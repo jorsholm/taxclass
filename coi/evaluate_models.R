@@ -54,6 +54,7 @@ colnames(result_epatax) <- colnames(result_BayesANT)
 result_SINTAX <- read.table("models/results_sintax_finbol_gbol/sintax_finbol_gbol_genus.txt",
                             header = TRUE)
 result_SINTAX <- rename_PROTAX_output(result_SINTAX)
+result_SINTAX <- dplyr::arrange(result_SINTAX, ID)
 # all(stringr::str_to_lower(colnames(result_SINTAX)) ==
 #       stringr::str_to_lower(colnames(result_BayesANT)))
 colnames(result_SINTAX) <- colnames(result_BayesANT)
@@ -123,6 +124,7 @@ result_SINTAX <- read.table("models/results_sintax_finbol_gbol/sintax_finbol_gbo
                             header = T)
 result_SINTAX[is.na(result_SINTAX)] <- 0
 result_SINTAX <- rename_PROTAX_output(result_SINTAX)
+result_SINTAX <- dplyr::arrange(result_SINTAX, ID)
 # Quick check that order of columns is identical to BayesANT
 # all(stringr::str_to_lower(colnames(result_SINTAX)) ==
 #       stringr::str_to_lower(colnames(result_BayesANT)))
@@ -162,11 +164,12 @@ id_observed <- !grepl("_new$", data_true[, ncol(data_true)])
 plot_accuracies(results, data_true, id_observed)
 
 bayesant_cal <- plot_cal_unknown(results$BayesANT, data_true, model_name = "BayesANT", id_observed, legend = "none")
-protax_cal <- plot_cal_unknown(results$PROTAX, data_true, model_name = "PROTAX", id_observed, legend = "none") 
-rdp_cal <- plot_cal_unknown(results$RDP, data_true, model_name = "RDP", id_observed, legend = "none") 
-epatax_cal <- plot_cal_unknown(results$`EPA-ng taxtree`, data_true, model_name = "EPA-ng", id_observed, legend = "none") 
+protax_cal <- plot_cal_unknown(results$PROTAX, data_true, model_name = "PROTAX", id_observed, legend = "none")
+rdp_cal <- plot_cal_unknown(results$RDP, data_true, model_name = "RDP", id_observed, legend = "none")
+epatax_cal <- plot_cal_unknown(results$`EPA-ng taxtree`, data_true, model_name = "EPA-ng", id_observed, legend = "none")
+sintax_cal <- plot_cal_unknown(results$`SINTAX (vsearch 2.28.1)`, data_true, model_name = "SINTAX (vsearch)", id_observed, legend = "none")
 
-cal_plotlist <- list(bayesant_cal, protax_cal, rdp_cal, epatax_cal)
+cal_plotlist <- list(bayesant_cal, protax_cal, rdp_cal, epatax_cal, sintax_cal)
 
 ggpubr::ggarrange(plotlist = cal_plotlist, ncol = 1)
 
