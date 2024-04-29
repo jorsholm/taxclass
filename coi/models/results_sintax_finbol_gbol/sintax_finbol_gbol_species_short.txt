@@ -3287,7 +3287,7 @@ FBAQU002-09	Insecta	1.00	Trichoptera	1.00	Hydroptilidae	1.00	Hydroptilinae	1.00	
 FBAQU003-09	Insecta	0.98	Coleoptera	0.38	Carabidae	0.09	Harpalinae	0.06	Amara	0.04	Dolichopeza_albipes	0.03
 FBAPD949-11	Insecta	1.00	Hymenoptera	0.90	Megachilidae	0.82	Megachilinae	0.82	Osmia	0.59	Osmia_leaiana	0.24
 FBAQU006-09	Insecta	1.00	Plecoptera	0.92	Capniidae	0.92	dummy_Capniidae	0.92	Capnia	0.92	Capnia_pygmaea	0.50
-FBAQU004-09	Insecta	0.99	Trichoptera	0.32	Limnephilidae	0.13	Limnephilinae	0.13	Limnephilus	0.07	Micrasema_	gelidum)_gelidum	0.06
+FBAQU004-09	Insecta	0.99	Trichoptera	0.32	Limnephilidae	0.13	Limnephilinae	0.13	Limnephilus	0.07	Micrasema_(gelidum)_gelidum	0.06
 FBAQU007-09	Insecta	1.00	Plecoptera	1.00	Perlodidae	1.00	Isoperlinae	1.00	Isoperla	1.00	Isoperla_grammatica	1.00
 FBAQU008-09	Insecta	0.99	Diptera	0.42	Taeniopterygidae	0.14	Brachypterainae	0.14	Rhabdiopteryx	0.14	Rhabdiopteryx_acuminata	0.14
 FBAQU018-09	Insecta	1.00	Coleoptera	1.00	Helophoridae	1.00	dummy_Helophoridae	1.00	Helophorus	1.00	Helophorus_brevipalpis	1.00
@@ -3361,7 +3361,7 @@ FBAQU1159-12	Insecta	1.00	Trichoptera	1.00	Beraeidae	1.00	dummy_Beraeidae	1.00	B
 FBAQU1155-12	Insecta	1.00	Diptera	0.38	Leptoceridae	0.17	Leptocerinae	0.17	Athripsodes	0.10	Athripsodes_commutatus	0.09
 FBAQU1160-12	Insecta	1.00	Trichoptera	1.00	Beraeidae	1.00	dummy_Beraeidae	1.00	Beraeodes	1.00	Beraeodes_minutus	1.00
 FBAQU1166-12	Insecta	1.00	Trichoptera	1.00	Leptoceridae	1.00	Leptocerinae	1.00	Ceraclea	1.00	Ceraclea_annulicornis	1.00
-FBAQU1162-12	Insecta	1.00	Diptera	0.31	Chironomidae	0.06	Limnephilinae	0.06	Micrasema	0.04	Micrasema_	gelidum)_gelidum	0.04
+FBAQU1162-12	Insecta	1.00	Diptera	0.31	Chironomidae	0.06	Limnephilinae	0.06	Micrasema	0.04	Micrasema_(gelidum)_gelidum	0.04
 FBAQU1158-12	Insecta	1.00	Trichoptera	1.00	Beraeidae	1.00	dummy_Beraeidae	1.00	Beraea	1.00	Beraea_pullata	1.00
 FBAQU1171-12	Insecta	1.00	Trichoptera	0.76	Limnephilidae	0.71	Limnephilinae	0.71	Limnephilus	0.42	Limnephilus_externus	0.09
 FBAQU1170-12	Insecta	1.00	Trichoptera	0.82	Limnephilidae	0.78	Limnephilinae	0.77	Limnephilus	0.40	Limnephilus_griseus	0.08
@@ -3387,7 +3387,7 @@ FBAQU1192-12	Insecta	1.00	Trichoptera	1.00	Limnephilidae	1.00	Limnephilinae	1.00
 FBAQU1201-12	Insecta	1.00	Trichoptera	1.00	Limnephilidae	1.00	Limnephilinae	1.00	Limnephilus	1.00	Limnephilus_marmoratus	0.99
 FBAQU1205-12	Insecta	1.00	Trichoptera	1.00	Psychomyiidae	1.00	Psychomyiinae	1.00	Lype	1.00	Lype_reducta	1.00
 FBAQU1206-12	Insecta	0.99	Trichoptera	0.84	Limnephilidae	0.82	Limnephilinae	0.82	Limnephilus	0.37	Micropterna_lateralis	0.14
-FBAQU1207-12	Insecta	0.99	Coleoptera	0.26	Limnephilidae	0.16	Limnephilinae	0.16	Limnephilus	0.08	Micrasema_	gelidum)_gelidum	0.07
+FBAQU1207-12	Insecta	0.99	Coleoptera	0.26	Limnephilidae	0.16	Limnephilinae	0.16	Limnephilus	0.08	Micrasema_(gelidum)_gelidum	0.07
 FBAQU1209-12	Insecta	1.00	Trichoptera	1.00	Molannidae	1.00	dummy_Molannidae	1.00	Molanna	1.00	Molanna_albicans	1.00
 FBAQU1203-12	Insecta	1.00	Trichoptera	1.00	Limnephilidae	1.00	Limnephilinae	1.00	Limnephilus	1.00	Limnephilus_sparsus	1.00
 FBAQU1208-12	Insecta	1.00	Trichoptera	0.85	Limnephilidae	0.84	Limnephilinae	0.82	Limnephilus	0.39	Micropterna_lateralis	0.12
@@ -3961,7 +3961,7 @@ FBCAD038-10	Insecta	1.00	Trichoptera	1.00	Hydroptilidae	1.00	Hydroptilinae	1.00	
 FBCAD049-10	Insecta	1.00	Trichoptera	0.83	Limnephilidae	0.79	Limnephilinae	0.76	Limnephilus	0.50	Limnephilus_luridus	0.15
 FBCAD039-10	Insecta	1.00	Trichoptera	0.31	Limnephilidae	0.15	Limnephilinae	0.15	Limnephilus	0.10	Lepidostoma_hirtum	0.05
 FBCAD044-10	Insecta	1.00	Trichoptera	0.50	Limnephilidae	0.30	Limnephilinae	0.30	Limnephilus	0.14	Brachypsyche_sibirica	0.06
-FBCAD051-10	Insecta	1.00	Lepidoptera	0.28	Limnephilidae	0.13	Limnephilinae	0.12	Limnephilus	0.07	Micrasema_	gelidum)_gelidum	0.04
+FBCAD051-10	Insecta	1.00	Lepidoptera	0.28	Limnephilidae	0.13	Limnephilinae	0.12	Limnephilus	0.07	Micrasema_(gelidum)_gelidum	0.04
 FBCAD037-10	Insecta	1.00	Trichoptera	1.00	Hydroptilidae	1.00	Hydroptilinae	1.00	Hydroptila	1.00	Hydroptila_sparsa	1.00
 FBCAD050-10	Insecta	0.99	Diptera	0.34	Brachycentridae	0.07	dummy_Brachycentridae	0.07	Apatania	0.05	Brachycentrus_subnubilus	0.05
 FBCAD040-10	Insecta	1.00	Trichoptera	0.33	Phryganeidae	0.12	Phryganeinae	0.12	Phryganea	0.07	Phryganea_grandis	0.07

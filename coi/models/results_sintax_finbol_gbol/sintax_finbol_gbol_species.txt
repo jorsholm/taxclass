@@ -3388,7 +3388,7 @@ FBAQU1201-12	Insecta	1.00	Trichoptera	1.00	Limnephilidae	1.00	Limnephilinae	1.00
 FBAQU1203-12	Insecta	1.00	Trichoptera	1.00	Limnephilidae	1.00	Limnephilinae	1.00	Limnephilus	1.00	Limnephilus_sparsus	1.00
 FBAQU1205-12	Insecta	1.00	Trichoptera	1.00	Psychomyiidae	1.00	Psychomyiinae	1.00	Lype	1.00	Lype_reducta	1.00
 FBAQU1206-12	Insecta	1.00	Trichoptera	0.85	Limnephilidae	0.85	Limnephilinae	0.85	Limnephilus	0.39	Limnephilus_picturatus	0.13
-FBAQU1207-12	Insecta	0.98	Diptera	0.27	Limnephilidae	0.08	Limnephilinae	0.08	Micrasema	0.05	Micrasema_	gelidum)_gelidum	0.05
+FBAQU1207-12	Insecta	0.98	Diptera	0.27	Limnephilidae	0.08	Limnephilinae	0.08	Micrasema	0.05	Micrasema_(gelidum)_gelidum	0.05
 FBAQU1209-12	Insecta	1.00	Trichoptera	1.00	Molannidae	1.00	dummy_Molannidae	1.00	Molanna	1.00	Molanna_albicans	1.00
 FBAQU1208-12	Insecta	1.00	Trichoptera	0.89	Limnephilidae	0.87	Limnephilinae	0.85	Limnephilus	0.38	Potamophylax_latipennis	0.10
 FBAQU1212-12	Insecta	1.00	Diptera	0.32	Syrphidae	0.07	Limnephilinae	0.05	Phyllonorycter	0.04	Neoascia_tenur	0.04
@@ -3963,7 +3963,7 @@ FBCAD039-10	Insecta	1.00	Trichoptera	0.37	Limnephilidae	0.22	Limnephilinae	0.22	
 FBCAD040-10	Insecta	1.00	Trichoptera	0.30	Phryganeidae	0.13	Phryganeinae	0.13	Agrypnia	0.06	Hagenella_clathrata	0.03
 FBCAD044-10	Insecta	0.99	Trichoptera	0.37	Limnephilidae	0.23	Limnephilinae	0.22	Limnephilus	0.12	Agrypnia_pagetana	0.03
 FBCAD049-10	Insecta	0.99	Trichoptera	0.89	Limnephilidae	0.84	Limnephilinae	0.83	Limnephilus	0.62	Limnephilus_luridus	0.14
-FBCAD051-10	Insecta	1.00	Diptera	0.29	Limnephilidae	0.13	Limnephilinae	0.13	Micrasema	0.07	Micrasema_	gelidum)_gelidum	0.07
+FBCAD051-10	Insecta	1.00	Diptera	0.29	Limnephilidae	0.13	Limnephilinae	0.13	Micrasema	0.07	Micrasema_(gelidum)_gelidum	0.07
 FBCAD053-10	Insecta	1.00	Trichoptera	1.00	Molannidae	1.00	dummy_Molannidae	1.00	Molanna	1.00	Molanna_angustata	1.00
 FBCAD050-10	Insecta	1.00	Diptera	0.36	Noctuidae	0.10	dummy_Brachycentridae	0.09	Brachycentrus	0.08	Brachycentrus_subnubilus	0.08
 FBCAD057-10	Insecta	1.00	Trichoptera	1.00	Leptoceridae	1.00	Leptocerinae	1.00	Mystacides	1.00	Mystacides_nigra	1.00
