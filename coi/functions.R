@@ -72,21 +72,6 @@ rename_PROTAX_output <- function(out, level = "species"){
   return(renamed)
 }
 
-make_plot_base <- function(){
-  # Base for the plot 
-  p <- ggplot2::ggplot() +
-    ggplot2::xlim(0, 100) +
-    ggplot2::ylim(0, 100) +
-    ggplot2::theme_bw() +
-    ggplot2::theme(aspect.ratio = 1) +
-    ggplot2::geom_abline(intercept = 0, slope = 1, color = "grey") +
-    ggplot2::xlab("Cumulative probability %") +
-    ggplot2::ylab("Cumulative correct %") +
-    ggpubr::grids(linetype = "dashed")
-  
-  return(p)
-}
-
 #' Build data frame with calibration information for each model and set of taxa 
 #' (all/obs/novel)
 get_calibration <- function(results, data_true, id_observed){
@@ -145,7 +130,17 @@ calc_calibration <- function(prob, correct){
 # TODO: When plotting a single rank + set, include accuracies in legend + info about sample size 
 # TODO: sample size in All Observed and Novel headings? 
 plot_calibration <- function(calibrations){
-  p <- make_plot_base()
+  
+  # Make plot base 
+  p <- ggplot2::ggplot() +
+    ggplot2::xlim(0, 100) +
+    ggplot2::ylim(0, 100) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(aspect.ratio = 1) +
+    ggplot2::geom_abline(intercept = 0, slope = 1, color = "grey") +
+    ggplot2::xlab("Cumulative probability %") +
+    ggplot2::ylab("Cumulative correct %") +
+    ggpubr::grids(linetype = "dashed")
   
   # Which of model rank and set has more than one unique value? 
   groups <- c()
@@ -203,64 +198,100 @@ plot_calibration <- function(calibrations){
   return(p)
 }
 
-#' Calculate accuracy on a single result data frame 
-#' @param x Result data frame 
-calc_accuracy <- function(x, data_true){
-  return(colMeans(x[,2:ncol(data_true)] == data_true[,-1]))
+#' Calculate accuracy from calibrations data frame 
+get_accuracy_from_cal <- function(calibrations, groups = c("model", "rank", "set")){
+  
+  accuracies <- calibrations |> 
+    dplyr::group_by(across(all_of(groups))) |> 
+    dplyr::summarise(accuracy = max(cumcorr)) 
+  
+  return(accuracies)
 }
 
-#' Create a single accuracy facet 
-plot_acc_facet <- function(df, data_true){
-  accuracies <- t(sapply(df, function(x) calc_accuracy(x, data_true))) 
+get_novelty_accuracy <- function(results, id_novel){
+  ranks <- colnames(data_true)[-1]
+  n <- list() 
   
-  plot_acc <- cbind("Model" = rownames(accuracies),
-                    data.frame(accuracies, row.names = NULL)) |>
-    pivot_longer(2:ncol(data_true), names_to = "Rank", values_to = "Accuracy")
+  acc_df <- data.frame()
+  part_novelty <- data.frame()
   
-  plot_acc$Rank <- factor(plot_acc$Rank, levels = colnames(data_true)[-1])
+  for(r in ranks){
+    n[[r]] <- length(id_novel[[r]])
+    
+    for(i in 1:length(results)){
+      novel_acc <- sum(stringr::str_ends(results[[i]][id_novel[[r]], r], "_new"))/n[[r]] * 100
+      
+      rank_sp_novel_accuracy <- sum(stringr::str_ends(results[[i]][id_novel[[r]], r], paste0(r, "_new")))/n[[r]] * 100
+      
+      # False novelty is calc as proportion of falsely predicted novel species on that rank / all sequences known on that rank 
+      false_novelty <- sum(stringr::str_ends(results[[i]][-id_novel[[r]], r], "_new"))/(nrow(results[[i]]) - n[[r]]) * 100
+      
+      # False novelty added on that specific rank 
+      level_sp_false_novelty <- sum(stringr::str_ends(results[[i]][-id_novel[[r]], r], paste0(r, "_new")))/(nrow(results[[i]]) - n[[r]]) * 100
+      
+      acc_df <- bind_rows(acc_df, 
+                data.frame(model = names(results)[i], 
+                           rank = r, 
+                           novel_accuracy = novel_acc, 
+                           rank_sp_novel_accuracy = rank_sp_novel_accuracy,
+                           false_novelty = false_novelty, 
+                           level_sp_false_novelty = level_sp_false_novelty))
+      
+      suppressMessages(part <- 
+        data.frame(rank = r, 
+                 model = names(results)[i], 
+                 novelty_rank = 
+                   sapply(results[[i]][id_novel[[r]],r],
+                          function(x) if_else(stringr::str_detect(x, "_new"),
+                                              stringr::str_split(x, "_")[[1]] |> tail(2) |> head(1),
+                                              "None"),
+                          USE.NAMES = F)) |> 
+        dplyr::group_by(rank, model, novelty_rank) |> 
+        dplyr::summarise(count = n()) |> 
+        dplyr::mutate(perc = count / n[[r]] * 100))
+      
+      part_novelty <- rbind(part_novelty, part)
+      
+    }
+  }
+  return(list(count = n, 
+              acc = acc_df, 
+              part_novelty = part_novelty))
+}
+
+plot_accuracies <- function(accuracies){
+  
+  groups <- c()
+  
+  for(col in c("model", "rank", "set")){
+    if(!(col %in% colnames(accuracies))) next
+    if(length(unique(accuracies[,col])) > 1) groups <- c(groups, col)
+  }
   
   p <- ggplot2::ggplot() +
     ggplot2::theme_bw() +
     ggplot2::theme(aspect.ratio = 1) + 
-    ggplot2::ylim(0, 1)
+    ggplot2::ylim(0, 100) +
+    ggplot2::theme(axis.title.x = element_blank()) + 
+    ggplot2::ylab("Accuracy %")
   
   p <- p + 
-    ggplot2::geom_line(data = plot_acc, 
-                       aes(x = Rank, y = Accuracy, 
-                           color = Model, group = Model)) + 
-    ggplot2::geom_point(data = plot_acc, 
-                        aes(x = Rank, y = Accuracy, color = Model)) + 
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    ggplot2::geom_line(data = accuracies, 
+                       mapping = ggplot2::aes(x = rank, 
+                                              y = accuracy, 
+                                              color = model, 
+                                              group = model)) + 
+    ggplot2::geom_point(data = accuracies, 
+                        mapping = ggplot2::aes(x = rank,
+                                               y = accuracy,
+                                               color = model)) + 
+    ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+    ggplot2::labs(color = "Model")
+  
+  if(length(groups) == 3){
+    p <- p +
+      ggplot2::facet_wrap(~set)
+  }
   
   return(p)
 }
-
-plot_accuracies <- function(results, data_true, id_observed = NULL){
-  
-  # bind column with "all taxa", "known", "unknown"
-  # Combine into the same data frame 
-  t(sapply(results, function(x) calc_accuracy(x, data_true)))
-  
-  if(is.null(id_observed)){
-    return(plot_acc_facet(df = results, data_true))
-  }else{
-    plotlist <- list()
-    
-    plotlist[[1]] <- plot_acc_facet(df = results, data_true)
-    plotlist[[2]] <- plot_acc_facet(df = lapply(results, function(x) x[id_observed, ]), 
-                                    data_true[id_observed, ])
-    plotlist[[3]] <- plot_acc_facet(df = lapply(results, function(x) x[!id_observed, ]), 
-                                    data_true[!id_observed, ])
-    
-    ggpubr::ggarrange(plotlist = plotlist, 
-                      ncol = 3, nrow = 1, 
-                      labels = c("All taxa", "Observed taxa", "New taxa"), 
-                      common.legend = T, legend = "right")
-    
-  }
-}
-
-
-
-
-
