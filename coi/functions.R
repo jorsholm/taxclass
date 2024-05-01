@@ -87,95 +87,119 @@ make_plot_base <- function(){
   return(p)
 }
 
-#' Data frames in result must have identical colnames with each other, 
-#' and colnames of taxonomic ranks (Species, Genus, etc.) must be identical to 
-#' data_true (including order of columns). 
-#' @param results Named list of data frames with tax class results for each model.
-#' @param data_true Data frame with the true taxonomic classifications 
-#' @param level Taxonomic rank to plot 
-#' @return Calibration plot 
-plot_comparison <- function(results, data_true, level = "Species"){
+#' Build data frame with calibration information for each model and set of taxa 
+#' (all/obs/novel)
+get_calibration <- function(results, data_true, id_observed){
   
-  # Find columns that contain taxonomic classifications + probabilities 
-  col <- which(colnames(data_true) == level)
-  col_prob <- which(colnames(results[[1]]) == paste0("Prob_", level))
-  
-  # Base for the plot 
-  p <- make_plot_base()
-  
-  # Add calibration line + point for each model 
-  for(i in 1:length(results)){
-    algorithm <- names(results)[i]
-    prob <- results[[i]][,col_prob]
-    correct <- results[[i]][,col] == data_true[,col]
-    plotelements <- plot_calibration(prob, correct, algorithm)
-    p <- p + plotelements[[1]] + plotelements[[2]]
-  }
-  
-  # Add header with sample size 
-  p <- p + 
-    ggplot2::facet_wrap(~paste0(level, " - sample size: ", nrow(data_true)))
-  
-  return(p)
-}
-
-#' Plot calibration line + point for a single model 
-#' @param prob vector of classification probabilities 
-#' @param correct vector of T/F taxonomic assignment results 
-#' @param algorithm name of model 
-#' @return list of plot elements; one line and one point 
-plot_calibration <- function(prob, correct, algorithm){
-  s <- sort(prob, dec = F, index.return = T)
-  n <- length(prob)
-  x <- cumsum(prob[s$ix])/n * 100 
-  y <- cumsum(correct[s$ix])/n * 100 
-  df <- data.frame(x, y)
-  
-  Model <- paste0(algorithm, " - ", 
-                     as.character(round(mean(correct) * 100, 1)), "%")
-  l <- ggplot2::geom_line(data = df, 
-                         aes(x = x, y = y, color = Model))
-  m <- ggplot2::geom_point(aes(x = x[length(x)], 
-                               y = y[length(y)], 
-                               color = Model))
-  
-  return(list(l, m))
-}
-
-#' Plots calibration of a single model, across all ranks 
-plot_ranks <- function(model_result, data_true, model_name){
   ranks <- colnames(data_true)[-1]
+  calibration <- data.frame()
   
-  p <- make_plot_base()
-  limits <- c() 
+  sets <- c("All", "Observed", "Novel")
   
-  for(r in ranks){
+  for(set in sets){
     
-    col <- which(colnames(model_result) == r)
-    col_prob <- which(colnames(model_result) == paste0("Prob_", r))
-    
-    prob <- model_result[,col_prob]
-    correct <- model_result[,col] == data_true[,col]
-    
-    limits <- c(limits,
-                paste0(r, " - ", 
-                       as.character(round(mean(correct) * 100, 1)), "%"))
-    
-    p <- p + 
-      plot_calibration(prob, correct, r)
+    for(rank in ranks){
+      
+      col <- which(colnames(data_true) == rank)
+      col_prob <- which(colnames(results[[1]]) == paste0("Prob_", rank))
+      
+      for(i in 1:length(results)){
+        
+        if(set == "All"){
+          correct <- results[[i]][,col] == data_true[,col]
+          prob <- results[[i]][,col_prob]
+        }else if(set == "Observed"){
+          correct <- results[[i]][id_observed,col] == data_true[id_observed,col]
+          prob <- results[[i]][id_observed,col_prob]
+        }else if(set == "Novel"){
+          correct <- results[[i]][!id_observed,col] == data_true[!id_observed,col]
+          prob <- results[[i]][!id_observed,col_prob]
+        }
+        
+        cal <- calc_calibration(prob, correct)
+        
+        calibration <- rbind(calibration, 
+                             data.frame(model = names(results)[i], 
+                                        set = set, 
+                                        rank = rank, 
+                                        cumcorr = cal$cumcorr, 
+                                        cumprob = cal$cumprob))
+      }
+    }
+  }
+  return(calibration)
+}
 
+#' Calculate calibration curve for a single model, rank and taxa set 
+calc_calibration <- function(prob, correct){
+  n <- length(prob)
+  s <- sort(prob, dec = F, index.return = T)
+  cumprob <- cumsum(prob[s$ix])/n * 100 
+  cumcorr <- cumsum(correct[s$ix])/n * 100 
+  return(list(cumprob = cumprob, 
+              cumcorr = cumcorr))
+}
+
+# My attempt for flexible plotting of calibrations 
+# TODO: When plotting a single model + set, include accuracies in legend 
+# TODO: When plotting a single rank + set, include accuracies in legend + info about sample size 
+# TODO: sample size in All Observed and Novel headings? 
+plot_calibration <- function(calibrations){
+  p <- make_plot_base()
+  
+  # Which of model rank and set has more than one unique value? 
+  groups <- c()
+  
+  for(col in c("model", "rank", "set")){
+    if(length(unique(calibrations[,col])) > 1) groups <- c(groups, col)
   }
   
-  blue_palette <- RColorBrewer::brewer.pal(name = "Blues",
-                        n = (length(ranks) + 3))[3:(length(ranks) + 3)]
-  
-  p <- p + 
-    ggplot2::scale_color_manual(name = "Rank", 
-                                limits = limits, 
-                                values = blue_palette) + 
-    ggplot2::ggtitle(model_name) + 
-    ggplot2::theme(plot.title = element_text(hjust = 0.5))
-    
+  if("rank" %in% groups){
+    p <- p + 
+      ggplot2::geom_line(data = calibrations, 
+                         mapping = ggplot2::aes(x = cumprob, 
+                                                y = cumcorr, 
+                                                color = rank)) + 
+      ggplot2::geom_point(data = calibrations |>
+                            group_by(across(all_of(groups))) |> 
+                            summarise(cumprob = max(cumprob),
+                                      cumcorr = max(cumcorr)), 
+                          mapping = ggplot2::aes(x = cumprob,
+                                                 y = cumcorr,
+                                                 color = rank)) +
+      ggplot2::scale_color_manual(name = "Rank", 
+                                  limits = colnames(data_true)[-1], 
+                                  values = RColorBrewer::brewer.pal(name = "Blues",
+                                                                    n = (length(unique(calibrations$rank)) + 2))[3:(length(unique(calibrations$rank)) + 2)])
+  }else{
+    p <- p + 
+      ggplot2::geom_line(data = calibrations, 
+                         mapping = ggplot2::aes(x = cumprob, 
+                                                y = cumcorr, 
+                                                color = model)) +
+      ggplot2::geom_point(data = calibrations |>
+                            group_by(across(all_of(groups))) |> 
+                                       summarise(cumprob = max(cumprob),
+                                                 cumcorr = max(cumcorr)), 
+                                     mapping = ggplot2::aes(x = cumprob,
+                                                            y = cumcorr,
+                                                            color = model))
+  }
+
+  if(length(groups) == 3){
+    p <- p + 
+      ggplot2::facet_grid(model~set)
+  }else if(all(groups == c("model", "rank"))){
+    p <- p + 
+      ggplot2::facet_wrap(~model)
+  }else if(all(groups == c("rank", "set"))){
+    p <- p + 
+      ggplot2::facet_wrap(~set)
+  }else if(all(groups == c("model", "set"))){
+    p <- p + 
+      ggplot2::facet_wrap(~set)
+  }
+
   return(p)
 }
 
@@ -236,20 +260,7 @@ plot_accuracies <- function(results, data_true, id_observed = NULL){
   }
 }
 
-plot_cal_unknown <- function(model_result, data_true, model_name, id_observed, legend = "bottom"){
-  
-  # All species 
-  all <- plot_ranks(model_result, data_true, model_name = paste(model_name, "- All taxa"))
-  obs <- plot_ranks(model_result[id_observed,], data_true[id_observed,], model_name = paste(model_name, "- Observed taxa"))
-  unobs <- plot_ranks(model_result[!id_observed,], data_true[!id_observed,], model_name = paste(model_name, "- New taxa"))
-  
-  plotlist <- list(all, obs, unobs)
-  
-  p <- ggpubr::ggarrange(plotlist = plotlist, ncol = 3, legend = legend)
-  
-  return(p)
-  
-}
+
 
 
 

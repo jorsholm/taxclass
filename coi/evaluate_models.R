@@ -58,22 +58,6 @@ result_SINTAX <- dplyr::arrange(result_SINTAX, ID)
 # all(stringr::str_to_lower(colnames(result_SINTAX)) ==
 #       stringr::str_to_lower(colnames(result_BayesANT)))
 colnames(result_SINTAX) <- colnames(result_BayesANT)
-# PLOT RESULTS GENUS -----------------------------------------------------------
-
-results <- list(
-  "BayesANT" = result_BayesANT,
-  "PROTAX" = result_PROTAX,
-  "EPA-ng taxtree" = result_epatax,
-  "RDP" = result_RDP,
-  "SINTAX" = result_SINTAX
-)
-
-# # Are all colnames in results identical?
-# length(unique(lapply(results, function(x) colnames(x)))) == 1
-# # Are taxonomic columns identical to data_true?
-# all(colnames(data_true) == colnames(results[[1]])[1:ncol(data_true)])
-
-plot_comparison(results, data_true, level = "Genus")
 
 # LOAD DATA SPECIES ------------------------------------------------------------
 
@@ -131,7 +115,7 @@ result_SINTAX <- dplyr::arrange(result_SINTAX, ID)
 # Rename SINTAX columns
 colnames(result_SINTAX) <- colnames(result_BayesANT)
 
-# PLOT RESULT SPECIES ----------------------------------------------------------
+# PREPARE AND CHECK RESULT -----------------------------------------------------
 
 results <- list(
   "BayesANT" = result_BayesANT,
@@ -141,35 +125,33 @@ results <- list(
   "SINTAX" = result_SINTAX
 )
 
-# # Are all colnames in results identical?
-# length(unique(lapply(results, function(x) colnames(x)))) == 1
-# # Are taxonomic columns identical to data_true?
-# all(colnames(data_true) == colnames(results[[1]])[1:ncol(data_true)])
-
-plot_comparison(results, data_true, level = "Species")
-
-# How well-calibrated are different models across ranks?
-plotlist_rank_calibrations <- list()
-
-for(i in 1:length(results)){
-  plotlist_rank_calibrations[[i]] <- plot_ranks(results[[i]], data_true,
-                                                names(results)[i])
-}
-
-ggpubr::ggarrange(plotlist = plotlist_rank_calibrations,
-                  ncol = length(results)/2, nrow = 2)
-
 id_observed <- !grepl("_new$", data_true[, ncol(data_true)])
+
+# Some quick checks 
+if(!length(unique(lapply(results, function(x) colnames(x)))) == 1) print("One of the results data frames have wrong column names.")
+if(!all(sapply(results, function(x) all(x[,1] == data_true[,1])))) print("One of the results data frames is not sorted by ID.")
+if(!all(colnames(data_true) == colnames(results[[1]])[1:ncol(data_true)])) print("Column names containing taxonomic information not identical to data_true")
+
+# PLOT CALIBRATION CURVES ------------------------------------------------------
+
+calibrations <- get_calibration(results, data_true, id_observed)
+
+calibrations$rank <- factor(calibrations$rank, 
+                            levels = colnames(data_true)[-1])
+calibrations$set <- factor(calibrations$set, 
+                           levels = c("All", "Observed", "Novel"))
+
+#### Plot all calibration curves (all ranks, taxa sets and models)
+p_cal <- plot_calibration(calibrations) 
+
+ggplot2::ggsave(plot = p_cal, 
+                filename = "../plots/calibration_COI_full.png", 
+                width = 210, 
+                height = 297, 
+                units = "mm")
+
+# PLOT ACCURACIES --------------------------------------------------------------
 
 plot_accuracies(results, data_true, id_observed)
 
-bayesant_cal <- plot_cal_unknown(results$BayesANT, data_true, model_name = "BayesANT", id_observed, legend = "none")
-protax_cal <- plot_cal_unknown(results$PROTAX, data_true, model_name = "PROTAX", id_observed, legend = "none")
-rdp_cal <- plot_cal_unknown(results$RDP, data_true, model_name = "RDP", id_observed, legend = "none")
-epatax_cal <- plot_cal_unknown(results$`EPA-ng taxtree`, data_true, model_name = "EPA-ng", id_observed, legend = "none")
-sintax_cal <- plot_cal_unknown(results$`SINTAX (vsearch 2.28.1)`, data_true, model_name = "SINTAX (vsearch)", id_observed, legend = "none")
-
-cal_plotlist <- list(bayesant_cal, protax_cal, rdp_cal, epatax_cal, sintax_cal)
-
-ggpubr::ggarrange(plotlist = cal_plotlist, ncol = 1)
 
