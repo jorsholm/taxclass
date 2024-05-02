@@ -125,6 +125,14 @@ for(rank in colnames(data_true)[-1]){
   id_novel[[rank]] <- which(str_ends(data_true[,rank], paste0(rank, "_new")))
 }
 
+id_observed <- list()
+
+for(rank in colnames(data_true)[-1]){
+  id_observed[[rank]] <- which(!str_ends(data_true[,rank], "_new"))
+}
+
+id_all <- lapply(data_true, function(x) 1:length(x))
+
 # How many of the novel taxa are predicted as novel *on any taxonomic rank* (in practice the correct one or above)
 a <- get_novelty_accuracy(results, id_novel)
 
@@ -162,17 +170,17 @@ truly_novel <- p +
   ggplot2::facet_wrap(~paste("Correctly predicted novel (on any rank) /\n the number of novel taxa on that rank"))
 
 # Proportion novel taxa correctly predicted novel *on the correct taxonomic level*
-# p + 
-#   ggplot2::geom_line(data = novel_accuracy, 
-#                      mapping = ggplot2::aes(x = rank, 
-#                                             y = rank_sp_novel_accuracy, 
-#                                             color = model, 
-#                                             group = model)) + 
-#   ggplot2::geom_point(data = novel_accuracy, 
+# p +
+#   ggplot2::geom_line(data = novel_accuracy,
+#                      mapping = ggplot2::aes(x = rank,
+#                                             y = rank_sp_novel_accuracy,
+#                                             color = model,
+#                                             group = model)) +
+#   ggplot2::geom_point(data = novel_accuracy,
 #                       mapping = ggplot2::aes(x = rank,
 #                                              y = rank_sp_novel_accuracy,
-#                                              color = model)) + 
-#   ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+#                                              color = model)) +
+#   ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
 #   ggplot2::labs(color = "Model")
 
 # How many were predicted new (on any level) that were actually observed? 
@@ -234,5 +242,93 @@ accuracy_plot <- ggpubr::ggarrange(plotlist = list(truly_novel, wrong_any, wrong
                   common.legend = T)
 ggpubr::ggarrange(plotlist = list(accuracy_plot, part_novelty), 
                   nrow = 2)
+
+
+#### Marginal accuracy 
+marg_accuracies_novel <- marginal_accuracy(results, data_true, id_novel)
+
+marg_accuracies_novel$rank <- factor(marg_accuracies_novel$rank, 
+                               levels = colnames(data_true)[-1])
+
+ggplot2::ggplot() + 
+  ggplot2::theme_bw() + 
+  ggplot2::ylim(0, 1) +
+  ggplot2::theme(aspect.ratio = 1) + 
+  ggplot2::geom_line(data = marg_accuracies_novel |> filter(model %in% c("BayesANT", "PROTAX", "EPA-ng taxtree")), 
+                     mapping = ggplot2::aes(x = rank, y = marg_accuracy, color = model, group = model)) + 
+  ggplot2::geom_point(data = marg_accuracies_novel |> filter(model %in% c("BayesANT", "PROTAX", "EPA-ng taxtree")), 
+                     mapping = ggplot2::aes(x = rank, y = marg_accuracy, color = model))
+
+
+marg_accuracies_obs <- marginal_accuracy(results, data_true, id_observed)
+
+marg_accuracies_all <- marginal_accuracy(results, data_true, id_all)
+
+### Conditional accuracy 
+cond_accuracies_novel <- conditional_accuracy(results, data_true, id_novel)
+
+cond_accuracies_novel$rank <- factor(cond_accuracies_novel$rank, 
+                               levels = colnames(data_true)[-1])
+
+ggplot2::ggplot() + 
+  ggplot2::theme_bw() + 
+  ggplot2::ylim(0, 1) +
+  ggplot2::theme(aspect.ratio = 1) + 
+  ggplot2::geom_line(data = cond_accuracies_novel |> filter(model %in% c("BayesANT", "PROTAX", "EPA-ng taxtree")), 
+                     mapping = ggplot2::aes(x = rank, y = cond_accuracy, color = model, group = model)) + 
+  ggplot2::geom_point(data = cond_accuracies_novel |> filter(model %in% c("BayesANT", "PROTAX", "EPA-ng taxtree")), 
+                      mapping = ggplot2::aes(x = rank, y = cond_accuracy, color = model))
+
+cond_accuracies_obs <- conditional_accuracy(results, data_true, id_observed)
+
+cond_accuracies_obs$rank <- factor(cond_accuracies_obs$rank, 
+                                     levels = colnames(data_true)[-1])
+
+ggplot2::ggplot() + 
+  ggplot2::theme_bw() + 
+  ggplot2::ylim(0, 1) +
+  ggplot2::theme(aspect.ratio = 1) + 
+  ggplot2::geom_line(data = cond_accuracies_obs, 
+                     mapping = ggplot2::aes(x = rank, y = cond_accuracy, color = model, group = model)) + 
+  ggplot2::geom_point(data = cond_accuracies_obs, 
+                      mapping = ggplot2::aes(x = rank, y = cond_accuracy, color = model))
+
+cond_accuracies_all <- conditional_accuracy(results, data_true, id_all)
+
+accuracy_df <- rbind(cbind(marg_accuracies_all, "set" = "all"), 
+      cbind(marg_accuracies_obs, "set" = "observed"), 
+      cbind(marg_accuracies_novel, "set" = "novel")
+      ) |> 
+  dplyr::left_join(rbind(cbind(cond_accuracies_all, "set" = "all"), 
+                         cbind(cond_accuracies_obs, "set" = "observed"), 
+                         cbind(cond_accuracies_novel, "set" = "novel")
+  )) |> 
+  dplyr::rename(marginal = marg_accuracy, 
+                conditional = cond_accuracy) |> 
+  tidyr::pivot_longer(c(3,5), 
+                      names_to = "measure", 
+                      values_to = "accuracy")
+
+accuracy_df$rank <- factor(accuracy_df$rank, 
+                           levels = colnames(data_true)[-1])
+accuracy_df$set <- factor(accuracy_df$set, 
+                          levels = c("all", "observed", "novel"))
+accuracy_df$measure <- factor(accuracy_df$measure, 
+                              levels = c("marginal", "conditional"))
+
+
+ggplot2::ggplot() + 
+  ggplot2::theme_bw() + 
+  ggplot2::theme(aspect.ratio = 1) + 
+  ggplot2::geom_line(data = accuracy_df, 
+                     mapping = ggplot2::aes(x = rank, 
+                                            y = accuracy, 
+                                            color = model, 
+                                            group = model)) + 
+  ggplot2::geom_point(data = accuracy_df, 
+                     mapping = ggplot2::aes(x = rank, 
+                                            y = accuracy, 
+                                            color = model)) + 
+  ggplot2::facet_grid(measure~set)
 
 

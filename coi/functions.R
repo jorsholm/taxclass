@@ -265,7 +265,7 @@ plot_accuracies <- function(accuracies){
   
   for(col in c("model", "rank", "set")){
     if(!(col %in% colnames(accuracies))) next
-    if(length(unique(accuracies[,col])) > 1) groups <- c(groups, col)
+    if(nrow(unique(accuracies[,col])) > 1) groups <- c(groups, col)
   }
   
   p <- ggplot2::ggplot() +
@@ -294,4 +294,77 @@ plot_accuracies <- function(accuracies){
   }
   
   return(p)
+}
+
+#' What proportion of sequences was correctly predicted as novel *within the correct higher rank*? 
+marginal_accuracy <- function(results, data_true, id_list){
+  
+  ranks <- colnames(data_true)[-1]
+  marg_accuracies <- data.frame()
+  
+  for(r in ranks){
+    taxgroups <- unique(data_true[id_list[[r]],r])
+    
+    denom <- length(data_true[id_list[[r]], r])
+    
+    for(i in 1:length(results)){
+      
+      correct <- 0
+      
+      for(tax in taxgroups){
+        ids <- which(data_true[,r] == tax)
+        
+        correct <- correct + sum(results[[i]][ids,r] == tax)
+      }
+      
+      marg_accuracies <- rbind(marg_accuracies, 
+                               data.frame(model = names(results[i]),
+                                          rank = r,
+                                          marg_accuracy = correct/denom))
+      
+    }
+  }
+  return(marg_accuracies)
+}
+
+conditional_accuracy <- function(results, data_true, id_list){
+  
+  ranks <- colnames(data_true)[-1]
+  cond_accuracies <- data.frame()
+  
+  for(r in ranks){
+    taxgroups <- unique(data_true[id_list[[r]],r])
+    
+    for(i in 1:length(results)){
+      
+      correct <- 0
+      denom <- 0 
+      
+      for(tax in taxgroups){
+        # Which are actually this taxon? 
+        ids_sugg <- which(data_true[,r] == tax)
+        
+        if(r == "Class"){
+          correct <- correct + sum(results[[i]][ids_sugg,r] == tax)
+          denom <- length(id_list[[r]])
+        }else{
+          
+          higher_rank <- ranks[which(ranks==r)-1]
+          
+          higher_tax <- data_true[ids_sugg, higher_rank][1]
+          
+          # Which are this taxon + have been correctly predicted to the higher rank 
+          correct_higher <- ids_sugg[which(results[[i]][ids_sugg, higher_rank] == higher_tax)]
+          
+          denom <- denom + length(correct_higher)
+          correct <- correct + sum(results[[i]][correct_higher,r] == tax)
+        }
+      }
+      cond_accuracies <- rbind(cond_accuracies, 
+                               data.frame(model = names(results[i]),
+                                          rank = r,
+                                          cond_accuracy = correct/denom))
+    }
+  }
+  return(cond_accuracies)
 }
