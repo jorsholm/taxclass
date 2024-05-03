@@ -9,6 +9,13 @@ source("functions.R")
 # LOAD DATA --------------------------------------------------------------------
 
 level <- "species"
+short <- TRUE
+shorttxt <- ""
+undshort <- ""
+if(short){
+  shorttxt <- "short"
+  undshort <- "_short"
+} 
 
 # Load test and train data 
 data <- load_FinBOL_GBOL(level = level)
@@ -22,19 +29,22 @@ data_true <- get_data_true(data$test, data$train) |>
 
 # BayesANT
 result_BayesANT <-
-  read.table(paste0("models/results_bayesant_finbol_gbol/bayesant_test_finbol-gbol_", level, ".txt"),
+  read.table(paste0("models/results_bayesant_finbol_gbol/bayesant_test", 
+                    shorttxt, "_finbol-gbol_", level, ".txt"),
              header = T) |>
   dplyr::arrange(ID)
 
 # RDP
 result_RDP <-
-  read.table(paste0("models/results_rdp_finbol_gbol/rdp_test_finbol-gbol_", level, ".txt"),
+  read.table(paste0("models/results_rdp_finbol_gbol/rdp_test", 
+                    shorttxt, "_finbol-gbol_", level, ".txt"),
              header = T) |>
   dplyr::arrange(ID)
 
 # PROTAX
 result_PROTAX <- 
-  read.table(paste0("models/results_protax_finbol_gbol/protax_finbol_gbol_", level, ".txt"),
+  read.table(paste0("models/results_protax_finbol_gbol/protax_finbol_gbol_",
+                    level, undshort, ".txt"),
              header = T)
 result_PROTAX[is.na(result_PROTAX)] <- 0
 result_PROTAX <- rename_PROTAX_output(result_PROTAX)
@@ -46,7 +56,8 @@ colnames(result_PROTAX) <- colnames(result_BayesANT)
 
 # EPA-ng Taxonomy tree
 result_epatax <- 
-  read.table(paste0("models/results_epa_finbol_gbol/epa_test_finbol-gbol_", level,".txt"),
+  read.table(paste0("models/results_epa_finbol_gbol/epa_test", 
+                    shorttxt, "_finbol-gbol_", level,".txt"),
              header = T) |>
   dplyr::arrange(ID)
 result_epatax <- rename_PROTAX_output(result_epatax)
@@ -56,7 +67,8 @@ colnames(result_epatax) <- colnames(result_BayesANT)
 
 # Sintax
 result_SINTAX <- 
-  read.table(paste0("models/results_sintax_finbol_gbol/sintax_finbol_gbol_", level, ".txt"),
+  read.table(paste0("models/results_sintax_finbol_gbol/sintax_finbol_gbol_",
+                    level, undshort, ".txt"),
                             header = TRUE)
 result_SINTAX <- rename_PROTAX_output(result_SINTAX)
 result_SINTAX <- dplyr::arrange(result_SINTAX, ID)
@@ -94,7 +106,7 @@ calibrations$set <- factor(calibrations$set,
 p_cal <- plot_calibration(calibrations) 
 
 ggplot2::ggsave(plot = p_cal, 
-                filename = "../plots/calibration_COI_full.png", 
+                filename = paste0("../plots/calibration_COI", undshort, ".png"), 
                 width = 210, 
                 height = 297, 
                 units = "mm")
@@ -112,7 +124,7 @@ accuracies$set <- factor(accuracies$set,
 p_acc <- plot_accuracies(accuracies)
 
 ggplot2::ggsave(plot = p_acc, 
-                filename = "../plots/accuracy_COI_full.png", 
+                filename = paste0("../plots/accuracy_COI", undshort, ".png"), 
                 width = 210, 
                 height = 150, 
                 units = "mm")
@@ -247,19 +259,6 @@ ggpubr::ggarrange(plotlist = list(accuracy_plot, part_novelty),
 #### Marginal accuracy 
 marg_accuracies_novel <- marginal_accuracy(results, data_true, id_novel)
 
-marg_accuracies_novel$rank <- factor(marg_accuracies_novel$rank, 
-                               levels = colnames(data_true)[-1])
-
-ggplot2::ggplot() + 
-  ggplot2::theme_bw() + 
-  ggplot2::ylim(0, 1) +
-  ggplot2::theme(aspect.ratio = 1) + 
-  ggplot2::geom_line(data = marg_accuracies_novel |> filter(model %in% c("BayesANT", "PROTAX", "EPA-ng taxtree")), 
-                     mapping = ggplot2::aes(x = rank, y = marg_accuracy, color = model, group = model)) + 
-  ggplot2::geom_point(data = marg_accuracies_novel |> filter(model %in% c("BayesANT", "PROTAX", "EPA-ng taxtree")), 
-                     mapping = ggplot2::aes(x = rank, y = marg_accuracy, color = model))
-
-
 marg_accuracies_obs <- marginal_accuracy(results, data_true, id_observed)
 
 marg_accuracies_all <- marginal_accuracy(results, data_true, id_all)
@@ -267,42 +266,18 @@ marg_accuracies_all <- marginal_accuracy(results, data_true, id_all)
 ### Conditional accuracy 
 cond_accuracies_novel <- conditional_accuracy(results, data_true, id_novel)
 
-cond_accuracies_novel$rank <- factor(cond_accuracies_novel$rank, 
-                               levels = colnames(data_true)[-1])
-
-ggplot2::ggplot() + 
-  ggplot2::theme_bw() + 
-  ggplot2::ylim(0, 1) +
-  ggplot2::theme(aspect.ratio = 1) + 
-  ggplot2::geom_line(data = cond_accuracies_novel |> filter(model %in% c("BayesANT", "PROTAX", "EPA-ng taxtree")), 
-                     mapping = ggplot2::aes(x = rank, y = cond_accuracy, color = model, group = model)) + 
-  ggplot2::geom_point(data = cond_accuracies_novel |> filter(model %in% c("BayesANT", "PROTAX", "EPA-ng taxtree")), 
-                      mapping = ggplot2::aes(x = rank, y = cond_accuracy, color = model))
-
 cond_accuracies_obs <- conditional_accuracy(results, data_true, id_observed)
-
-cond_accuracies_obs$rank <- factor(cond_accuracies_obs$rank, 
-                                     levels = colnames(data_true)[-1])
-
-ggplot2::ggplot() + 
-  ggplot2::theme_bw() + 
-  ggplot2::ylim(0, 1) +
-  ggplot2::theme(aspect.ratio = 1) + 
-  ggplot2::geom_line(data = cond_accuracies_obs, 
-                     mapping = ggplot2::aes(x = rank, y = cond_accuracy, color = model, group = model)) + 
-  ggplot2::geom_point(data = cond_accuracies_obs, 
-                      mapping = ggplot2::aes(x = rank, y = cond_accuracy, color = model))
 
 cond_accuracies_all <- conditional_accuracy(results, data_true, id_all)
 
-accuracy_df <- rbind(cbind(marg_accuracies_all, "set" = "all"), 
-      cbind(marg_accuracies_obs, "set" = "observed"), 
-      cbind(marg_accuracies_novel, "set" = "novel")
-      ) |> 
+accuracy_df <- rbind(cbind(marg_accuracies_all, "set" = "all"),
+                     cbind(marg_accuracies_obs, "set" = "observed"),
+                     cbind(marg_accuracies_novel, "set" = "novel")
+                     ) |>
   dplyr::left_join(rbind(cbind(cond_accuracies_all, "set" = "all"), 
                          cbind(cond_accuracies_obs, "set" = "observed"), 
                          cbind(cond_accuracies_novel, "set" = "novel")
-  )) |> 
+                         )) |>
   dplyr::rename(marginal = marg_accuracy, 
                 conditional = cond_accuracy) |> 
   tidyr::pivot_longer(c(3,5), 
@@ -316,8 +291,9 @@ accuracy_df$set <- factor(accuracy_df$set,
 accuracy_df$measure <- factor(accuracy_df$measure, 
                               levels = c("marginal", "conditional"))
 
-
-ggplot2::ggplot() + 
+## TODO : Put numbers in cond accuracy denominator
+cond_marg_plot <- 
+  ggplot2::ggplot() + 
   ggplot2::theme_bw() + 
   ggplot2::theme(aspect.ratio = 1) + 
   ggplot2::geom_line(data = accuracy_df, 
@@ -331,4 +307,8 @@ ggplot2::ggplot() +
                                             color = model)) + 
   ggplot2::facet_grid(measure~set)
 
-
+ggplot2::ggsave(plot = cond_marg_plot, 
+                filename = paste0("../plots/marg_cond_accuracy", undshort, ".pdf"), 
+                width = 310, 
+                height = 200, 
+                units = "mm")
