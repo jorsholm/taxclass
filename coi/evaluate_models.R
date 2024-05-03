@@ -88,6 +88,8 @@ results <- list(
 
 #### Identify novel taxa across all ranks 
 
+observed_everywhere <- !grepl("_new$", data_true[, ncol(data_true)])
+
 id_novel <- list()
 for(rank in colnames(data_true)[-1]){
   id_novel[[rank]] <- which(str_ends(data_true[,rank], paste0(rank, "_new")))
@@ -107,7 +109,7 @@ if(!all(colnames(data_true) == colnames(results[[1]])[1:ncol(data_true)])) print
 
 # PLOT CALIBRATION CURVES ------------------------------------------------------
 
-calibrations <- get_calibration(results, data_true, id_observed$Species)
+calibrations <- get_calibration(results, data_true, observed_everywhere)
 
 calibrations$rank <- factor(calibrations$rank, 
                             levels = colnames(data_true)[-1])
