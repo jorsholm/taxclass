@@ -86,7 +86,19 @@ results <- list(
   "SINTAX" = result_SINTAX
 )
 
-id_observed <- !grepl("_new$", data_true[, ncol(data_true)])
+#### Identify novel taxa across all ranks 
+
+id_novel <- list()
+for(rank in colnames(data_true)[-1]){
+  id_novel[[rank]] <- which(str_ends(data_true[,rank], paste0(rank, "_new")))
+}
+
+id_observed <- list()
+for(rank in colnames(data_true)[-1]){
+  id_observed[[rank]] <- which(!str_ends(data_true[,rank], "_new"))
+}
+
+id_all <- lapply(data_true, function(x) 1:length(x))
 
 # Some quick checks 
 if(!length(unique(lapply(results, function(x) colnames(x)))) == 1) print("One of the results data frames have wrong column names.")
@@ -95,7 +107,7 @@ if(!all(colnames(data_true) == colnames(results[[1]])[1:ncol(data_true)])) print
 
 # PLOT CALIBRATION CURVES ------------------------------------------------------
 
-calibrations <- get_calibration(results, data_true, id_observed)
+calibrations <- get_calibration(results, data_true, id_observed$Species)
 
 calibrations$rank <- factor(calibrations$rank, 
                             levels = colnames(data_true)[-1])
@@ -113,6 +125,7 @@ ggplot2::ggsave(plot = p_cal,
 
 # PLOT ACCURACIES --------------------------------------------------------------
 
+### If a sequence belongs to a new taxon (on any rank), how well is it predicted on higher ranks? 
 accuracies <- get_accuracy_from_cal(calibrations)
 
 accuracies$rank <- factor(accuracies$rank,
@@ -129,131 +142,6 @@ ggplot2::ggsave(plot = p_acc,
                 height = 150, 
                 units = "mm")
 
-# Accuracy of novel taxa across all ranks 
-
-id_novel <- list()
-
-for(rank in colnames(data_true)[-1]){
-  id_novel[[rank]] <- which(str_ends(data_true[,rank], paste0(rank, "_new")))
-}
-
-id_observed <- list()
-
-for(rank in colnames(data_true)[-1]){
-  id_observed[[rank]] <- which(!str_ends(data_true[,rank], "_new"))
-}
-
-id_all <- lapply(data_true, function(x) 1:length(x))
-
-# How many of the novel taxa are predicted as novel *on any taxonomic rank* (in practice the correct one or above)
-a <- get_novelty_accuracy(results, id_novel)
-
-novel_accuracy <- a$acc
-novel_count <- a$count
-partitioned_novelty <- a$part_novelty
-
-novel_accuracy <- 
-  novel_accuracy |> 
-  dplyr::mutate(rank = purrr::map_chr(rank, ~paste0(.x, " (", novel_count[[.x]], ")")))
-
-novel_accuracy$rank <- factor(novel_accuracy$rank, 
-                              levels = unique(novel_accuracy$rank))
-
-p <- ggplot2::ggplot() +
-  ggplot2::theme_bw() +
-  ggplot2::theme(aspect.ratio = 1) + 
-  ggplot2::ylim(0, 100) +
-  ggplot2::theme(axis.title.x = element_blank()) + 
-  ggplot2::ylab("Accuracy %")
-
-# Proportion novel taxa correctly predicted novel (on any taxonomic level, i.e. correct or above)
-truly_novel <- p + 
-  ggplot2::geom_line(data = novel_accuracy, 
-                     mapping = ggplot2::aes(x = rank, 
-                                            y = novel_accuracy, 
-                                            color = model, 
-                                            group = model)) + 
-  ggplot2::geom_point(data = novel_accuracy, 
-                      mapping = ggplot2::aes(x = rank,
-                                             y = novel_accuracy,
-                                             color = model)) + 
-  ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
-  ggplot2::labs(color = "Model") + 
-  ggplot2::facet_wrap(~paste("Correctly predicted novel (on any rank) /\n the number of novel taxa on that rank"))
-
-# Proportion novel taxa correctly predicted novel *on the correct taxonomic level*
-# p +
-#   ggplot2::geom_line(data = novel_accuracy,
-#                      mapping = ggplot2::aes(x = rank,
-#                                             y = rank_sp_novel_accuracy,
-#                                             color = model,
-#                                             group = model)) +
-#   ggplot2::geom_point(data = novel_accuracy,
-#                       mapping = ggplot2::aes(x = rank,
-#                                              y = rank_sp_novel_accuracy,
-#                                              color = model)) +
-#   ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-#   ggplot2::labs(color = "Model")
-
-# How many were predicted new (on any level) that were actually observed? 
-wrong_any <- p + 
-  ggplot2::geom_line(data = novel_accuracy, 
-                     mapping = ggplot2::aes(x = rank, 
-                                            y = false_novelty, 
-                                            color = model, 
-                                            group = model)) + 
-  ggplot2::geom_point(data = novel_accuracy, 
-                      mapping = ggplot2::aes(x = rank,
-                                             y = false_novelty,
-                                             color = model)) + 
-  ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
-  ggplot2::labs(color = "Model") + 
-  ggplot2::facet_wrap(~paste("Wrongly predicted as novel (on any rank) /\n all seq with known id on that rank"))
-
-# Which proportion on each specific rank? 
-wrong_sp <- p + 
-  ggplot2::geom_line(data = novel_accuracy, 
-                     mapping = ggplot2::aes(x = rank, 
-                                            y = level_sp_false_novelty, 
-                                            color = model, 
-                                            group = model)) + 
-  ggplot2::geom_point(data = novel_accuracy, 
-                      mapping = ggplot2::aes(x = rank,
-                                             y = level_sp_false_novelty,
-                                             color = model)) + 
-  ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
-  ggplot2::labs(color = "Model") + 
-  ggplot2::facet_wrap(~paste("Wrongly predicted as novel (on that rank) /\n all seq with known id on that rank"))
-
-# Partition the correctly predicted novel taxa 
-partitioned_novelty <- 
-  partitioned_novelty |> 
-  dplyr::filter(novelty_rank != "None") |> 
-  dplyr::mutate(novelty_rank = if_else(novelty_rank == rank, "Correct rank", novelty_rank))
-
-partitioned_novelty$novelty_rank <- factor(partitioned_novelty$novelty_rank, 
-                                           levels = c(colnames(data_true)[-1], "Correct rank"))
-partitioned_novelty$rank <- factor(partitioned_novelty$rank, 
-                                           levels = colnames(data_true)[-1])
-
-color_alternatives <- c("#eff3ff", "#bdd7e7", "#6baed6", "#3182bd", "#08519c")
-
-part_novelty <- p + 
-  ggplot2::geom_bar(data = partitioned_novelty, 
-                    mapping = ggplot2::aes(x = rank, 
-                                           y = perc, 
-                                           fill = novelty_rank), 
-                    position = "stack", 
-                    stat = "identity") + 
-  ggplot2::facet_wrap(~model) + 
-  ggplot2::scale_fill_manual(limits = c(colnames(data_true)[-1], "Correct rank"), 
-                             values = c(color_alternatives[1:length(colnames(data_true)[-1])], "grey"))
-
-accuracy_plot <- ggpubr::ggarrange(plotlist = list(truly_novel, wrong_any, wrong_sp), 
-                  nrow = 1, 
-                  common.legend = T)
-ggpubr::ggarrange(plotlist = list(accuracy_plot, part_novelty), 
-                  nrow = 2)
 
 
 #### Marginal accuracy 
@@ -312,3 +200,86 @@ ggplot2::ggsave(plot = cond_marg_plot,
                 width = 310, 
                 height = 200, 
                 units = "mm")
+
+# How many of the novel taxa are predicted as novel *on any taxonomic rank* (in practice the correct one or above)
+a <- get_novelty_accuracy(results, id_novel)
+
+novel_accuracy <- a$acc
+novel_count <- a$count
+partitioned_novelty <- a$part_novelty
+
+novel_accuracy <- 
+  novel_accuracy |> 
+  dplyr::mutate(rank = purrr::map_chr(rank, ~paste0(.x, " (", novel_count[[.x]], ")")))
+
+novel_accuracy$rank <- factor(novel_accuracy$rank, 
+                              levels = unique(novel_accuracy$rank))
+
+p <- ggplot2::ggplot() +
+  ggplot2::theme_bw() +
+  ggplot2::theme(aspect.ratio = 1) + 
+  ggplot2::ylim(0, 100) +
+  ggplot2::theme(axis.title.x = element_blank()) + 
+  ggplot2::ylab("Accuracy %")
+
+# Proportion novel taxa correctly predicted novel (on any taxonomic level, i.e. correct or above)
+# truly_novel <- p + 
+#   ggplot2::geom_line(data = novel_accuracy, 
+#                      mapping = ggplot2::aes(x = rank, 
+#                                             y = novel_accuracy, 
+#                                             color = model, 
+#                                             group = model)) + 
+#   ggplot2::geom_point(data = novel_accuracy, 
+#                       mapping = ggplot2::aes(x = rank,
+#                                              y = novel_accuracy,
+#                                              color = model)) + 
+#   ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+#   ggplot2::labs(color = "Model") + 
+#   ggplot2::facet_wrap(~paste("Correctly predicted novel (on any rank) /\n the number of novel taxa on that rank"))
+
+
+
+# How many were predicted new (on any level) that were actually observed?
+# TODO: scale this to the number of true novel sequences 
+# wrong_any <- p + 
+#   ggplot2::geom_line(data = novel_accuracy, 
+#                      mapping = ggplot2::aes(x = rank, 
+#                                             y = false_novelty, 
+#                                             color = model, 
+#                                             group = model)) + 
+#   ggplot2::geom_point(data = novel_accuracy, 
+#                       mapping = ggplot2::aes(x = rank,
+#                                              y = false_novelty,
+#                                              color = model)) + 
+#   ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+#   ggplot2::labs(color = "Model") + 
+#   ggplot2::facet_wrap(~paste("Wrongly predicted as novel (on any rank) /\n all seq with known id on that rank"))
+
+# Partition the correctly predicted novel taxa 
+partitioned_novelty <- 
+  partitioned_novelty |> 
+  dplyr::filter(novelty_rank != "None") |> 
+  dplyr::mutate(novelty_rank = if_else(novelty_rank == rank, 
+                                       "Correct rank", novelty_rank))
+
+partitioned_novelty$novelty_rank <- factor(partitioned_novelty$novelty_rank, 
+                                           levels = c(colnames(data_true)[-1], "Correct rank"))
+partitioned_novelty$rank <- factor(partitioned_novelty$rank, 
+                                   levels = colnames(data_true)[-1])
+
+color_alternatives <- c("#eff3ff", "#bdd7e7", "#6baed6", "#3182bd", "#08519c")
+
+part_novelty <- p + 
+  ggplot2::geom_bar(data = partitioned_novelty, 
+                    mapping = ggplot2::aes(x = rank, 
+                                           y = perc, 
+                                           fill = novelty_rank), 
+                    position = "stack", 
+                    stat = "identity") + 
+  ggplot2::facet_wrap(~model) + 
+  ggplot2::scale_fill_manual(limits = c(colnames(data_true)[-1], "Correct rank"), 
+                             values = c(color_alternatives[1:length(colnames(data_true)[-1])], "grey"))
+
+ggpubr::ggarrange(plotlist = list(accuracy_plot, part_novelty), 
+                  nrow = 2)
+
