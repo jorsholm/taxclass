@@ -172,7 +172,9 @@ accuracy_df <- rbind(cbind(marg_accuracies_all, "set" = "all"),
                 conditional = cond_accuracy) |> 
   tidyr::pivot_longer(c(3,5), 
                       names_to = "measure", 
-                      values_to = "accuracy")
+                      values_to = "accuracy") |> 
+  dplyr::mutate(denom_cond = if_else(measure == "marginal", 0, denom_cond)) |> 
+  dplyr::mutate(denom_cond = na_if(denom_cond, 0))
 
 accuracy_df$rank <- factor(accuracy_df$rank, 
                            levels = colnames(data_true)[-1])
@@ -181,7 +183,6 @@ accuracy_df$set <- factor(accuracy_df$set,
 accuracy_df$measure <- factor(accuracy_df$measure, 
                               levels = c("marginal", "conditional"))
 
-## TODO : Put numbers in cond accuracy denominator
 cond_marg_plot <- 
   ggplot2::ggplot() + 
   ggplot2::theme_bw() + 
@@ -195,7 +196,13 @@ cond_marg_plot <-
                      mapping = ggplot2::aes(x = rank, 
                                             y = accuracy, 
                                             color = model)) + 
-  ggplot2::facet_grid(measure~set)
+  ggplot2::facet_grid(measure~set) + 
+  ggplot2::geom_text(data = accuracy_df |> dplyr::filter(measure == "conditional", 
+                                                         set == "novel", 
+                                                         !(model %in% c("RDP", "SINTAX"))), 
+                     mapping = ggplot2::aes(x = rank, y = accuracy, color = model, 
+                                            label = denom_cond), 
+                     nudge_y = 0.05, size = 3)
 
 ggplot2::ggsave(plot = cond_marg_plot, 
                 filename = paste0("../plots/marg_cond_accuracy", undshort, ".pdf"), 
