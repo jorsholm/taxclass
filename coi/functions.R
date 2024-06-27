@@ -1,7 +1,7 @@
 ################################################################################
 # Functions for analysing performance of taxonomic classification algorithms.
 ################################################################################
-library(tidyverse)
+#library(tidyverse)
 
 #' Replaces labels of classes that are unique to test dataset. 
 #' Example of new labels: Araneae_Family_new
@@ -125,6 +125,65 @@ calc_calibration <- function(prob, correct){
               cumcorr = cumcorr))
 }
 
+calc_calibration_binned <- function(prob, correct, bins){
+  
+  n <- length(prob)
+  
+  df <- 
+    data.frame(prob = prob, 
+             correct = correct) |> 
+    dplyr::mutate(bin = cut(prob, bins, include.lowest = T)) |>
+    dplyr::group_by(bin) |> 
+    dplyr::summarise(correct = sum(correct)/dplyr::n(), 
+                     count = dplyr::n()) 
+  
+  return(df)
+}
+
+get_binned_calibration <- function(results, data_true, observed_everywhere, 
+                                   bins = seq(0, 1, 0.05)){
+  
+  ranks <- colnames(data_true)[-1]
+  calibration <- data.frame()
+  
+  sets <- c("All", "Observed", "Novel")
+  
+  for(set in sets){
+
+    for(rank in ranks){
+      
+      col <- which(colnames(data_true) == rank)
+      col_prob <- which(colnames(results[[1]]) == paste0("Prob_", rank))
+      
+      for(i in 1:length(results)){
+        
+        if(set == "All"){
+          correct <- results[[i]][,col] == data_true[,col]
+          prob <- results[[i]][,col_prob]
+        }else if(set == "Observed"){
+          correct <- results[[i]][observed_everywhere,col] == data_true[observed_everywhere,col]
+          prob <- results[[i]][observed_everywhere,col_prob]
+        }else if(set == "Novel"){
+          correct <- results[[i]][!observed_everywhere,col] == data_true[!observed_everywhere,col]
+          prob <- results[[i]][!observed_everywhere,col_prob]
+        }
+        
+        cal <- calc_calibration_binned(prob, correct, bins)
+        
+        cal <- cal |> 
+          dplyr::mutate(model = names(results)[i], 
+                        rank = rank, 
+                        set = set)
+        
+        calibration <- rbind(calibration, 
+                             cal)
+      }
+    }
+  }
+  return(calibration)
+}
+
+
 # My attempt for flexible plotting of calibrations 
 # TODO: When plotting a single model + set, include accuracies in legend 
 # TODO: When plotting a single rank + set, include accuracies in legend + info about sample size 
@@ -156,8 +215,8 @@ plot_calibration <- function(calibrations){
                                                 y = cumcorr, 
                                                 color = rank)) + 
       ggplot2::geom_point(data = calibrations |>
-                            group_by(across(all_of(groups))) |> 
-                            summarise(cumprob = max(cumprob),
+                            dplyr::group_by(across(all_of(groups))) |> 
+                            dplyr::summarise(cumprob = max(cumprob),
                                       cumcorr = max(cumcorr)), 
                           mapping = ggplot2::aes(x = cumprob,
                                                  y = cumcorr,
@@ -221,33 +280,26 @@ get_novelty_accuracy <- function(results, id_novel){
     for(i in 1:length(results)){
       novel_acc <- sum(stringr::str_ends(results[[i]][id_novel[[r]], r], "_new"))/n[[r]] * 100
       
-      rank_sp_novel_accuracy <- sum(stringr::str_ends(results[[i]][id_novel[[r]], r], paste0(r, "_new")))/n[[r]] * 100
+      # False novelty is calc as proportion of falsely predicted novel species on that rank / true novel on that rank  
+      false_novelty <- sum(stringr::str_ends(results[[i]][-id_novel[[r]], r],  paste0(r, "_new")))/n[[r]] * 100
       
-      # False novelty is calc as proportion of falsely predicted novel species on that rank / all sequences known on that rank 
-      false_novelty <- sum(stringr::str_ends(results[[i]][-id_novel[[r]], r], "_new"))/(nrow(results[[i]]) - n[[r]]) * 100
-      
-      # False novelty added on that specific rank 
-      level_sp_false_novelty <- sum(stringr::str_ends(results[[i]][-id_novel[[r]], r], paste0(r, "_new")))/(nrow(results[[i]]) - n[[r]]) * 100
-      
-      acc_df <- bind_rows(acc_df, 
+      acc_df <- rbind(acc_df, 
                 data.frame(model = names(results)[i], 
                            rank = r, 
                            novel_accuracy = novel_acc, 
-                           rank_sp_novel_accuracy = rank_sp_novel_accuracy,
-                           false_novelty = false_novelty, 
-                           level_sp_false_novelty = level_sp_false_novelty))
-      
+                           false_novelty = false_novelty)) 
+
       suppressMessages(part <- 
         data.frame(rank = r, 
                  model = names(results)[i], 
                  novelty_rank = 
                    sapply(results[[i]][id_novel[[r]],r],
-                          function(x) if_else(stringr::str_detect(x, "_new"),
+                          function(x) dplyr::if_else(stringr::str_detect(x, "_new"),
                                               stringr::str_split(x, "_")[[1]] |> tail(2) |> head(1),
                                               "None"),
                           USE.NAMES = F)) |> 
         dplyr::group_by(rank, model, novelty_rank) |> 
-        dplyr::summarise(count = n()) |> 
+        dplyr::summarise(count = dplyr::n()) |> 
         dplyr::mutate(perc = count / n[[r]] * 100))
       
       part_novelty <- rbind(part_novelty, part)
@@ -272,7 +324,7 @@ plot_accuracies <- function(accuracies){
     ggplot2::theme_bw() +
     ggplot2::theme(aspect.ratio = 1) + 
     ggplot2::ylim(0, 100) +
-    ggplot2::theme(axis.title.x = element_blank()) + 
+    ggplot2::theme(axis.title.x = ggplot2::element_blank()) + 
     ggplot2::ylab("Accuracy %")
   
   p <- p + 
@@ -285,7 +337,7 @@ plot_accuracies <- function(accuracies){
                         mapping = ggplot2::aes(x = rank,
                                                y = accuracy,
                                                color = model)) + 
-    ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) + 
     ggplot2::labs(color = "Model")
   
   if(length(groups) == 3){
@@ -363,8 +415,10 @@ conditional_accuracy <- function(results, data_true, id_list){
       cond_accuracies <- rbind(cond_accuracies, 
                                data.frame(model = names(results[i]),
                                           rank = r,
-                                          cond_accuracy = correct/denom))
+                                          cond_accuracy = correct/denom, 
+                                          denom_cond = denom))
     }
   }
   return(cond_accuracies)
 }
+# 
