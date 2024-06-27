@@ -1,7 +1,10 @@
 
 #' Loads FinBOL data (train) and GBOL data (test) as listed dataframes. 
 #' @param level lowest taxonomic level (genus/species)
-load_FinBOL_GBOL <- function(level = "species"){
+load_FinBOL_GBOL <- function(level = "species", short = F){
+  
+  shorttxt <- ""
+  if(short) shorttxt <- "short"
   
   data_train <- seqinr::read.fasta(paste0("data/finbol-gbol/train_finbol-gbol_", 
                                           level, ".fasta"), 

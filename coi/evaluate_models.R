@@ -1,5 +1,6 @@
 
 rm(list = ls())
+setwd("coi")
 
 # LOAD FUNCTIONS ---------------------------------------------------------------
 
@@ -9,7 +10,7 @@ source("functions.R")
 # LOAD DATA --------------------------------------------------------------------
 
 level <- "species"
-short <- TRUE
+short <- F
 shorttxt <- ""
 undshort <- ""
 if(short){
@@ -18,7 +19,7 @@ if(short){
 } 
 
 # Load test and train data 
-data <- load_FinBOL_GBOL(level = level)
+data <- load_FinBOL_GBOL(level = level, short = short)
 
 # Replace labels of taxa unique to test
 # Sort test data in alphabetical order
@@ -92,12 +93,12 @@ observed_everywhere <- !grepl("_new$", data_true[, ncol(data_true)])
 
 id_novel <- list()
 for(rank in colnames(data_true)[-1]){
-  id_novel[[rank]] <- which(str_ends(data_true[,rank], paste0(rank, "_new")))
+  id_novel[[rank]] <- which(stringr::str_ends(data_true[,rank], paste0(rank, "_new")))
 }
 
 id_observed <- list()
 for(rank in colnames(data_true)[-1]){
-  id_observed[[rank]] <- which(!str_ends(data_true[,rank], "_new"))
+  id_observed[[rank]] <- which(!stringr::str_ends(data_true[,rank], "_new"))
 }
 
 id_all <- lapply(data_true, function(x) 1:length(x))
@@ -107,8 +108,9 @@ if(!length(unique(lapply(results, function(x) colnames(x)))) == 1) print("One of
 if(!all(sapply(results, function(x) all(x[,1] == data_true[,1])))) print("One of the results data frames is not sorted by ID.")
 if(!all(colnames(data_true) == colnames(results[[1]])[1:ncol(data_true)])) print("Column names containing taxonomic information not identical to data_true")
 
-# PLOT CALIBRATION CURVES ------------------------------------------------------
+# PLOT CALIBRATION -------------------------------------------------------------
 
+#### Plot all calibration curves (all ranks, taxa sets and models)
 calibrations <- get_calibration(results, data_true, observed_everywhere)
 
 calibrations$rank <- factor(calibrations$rank, 
@@ -116,14 +118,61 @@ calibrations$rank <- factor(calibrations$rank,
 calibrations$set <- factor(calibrations$set, 
                            levels = c("All", "Observed", "Novel"))
 
-#### Plot all calibration curves (all ranks, taxa sets and models)
 p_cal <- plot_calibration(calibrations) 
 
 ggplot2::ggsave(plot = p_cal, 
-                filename = paste0("../plots/calibration_COI", undshort, ".png"), 
+                filename = paste0("../plots/calibration_COI", undshort,
+                                  "_", level, ".pdf"), 
                 width = 210, 
                 height = 297, 
                 units = "mm")
+
+#### Binned calibration 
+binned_calibrations <- get_binned_calibration(results, data_true, observed_everywhere)
+
+binned_calibrations$rank <- factor(binned_calibrations$rank, 
+                                   levels = colnames(data_true)[-1])
+binned_calibrations$set <- factor(binned_calibrations$set, 
+                                   levels = c("All", "Observed", "Novel"))
+
+binned_calibrations <- 
+  binned_calibrations |> 
+  dplyr::mutate(bin = purrr::map_dbl(bin, function(x) 
+                                     stringr::str_remove(x, "\\(") |> 
+                                       stringr::str_split(",") |> 
+                                       unlist() |> 
+                                       head(1) |> 
+                                       as.numeric())) |> 
+  dplyr::mutate(bin = bin + 0.05)
+
+plotlist <- list()
+
+for(m in names(results)){
+  
+  plotlist[[m]] <- 
+    ggplot2::ggplot() + 
+    ggplot2::ylim(0, 1) +
+    ggplot2::xlim(0, 1.05) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(aspect.ratio = 1) +
+    ggplot2::geom_abline(intercept = 0, slope = 1, color = "grey") +
+    ggplot2::geom_bar(data = binned_calibrations |> dplyr::filter(model == m), 
+                      ggplot2::aes(x = bin, 
+                                   y = correct, 
+                                   fill = log(count)), 
+                      stat = "identity", 
+                      alpha = 0.5) + 
+    ggplot2::facet_grid(set~rank) + 
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90)) + 
+    ggplot2::ylab("Prop. correct") + 
+    ggplot2::xlab("Pred. probability") + 
+    ggplot2::ggtitle(m)
+}
+
+pdf(paste0("../plots/binned_calibration", undshort, "_", level, ".pdf"), 
+    width = 10)
+lapply(plotlist, print)
+dev.off()
 
 # PLOT ACCURACIES --------------------------------------------------------------
 
@@ -135,16 +184,15 @@ accuracies$rank <- factor(accuracies$rank,
 accuracies$set <- factor(accuracies$set, 
                            levels = c("All", "Observed", "Novel"))
 
-#### Plot accuracy across all models and taxa sets 
+#### Plot across all models and taxa sets 
 p_acc <- plot_accuracies(accuracies)
 
 ggplot2::ggsave(plot = p_acc, 
-                filename = paste0("../plots/accuracy_COI", undshort, ".png"), 
+                filename = paste0("../plots/accuracy_COI", undshort, 
+                                  "_", level, ".pdf"), 
                 width = 210, 
                 height = 150, 
                 units = "mm")
-
-
 
 #### Marginal accuracy 
 marg_accuracies_novel <- marginal_accuracy(results, data_true, id_novel)
@@ -160,6 +208,7 @@ cond_accuracies_obs <- conditional_accuracy(results, data_true, id_observed)
 
 cond_accuracies_all <- conditional_accuracy(results, data_true, id_all)
 
+### Plot marginal and conditional accuracy 
 accuracy_df <- rbind(cbind(marg_accuracies_all, "set" = "all"),
                      cbind(marg_accuracies_obs, "set" = "observed"),
                      cbind(marg_accuracies_novel, "set" = "novel")
@@ -173,8 +222,8 @@ accuracy_df <- rbind(cbind(marg_accuracies_all, "set" = "all"),
   tidyr::pivot_longer(c(3,5), 
                       names_to = "measure", 
                       values_to = "accuracy") |> 
-  dplyr::mutate(denom_cond = if_else(measure == "marginal", 0, denom_cond)) |> 
-  dplyr::mutate(denom_cond = na_if(denom_cond, 0))
+  dplyr::mutate(denom_cond = dplyr::if_else(measure == "marginal", 0, denom_cond)) |> 
+  dplyr::mutate(denom_cond = dplyr::na_if(denom_cond, 0))
 
 accuracy_df$rank <- factor(accuracy_df$rank, 
                            levels = colnames(data_true)[-1])
@@ -205,12 +254,13 @@ cond_marg_plot <-
                      nudge_y = 0.05, size = 3)
 
 ggplot2::ggsave(plot = cond_marg_plot, 
-                filename = paste0("../plots/marg_cond_accuracy", undshort, ".pdf"), 
+                filename = paste0("../plots/marg_cond_accuracy", undshort, 
+                                  "_", level, ".pdf"), 
                 width = 310, 
                 height = 200, 
                 units = "mm")
 
-# How many of the novel taxa are predicted as novel *on any taxonomic rank* (in practice the correct one or above)
+### True vs false novelty 
 a <- get_novelty_accuracy(results, id_novel)
 
 novel_accuracy <- a$acc
@@ -226,49 +276,44 @@ novel_accuracy$rank <- factor(novel_accuracy$rank,
 
 p <- ggplot2::ggplot() +
   ggplot2::theme_bw() +
-  ggplot2::theme(aspect.ratio = 1) + 
-  ggplot2::ylim(0, 100) +
-  ggplot2::theme(axis.title.x = element_blank()) + 
+  ggplot2::theme(axis.title.x = ggplot2::element_blank()) + 
   ggplot2::ylab("Accuracy %")
 
 # Proportion novel taxa correctly predicted novel (on any taxonomic level, i.e. correct or above)
-# truly_novel <- p + 
-#   ggplot2::geom_line(data = novel_accuracy, 
-#                      mapping = ggplot2::aes(x = rank, 
-#                                             y = novel_accuracy, 
-#                                             color = model, 
-#                                             group = model)) + 
-#   ggplot2::geom_point(data = novel_accuracy, 
-#                       mapping = ggplot2::aes(x = rank,
-#                                              y = novel_accuracy,
-#                                              color = model)) + 
-#   ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
-#   ggplot2::labs(color = "Model") + 
-#   ggplot2::facet_wrap(~paste("Correctly predicted novel (on any rank) /\n the number of novel taxa on that rank"))
-
-
+true_novel <- p +
+  ggplot2::geom_line(data = novel_accuracy,
+                     mapping = ggplot2::aes(x = rank,
+                                            y = novel_accuracy,
+                                            color = model,
+                                            group = model)) +
+  ggplot2::geom_point(data = novel_accuracy,
+                      mapping = ggplot2::aes(x = rank,
+                                             y = novel_accuracy,
+                                             color = model)) +
+  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) +
+  ggplot2::labs(color = "Model") +
+  ggplot2::facet_wrap(~paste("True novel"))
 
 # How many were predicted new (on any level) that were actually observed?
-# TODO: scale this to the number of true novel sequences 
-# wrong_any <- p + 
-#   ggplot2::geom_line(data = novel_accuracy, 
-#                      mapping = ggplot2::aes(x = rank, 
-#                                             y = false_novelty, 
-#                                             color = model, 
-#                                             group = model)) + 
-#   ggplot2::geom_point(data = novel_accuracy, 
-#                       mapping = ggplot2::aes(x = rank,
-#                                              y = false_novelty,
-#                                              color = model)) + 
-#   ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
-#   ggplot2::labs(color = "Model") + 
-#   ggplot2::facet_wrap(~paste("Wrongly predicted as novel (on any rank) /\n all seq with known id on that rank"))
+false_novel <- p +
+  ggplot2::geom_line(data = novel_accuracy,
+                     mapping = ggplot2::aes(x = rank,
+                                            y = false_novelty,
+                                            color = model,
+                                            group = model)) +
+  ggplot2::geom_point(data = novel_accuracy,
+                      mapping = ggplot2::aes(x = rank,
+                                             y = false_novelty,
+                                             color = model)) +
+  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) +
+  ggplot2::labs(color = "Model") +
+  ggforce::facet_zoom(ylim = c(0,500))  
 
 # Partition the correctly predicted novel taxa 
 partitioned_novelty <- 
   partitioned_novelty |> 
   dplyr::filter(novelty_rank != "None") |> 
-  dplyr::mutate(novelty_rank = if_else(novelty_rank == rank, 
+  dplyr::mutate(novelty_rank = dplyr::if_else(novelty_rank == rank, 
                                        "Correct rank", novelty_rank))
 
 partitioned_novelty$novelty_rank <- factor(partitioned_novelty$novelty_rank, 
@@ -289,6 +334,16 @@ part_novelty <- p +
   ggplot2::scale_fill_manual(limits = c(colnames(data_true)[-1], "Correct rank"), 
                              values = c(color_alternatives[1:length(colnames(data_true)[-1])], "grey"))
 
-ggpubr::ggarrange(plotlist = list(accuracy_plot, part_novelty), 
+novel_accuracy_plot <-
+  ggpubr::ggarrange(plotlist = list(ggpubr::ggarrange(plotlist = list(true_novel, false_novel), 
+                                                    ncol = 2, widths = c(1,2), 
+                                                    common.legend = T, 
+                                                    labels = c("", "False novel")),
+                                  part_novelty), 
                   nrow = 2)
+
+ggplot2::ggsave(filename = paste0("../plots/novel_accuracy", undshort, "_", level, ".pdf"), 
+                plot = novel_accuracy_plot, 
+                width = 13, 
+                height = 9.5)
 
