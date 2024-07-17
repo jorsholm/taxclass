@@ -110,14 +110,13 @@ if(!all(colnames(data_true) == colnames(results[[1]])[1:ncol(data_true)])) print
 
 # PLOT CALIBRATION -------------------------------------------------------------
 
-#### Plot all calibration curves (all ranks, taxa sets and models)
 calibrations <- get_calibration(results, data_true, observed_everywhere)
-
 calibrations$rank <- factor(calibrations$rank, 
                             levels = colnames(data_true)[-1])
 calibrations$set <- factor(calibrations$set, 
                            levels = c("All", "Observed", "Novel"))
 
+#### Plot all calibration curves (all ranks, taxa sets and models) #####
 p_cal <- plot_calibration(calibrations) 
 
 ggplot2::ggsave(plot = p_cal, 
@@ -127,7 +126,38 @@ ggplot2::ggsave(plot = p_cal,
                 height = 297, 
                 units = "mm")
 
-#### Binned calibration 
+#### Calibration plot for publication #### 
+obs_perc <- round(sum(observed_everywhere)/nrow(data_true) * 100, 1)
+novel_perc <- round(sum(!observed_everywhere)/nrow(data_true) * 100, 1)
+
+calibrations_for_pub <- 
+  calibrations |> 
+  dplyr::filter(set != "All")
+
+calibrations_for_pub$set <- as.character(calibrations_for_pub$set)
+calibrations_for_pub$set[which(calibrations_for_pub$set == "Observed")] <- paste0("Observed (", obs_perc, "%)")
+calibrations_for_pub$set[which(calibrations_for_pub$set == "Novel")] <- paste0("Novel (", novel_perc, "%)")
+calibrations_for_pub$set <- factor(calibrations_for_pub$set, levels = c(paste0("Observed (", obs_perc, "%)"), 
+                                                                        paste0("Novel (", novel_perc, "%)")))
+
+calibration_plot_publ <- 
+  plot_calibration(calibrations_for_pub) +
+  ggplot2::facet_grid(set~model) + 
+  theme(panel.grid.minor = element_blank(), 
+        legend.position = "bottom")
+
+ggplot2::ggsave(plot = calibration_plot_publ, 
+                filename = paste0("../plots/publication/calibration", undshort, ".pdf"), 
+                width = 235, 
+                height = 130, 
+                units = "mm")
+ggplot2::ggsave(plot = calibration_plot_publ, 
+                filename = paste0("../plots/publication/calibration", undshort, ".png"), 
+                width = 235, 
+                height = 130, 
+                units = "mm")
+
+#### Binned calibration #####
 binned_calibrations <- get_binned_calibration(results, data_true, observed_everywhere)
 
 binned_calibrations$rank <- factor(binned_calibrations$rank, 
@@ -145,6 +175,34 @@ binned_calibrations <-
                                        as.numeric())) |> 
   dplyr::mutate(bin = bin + 0.05)
 
+# Genus-level plot 
+binned_genus <- 
+  binned_calibrations |> 
+  dplyr::filter(set != "All") |> 
+  dplyr::filter(rank == "Genus") |> 
+  ggplot() + 
+  ggplot2::ylim(0, 1) +
+  ggplot2::xlim(0, 1.05) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(aspect.ratio = 1) +
+  ggplot2::geom_abline(intercept = 0, slope = 1, color = "grey") +
+  ggplot2::geom_bar(ggplot2::aes(x = bin, 
+                                 y = correct, 
+                                 fill = log(count)), 
+                    stat = "identity", 
+                    alpha = 0.5) + 
+  ggplot2::facet_grid(set~model) + 
+  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90)) + 
+  ggplot2::ylab("Prop. correct") + 
+  ggplot2::xlab("Pred. probability") 
+
+ggsave(plot = binned_genus, 
+       filename = "../plots/binned_genus.pdf", 
+       width = 200, 
+       height = 100, 
+       units = "mm")
+
+# Plot all ranks for all models 
 plotlist <- list()
 
 for(m in names(results)){
@@ -184,7 +242,7 @@ accuracies$rank <- factor(accuracies$rank,
 accuracies$set <- factor(accuracies$set, 
                            levels = c("All", "Observed", "Novel"))
 
-#### Plot across all models and taxa sets 
+#### Plot across all models and species sets ####
 p_acc <- plot_accuracies(accuracies)
 
 ggplot2::ggsave(plot = p_acc, 
@@ -194,14 +252,13 @@ ggplot2::ggsave(plot = p_acc,
                 height = 150, 
                 units = "mm")
 
-#### Marginal accuracy 
+#### Marginal and conditional accuracy #####
 marg_accuracies_novel <- marginal_accuracy(results, data_true, id_novel)
 
 marg_accuracies_obs <- marginal_accuracy(results, data_true, id_observed)
 
 marg_accuracies_all <- marginal_accuracy(results, data_true, id_all)
 
-### Conditional accuracy 
 cond_accuracies_novel <- conditional_accuracy(results, data_true, id_novel)
 
 cond_accuracies_obs <- conditional_accuracy(results, data_true, id_observed)
@@ -260,7 +317,142 @@ ggplot2::ggsave(plot = cond_marg_plot,
                 height = 200, 
                 units = "mm")
 
+##### For publ 
+accuracy_for_publ <- 
+  accuracy_df |>
+  dplyr::filter(measure == "marginal") |> 
+  dplyr::mutate(set = stringr::str_to_title(set))
+
+accuracy_for_publ$set <- factor(accuracy_for_publ$set, 
+                                levels = c("All", "Observed", "Novel"))
+
+marginal_accuracy_publ <- 
+  ggplot2::ggplot() + 
+  ggplot2::theme_bw() + 
+  ggplot2::theme(aspect.ratio = 1) + 
+  ggplot2::geom_line(data = accuracy_for_publ, 
+                     mapping = ggplot2::aes(x = rank, 
+                                            y = accuracy * 100, 
+                                            color = model, 
+                                            group = model)) + 
+  ggplot2::geom_point(data = accuracy_for_publ, 
+                      mapping = ggplot2::aes(x = rank, 
+                                             y = accuracy * 100, 
+                                             color = model)) + 
+  ggplot2::facet_wrap(~set) + 
+  ggplot2::ylab("Accuracy (%)") + 
+  ggplot2::labs(color = "Model") + 
+  theme(panel.grid.minor = element_blank(), 
+        axis.title.x = element_blank())
+
+ggplot2::ggsave(plot = marginal_accuracy_publ, 
+                filename = paste0("../plots/publication/marginal_accuracy", 
+                                  undshort, ".pdf"), 
+                width = 280, 
+                height = 100, 
+                units = "mm")
+ggplot2::ggsave(plot = marginal_accuracy_publ, 
+                filename = paste0("../plots/publication/marginal_accuracy", 
+                                  undshort, ".png"), 
+                width = 280, 
+                height = 100, 
+                units = "mm")
+### FOUR PANEL ACCURACY PLOT 
+
+fourpanel_df <- 
+  bind_rows(
+  accuracy_df |>
+    filter(measure == "marginal", set != "all") |>
+    select(-denom_cond) |>
+    mutate(set = as.character(set)) |>
+    mutate(set = map_chr(set, ~ str_to_sentence(paste(.x, "taxa")))) |>
+    mutate(accuracy = accuracy * 100),
+  accuracies |> 
+    filter(set != "All") |>
+    mutate(set = as.character(set)) |>
+    mutate(set = paste(set, "species")) |>
+    mutate(measure = "accuracy"))
+
+fourpanel_df$set <- factor(fourpanel_df$set, levels = c("Observed species",
+                                                        "Novel species", 
+                                                        "Observed taxa",
+                                                        "Novel taxa"))
+ggplot2::ggplot() + 
+  ggplot2::theme_bw() + 
+  ggplot2::theme(aspect.ratio = 1) + 
+  ggplot2::geom_line(data = fourpanel_df, 
+                     mapping = ggplot2::aes(x = rank, 
+                                            y = accuracy, 
+                                            color = model, 
+                                            group = model)) + 
+  ggplot2::geom_point(data = fourpanel_df, 
+                      mapping = ggplot2::aes(x = rank, 
+                                             y = accuracy, 
+                                             color = model)) + 
+  ggplot2::facet_wrap(~set) + 
+  ggplot2::ylab("Accuracy (%)") + 
+  ggplot2::labs(color = "Model") + 
+  theme(panel.grid.minor = element_blank(), 
+        axis.title.x = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+
 ### True vs false novelty 
+predicted_novelty <- function(results, data_true, id_novel){
+  ranks <- colnames(data_true)[-1]
+  pred_df <- data.frame()
+  
+  for(i in 1:length(results)){
+    
+    sum_novel <- 0 
+    cumid_novel <- c()
+    pred_novel <- 0 
+    
+    for(r in ranks){
+      
+      sum_novel <- sum_novel + length(id_novel[[r]])
+      cumid_novel <- c(cumid_novel, id_novel[[r]])
+      
+      pred_novel <- pred_novel + 
+        sum(stringr::str_ends(results[[i]][,r], "_new"))
+      
+      df <- data.frame(model = names(results)[i], 
+                       rank = r,
+                       sum_novel = sum_novel, 
+                       pred_novel = pred_novel
+      )
+      
+      pred_df <- rbind(pred_df, df)
+    }
+    
+  }
+
+  return(pred_df)
+}
+
+pred_novel <- predicted_novelty(results, data_true, id_novel)
+
+pred_novel$rank <- factor(pred_novel$rank, levels = names(data_true)[-1])
+
+#sum_novel <- 
+  ggplot() + 
+  geom_line(data = pred_novel |> filter(model == "BayesANT"), 
+            aes(x = rank, y = sum_novel, group = model), 
+            color = "black", 
+            linetype = "dashed") + 
+  geom_line(data = pred_novel, 
+            aes(x = rank, y = pred_novel, color = model, group = model)) + 
+  geom_point(data = pred_novel, 
+            aes(x = rank, y = pred_novel, color = model, group = model)) + 
+  theme_bw() + 
+  scale_y_log10()
+
+ggsave(plot = sum_novel, 
+       filename = "../plots/sum_novel.pdf", 
+       height = 150, 
+       width = 200, 
+       units = "mm")
+
 a <- get_novelty_accuracy(results, id_novel)
 
 novel_accuracy <- a$acc
@@ -311,19 +503,24 @@ false_novel <- p +
 
 # Partition the correctly predicted novel taxa 
 partitioned_novelty <- 
-  partitioned_novelty |> 
-  dplyr::filter(novelty_rank != "None") |> 
-  dplyr::mutate(novelty_rank = dplyr::if_else(novelty_rank == rank, 
-                                       "Correct rank", novelty_rank))
+   partitioned_novelty |> 
+   dplyr::filter(novelty_rank != "None") #|> 
+#   dplyr::mutate(novelty_rank = dplyr::if_else(novelty_rank == rank, 
+#                                        "Correct rank", novelty_rank))
 
-partitioned_novelty$novelty_rank <- factor(partitioned_novelty$novelty_rank, 
-                                           levels = c(colnames(data_true)[-1], "Correct rank"))
+# partitioned_novelty$novelty_rank <- factor(partitioned_novelty$novelty_rank, 
+#                                            levels = c(colnames(data_true)[-1], "Correct rank"))
 partitioned_novelty$rank <- factor(partitioned_novelty$rank, 
                                    levels = colnames(data_true)[-1])
 
-color_alternatives <- c("#eff3ff", "#bdd7e7", "#6baed6", "#3182bd", "#08519c")
+partitioned_novelty$novelty_rank <- factor(partitioned_novelty$novelty_rank,
+                                           levels = colnames(data_true)[-1])
 
-part_novelty <- p + 
+color_alternatives <- c("#EFF3FF", "#C6DBEF", "#9ECAE1", "#6BAED6", "#3182BD", "#08519C")
+
+
+#part_novelty <- 
+  p + 
   ggplot2::geom_bar(data = partitioned_novelty, 
                     mapping = ggplot2::aes(x = rank, 
                                            y = perc, 
@@ -333,6 +530,40 @@ part_novelty <- p +
   ggplot2::facet_wrap(~model) + 
   ggplot2::scale_fill_manual(limits = c(colnames(data_true)[-1], "Correct rank"), 
                              values = c(color_alternatives[1:length(colnames(data_true)[-1])], "grey"))
+
+  
+part_w_neg <- 
+  partitioned_novelty  |> 
+  mutate(rank_no = map_dbl(rank, ~which(ranks == .x)), 
+         novelty_rank_no = map_dbl(novelty_rank, ~which(ranks == .x))) |> 
+  mutate(pred_lower = (rank_no-novelty_rank_no)<0) |> 
+  mutate(perc = map2_dbl(pred_lower, perc, 
+                         ~if_else(.x, -.y, .y))) |> 
+  mutate(novelty_rank = if_else(novelty_rank==rank, "Correct", novelty_rank))
+  
+part_w_neg$novelty_rank <- factor(part_w_neg$novelty_rank,
+                                           levels = c(colnames(data_true)[-1], "Correct"))
+
+part_w_neg_plot <- 
+  p + 
+  geom_bar(data = part_w_neg, 
+           mapping = aes(x = rank, 
+                         y = perc, 
+                         fill = novelty_rank), 
+           position = "stack", 
+           stat = "identity") + 
+  facet_wrap(~model) + 
+  scale_fill_manual(limits = c(colnames(data_true)[-1], "Correct"), 
+                    values = c(color_alternatives[1:length(colnames(data_true)[-1])], "grey")) + 
+  ylab("Proportion of predictions (%)") + 
+  labs(fill = "Predicted novel rank") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggsave(plot = part_w_neg_plot, 
+       filename = "../plots/part_novelty.pdf", 
+       width = 220, 
+       height = 130, 
+       units = "mm")
 
 novel_accuracy_plot <-
   ggpubr::ggarrange(plotlist = list(ggpubr::ggarrange(plotlist = list(true_novel, false_novel), 

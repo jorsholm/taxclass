@@ -293,8 +293,8 @@ get_novelty_accuracy <- function(results, id_novel){
         data.frame(rank = r, 
                  model = names(results)[i], 
                  novelty_rank = 
-                   sapply(results[[i]][id_novel[[r]],r],
-                          function(x) dplyr::if_else(stringr::str_detect(x, "_new"),
+                   sapply(results[[i]][id_novel[[r]], tail(ranks,1)],
+                          function(x) dplyr::if_else(stringr::str_ends(x, "_new"),
                                               stringr::str_split(x, "_")[[1]] |> tail(2) |> head(1),
                                               "None"),
                           USE.NAMES = F)) |> 
