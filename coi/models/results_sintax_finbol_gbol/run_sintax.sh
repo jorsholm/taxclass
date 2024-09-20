@@ -1,26 +1,10 @@
 #!/usr/bin/env bash
-sed '/^>/!s/-//g' ../../data/finbol-gbol/train_finbol-gbol_genus_sintax.fasta >train_finbol-gbol_genus_sintax.fasta
-sed '/^>/!s/-//g' ../../data/finbol-gbol/train_finbol-gbol_species_sintax.fasta >train_finbol-gbol_species_sintax.fasta
-sed '/^>/!s/-//g' ../../data/finbol-gbol/test_finbol-gbol_genus.fasta >test_finbol-gbol_genus.fasta
-sed '/^>/!s/-//g' ../../data/finbol-gbol/test_finbol-gbol_species.fasta >test_finbol-gbol_species.fasta
-sed '/^>/!s/-//g' ../../data/finbol-gbol/test_finbol-gbol_genus.fasta >testshort_finbol-gbol_genus.fasta
-sed '/^>/!s/-//g' ../../data/finbol-gbol/test_finbol-gbol_species.fasta >testshort_finbol-gbol_species.fasta
 TIME="$(which time) --verbose"
-$TIME vsearch --makeudb_usearch train_finbol-gbol_genus_sintax.fasta --output train_finbol-gbol_genus.udb
-$TIME vsearch --sintax test_finbol-gbol_genus.fasta --db train_finbol-gbol_genus.udb --tabbedout sintax_finbol_gbol_genus.raw --threads 8
-echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	genus	Prob_genus" >sintax_finbol_gbol_genus.txt
-sed -r 's/ [^\t]*\t//; s/[pcofgs]:([^,\t]+)\(([01][.][0-9]+)\),?/\t\1\t\2/g; s/\t\+.*//' sintax_finbol_gbol_genus.raw >>sintax_finbol_gbol_genus.txt
+$TIME vsearch --makeudb_usearch ../../data/finbol-gbol/train_finbol-gbol_nt_sintax.fasta --output train_finbol-gbol_nt.udb
+$TIME vsearch --sintax ../../data/finbol-gbol/test_finbol-gbol_nt_sintax.fasta --db train_finbol-gbol_nt.udb --tabbedout sintax_finbol_gbol_nt.raw --threads 8
+echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species" >sintax_finbol_gbol_nt.txt
+sed -r 's/ [^\t]*\t//; s/[kpcofgs]:([^,\t]+)\(([01][.][0-9]+)\),?/\t\1\t\2/g; s/\t\+.*//' sintax_finbol_gbol_nt.raw >>sintax_finbol_gbol_nt.txt
 
-$TIME vsearch --sintax testshort_finbol-gbol_genus.fasta --db train_finbol-gbol_genus.udb --tabbedout sintax_finbol_gbol_genus_short.raw --threads 8
-echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	genus	Prob_genus" >sintax_finbol_gbol_genus_short.txt
-sed -r 's/ [^\t]*\t//; s/[pcofgs]:([^,\t]+)\(([01][.][0-9]+)\),?/\t\1\t\2/g; s/\t\+.*//' sintax_finbol_gbol_genus_short.raw >>sintax_finbol_gbol_genus_short.txt
-
-
-$TIME vsearch --makeudb_usearch train_finbol-gbol_species_sintax.fasta --output train_finbol-gbol_species.udb
-$TIME vsearch --sintax test_finbol-gbol_species.fasta --db train_finbol-gbol_species.udb --tabbedout sintax_finbol_gbol_species.raw --threads 8
-echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	genus	Prob_genus	species	Prob_species" >sintax_finbol_gbol_species.txt
-sed -r 's/ [^\t]*\t//; s/[pcofgs]:([^,\t]+)\(([01][.][0-9]+)\),?/\t\1\t\2/g; s/\t\+.*//' sintax_finbol_gbol_species.raw >>sintax_finbol_gbol_species.txt
-
-$TIME vsearch --sintax testshort_finbol-gbol_species.fasta --db train_finbol-gbol_species.udb --tabbedout sintax_finbol_gbol_species_short.raw --threads 8
-echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	genus	Prob_genus	species	Prob_species" >sintax_finbol_gbol_species_short.txt
-sed -r 's/ [^\t]*\t//; s/[pcofgs]:([^,\t]+)\(([01][.][0-9]+)\),?/\t\1\t\2/g; s/\t\+.*//' sintax_finbol_gbol_species_short.raw >>sintax_finbol_gbol_species_short.txt
+$TIME vsearch --sintax ../../data/finbol-gbol/testshort_finbol-gbol_nt_sintax.fasta --db train_finbol-gbol_nt.udb --tabbedout sintax_finbol_gbol_nt_short.raw --threads 8
+echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species" >sintax_finbol_gbol_nt_short.txt
+sed -r 's/ [^\t]*\t//; s/[kpcofgs]:([^,\t]+)\(([01][.][0-9]+)\),?/\t\1\t\2/g; s/\t\+.*//' sintax_finbol_gbol_nt_short.raw >>sintax_finbol_gbol_nt_short.txt

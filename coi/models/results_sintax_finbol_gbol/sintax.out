@@ -1,0 +1,98 @@
+vsearch v2.28.1_linux_x86_64, 14.9GB RAM, 8 cores
+https://github.com/torognes/vsearch
+
+Reading file ../../data/finbol-gbol/train_finbol-gbol_nt_sintax.fasta 100%
+23254716 nt in 35623 seqs, min 600, max 658, avg 653
+Masking 100%
+Counting k-mers 100%
+Creating k-mer index 100%
+Writing UDB file 100%
+	Command being timed: "vsearch --makeudb_usearch ../../data/finbol-gbol/train_finbol-gbol_nt_sintax.fasta --output train_finbol-gbol_nt.udb"
+	User time (seconds): 3.63
+	System time (seconds): 0.46
+	Percent of CPU this job got: 96%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:04.25
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 80032
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 2969
+	Voluntary context switches: 9
+	Involuntary context switches: 21
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 224848
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+vsearch v2.28.1_linux_x86_64, 14.9GB RAM, 8 cores
+https://github.com/torognes/vsearch
+
+Reading UDB file train_finbol-gbol_nt.udb 100%
+Reorganizing data in memory 100%
+Creating bitmaps 100%
+Parsing abundances 100%
+23254716 nt in 35623 seqs, min 600, max 658, avg 653
+Classifying sequences 100%
+Classified 27071 of 27071 sequences (100.00%)
+	Command being timed: "vsearch --sintax ../../data/finbol-gbol/test_finbol-gbol_nt_sintax.fasta --db train_finbol-gbol_nt.udb --tabbedout sintax_finbol_gbol_nt.raw --threads 8"
+	User time (seconds): 629.53
+	System time (seconds): 3.17
+	Percent of CPU this job got: 701%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:30.14
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 124516
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3832
+	Voluntary context switches: 1982
+	Involuntary context switches: 106409
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8376
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+vsearch v2.28.1_linux_x86_64, 14.9GB RAM, 8 cores
+https://github.com/torognes/vsearch
+
+Reading UDB file train_finbol-gbol_nt.udb 100%
+Reorganizing data in memory 100%
+Creating bitmaps 100%
+Parsing abundances 100%
+23254716 nt in 35623 seqs, min 600, max 658, avg 653
+Classifying sequences 100%
+Classified 27071 of 27071 sequences (100.00%)
+	Command being timed: "vsearch --sintax ../../data/finbol-gbol/testshort_finbol-gbol_nt_sintax.fasta --db train_finbol-gbol_nt.udb --tabbedout sintax_finbol_gbol_nt_short.raw --threads 8"
+	User time (seconds): 1063.03
+	System time (seconds): 4.45
+	Percent of CPU this job got: 661%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:41.26
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 125472
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3823
+	Voluntary context switches: 1848
+	Involuntary context switches: 145794
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8376
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
