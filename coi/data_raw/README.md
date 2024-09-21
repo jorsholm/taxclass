@@ -297,21 +297,25 @@ awk '
 # Sintax annotations
 
 Now generate the Sintax versions; for train this includes Sintax taxonomy annotations, for test it does not.
+The Sintax versions also have gaps removed.
 
 ```sh
-awk -F"[ |]" '
-  /^>/ {
-    print $1 ";tax=k:" $2 ",p:" $3 ",c:" $4 ",o:" $5 ",f:" $6 ",g:" $7 ",s:" $8;
-    next
-  }
-  {
-    gsub(/-/, "")
-    print
-  }
-' ../data/finbol-gbol/train_finbol-gbol_nt.fasta\
->../data/finbol-gbol/train_finbol-gbol_nt_sintax.fasta
+for f in ../data/finbol-gbol/train_finbol-gbol_??.fasta;
+do
+  awk -F"[ |]" '
+    /^>/ {
+      print $1 ";tax=k:" $2 ",p:" $3 ",c:" $4 ",o:" $5 ",f:" $6 ",g:" $7 ",s:" $8;
+      next
+    }
+    {
+      gsub(/-/, "")
+      print
+    }
+  ' $f >${f%.fasta}_sintax.fasta
+done
 
-for test in test testshort; do
+for f in ../data/finbol-gbol/test*_finbol-gbol_??.fasta
+do
   awk -F"[ |]" '
     /^>/ {
       print $1;
@@ -321,8 +325,23 @@ for test in test testshort; do
       gsub(/-/, "")
       print
     }
-  ' ../data/finbol-gbol/${test}_finbol-gbol_nt.fasta\
-  >../data/finbol-gbol/${test}_finbol-gbol_nt_sintax.fasta
+  ' $f >${f%.fasta}_sintax.fasta
 done
 ```
 
+# Unite-style annotations
+
+Some algorithms are configured to use taxonomic annotations as used by the Unite
+database. These are similar to Sintax, but use different delimiters. Like the
+Sintax-formatted sequences, these are unaligned.
+
+There are no Unite-style test files; they would be identical to the Sintax-style
+test files.
+
+```sh
+for f in ../data/finbol-gbol/train_finbol-gbol_??_sintax.fasta
+do
+  sed -r 's/;tax=/|/; s/([kpcofgst]):/\1__/g; y/,/;/' ${f}\
+      >${f%sintax.fasta}unite.fasta
+done
+```
