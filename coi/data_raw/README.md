@@ -248,16 +248,16 @@ for data in test train; do
       seqlen = length(gensub(/[^ACGT]/, "", "g", seq))
       if (seqlen >= 600) {
         select[$1]=1
-        print ">" $1 > "'../data/finbol-gbol/${data}_finbol-gbol_nt.fasta'"
-        print seq > "'../data/finbol-gbol/${data}_finbol-gbol_nt.fasta'"
+        print ">" $1 > "'../data/${data}_nt.fasta'"
+        print seq > "'../data/${data}_nt.fasta'"
       }
       next
     }
     $1 in select {
       seq=""
       for (i=2;i<=NF;i++) seq = seq $i
-      print ">" $1 > "'../data/finbol-gbol/${data}_finbol-gbol_aa.fasta'"
-      print seq > "'../data/finbol-gbol/${data}_finbol-gbol_aa.fasta'"
+      print ">" $1 > "'../data/${data}_aa.fasta'"
+      print seq > "'../data/${data}_aa.fasta'"
     }
   ' <(esl-alimask --outformat afa -g ${data}_${source}_raw_nt.fasta)\
     <(esl-alimask --outformat afa -g ${data}_${source}_raw_aa.fasta)
@@ -278,8 +278,8 @@ awk '
   /^>/{print; next};
   {print blank substr($1, 241)}
 ' \
-../data/finbol-gbol/test_finbol-gbol_nt.fasta \
->../data/finbol-gbol/testshort_finbol-gbol_nt.fasta
+../data/test_nt.fasta \
+>../data/testshort_nt.fasta
 
 
 awk '
@@ -290,8 +290,8 @@ awk '
   /^>/{print; next};
   {print blank substr($1, 81)}
 ' \
-../data/finbol-gbol/test_finbol-gbol_aa.fasta \
->../data/finbol-gbol/testshort_finbol-gbol_aa.fasta
+../data/test_aa.fasta \
+>../data/testshort_aa.fasta
 ```
 
 # Sintax annotations
@@ -300,7 +300,7 @@ Now generate the Sintax versions; for train this includes Sintax taxonomy annota
 The Sintax versions also have gaps removed.
 
 ```sh
-for f in ../data/finbol-gbol/train_finbol-gbol_??.fasta;
+for f in ../data/train_??.fasta;
 do
   awk -F"[ |]" '
     /^>/ {
@@ -314,7 +314,7 @@ do
   ' $f >${f%.fasta}_sintax.fasta
 done
 
-for f in ../data/finbol-gbol/test*_finbol-gbol_??.fasta
+for f in ../data/test*_??.fasta
 do
   awk -F"[ |]" '
     /^>/ {
@@ -339,7 +339,7 @@ There are no Unite-style test files; they would be identical to the Sintax-style
 test files.
 
 ```sh
-for f in ../data/finbol-gbol/train_finbol-gbol_??_sintax.fasta
+for f in ../data/train_??_sintax.fasta
 do
   sed -r 's/;tax=/|/; s/([kpcofgst]):/\1__/g; y/,/;/' ${f}\
       >${f%sintax.fasta}unite.fasta
