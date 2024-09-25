@@ -63,12 +63,15 @@ and tribe) but the total number of ranks still fits within the number Sintax
 accepts.
 
 ```sh
-for f in *_label.fasta;
+for f in train_*_label.fasta;
 do
   awk -F"[ |]" '
     /^>/ {
       print $1 ";tax=k:" $2 ",p:" $3 ",c:" $4 ",o:" $5 ",f:" $6 ",g:" $7 ",s:" $8;
       next
+    }
+    {
+      print
     }
   ' $f >${f%_label.fasta}_sintax.fasta
 done
@@ -80,7 +83,7 @@ Some algorithms are configured to use taxonomic annotations as used by the Unite
 database. These are similar to Sintax, but use different delimiters.
 
 ```sh
-for f in *_sintax.fasta
+for f in train_*_sintax.fasta
 do
   sed -r 's/;tax=/|/; s/([kpcofgst]):/\1__/g; y/,/;/' ${f}\
       >${f%sintax.fasta}unite.fasta
