@@ -43,7 +43,7 @@ $TIME vsearch --makeudb_usearch $TRAIN_FILE\
 # classify the test sequences
 for TEST in test testshort
 do
-  TEST_FILE=$DATA/${TEST}_nt_sintax.fasta
+  TEST_FILE=$DATA/${TEST}_nt.fasta
   RAW_FILE=${MODEL}_${TEST}_nt_$SLURM_ARRAY_TASK_ID.raw
 
   $TIME vsearch --sintax $TEST_FILE\

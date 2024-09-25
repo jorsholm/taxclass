@@ -44,7 +44,7 @@ $TIME makeblastdb -in $TRAIN_FILE\
 # classify the nucleotide test sequences
 for TEST in test testshort
 do
-  TEST_FILE=$DATA/${TEST}_nt_sintax.fasta
+  TEST_FILE=$DATA/${TEST}_nt.fasta
   RAW_FILE=${MODEL}_${TEST}_nt_$SLURM_ARRAY_TASK_ID.raw
 
   $TIME blastn -query $TEST_FILE\
@@ -68,10 +68,10 @@ $TIME makeblastdb -in $TRAIN_FILE\
 # classify the amino acid test sequences
 for TEST in test testshort
 do
-TEST_FILE=$DATA/${TEST}_aa_sintax.fasta
+TEST_FILE=$DATA/${TEST}_aa.fasta
 RAW_FILE=${MODEL}_${TEST}_aa_$SLURM_ARRAY_TASK_ID.raw
 
-$TIME blastp -query ../../data/finbol-gbol/test_finbol-gbol_aa.fasta\
+$TIME blastp -query $TEST_FILE\
              -db $MODEL_FILE\
              -out $RAW_FILE\
              -num_threads $SLURM_CPUS_PER_TASK\
