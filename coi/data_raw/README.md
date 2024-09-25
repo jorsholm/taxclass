@@ -131,68 +131,25 @@ END{
 - 3896 unique genera
 - 11249 unique species
 
-# Alignment
+# Alignment via MACSE pipeline
 
-Align these sequences to the Folmer barcode region using HMMER.
-`refs.hmm` is from FinProtax/ProtaxAnimal.
-This script also makes sure that after alignment there are still 600bp of non-gap, non-"N" sequence.
-
-```sh
-for data in test train; do
-  source=$([ $data = test ] && echo gbol || echo finbol)
-  hmmalign --trim --dna --outformat a2m refs.hmm ${data}_${source}_${rank}_raw.fasta |
-  awk '
-    BEGIN{
-      FS="\n";
-      RS=">"
-    };
-    NR==1{next};
-    
-    {
-      seq = "";
-      for (i=2; i < NF; i++) seq = seq $i;
-      gsub(/[[:lower:]]/, "", seq);
-      seqlen = length(gensub(/[^ACGT]/, "", "g", seq));
-      if (seqlen > 600) {
-        print ">" $1;
-        print seq;
-      }
-    }' >${data}_${source}_${rank}.fasta &
-done
-```
-
-This removes a few sequences.  Totals are now:
-
-- train:
-  - 36177 sequences
-  - 2 class
-  - 20 order
-  - 474 family
-  - 910 subfamily
-  - 1364 tribe
-  - 3864 genus
-  - 11136 species
-- test:
-  - 27048 sequences
-  - 11 class
-  - 49 order
-  - 559 family
-  - 1023 subfamily
-  - 1493 tribe
-  - 3773 genus
-  - 9014 species
-
-# MACSE pipeline -- generate representative sequences
+## Generate representative sequences
 
 I downloaded the repseq of the cox1 CDS from _Drosophila melanogaster_ to use as reference for the alignment.
 
 Then the MACSE pipeline selects 100 sequences from the dataset which align to the reference, and cover the diversity present.
 
 ```sh
-TMPDIR=/home/brfurnea/tmp APPTAINER_TMPDIR=/home/brfurnea/tmp ./representative_seqs_v01_sing_3.3.sif --in_refSeq Drosophila_melanogaster_cox1_refseq.fasta --in_seqFile train_finbol_species_raw.fasta --in_geneticCode 5 --debug
+TMPDIR=/home/brfurnea/tmp\
+APPTAINER_TMPDIR=/home/brfurnea/tmp\
+./representative_seqs_v01_sing_3.3.sif\
+  --in_refSeq Drosophila_melanogaster_cox1_refseq.fasta\
+  --in_seqFile train_finbol_raw.fasta\
+  --in_geneticCode 5\
+  --debug
 ```
 
-# MACSE alignment of representative sequences
+## MACSE alignment of representative sequences
 
 ```sh
 cat Drosophila_melanogaster_cox1_refseq.fasta >>representative_seq_NT.fasta
@@ -206,7 +163,7 @@ java -jar ../../bin/macse_v2.07.jar\
  -gap_op_term 2.0
 ```
 
-# MACSE alignment and translation of other sequences
+## MACSE alignment and translation of other sequences
 
 ```sh
 for data in test_gbol train_finbol; do
@@ -228,7 +185,7 @@ for data in test_gbol train_finbol; do
 done
 ```
 
-# Remove gap columns from alignment
+## Remove gap columns from alignment
 
 ```sh
 for data in test train; do
@@ -248,100 +205,18 @@ for data in test train; do
       seqlen = length(gensub(/[^ACGT]/, "", "g", seq))
       if (seqlen >= 600) {
         select[$1]=1
-        print ">" $1 > "'../data/${data}_nt.fasta'"
-        print seq > "'../data/${data}_nt.fasta'"
+        print ">" $1 > "'../data/${data}_nt_aln_label.fasta'"
+        print seq > "'../data/${data}_nt_aln_label.fasta'"
       }
       next
     }
     $1 in select {
       seq=""
       for (i=2;i<=NF;i++) seq = seq $i
-      print ">" $1 > "'../data/${data}_aa.fasta'"
-      print seq > "'../data/${data}_aa.fasta'"
+      print ">" $1 > "'../data/${data}_aa_aln_label.fasta'"
+      print seq > "'../data/${data}_aa_aln_label.fasta'"
     }
   ' <(esl-alimask --outformat afa -g ${data}_${source}_raw_nt.fasta)\
     <(esl-alimask --outformat afa -g ${data}_${source}_raw_aa.fasta)
-done
-```
-
-# Artificial metabarcoding -- testshort
-
-Generate simulated short "metabarcoding" test sequences, starting only after the BF3 primer site, which ends 240bp after the alignment start.
-240 gaps are included so that the alignment is still accurate.
-
-```sh
-awk '
-  BEGIN{
-    blank=sprintf("%240s", "");
-    gsub(/ /, "-", blank)
-  };
-  /^>/{print; next};
-  {print blank substr($1, 241)}
-' \
-../data/test_nt.fasta \
->../data/testshort_nt.fasta
-
-
-awk '
-  BEGIN{
-    blank=sprintf("%80s", "");
-    gsub(/ /, "-", blank)
-  };
-  /^>/{print; next};
-  {print blank substr($1, 81)}
-' \
-../data/test_aa.fasta \
->../data/testshort_aa.fasta
-```
-
-# Sintax annotations
-
-Now generate the Sintax versions; for train this includes Sintax taxonomy annotations, for test it does not.
-The Sintax versions also have gaps removed.
-
-```sh
-for f in ../data/train_??.fasta;
-do
-  awk -F"[ |]" '
-    /^>/ {
-      print $1 ";tax=k:" $2 ",p:" $3 ",c:" $4 ",o:" $5 ",f:" $6 ",g:" $7 ",s:" $8;
-      next
-    }
-    {
-      gsub(/-/, "")
-      print
-    }
-  ' $f >${f%.fasta}_sintax.fasta
-done
-
-for f in ../data/test*_??.fasta
-do
-  awk -F"[ |]" '
-    /^>/ {
-      print $1;
-      next
-    }
-    {
-      gsub(/-/, "")
-      print
-    }
-  ' $f >${f%.fasta}_sintax.fasta
-done
-```
-
-# Unite-style annotations
-
-Some algorithms are configured to use taxonomic annotations as used by the Unite
-database. These are similar to Sintax, but use different delimiters. Like the
-Sintax-formatted sequences, these are unaligned.
-
-There are no Unite-style test files; they would be identical to the Sintax-style
-test files.
-
-```sh
-for f in ../data/train_??_sintax.fasta
-do
-  sed -r 's/;tax=/|/; s/([kpcofgst]):/\1__/g; y/,/;/' ${f}\
-      >${f%sintax.fasta}unite.fasta
 done
 ```
