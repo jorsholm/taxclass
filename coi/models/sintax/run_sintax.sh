@@ -4,8 +4,8 @@
 #SBATCH --partition=small
 #SBATCH --time=1:00:00
 #SBATCH --mem-per-cpu=4800M
-#SBATCH --cpus-per-task=4
-#SBATCH --array=4
+#SBATCH --cpus-per-task=40
+#SBATCH --array=40
 #SBATCH --output=sintax_%a.out
 #SBATCH --error=sintax_%a.out
 #SBATCH --mail-type=ALL
@@ -38,7 +38,7 @@ TRAIN_FILE=$DATA/train_nt_sintax.fasta
 MODEL_FILE=train_nt_$SLURM_ARRAY_TASK_ID.udb
 
 $TIME vsearch --makeudb_usearch $TRAIN_FILE\
-              --output $MODEL_FILE\
+              --output $MODEL_FILE
 
 # classify the test sequences
 for TEST in test testshort
@@ -49,11 +49,11 @@ do
   $TIME vsearch --sintax $TEST_FILE\
                 --db $MODEL_FILE\
                 --tabbedout $RAW_FILE\
-                --threads $SLURM_CPUS_PER_TASK\
+                --threads $SLURM_CPUS_PER_TASK
 done
 
 # reformat the output
-for f in *.raw;
+for f in *.raw
 do
   RESULT_FILE=$RESULTS/${f%.raw}.tsv
 

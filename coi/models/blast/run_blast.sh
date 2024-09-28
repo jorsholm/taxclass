@@ -4,8 +4,8 @@
 #SBATCH --partition=small
 #SBATCH --time=24:00:00
 #SBATCH --mem-per-cpu=4800M
-#SBATCH --cpus-per-task=4
-#SBATCH --array=4
+#SBATCH --cpus-per-task=40
+#SBATCH --array=40
 #SBATCH --output=blast_%a.out
 #SBATCH --error=blast_%a.out
 #SBATCH --mail-type=ALL
@@ -84,7 +84,7 @@ done
 for f in *$SLURM_ARRAY_TASK_ID.raw
 do
   RESULT_FILE=${f%.raw}.tsv
-  RESULT_FILE=$RESULTS/blast_top_hit${f#blast}
+  RESULT_FILE=$RESULTS/blast_top_hit${RESULT_FILE#blast}
 
   echo "ID	class	Prob_class	order	Prob_order	"\
        "family	Prob_family	subfamily	Prob_subfamily	"\
@@ -100,7 +100,7 @@ done
 for f in *_nt_$SLURM_ARRAY_TASK_ID.raw
 do
   RESULT_FILE=${f%.raw}.tsv
-  RESULT_FILE=$RESULTS/blast_thresh${f#blast}
+  RESULT_FILE=$RESULTS/blast_thresh${RESULT_FILE#blast}
 
   echo "ID	class	Prob_class	order	Prob_order	"\
        "family	Prob_family	subfamily	Prob_subfamily	"\
