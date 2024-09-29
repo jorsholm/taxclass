@@ -8,22 +8,22 @@ Counting k-mers 100%
 Creating k-mer index 100%
 Writing UDB file 100%
 	Command being timed: "vsearch --makeudb_usearch ../../data/train_nt_sintax.fasta --output train_nt_1.udb"
-	User time (seconds): 7.64
-	System time (seconds): 0.37
-	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:08.06
+	User time (seconds): 6.26
+	System time (seconds): 0.27
+	Percent of CPU this job got: 96%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:06.76
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
 	Maximum resident set size (kbytes): 78440
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 19192
-	Voluntary context switches: 15
-	Involuntary context switches: 28
+	Major (requiring I/O) page faults: 1
+	Minor (reclaiming a frame) page faults: 19189
+	Voluntary context switches: 22
+	Involuntary context switches: 20
 	Swaps: 0
-	File system inputs: 0
+	File system inputs: 54856
 	File system outputs: 224840
 	Socket messages sent: 0
 	Socket messages received: 0
@@ -40,23 +40,23 @@ Parsing abundances 100%
 23254716 nt in 35623 seqs, min 600, max 658, avg 653
 Classifying sequences 100%
 Classified 27071 of 27071 sequences (100.00%)
-	Command being timed: "vsearch --sintax ../../data/test_nt.fasta --db train_nt_1.udb --tabbedout sintax_test_nt_1.raw --threads 1"
-	User time (seconds): 439.20
-	System time (seconds): 0.19
+	Command being timed: "vsearch --sintax ../../data/test_nt.fasta --sintax_random --db train_nt_1.udb --tabbedout sintax_test_nt_1.raw --threads 1"
+	User time (seconds): 363.87
+	System time (seconds): 0.17
 	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 7:21.31
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 6:05.47
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 123208
+	Maximum resident set size (kbytes): 123224
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
 	Minor (reclaiming a frame) page faults: 30406
-	Voluntary context switches: 28
-	Involuntary context switches: 1582
+	Voluntary context switches: 30
+	Involuntary context switches: 1241
 	Swaps: 0
-	File system inputs: 35272
+	File system inputs: 0
 	File system outputs: 8376
 	Socket messages sent: 0
 	Socket messages received: 0
@@ -73,24 +73,24 @@ Parsing abundances 100%
 23254716 nt in 35623 seqs, min 600, max 658, avg 653
 Classifying sequences 100%
 Classified 27071 of 27071 sequences (100.00%)
-	Command being timed: "vsearch --sintax ../../data/testshort_nt.fasta --db train_nt_1.udb --tabbedout sintax_testshort_nt_1.raw --threads 1"
-	User time (seconds): 426.93
-	System time (seconds): 0.17
+	Command being timed: "vsearch --sintax ../../data/testshort_nt.fasta --sintax_random --db train_nt_1.udb --tabbedout sintax_testshort_nt_1.raw --threads 1"
+	User time (seconds): 358.21
+	System time (seconds): 0.16
 	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 7:08.98
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 5:59.95
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 123160
+	Maximum resident set size (kbytes): 123252
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 30406
-	Voluntary context switches: 21
-	Involuntary context switches: 1458
+	Minor (reclaiming a frame) page faults: 30405
+	Voluntary context switches: 22
+	Involuntary context switches: 1208
 	Swaps: 0
-	File system inputs: 22696
-	File system outputs: 8376
+	File system inputs: 0
+	File system outputs: 8384
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
