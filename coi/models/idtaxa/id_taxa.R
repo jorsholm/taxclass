@@ -1,6 +1,6 @@
 # input and output file names are set in main script using environmental
 # variables
-nthread <- Sys.getenv("OMP_NUM_THREADS")
+nthread <- as.integer(Sys.getenv("OMP_NUM_THREADS"))
 model_file <- Sys.getenv("MODEL_FILE")
 test_file <- Sys.getenv("TEST_FILE")
 result_file <- Sys.getenv("RESULT_FILE")

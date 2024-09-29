@@ -41,17 +41,17 @@ mkdir -p $RESULTS
 for alphabet in nt aa
 do
   # train the model
-  TRAIN_FILE=$DATA/train_$alphabet.fasta
-  TAX_FILE=$DATA/train_tax.tsv
-  MODEL_FILE=train_$alphabet_$SLURM_ARRAY_TASK_ID.rds
+  export TRAIN_FILE=$DATA/train_$alphabet.fasta
+  export TAX_FILE=$DATA/train_tax.tsv
+  export MODEL_FILE=train_$alphabet_$SLURM_ARRAY_TASK_ID.rds
 
   $TIME Rscript learn_taxa.R
 
   # classify the test sequences
   for TEST in test testshort
   do
-    TEST_FILE=$DATA/${TEST}_nt.fasta
-    RESULT_FILE=${RESULTS}/${MODEL}_${TEST}_${alphabet}_$SLURM_ARRAY_TASK_ID.tsv
+    export TEST_FILE=$DATA/${TEST}_nt.fasta
+    export RESULT_FILE=${RESULTS}/${MODEL}_${TEST}_${alphabet}_$SLURM_ARRAY_TASK_ID.tsv
 
     $TIME Rscript id_taxa.R
   done
