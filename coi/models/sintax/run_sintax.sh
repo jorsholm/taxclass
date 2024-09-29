@@ -47,6 +47,7 @@ do
   RAW_FILE=${MODEL}_${TEST}_nt_$SLURM_ARRAY_TASK_ID.raw
 
   $TIME vsearch --sintax $TEST_FILE\
+                --sintax_random\
                 --db $MODEL_FILE\
                 --tabbedout $RAW_FILE\
                 --threads $SLURM_CPUS_PER_TASK
