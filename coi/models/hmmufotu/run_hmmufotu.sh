@@ -11,24 +11,44 @@
 #SBATCH --error=hmmufotu_%a.out
 #SBATCH --mail-type=ALL
 
-# activate python virtual environment
-source /projappl/project_2005718/mycoai/bin/activate
+# activate env module for boost
+module load boost
+
+# add project executables to PATH
+export PATH="/projappl/project_2005718/bin:$PATH"
 
 # gnu time
 export PATH="/appl/opt/time/1.9/bin:$PATH"
 TIME="$(which time) --verbose"
 
 # define file names
-MODEL=mycoai_bert
+MODEL=hmmufotu_fasttree
 DATA=../../data
 RESULTS=../../results/$MODEL
 
-# train model
-TRAIN_FILE=$DATA/train_nt_unite.fasta
-MODEL_FILE=train_nt_bert_$SLURM_ARRAY_TASK_ID.pt
+# train model (including building the tree
+PREFIX=train_nt
+TRAIN_FILE=$DATA/${PREFIX}_aln.fasta
+TREE_FILE=${PREFIX}.tree
+LOG_FILE=${PREFIX}.vft
+TAX_FILE=$DATA/train_tax.tsv
 
-$TIME mycoai-train --out $MODEL_FILE\
+$TIME VeryFastTree -nt\
+                   -gtr\
+                   -gamma\
+                   -threads $SLURM_CPUS_PER_TASK\
+                   -out $TREE_FILE\
+                   -log $LOG_FILE\
                    $TRAIN_FILE
+
+$TIME hmmufotu-build $TRAIN_FILE\
+                     $TREE_FILE\
+                     -n $PREFIX\
+                     -a $TAX_FILE\
+                     -s GTR\
+                     -V\
+                     -k 8\
+                     -p $SLURM_CPUS_PER_TASK
 
 # classify test sequences
 for test_case in test testshort
