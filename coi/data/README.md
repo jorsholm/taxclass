@@ -1,13 +1,14 @@
 # Formatting train/test data
 
 The commands shown here generate all variants of the test and train data based
-on the files `test_nt_aln_label.fasta` and `test_aa_aln_label.fasta`,
+on the files `train_nt_aln_label.fasta`, `train_aa_aln_label.fasta`,
+`test_nt_aln_label.fasta` and `test_aa_aln_label.fasta`,
 which are generated from files in `../data_raw`
 
 ## Artificial metabarcoding -- testshort
 
 Generate simulated short "metabarcoding" test sequences, starting only after
-the BF3 primer site, which ends 240bp after the alignment start.
+the BF3 primer site, which ends 240bp (80 aa) after the alignment start.
 240 gaps are included so that the alignment is still accurate.
 
 ```sh

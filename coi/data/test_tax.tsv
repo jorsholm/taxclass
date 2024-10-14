@@ -424,7 +424,6 @@ FBLMW161-10	Insecta	Lepidoptera	Coleophoridae	Coleophorinae	dummy_Coleophorinae	
 FBCOA474-10	Insecta	Coleoptera	Staphylinidae	Mycetoporinae	dummy_Mycetoporinae	Mycetoporus	Mycetoporus_longulus
 FBCOB101-10	Insecta	Coleoptera	Curculionidae	Ceutorhynchinae	Ceutorhynchini	Sirocalodes	Sirocalodes_nigrinus
 FBCOB392-10	Insecta	Coleoptera	Ciidae	Ciinae	dummy_Ciinae	Cis	Cis_vestitus
-GBDTA10191-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Porricondylini	Porricondyla	Porricondyla_colpodioidesMJDE1
 GBMND88342-21	Arachnida	Ixodida	Ixodidae	Ixodinae	dummy_Ixodinae	Ixodes	Ixodes_hexagonus
 EULEP6382-20	Insecta	Lepidoptera	Nymphalidae	Nymphalinae	Melitaeini	Melitaea	Melitaea_aurelia
 BSOIL273-18	Malacostraca	Isopoda	Ligiidae	dummy_Ligiidae	dummy_Ligiidae	Ligidium	Ligidium_germanicum
@@ -1415,7 +1414,6 @@ FBLMZ735-12	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	dummy_Gelechiinae	Caryoc
 ODOPE883-11	Insecta	Lepidoptera	Pyralidae	Phycitinae	dummy_Phycitinae	Salebriopsis	Salebriopsis_albicilla
 GCOL621-16	Insecta	Coleoptera	Cerambycidae	Lepturinae	Rhamnusiini	Rhamnusium	Rhamnusium_bicolor
 GBBSP1148-15	Arachnida	Araneae	Linyphiidae	dummy_Linyphiidae	dummy_Linyphiidae	Helophora	Helophora_insignis
-BCHYM10894-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1761
 GBLAD502-14	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Chesias	Chesias_legatella
 FGMLD490-13	Insecta	Lepidoptera	Gelechiidae	Anacampsinae	Anacampsini	Aproaerema	Aproaerema_larseniella
 GBCOU2893-13	Insecta	Coleoptera	Curculionidae	Entiminae	Otiorhynchini	Otiorhynchus	Otiorhynchus_halbherri
@@ -1816,7 +1814,6 @@ ODOPE643-11	Insecta	Lepidoptera	Depressariidae	Depressariinae	dummy_Depressariin
 GCOL9114-16	Insecta	Coleoptera	Curculionidae	Curculioninae	Mecinini	Rhinusa	Rhinusa_neta
 BCHYM10949-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_filicornis
 GMGML784-14	Insecta	Diptera	Agromyzidae	Agromyzinae	dummy_Agromyzinae	Melanagromyza	Melanagromyza_pubescens
-GMGRC1249-13	Insecta	Hymenoptera	Ichneumonidae	Orthocentrinae	dummy_Orthocentrinae	Stenomacrus	Stenomacrus_AH9
 GMGRB1636-13	Insecta	Diptera	Chironomidae	Orthocladiinae	dummy_Orthocladiinae	Pseudorthocladius	Pseudorthocladius_pilosipennis
 GBACU3513-13	Insecta	Hymenoptera	Apidae	Nomadinae	Nomadini	Nomada	Nomada_fuscicornis
 FBACB761-11	Insecta	Hymenoptera	Crabronidae	Crabroninae	Crabronini	Crossocerus	Crossocerus_palmipes
@@ -2026,7 +2023,6 @@ GBMIN47930-17	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Oryxolaemus	Oryxol
 FBLMZ045-12	Insecta	Lepidoptera	Gracillariidae	Lithocolletinae	dummy_Lithocolletinae	Phyllonorycter	Phyllonorycter_nicellii
 GCOL10538-16	Insecta	Coleoptera	Staphylinidae	Tachyporinae	Tachyporini	Sepedophilus	Sepedophilus_pedicularius
 GBLAA1671-15	Insecta	Lepidoptera	Lasiocampidae	Poecilocampinae	dummy_Poecilocampinae	Trichiura	Trichiura_crataegi
-BCHYM9069-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1713
 BCHYM9097-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_tessellatus
 FBHET1000-12	Insecta	Hemiptera	Oxycarenidae	dummy_Oxycarenidae	dummy_Oxycarenidae	Macroplax	Macroplax_preyssleri
 GWORL322-09	Insecta	Lepidoptera	Noctuidae	Cuculliinae	dummy_Cuculliinae	Cucullia	Cucullia_lucifuga
@@ -2248,7 +2244,6 @@ GCOL3940-16	Insecta	Coleoptera	Ptinidae	Ptilininae	Ptilinini	Ptilinus	Ptilinus_f
 GBCHA004-13	Insecta	Hymenoptera	Halictidae	Halictinae	Halictini	Lasioglossum	Lasioglossum_zonulum
 GMGRD2768-13	Insecta	Diptera	Cecidomyiidae	Micromyinae	Peromyiini	Peromyia	Peromyia_perpusilla
 GMGRC2210-13	Insecta	Hymenoptera	Ichneumonidae	Orthocentrinae	dummy_Orthocentrinae	Helictes	Helictes_borealis
-GBACU1453-12	Insecta	Hymenoptera	Ammoplanidae	dummy_Ammoplanidae	dummy_Ammoplanidae	Ammoplanus	Ammoplanus_spJS1751
 FBHET1102-12	Insecta	Hemiptera	Rhyparochromidae	Rhyparochrominae	Myodochini	Pachybrachius	Pachybrachius_fracticollis
 BASYM809-11	Insecta	Hymenoptera	Tenthredinidae	Nematinae	dummy_Nematinae	Euura	Euura_scotonota
 GWORM007-09	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Gnophos	Gnophos_obfuscata
@@ -2375,7 +2370,6 @@ FBLMW392-10	Insecta	Lepidoptera	Crambidae	Acentropinae	dummy_Acentropinae	Nymphu
 FBLMV926-09	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	Gelechiini	Chionodes	Chionodes_tragicella
 FBLMT323-09	Insecta	Lepidoptera	Sesiidae	Sesiinae	Synanthedonini	Synanthedon	Synanthedon_myopaeformis
 GMGMM393-14	Insecta	Hemiptera	Aphididae	Calaphidinae	Myzocallidini	Tuberculatus	Tuberculatus_annulatus
-BCHYM9075-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1714
 FBSYB707-11	Insecta	Hymenoptera	Tenthredinidae	Selandriinae	Dolerini	Dolerus	Dolerus_madidus
 FBCOI455-12	Insecta	Coleoptera	Leiodidae	Coloninae	dummy_Coloninae	Colon	Colon_serripes
 FBLMT916-09	Insecta	Lepidoptera	Adelidae	Adelinae	dummy_Adelinae	Adela	Adela_reaumurella
@@ -2501,7 +2495,6 @@ GMGMT774-20	Insecta	Diptera	Anthomyiidae	dummy_Anthomyiidae	dummy_Anthomyiidae	B
 GBCL51777-19	Insecta	Coleoptera	Curculionidae	Bagoinae	dummy_Bagoinae	Bagous	Bagous_elegans
 ODOPE224-11	Insecta	Lepidoptera	Crambidae	Scopariinae	dummy_Scopariinae	Eudonia	Eudonia_pallida
 BCHYM10764-15	Insecta	Hymenoptera	Sphecidae	Ammophilinae	dummy_Ammophilinae	Podalonia	Podalonia_minax
-BCHYM9095-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1761
 GBCOF865-13	Insecta	Coleoptera	Carabidae	Harpalinae	Harpalini	Dicheirotrichus	Dicheirotrichus_placidus
 GBSYM988-12	Insecta	Hymenoptera	Tenthredinidae	Nematinae	dummy_Nematinae	Pristiphora	Pristiphora_glauca
 FBSYB1129-12	Insecta	Hymenoptera	Argidae	Arginae	dummy_Arginae	Arge	Arge_fuscipes
@@ -3254,7 +3247,6 @@ GBLAA1195-15	Insecta	Lepidoptera	Noctuidae	Noctuinae	Noctuini	Chersotis	Chersoti
 GBLAA922-14	Insecta	Lepidoptera	Noctuidae	Oncocnemidinae	dummy_Oncocnemidinae	Calophasia	Calophasia_lunula
 GBACU1435-12	Insecta	Hymenoptera	Megachilidae	Megachilinae	Megachilini	Coelioxys	Coelioxys_brevis
 GBLAC365-13	Insecta	Lepidoptera	Noctuidae	Noctuinae	Xylenini	Agrochola	Agrochola_laevis
-BCHYM9091-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1719
 FBSYB1634-12	Insecta	Hymenoptera	Tenthredinidae	Nematinae	dummy_Nematinae	Euura	Euura_viminalis
 FBCON537-13	Insecta	Coleoptera	Staphylinidae	Omaliinae	Anthophagini	Phyllodrepoidea	Phyllodrepoidea_crenata
 GBACU1921-12	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachytes	Tachytes_panzeri
@@ -3333,7 +3325,6 @@ GMGMQ3888-18	Insecta	Hymenoptera	Braconidae	Rhyssalinae	dummy_Rhyssalinae	Acrisi
 GCOL9106-16	Insecta	Coleoptera	Staphylinidae	Scydmaeninae	Stenichnini	Scydmoraphes	Scydmoraphes_helvolus
 GCOL1429-16	Insecta	Coleoptera	Brentidae	Nanophyinae	Nanophyini	Nanophyes	Nanophyes_brevis
 BCHYM12215-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_incertus
-BCHYM5058-14	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1706
 FBAPC335-10	Insecta	Hymenoptera	Andrenidae	Panurginae	Panurgini	Panurgus	Panurgus_banksianus
 GBCOU1430-13	Insecta	Coleoptera	Nitidulidae	Nitidulinae	dummy_Nitidulinae	Nitidula	Nitidula_rufipes
 FBCOP649-13	Insecta	Coleoptera	Chrysomelidae	Galerucinae	Alticini	Phyllotreta	Phyllotreta_armoraciae
@@ -3473,7 +3464,6 @@ GMGML671-14	Insecta	Hymenoptera	Ichneumonidae	Phygadeuontinae	dummy_Phygadeuonti
 PHLAI956-14	Insecta	Lepidoptera	Depressariidae	Depressariinae	dummy_Depressariinae	Agonopterix	Agonopterix_angelicella
 GBLAA336-14	Insecta	Lepidoptera	Notodontidae	Notodontinae	dummy_Notodontinae	Notodonta	Notodonta_tritophus
 FBCON347-13	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Oxystoma	Oxystoma_pomonae
-GBACU838-12	Insecta	Hymenoptera	Apidae	Nomadinae	Nomadini	Nomada	Nomada_flava_spec1CSE
 FBLMT830-09	Insecta	Lepidoptera	Crambidae	Pyraustinae	dummy_Pyraustinae	Anania	Anania_lancealis
 FBLMS191-09	Insecta	Lepidoptera	Crambidae	Pyraustinae	dummy_Pyraustinae	Pyrausta	Pyrausta_rectefascialis
 GWORO765-09	Insecta	Lepidoptera	Lasiocampidae	Lasiocampinae	dummy_Lasiocampinae	Phyllodesma	Phyllodesma_ilicifolia
@@ -3557,7 +3547,6 @@ FBCOH056-12	Insecta	Coleoptera	Carabidae	Scaritinae	Dyschiriini	Dyschirius	Dysch
 FBCON449-13	Insecta	Coleoptera	Staphylinidae	Aleocharinae	Homalotini	Thecturota	Thecturota_tenuissima
 FBAQU1203-12	Insecta	Trichoptera	Limnephilidae	Limnephilinae	dummy_Limnephilinae	Limnephilus	Limnephilus_sparsus
 FBLMZ330-12	Insecta	Lepidoptera	Crambidae	Scopariinae	dummy_Scopariinae	Eudonia	Eudonia_phaeoleuca
-BCHYM5045-14	Insecta	Hymenoptera	Sphecidae	Sphecinae	Prionychini	Prionyx	Prionyx_spCSE1722
 BCHYM4570-14	Insecta	Hymenoptera	Psenidae	dummy_Psenidae	dummy_Psenidae	Mimesa	Mimesa_bicolor
 GBLAB059-13	Insecta	Lepidoptera	Notodontidae	Notodontinae	dummy_Notodontinae	Pterostoma	Pterostoma_palpina
 GMGRA392-13	Insecta	Diptera	Sciaridae	dummy_Sciaridae	dummy_Sciaridae	Dichopygina	Dichopygina_ramosa
@@ -3607,7 +3596,6 @@ GBUPS218-14	Insecta	Orthoptera	Tettigoniidae	Tettigoniinae	Platycleidini	Tessell
 GWOSI068-10	Insecta	Lepidoptera	Geometridae	Geometrinae	dummy_Geometrinae	Chlorissa	Chlorissa_cloraria
 FGMLB835-13	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	dummy_Gelechiinae	Teleiodes	Teleiodes_flavimaculella
 GBCOU2568-13	Insecta	Coleoptera	Curculionidae	Entiminae	Polydrusini	Polydrusus	Polydrusus_fulvicornis
-GBACU837-12	Insecta	Hymenoptera	Apidae	Nomadinae	Nomadini	Nomada	Nomada_flava_spec1CSE
 MIDGE022-06	Insecta	Diptera	Chironomidae	Orthocladiinae	dummy_Orthocladiinae	Cricotopus	Cricotopus_nivalis
 FBAPB509-09	Insecta	Hymenoptera	Halictidae	Rophitinae	Rophitini	Dufourea	Dufourea_alpina
 FBCOA744-10	Insecta	Coleoptera	Staphylinidae	Aleocharinae	Athetini	Atheta	Atheta_gyllenhalii
@@ -3690,7 +3678,6 @@ GWOTH935-12	Insecta	Lepidoptera	Geometridae	Ennominae	Campaeini	Gerinia	Gerinia_
 ODOPE023-11	Insecta	Lepidoptera	Tortricidae	Tortricinae	Cochylini	Thyraylia	Thyraylia_nana
 GBCOU4284-14	Insecta	Coleoptera	Carabidae	Trechinae	Bembidiini	Bembidion	Bembidion_ascendens
 GBMIX774-14	Insecta	Hymenoptera	Sphecidae	Sphecinae	Sphecini	Sphex	Sphex_funerarius
-GMGMA151-14	Insecta	Coleoptera	Mordellidae	Mordellinae	Mordellistenini	Mordellistena	Mordellistena_spACO6512
 GBLAB675-13	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Euchoeca	Euchoeca_nebulata
 FBNE201-13	Insecta	Neuroptera	Hemerobiidae	Hemerobiinae	dummy_Hemerobiinae	Hemerobius	Hemerobius_micans
 FBCOG1515-12	Insecta	Coleoptera	Carabidae	Cicindelinae	Cicindelini	Cylindera	Cylindera_arenaria
@@ -3939,7 +3926,6 @@ GBCOE461-13	Insecta	Coleoptera	Histeridae	Abraeinae	Acritini	Acritus	Acritus_hom
 GBMNF23386-22	Insecta	Lepidoptera	Nymphalidae	Satyrinae	Satyrini	Chazara	Chazara_briseis
 GBLAC388-13	Insecta	Lepidoptera	Gracillariidae	Parornichinae	dummy_Parornichinae	Parornix	Parornix_scoticella
 GMGMP5751-18	Insecta	Lepidoptera	Tortricidae	Tortricinae	Tortricini	Acleris	Acleris_bergmanniana
-BCHYM9090-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1719
 AMTPF6587-16	Insecta	Diptera	Drosophilidae	Drosophilinae	Drosophilini	Lordiphosa	Lordiphosa_nigricolor
 GMGRB1295-13	Insecta	Diptera	Ceratopogonidae	Ceratopogoninae	Ceratopogonini	Brachypogon	Brachypogon_sociabilis
 FBLMZ174-12	Insecta	Lepidoptera	Nymphalidae	Nymphalinae	Melitaeini	Euphydryas	Euphydryas_maturna
@@ -3953,7 +3939,6 @@ FBCOK586-13	Insecta	Coleoptera	Rhadalidae	Rhadalinae	Aplocnemini	Aplocnemus	Aplo
 GBMNE48049-22	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Catapion	Catapion_meieri
 GWOTF345-12	Insecta	Lepidoptera	Noctuidae	Noctuinae	Noctuini	Chersotis	Chersotis_margaritacea
 GCOL7962-16	Insecta	Coleoptera	Chrysomelidae	Chrysomelinae	dummy_Chrysomelinae	Oreina	Oreina_frigida
-GBMIX2377-15	Insecta	Hymenoptera	Bembicidae	Bembicinae	Bembicini	Bembix	Bembix_spCSE1717
 GMGMI1401-14	Insecta	Hymenoptera	Ichneumonidae	Tryphoninae	dummy_Tryphoninae	Erromenus	Erromenus_punctatus
 BCHYM2959-14	Insecta	Hymenoptera	Bembicidae	Bembicinae	Bembicini	Bembix	Bembix_olivacea
 GMGRC1067-13	Insecta	Coleoptera	Mordellidae	Mordellinae	Mordellini	Curtimorda	Curtimorda_bisignata
@@ -4009,7 +3994,6 @@ FBCOA531-10	Insecta	Coleoptera	Staphylinidae	Mycetoporinae	dummy_Mycetoporinae	B
 FBCOA927-10	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Ceratapion	Ceratapion_onopordi
 FBLMX139-11	Insecta	Lepidoptera	Nymphalidae	Satyrinae	Satyrini	Minois	Minois_dryas
 GBMNE91034-22	Insecta	Blattodea	Ectobiidae	dummy_Ectobiidae	dummy_Ectobiidae	Ectobius	Ectobius_lapponicus
-GBDTA9920-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Asynaptini	Camptomyia	Camptomyia_corticalisMJ1
 GMGMU1531-20	Insecta	Hymenoptera	Braconidae	Brachistinae	dummy_Brachistinae	Aliolus	Aliolus_lepidus
 GMGMP5901-18	Insecta	Lepidoptera	Elachistidae	Elachistinae	dummy_Elachistinae	Elachista	Elachista_argentella
 GMGMP1822-18	Insecta	Hymenoptera	Braconidae	Opiinae	dummy_Opiinae	Opius	Opius_ocreatus
@@ -4098,7 +4082,6 @@ BCHYM5120-14	Insecta	Hymenoptera	Philanthidae	Philanthinae	Philanthini	Philanthu
 BGSF107-15	Malacostraca	Decapoda	Pandalidae	dummy_Pandalidae	dummy_Pandalidae	Pandalus	Pandalus_borealis
 ODOPE687-11	Insecta	Lepidoptera	Nymphalidae	Satyrinae	Satyrini	Erebia	Erebia_oeme
 GCOL5022-16	Insecta	Coleoptera	Curculionidae	Ceutorhynchinae	Ceutorhynchini	Trichosirocalus	Trichosirocalus_horridus
-BCHYM6436-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Miscophini	Miscophus	Miscophus_spCSE1711
 GBCOU3168-13	Insecta	Coleoptera	Staphylinidae	Staphylininae	Staphylinini	Philonthus	Philonthus_intermedius
 FGMLB843-13	Insecta	Lepidoptera	Gelechiidae	Anacampsinae	Anacampsini	Aproaerema	Aproaerema_wormiella
 GMGRE3483-13	Insecta	Hymenoptera	Ichneumonidae	Tersilochinae	dummy_Tersilochinae	Barycnemis	Barycnemis_harpura
@@ -4604,7 +4587,6 @@ FBSYM752-10	Insecta	Hymenoptera	Tenthredinidae	Heterarthrinae	dummy_Heterarthrin
 FBAPC418-10	Insecta	Hymenoptera	Halictidae	Halictinae	Halictini	Lasioglossum	Lasioglossum_interruptum
 MYFAB562-11	Malacostraca	Isopoda	Armadillidiidae	dummy_Armadillidiidae	dummy_Armadillidiidae	Armadillidium	Armadillidium_nasatum
 FBCOD142-11	Insecta	Coleoptera	Carabidae	Harpalinae	Zabrini	Amara	Amara_strenua
-GBDTA9890-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Porricondylini	Porricondyla	Porricondyla_colpodioidesMJDE2
 GCOL10158-16	Insecta	Coleoptera	Dytiscidae	Hydroporinae	Hydroporini	Scarodytes	Scarodytes_halensis
 GBOSY003-15	Insecta	Diptera	Syrphidae	Eristalinae	Rhingiini	Psarus	Psarus_abdominalis
 GMGMD882-14	Insecta	Diptera	Chironomidae	Tanypodinae	Pentaneurini	Thienemannimyia	Thienemannimyia_northumbrica
@@ -4667,7 +4649,6 @@ GMGMU1176-20	Insecta	Diptera	Agromyzidae	Phytomyzinae	dummy_Phytomyzinae	Phytomy
 GMGMP3236-18	Insecta	Hymenoptera	Braconidae	Alysiinae	Dacnusini	Chorebus	Chorebus_avesta
 GBICH625-17	Insecta	Hymenoptera	Thynnidae	Methochinae	dummy_Methochinae	Methocha	Methocha_articulata
 GCOL6710-16	Insecta	Coleoptera	Carabidae	Cicindelinae	Cicindelini	Cicindela	Cicindela_gallica
-BCHYM10909-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1719
 BCHYM7747-15	Insecta	Hymenoptera	Braconidae	Euphorinae	dummy_Euphorinae	Leiophron	Leiophron_duploclaviventris
 GBLAA1094-15	Insecta	Lepidoptera	Notodontidae	Heterocampinae	dummy_Heterocampinae	Stauropus	Stauropus_fagi
 GMGMK828-14	Insecta	Hymenoptera	Psenidae	dummy_Psenidae	dummy_Psenidae	Psenulus	Psenulus_concolor
@@ -4851,7 +4832,6 @@ GWOTF667-12	Insecta	Lepidoptera	Nymphalidae	Satyrinae	Satyrini	Erebia	Erebia_pan
 AMTPD1168-15	Insecta	Diptera	Tipulidae	Tipulinae	dummy_Tipulinae	Tipula	Tipula_excisa
 GBLAD899-14	Insecta	Lepidoptera	Gracillariidae	Gracillariinae	dummy_Gracillariinae	Caloptilia	Caloptilia_hemidactylella
 BCHYM2919-14	Insecta	Hymenoptera	Tenthredinidae	Allantinae	dummy_Allantinae	Allantus	Allantus_cingulatus
-GMGRD2944-13	Insecta	Hymenoptera	Ichneumonidae	Orthocentrinae	dummy_Orthocentrinae	Stenomacrus	Stenomacrus_AH9
 FBCOJ354-12	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Taeniapion	Taeniapion_urticarium
 PHLAH180-12	Insecta	Lepidoptera	Depressariidae	Depressariinae	dummy_Depressariinae	Depressaria	Depressaria_douglasella
 FBLMT076-09	Insecta	Lepidoptera	Tortricidae	Olethreutinae	Grapholitini	Pammene	Pammene_herrichiana
@@ -4928,7 +4908,6 @@ CSP014-09	Insecta	Coleoptera	Silvanidae	Silvaninae	dummy_Silvaninae	Oryzaephilus
 FBACA006-10	Insecta	Hymenoptera	Crabronidae	Crabroninae	Crabronini	Crossocerus	Crossocerus_barbipes
 FBCOD1083-11	Insecta	Coleoptera	Carabidae	Nebriinae	Nebriini	Oreonebria	Oreonebria_castanea
 GMGMQ1968-18	Insecta	Hymenoptera	Ichneumonidae	Brachycyrtinae	dummy_Brachycyrtinae	Brachycyrtus	Brachycyrtus_ornatus
-GBMIX3324-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1732
 BMAH001-16	Insecta	Orthoptera	Myrmecophilidae	Myrmecophilinae	dummy_Myrmecophilinae	Myrmecophilus	Myrmecophilus_acervorum
 GMGMK545-14	Insecta	Diptera	Anthomyiidae	dummy_Anthomyiidae	dummy_Anthomyiidae	Lasiomma	Lasiomma_anthomyinum
 FBAPD511-11	Insecta	Hymenoptera	Andrenidae	Andreninae	Andrenini	Andrena	Andrena_nitidiuscula
@@ -4998,7 +4977,6 @@ FBLMT764-09	Insecta	Lepidoptera	Gelechiidae	Anomologinae	dummy_Anomologinae	Metz
 FBLMW495-10	Insecta	Lepidoptera	Yponomeutidae	Yponomeutinae	dummy_Yponomeutinae	Yponomeuta	Yponomeuta_cagnagella
 GWORU484-10	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Hylaea	Hylaea_pinicolaria
 FBSYB553-11	Insecta	Hymenoptera	Tenthredinidae	Nematinae	dummy_Nematinae	Hoplocampa	Hoplocampa_ariae
-GBDTA9889-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Porricondylini	Porricondyla	Porricondyla_colpodioidesMJDE2
 GBMNB16805-20	Insecta	Diptera	Cecidomyiidae	Cecidomyiinae	Dasineurini	Hartigiola	Hartigiola_annulipes
 GMGMT550-20	Insecta	Diptera	Anthomyiidae	dummy_Anthomyiidae	dummy_Anthomyiidae	Phorbia	Phorbia_curvicauda
 GBAH10213-15	Insecta	Hymenoptera	Ichneumonidae	Anomaloninae	Gravenhorstiini	Trichomma	Trichomma_enecator
@@ -5019,9 +4997,7 @@ BASYM3238-14	Insecta	Hymenoptera	Tenthredinidae	Blennocampinae	dummy_Blennocampi
 GBDTA10298-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Porricondylini	Isocolpodia	Isocolpodia_unidentata
 GMGMU2601-20	Insecta	Hymenoptera	Figitidae	Charipinae	dummy_Charipinae	Alloxysta	Alloxysta_citripes
 GMGMQ490-18	Insecta	Diptera	Pipunculidae	Pipunculinae	Tomosvaryellini	Eudorylas	Eudorylas_ruralis
-BCHYM10987-15	Insecta	Hymenoptera	Crabronidae	Eremiaspheciinae	dummy_Eremiaspheciinae	Eremiasphecium	Eremiasphecium_spCSE1714
 BCHYM8641-15	Insecta	Hymenoptera	Ichneumonidae	Campopleginae	dummy_Campopleginae	Hyposoter	Hyposoter_boops
-BCHYM6285-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1705
 GMGMN1338-14	Insecta	Hymenoptera	Ichneumonidae	Cryptinae	Cryptini	Trychosis	Trychosis_tristator
 EPNG8605-14	Insecta	Lepidoptera	Pyralidae	Galleriinae	dummy_Galleriinae	Corcyra	Corcyra_cephalonica
 FBCOP656-13	Insecta	Coleoptera	Curculionidae	Ceutorhynchinae	Ceutorhynchini	Trichosirocalus	Trichosirocalus_horridus
@@ -5038,7 +5014,6 @@ GBDTA10017-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Dicerurini	Paratetra
 LAK063-19	Insecta	Lepidoptera	Tortricidae	Olethreutinae	Grapholitini	Pammene	Pammene_giganteana
 GMGMP2836-18	Insecta	Hemiptera	Aphididae	Drepanosiphinae	dummy_Drepanosiphinae	Drepanosiphum	Drepanosiphum_aceris
 GCOL8289-16	Insecta	Coleoptera	Helophoridae	dummy_Helophoridae	dummy_Helophoridae	Helophorus	Helophorus_fulgidicollis
-GMGML1051-14	Insecta	Coleoptera	Mordellidae	Mordellinae	Mordellistenini	Mordellistena	Mordellistena_spACR545
 GBCHA1135-13	Insecta	Hymenoptera	Halictidae	Halictinae	Halictini	Lasioglossum	Lasioglossum_lucidulum
 GBSYM2105-13	Insecta	Hymenoptera	Tenthredinidae	Selandriinae	Dolerini	Dolerus	Dolerus_brevicornis
 GBACU886-12	Insecta	Hymenoptera	Pemphredonidae	Pemphredoninae	Pemphredonini	Passaloecus	Passaloecus_turionum
@@ -5327,7 +5302,6 @@ FBAPC746-11	Insecta	Hymenoptera	Megachilidae	Megachilinae	Megachilini	Megachile	
 BCHYM3978-14	Insecta	Hymenoptera	Ichneumonidae	Tersilochinae	dummy_Tersilochinae	Phrudus	Phrudus_monilicornis
 GMGMO1934-18	Insecta	Diptera	Cecidomyiidae	Micromyinae	Campylomyzini	Campylomyza	Campylomyza_dilatata
 GWOSI045-10	Insecta	Lepidoptera	Geometridae	Ennominae	Campaeini	Gerinia	Gerinia_honoraria
-GWOSR456-11	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Afriberina	Afriberina_AH01
 GCOL5284-16	Insecta	Coleoptera	Chrysomelidae	Galerucinae	Alticini	Altica	Altica_helianthemi
 GBLAA1283-15	Insecta	Lepidoptera	Noctuidae	Noctuinae	Hadenini	Sideridis	Sideridis_reticulata
 GMGMN893-14	Insecta	Hymenoptera	Ichneumonidae	Phygadeuontinae	dummy_Phygadeuontinae	Thaumatogelis	Thaumatogelis_sylvicola
@@ -5576,7 +5550,6 @@ BCHYM9085-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphe
 GBLAA1413-15	Insecta	Lepidoptera	Nymphalidae	Nymphalinae	Nymphalini	Aglais	Aglais_urticae
 EULEP4954-16	Insecta	Lepidoptera	Nymphalidae	Nymphalinae	Nymphalini	Aglais	Aglais_urticae
 GCOL1944-16	Insecta	Coleoptera	Ptinidae	Dorcatominae	Dorcatomini	Dorcatoma	Dorcatoma_androgyna
-BCHYM11065-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1722
 AMTPC121-15	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Psodos	Psodos_quadrifaria
 GWOSN324-11	Insecta	Lepidoptera	Geometridae	Sterrhinae	dummy_Sterrhinae	Idaea	Idaea_camparia
 BCHYM9372-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_maculipes
@@ -5694,7 +5667,6 @@ GWOSU031-11	Insecta	Lepidoptera	Nymphalidae	Satyrinae	Satyrini	Erebia	Erebia_niv
 GCOL12864-16	Insecta	Coleoptera	Eucinetidae	dummy_Eucinetidae	dummy_Eucinetidae	Eucinetus	Eucinetus_haemorrhoidalis
 GCOL9344-16	Insecta	Coleoptera	Staphylinidae	Aleocharinae	Athetini	Atheta	Atheta_europaea
 GBLAA1406-15	Insecta	Lepidoptera	Noctuidae	Noctuinae	dummy_Noctuinae	Dichagyris	Dichagyris_nigrescens
-GMGMJ1225-14	Insecta	Diptera	Agromyzidae	Agromyzinae	dummy_Agromyzinae	Agromyza	Agromyza_spBOLDACR0495
 GBLAA896-14	Insecta	Lepidoptera	Noctuidae	Pantheinae	dummy_Pantheinae	Colocasia	Colocasia_coryli
 GBLAC286-13	Insecta	Lepidoptera	Noctuidae	Noctuinae	Apameini	Globia	Globia_sparganii
 GBCOU1688-13	Insecta	Coleoptera	Oedemeridae	Oedemerinae	Oedemerini	Oedemera	Oedemera_annulata
@@ -6014,7 +5986,6 @@ FBCOE286-12	Insecta	Coleoptera	Staphylinidae	Paederinae	Lathrobiini	Tetartopeus	
 FBCON895-13	Insecta	Coleoptera	Staphylinidae	Aleocharinae	Athetini	Atheta	Atheta_procera
 GBDTA10459-21	Insecta	Diptera	Cecidomyiidae	Winnertziinae	Winnertziini	Winnertzia	Winnertzia_longiptera
 GMGMV403-20	Insecta	Hymenoptera	Ichneumonidae	Cryptinae	Cryptini	Hoplocryptus	Hoplocryptus_murarius
-BCHYM6287-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1704
 FBLMZ568-12	Insecta	Lepidoptera	Crambidae	Crambinae	dummy_Crambinae	Catoptria	Catoptria_conchella
 GCOL3969-16	Insecta	Coleoptera	Cantharidae	Cantharinae	Cantharini	Podistra	Podistra_prolixa
 GBORT1016-15	Insecta	Orthoptera	Tettigoniidae	Phaneropterinae	Barbitistini	Poecilimon	Poecilimon_schmidtii
@@ -6072,7 +6043,6 @@ FBCOB623-10	Insecta	Coleoptera	Cerambycidae	Lamiinae	Agapanthiini	Calamobius	Cal
 FBCOG531-12	Insecta	Coleoptera	Ptinidae	Dorcatominae	Dorcatomini	Dorcatoma	Dorcatoma_chrysomelina
 GBCOF471-13	Insecta	Coleoptera	Staphylinidae	Aleocharinae	Athetini	Atheta	Atheta_procera
 FBCOJ310-12	Insecta	Coleoptera	Dermestidae	Megatominae	Megatomini	Trogoderma	Trogoderma_glabrum
-GBMIX3343-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1731
 GWOSU057-11	Insecta	Lepidoptera	Noctuidae	Acronictinae	dummy_Acronictinae	Acronicta	Acronicta_tridens
 GWOTD356-12	Insecta	Lepidoptera	Psychidae	Typhoniinae	dummy_Typhoniinae	Typhonia	Typhonia_melana
 FBLMZ651-12	Insecta	Lepidoptera	Tortricidae	Olethreutinae	Grapholitini	Cydia	Cydia_nigricana
@@ -6283,7 +6253,6 @@ FBLMZ087-12	Insecta	Lepidoptera	Ypsolophidae	Ypsolophinae	dummy_Ypsolophinae	Yps
 GCOL13487-16	Insecta	Coleoptera	Staphylinidae	Aleocharinae	Homalotini	Gyrophaena	Gyrophaena_nana
 GCOL5529-16	Insecta	Coleoptera	Staphylinidae	Staphylininae	Staphylinini	Gabrius	Gabrius_appendiculatus
 GBUPS099-14	Insecta	Orthoptera	Tettigoniidae	Tettigoniinae	Gampsocleidini	Gampsocleis	Gampsocleis_glabra
-GMGRI423-13	Insecta	Diptera	Mycetophilidae	Sciophilinae	dummy_Sciophilinae	Monoclona	Monoclona_sp1
 FBCOI100-12	Insecta	Coleoptera	Chrysomelidae	Galerucinae	Alticini	Phyllotreta	Phyllotreta_striolata
 FBAPB698-09	Insecta	Hymenoptera	Megachilidae	Megachilinae	Osmiini	Hoplitis	Hoplitis_loti
 GWORK444-09	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Ennomos	Ennomos_autumnaria
@@ -6299,7 +6268,6 @@ GCOL13086-16	Insecta	Coleoptera	Curculionidae	Hyperinae	Hyperini	Hypera	Hypera_d
 GCOL11206-16	Insecta	Coleoptera	Curculionidae	Lixinae	Cleonini	Coniocleonus	Coniocleonus_hollbergi
 GCOL11584-16	Insecta	Coleoptera	Staphylinidae	Omaliinae	Anthophagini	Anthophagus	Anthophagus_praeustus
 GCOL6088-16	Insecta	Coleoptera	Nitidulidae	Epuraeinae	dummy_Epuraeinae	Epuraea	Epuraea_terminalis
-BCHYM10957-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1710
 BCHYM8952-15	Insecta	Hymenoptera	Bembicidae	Bembicinae	dummy_Bembicinae	Bembecinus	Bembecinus_hungaricus
 GMGRG683-13	Insecta	Diptera	Mycetophilidae	Mycetophilinae	Exechiini	Tarnania	Tarnania_tarnanii
 GMGRG856-13	Insecta	Diptera	Mycetophilidae	Mycetophilinae	Mycetophilini	Mycetophila	Mycetophila_forcipata
@@ -6424,7 +6392,6 @@ ODOPE863-11	Insecta	Lepidoptera	Pyralidae	Galleriinae	dummy_Galleriinae	Galleria
 GCOL11424-16	Insecta	Coleoptera	Chrysomelidae	Bruchinae	Bruchini	Bruchus	Bruchus_brachialis
 GCOL6386-16	Insecta	Coleoptera	Byrrhidae	Byrrhinae	dummy_Byrrhinae	Byrrhus	Byrrhus_scabripennis
 GBBSP1013-15	Arachnida	Araneae	Tetragnathidae	dummy_Tetragnathidae	dummy_Tetragnathidae	Meta	Meta_bourneti
-BCHYM5046-14	Insecta	Hymenoptera	Sphecidae	Sphecinae	Prionychini	Prionyx	Prionyx_spCSE1722
 GBEPT315-14	Insecta	Plecoptera	Perlodidae	Perlodinae	dummy_Perlodinae	Perlodes	Perlodes_microcephalus
 GBCOU2992-13	Insecta	Coleoptera	Chrysomelidae	Bruchinae	Bruchini	Bruchidius	Bruchidius_varius
 GBCOU1196-13	Insecta	Plecoptera	Perlodidae	Isoperlinae	dummy_Isoperlinae	Isoperla	Isoperla_rivulorum
@@ -6815,7 +6782,6 @@ ISSWG325-21	Insecta	Orthoptera	Tettigoniidae	Phaneropterinae	Barbitistini	Leptop
 GBMNE16292-21	Insecta	Coleoptera	Cleridae	Korynetinae	dummy_Korynetinae	Korynetes	Korynetes_caeruleus
 GBMIX1069-14	Arachnida	Pseudoscorpiones	Chthoniidae	dummy_Chthoniidae	dummy_Chthoniidae	Ephippiochthonius	Ephippiochthonius_boldorii
 GMGMP7225-18	Insecta	Diptera	Chloropidae	Oscinellinae	Oscinisomatini	Oscinisoma	Oscinisoma_alienum
-GBMIX3385-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1706
 GWOSU060-11	Insecta	Lepidoptera	Lasiocampidae	Lasiocampinae	dummy_Lasiocampinae	Gastropacha	Gastropacha_quercifolia
 GWOSI032-10	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Peribatodes	Peribatodes_correptaria
 ODOPE897-11	Insecta	Lepidoptera	Pyralidae	Phycitinae	dummy_Phycitinae	Sciota	Sciota_hostilis
@@ -7195,7 +7161,6 @@ FBCOB688-10	Insecta	Coleoptera	Staphylinidae	Pselaphinae	Trichonychini	Plectophl
 GWORU082-10	Insecta	Lepidoptera	Pieridae	Pierinae	Pierini	Pieris	Pieris_mannii
 FGMLB342-13	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	dummy_Gelechiinae	Gelechia	Gelechia_cuneatella
 GWOTD981-12	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Scotopteryx	Scotopteryx_peribolata
-BCHYM10947-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1731
 BCHYM1992-14	Insecta	Hymenoptera	Encyrtidae	Encyrtinae	dummy_Encyrtinae	Copidosoma	Copidosoma_floridanum
 GBEPT323-14	Insecta	Plecoptera	Leuctridae	Leuctrinae	dummy_Leuctrinae	Leuctra	Leuctra_hippopus
 NEPTA741-13	Insecta	Lepidoptera	Nepticulidae	dummy_Nepticulidae	dummy_Nepticulidae	Stigmella	Stigmella_svenssoni
@@ -7548,7 +7513,6 @@ GWOTH357-12	Insecta	Lepidoptera	Geometridae	Larentiinae	Eupitheciini	Eupithecia	
 GCOL13167-16	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Cyanapion	Cyanapion_afer
 GCOL12633-16	Insecta	Coleoptera	Leiodidae	Cholevinae	Cholevini	Choleva	Choleva_glauca
 GCOL12640-16	Insecta	Coleoptera	Ptiliidae	Ptiliinae	Ptenidiini	Ptenidium	Ptenidium_turgidum
-BCHYM11066-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1722
 GBLAA1936-15	Insecta	Lepidoptera	Noctuidae	Noctuinae	dummy_Noctuinae	Diarsia	Diarsia_rubi
 AMTPD2118-15	Insecta	Diptera	Simuliidae	Simuliinae	Prosimuliini	Prosimulium	Prosimulium_rufipes
 GMGMN1380-14	Insecta	Hymenoptera	Ichneumonidae	Banchinae	dummy_Banchinae	Glypta	Glypta_resinanae
@@ -7670,7 +7634,6 @@ GWOSO813-11	Insecta	Lepidoptera	Noctuidae	Eustrotiinae	dummy_Eustrotiinae	Deltot
 FBAPC511-11	Insecta	Hymenoptera	Colletidae	Hylaeinae	Hylaeini	Hylaeus	Hylaeus_kahri
 FGMLL109-17	Insecta	Lepidoptera	Gracillariidae	Parornichinae	dummy_Parornichinae	Parornix	Parornix_anguliferella
 GBPSS084-20	Arachnida	Pseudoscorpiones	Larcidae	dummy_Larcidae	dummy_Larcidae	Larca	Larca_lata
-GBMIX3334-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1742
 BCHYM9333-15	Insecta	Hymenoptera	Astatidae	dummy_Astatidae	dummy_Astatidae	Astata	Astata_rufipes
 GWOTF695-12	Insecta	Lepidoptera	Lycaenidae	Lycaeninae	Lycaenini	Lycaena	Lycaena_hippothoe
 GBMIX1703-15	Insecta	Trichoptera	Rhyacophilidae	dummy_Rhyacophilidae	dummy_Rhyacophilidae	Rhyacophila	Rhyacophila_stigmatica
@@ -7828,7 +7791,6 @@ GBACU1439-12	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Trypoxylini	Trypo
 GBMIX1884-15	Insecta	Trichoptera	Beraeidae	dummy_Beraeidae	dummy_Beraeidae	Beraea	Beraea_pullata
 GCOL11265-16	Insecta	Coleoptera	Melyridae	Malachiinae	Malachiini	Axinotarsus	Axinotarsus_ruficollis
 GCOL1499-16	Insecta	Coleoptera	Melyridae	Malachiinae	Malachiini	Troglops	Troglops_albicans
-GBMIX2406-15	Insecta	Hymenoptera	Sphecidae	Sphecinae	Prionychini	Prionyx	Prionyx_spCSE1722
 GMGRI671-13	Insecta	Hymenoptera	Braconidae	Microgastrinae	dummy_Microgastrinae	Cotesia	Cotesia_ruficrus
 GWORT459-10	Insecta	Lepidoptera	Nymphalidae	Satyrinae	dummy_Satyrinae	Lopinga	Lopinga_achine
 FBCOC406-10	Insecta	Coleoptera	Ptinidae	Dryophilinae	Dryophilini	Homophthalmus	Homophthalmus_rugicollis
@@ -8184,7 +8146,6 @@ FBLMZ208-12	Insecta	Lepidoptera	Pyralidae	Phycitinae	dummy_Phycitinae	Ephestia	E
 FBLMZ759-12	Insecta	Lepidoptera	Glyphipterigidae	Acrolepiinae	dummy_Acrolepiinae	Acrolepiopsis	Acrolepiopsis_assectella
 GBLAA2037-15	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Pseudopanthera	Pseudopanthera_macularia
 GBMYR116-14	Arachnida	Pseudoscorpiones	Chthoniidae	dummy_Chthoniidae	dummy_Chthoniidae	Ephippiochthonius	Ephippiochthonius_boldorii
-BCHYM9079-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1718
 GMGRG1607-13	Insecta	Diptera	Mycetophilidae	Mycetophilinae	Mycetophilini	Platurocypta	Platurocypta_punctum
 GBLGC256-12	Insecta	Lepidoptera	Notodontidae	Cerurinae	dummy_Cerurinae	Cerura	Cerura_vinula
 GWOSR003-11	Insecta	Lepidoptera	Hesperiidae	Pyrginae	Pyrgini	Pyrgus	Pyrgus_serratulae
@@ -8756,7 +8717,6 @@ FGMLD382-13	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	dummy_Gelechiinae	Teleio
 LEEUA638-11	Insecta	Lepidoptera	Tineidae	Tineinae	dummy_Tineinae	Trichophaga	Trichophaga_tapetzella
 GBORT914-15	Insecta	Orthoptera	Acrididae	Calliptaminae	dummy_Calliptaminae	Calliptamus	Calliptamus_siciliae
 BCHYM5089-14	Insecta	Hymenoptera	Bembicidae	Bembicinae	Bembicini	Bembix	Bembix_galactina
-GMGRH793-13	Insecta	Diptera	Mycetophilidae	Sciophilinae	dummy_Sciophilinae	Monoclona	Monoclona_sp1
 FBLMT481-09	Insecta	Lepidoptera	Gelechiidae	Anacampsinae	Anacampsini	Aproaerema	Aproaerema_cinctella
 FBCOB111-10	Insecta	Coleoptera	Curculionidae	Ceutorhynchinae	Ceutorhynchini	Ceutorhynchus	Ceutorhynchus_pulvinatus
 FBCOK320-13	Insecta	Coleoptera	Cantharidae	Cantharinae	Cantharini	Ancistronycha	Ancistronycha_abdominalis
@@ -8832,7 +8792,6 @@ GACAC003-12	Arachnida	Trombidiformes	Hygrobatidae	Hygrobatinae	dummy_Hygrobatina
 ODOPE612-11	Insecta	Lepidoptera	Erebidae	Hypeninae	dummy_Hypeninae	Colobochyla	Colobochyla_salicalis
 FBAQU827-10	Insecta	Ephemeroptera	Leptophlebiidae	Leptophlebiinae	dummy_Leptophlebiinae	Habrophlebia	Habrophlebia_fusca
 NEPT202-10	Insecta	Lepidoptera	Nepticulidae	dummy_Nepticulidae	dummy_Nepticulidae	Ectoedemia	Ectoedemia_subbimaculella
-BCHYM11010-15	Insecta	Hymenoptera	Crabronidae	Eremiaspheciinae	dummy_Eremiaspheciinae	Eremiasphecium	Eremiasphecium_spCSE1714
 ODOPE795-11	Insecta	Lepidoptera	Crambidae	Spilomelinae	dummy_Spilomelinae	Udea	Udea_olivalis
 GCOL5721-16	Insecta	Coleoptera	Cerambycidae	Lamiinae	Pogonocherini	Pogonocherus	Pogonocherus_decoratus
 BCHYM12219-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_punctipleuris
@@ -8923,7 +8882,6 @@ FBLMT294-09	Insecta	Lepidoptera	Tortricidae	Olethreutinae	Grapholitini	Pammene	P
 FBCOA921-10	Insecta	Coleoptera	Curculionidae	Ceutorhynchinae	Ceutorhynchini	Mogulones	Mogulones_crucifer
 GBCOG454-13	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Apion	Apion_haematodes
 GDIP3826-22	Insecta	Diptera	Chironomidae	Orthocladiinae	dummy_Orthocladiinae	Smittia	Smittia_edwardsi
-GBDTA10001-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Asynaptini	Camptomyia	Camptomyia_corticalisMJ3
 GMGMW1165-20	Insecta	Hemiptera	Aphididae	Aphidinae	dummy_Aphidinae	Ceruraphis	Ceruraphis_eriophori
 GMGMQ593-18	Insecta	Diptera	Chironomidae	Chironominae	Chironomini	Chironomus	Chironomus_cingulatus
 GBBSP2098-16	Arachnida	Araneae	Zodariidae	dummy_Zodariidae	dummy_Zodariidae	Zodarion	Zodarion_italicum
@@ -9147,7 +9105,6 @@ GBCOU1097-13	Insecta	Coleoptera	Curculionidae	Entiminae	Otiorhynchini	Otiorhynch
 GBCOU3629-13	Insecta	Coleoptera	Carabidae	Trechinae	Bembidiini	Sinechostictus	Sinechostictus_stomoides
 FBCOO856-13	Insecta	Coleoptera	Melyridae	Malachiinae	Malachiini	Clanoptilus	Clanoptilus_geniculatus
 FGMLG015-15	Insecta	Lepidoptera	Gelechiidae	Anacampsinae	Anacampsini	Anacampsis	Anacampsis_scintillella
-GBMIX3364-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1704
 GCOL13224-16	Insecta	Coleoptera	Staphylinidae	Aleocharinae	Falagriini	Anaulacaspis	Anaulacaspis_nigra
 GCOL2690-16	Insecta	Coleoptera	Chrysomelidae	Galerucinae	Alticini	Longitarsus	Longitarsus_kutscherae
 BCHYM2293-14	Insecta	Hymenoptera	Tenthredinidae	Blennocampinae	dummy_Blennocampinae	Halidamia	Halidamia_affinis
@@ -9190,7 +9147,6 @@ ODOPE541-11	Insecta	Lepidoptera	Crambidae	Scopariinae	dummy_Scopariinae	Scoparia
 GWOTH920-12	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Pachycnemia	Pachycnemia_tibiaria
 FBLMZ557-12	Insecta	Lepidoptera	Erebidae	Arctiinae	Arctiini	Hyphoraia	Hyphoraia_aulica
 GBLAA1907-15	Insecta	Lepidoptera	Nolidae	Chloephorinae	Eariadini	Earias	Earias_clorana
-GMGMJ1230-14	Insecta	Diptera	Agromyzidae	Agromyzinae	dummy_Agromyzinae	Agromyza	Agromyza_spBOLDACR0495
 GMGMH997-14	Insecta	Diptera	Cecidomyiidae	Cecidomyiinae	Asphondyliini	Asphondylia	Asphondylia_sarothamni
 FBHET323-12	Insecta	Hemiptera	Rhopalidae	Rhopalinae	Rhopalini	Liorhyssus	Liorhyssus_hyalinus
 GBCOU2233-13	Insecta	Coleoptera	Cerambycidae	Lepturinae	Lepturini	Leptura	Leptura_annularis
@@ -9639,7 +9595,6 @@ GBCOU544-13	Insecta	Coleoptera	Cerambycidae	Lamiinae	Agapanthiini	Calamobius	Cal
 FBSYB593-11	Insecta	Hymenoptera	Tenthredinidae	Nematinae	dummy_Nematinae	Pristiphora	Pristiphora_brevis
 FBCON185-13	Insecta	Coleoptera	Silphidae	Nicrophorinae	dummy_Nicrophorinae	Nicrophorus	Nicrophorus_investigator
 GMGMP1871-18	Insecta	Hemiptera	Aphididae	Aphidinae	Aphidini	Aphis	Aphis_idaei
-BCHYM6773-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1708
 GWOSU001-11	Insecta	Lepidoptera	Tortricidae	Tortricinae	Archipini	Clepsis	Clepsis_spectrana
 FBLMX070-11	Insecta	Lepidoptera	Gracillariidae	Ornixolinae	dummy_Ornixolinae	Parectopa	Parectopa_robiniella
 GBMIX2434-15	Insecta	Orthoptera	Rhaphidophoridae	Troglophilinae	dummy_Troglophilinae	Troglophilus	Troglophilus_neglectus
@@ -9843,7 +9798,6 @@ GCOL334-16	Insecta	Coleoptera	Dermestidae	Megatominae	Megatomini	Megatoma	Megato
 BCHYM12255-15	Insecta	Hymenoptera	Crabronidae	Crabroninae	dummy_Crabroninae	Palarus	Palarus_variegatus
 GBBSP1185-15	Arachnida	Araneae	Amaurobiidae	dummy_Amaurobiidae	dummy_Amaurobiidae	Amaurobius	Amaurobius_similis
 AMTPC371-15	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Perizoma	Perizoma_minorata
-BCHYM6438-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Trypoxylini	Trypoxylon	Trypoxylon_spCSE1801
 GMGMH487-14	Insecta	Hymenoptera	Ichneumonidae	Cryptinae	Cryptini	Enclisis	Enclisis_macilenta
 GMGME718-14	Insecta	Diptera	Agromyzidae	Phytomyzinae	dummy_Phytomyzinae	Phytomyza	Phytomyza_continua
 GBCOU1446-13	Insecta	Coleoptera	Chrysomelidae	Galerucinae	Alticini	Psylliodes	Psylliodes_hyoscyami
@@ -10101,7 +10055,6 @@ GBCM4945-17	Malacostraca	Amphipoda	Niphargidae	dummy_Niphargidae	dummy_Niphargid
 MJBRC060-17	Insecta	Diptera	Cecidomyiidae	Micromyinae	Peromyiini	Peromyia	Peromyia_curta
 GCOL3501-16	Insecta	Coleoptera	Elmidae	Elminae	dummy_Elminae	Elmis	Elmis_obscura
 BCHYM1433-13	Insecta	Hymenoptera	Apidae	Nomadinae	Nomadini	Nomada	Nomada_villosa
-BCHYM9074-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1717
 BCHYM8935-15	Insecta	Hymenoptera	Bembicidae	Nyssoninae	Nyssonini	Nysson	Nysson_decemmaculatus
 GBCOU2497-13	Insecta	Coleoptera	Staphylinidae	Staphylininae	Staphylinini	Quedius	Quedius_dubius
 GMGRE1733-13	Insecta	Diptera	Chironomidae	Orthocladiinae	dummy_Orthocladiinae	Limnophyes	Limnophyes_asquamatus
@@ -10211,7 +10164,6 @@ FBCOK368-13	Insecta	Coleoptera	Tenebrionidae	Alleculinae	Alleculini	Hymenalia	Hy
 GMGMU1896-20	Insecta	Hymenoptera	Eulophidae	Entedoninae	dummy_Entedoninae	Omphale	Omphale_clymene
 FGMLI515-17	Insecta	Lepidoptera	Gelechiidae	Anomologinae	dummy_Anomologinae	Monochroa	Monochroa_servella
 GMGMP3127-18	Insecta	Hymenoptera	Ichneumonidae	Pimplinae	Ephialtini	Zatypota	Zatypota_percontatoria
-GBMIX2388-15	Insecta	Hymenoptera	Bembicidae	Bembicinae	Bembicini	Bembix	Bembix_spCSE1721
 BCEAB603-17	Insecta	Hemiptera	Notonectidae	Notonectinae	Notonectini	Notonecta	Notonecta_maculata
 GCOL5651-16	Insecta	Coleoptera	Nitidulidae	Meligethinae	dummy_Meligethinae	Pria	Pria_dulcamarae
 GCOL5240-16	Insecta	Coleoptera	Chrysomelidae	Galerucinae	Alticini	Longitarsus	Longitarsus_pulmonariae
@@ -10248,7 +10200,6 @@ FBAQU516-10	Insecta	Odonata	Libellulidae	Sympetrinae	dummy_Sympetrinae	Sympetrum
 FBCOO891-13	Insecta	Coleoptera	Staphylinidae	Osoriinae	Thoracophorini	Thoracophorus	Thoracophorus_corticinus
 GMGMT908-20	Insecta	Diptera	Anthomyiidae	dummy_Anthomyiidae	dummy_Anthomyiidae	Botanophila	Botanophila_phrenione
 GMGMP5929-18	Insecta	Lepidoptera	Adelidae	Adelinae	dummy_Adelinae	Cauchas	Cauchas_fibulella
-GBMIX3341-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1736
 GWOSR440-11	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Mattia	Mattia_callidaria
 GCOL2841-16	Insecta	Coleoptera	Curculionidae	Curculioninae	Mecinini	Mecinus	Mecinus_janthinus
 BCHYM6427-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Miscophini	Miscophus	Miscophus_helveticus
@@ -10334,7 +10285,6 @@ ASQSP989-10	Insecta	Hymenoptera	Braconidae	Rogadinae	dummy_Rogadinae	Aleiodes	Al
 FBCOC185-10	Insecta	Coleoptera	Carabidae	Trechinae	Bembidiini	Bembidion	Bembidion_prasinum
 FBLMZ274-12	Insecta	Lepidoptera	Tortricidae	Olethreutinae	Eucosmini	Epiblema	Epiblema_graphana
 FBLMW940-10	Insecta	Lepidoptera	Gracillariidae	Lithocolletinae	dummy_Lithocolletinae	Phyllonorycter	Phyllonorycter_froelichiella
-BCHYM5056-14	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1707
 GBEPT798-14	Insecta	Trichoptera	Rhyacophilidae	dummy_Rhyacophilidae	dummy_Rhyacophilidae	Rhyacophila	Rhyacophila_obliterata
 GBMIN41231-14	Insecta	Coleoptera	Carabidae	Harpalinae	Harpalini	Dicheirotrichus	Dicheirotrichus_obsoletus
 GBCHA1074-13	Insecta	Hymenoptera	Megachilidae	Megachilinae	Osmiini	Hoplitis	Hoplitis_loti
@@ -10506,7 +10456,6 @@ GBLAC457-13	Insecta	Lepidoptera	Noctuidae	Noctuinae	dummy_Noctuinae	Lithophane	L
 GBCOU2162-13	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Oxystoma	Oxystoma_craccae
 GBLAB843-13	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Philereme	Philereme_transversata
 GBLAB346-13	Insecta	Lepidoptera	Noctuidae	Noctuinae	Xylenini	Atethmia	Atethmia_centrago
-GMGRD1031-13	Insecta	Hymenoptera	Ichneumonidae	Orthocentrinae	dummy_Orthocentrinae	Stenomacrus	Stenomacrus_AH9
 GBSYM469-12	Insecta	Hymenoptera	Pamphiliidae	Pamphiliinae	dummy_Pamphiliinae	Pamphilius	Pamphilius_aurantiacus
 GBACU3643-13	Insecta	Hymenoptera	Pemphredonidae	Pemphredoninae	Pemphredonini	Passaloecus	Passaloecus_borealis
 GBCOB766-12	Insecta	Coleoptera	Elateridae	Elaterinae	Ampedini	Ampedus	Ampedus_rufipennis
@@ -10752,7 +10701,6 @@ FBSYM293-10	Insecta	Hymenoptera	Apidae	Apinae	Bombini	Bombus	Bombus_mesomelas
 FBAQU1284-12	Insecta	Hemiptera	Micronectidae	Micronectinae	dummy_Micronectinae	Micronecta	Micronecta_poweri
 GBCOU857-13	Insecta	Coleoptera	Scirtidae	Scirtinae	dummy_Scirtinae	Contacyphon	Contacyphon_ochraceus
 MIDGE924-11	Insecta	Diptera	Chironomidae	Chironominae	Tanytarsini	Tanytarsus	Tanytarsus_usmaensis
-GBDTA9952-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Porricondylini	Porricondyla	Porricondyla_colpodioidesMJDE2
 GMGMQ781-18	Insecta	Hymenoptera	Ichneumonidae	Diplazontinae	dummy_Diplazontinae	Diplazon	Diplazon_scutatorius
 GBMIN70245-17	Insecta	Hemiptera	Stenocephalidae	dummy_Stenocephalidae	dummy_Stenocephalidae	Dicranocephalus	Dicranocephalus_agilis
 GBBSP775-15	Arachnida	Araneae	Oxyopidae	dummy_Oxyopidae	dummy_Oxyopidae	Oxyopes	Oxyopes_ramosus
@@ -10852,7 +10800,6 @@ GBBSP967-15	Arachnida	Araneae	Salticidae	dummy_Salticidae	dummy_Salticidae	Salti
 GMGMC718-14	Insecta	Hymenoptera	Ichneumonidae	Ichneumoninae	dummy_Ichneumoninae	Barichneumon	Barichneumon_derogator
 GBACU1466-12	Insecta	Hymenoptera	Halictidae	Halictinae	Halictini	Lasioglossum	Lasioglossum_euboeense
 GBLAA129-14	Insecta	Lepidoptera	Noctuidae	Noctuinae	Dypterygiini	Polyphaenis	Polyphaenis_sericata
-GWORB3320-08	Insecta	Lepidoptera	Geometridae	Sterrhinae	dummy_Sterrhinae	Rhodostrophia	Rhodostrophia_sieversiAH01Tr
 FBCOG525-12	Insecta	Coleoptera	Ptinidae	Ernobiinae	Ernobiini	Ernobius	Ernobius_pini
 FBLMT552-09	Insecta	Lepidoptera	Adelidae	Adelinae	dummy_Adelinae	Adela	Adela_croesella
 GWOSQ159-11	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Nychiodes	Nychiodes_divergaria
@@ -11020,7 +10967,6 @@ GCOL9494-16	Insecta	Coleoptera	Ptiliidae	Ptiliinae	Ptinellini	Ptinella	Ptinella_
 BCHYM8370-15	Insecta	Hymenoptera	Braconidae	Euphorinae	dummy_Euphorinae	Leiophron	Leiophron_similis
 GBMWB844-15	Insecta	Diptera	Empididae	Empidinae	Empidini	Empis	Empis_pennipes
 GBLAA285-14	Insecta	Lepidoptera	Noctuidae	Noctuinae	Apameini	Amphipoea	Amphipoea_lucens
-BCHYM9077-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1713
 EUBUG1349-13	Insecta	Hemiptera	Miridae	Deraeocorinae	Deraeocorini	Deraeocoris	Deraeocoris_annulipes
 FBLMU252-09	Insecta	Lepidoptera	Pterophoridae	Pterophorinae	dummy_Pterophorinae	Gillmeria	Gillmeria_pallidactyla
 FBAQU368-09	Insecta	Trichoptera	Phryganeidae	Phryganeinae	dummy_Phryganeinae	Oligotricha	Oligotricha_striata
@@ -11082,7 +11028,6 @@ GBCOU1355-13	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Holotrichapion	Holo
 GMGMU4441-20	Insecta	Hymenoptera	Eulophidae	Entedoninae	dummy_Entedoninae	Asecodes	Asecodes_parviclava
 MIDGE261-06	Insecta	Diptera	Chironomidae	Tanypodinae	Pentaneurini	Pentaneurella	Pentaneurella_katterjokki
 BCEAB411-16	Insecta	Hemiptera	Notonectidae	Notonectinae	Notonectini	Notonecta	Notonecta_obliqua
-BCHYM10895-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1716
 GBCOU2902-13	Insecta	Coleoptera	Chrysomelidae	Chrysomelinae	dummy_Chrysomelinae	Oreina	Oreina_bidentata
 FBCON147-13	Insecta	Coleoptera	Nitidulidae	Cryptarchinae	dummy_Cryptarchinae	Cryptarcha	Cryptarcha_strigata
 FBCOK257-13	Insecta	Coleoptera	Staphylinidae	Aleocharinae	Athetini	Amischa	Amischa_nigrofusca
@@ -11348,7 +11293,6 @@ GMGMP1882-18	Insecta	Hemiptera	Aphididae	Aphidinae	dummy_Aphidinae	Hyalopteroide
 GBLAA2768-15	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Costaconvexa	Costaconvexa_polygrammata
 FGMLG370-15	Insecta	Lepidoptera	Nepticulidae	dummy_Nepticulidae	dummy_Nepticulidae	Ectoedemia	Ectoedemia_argyropeza
 GBBSP276-15	Arachnida	Araneae	Clubionidae	dummy_Clubionidae	dummy_Clubionidae	Clubiona	Clubiona_diversa
-BCHYM11053-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1725
 GMGME519-14	Insecta	Hemiptera	Aphididae	Aphidinae	Macrosiphini	Acyrthosiphon	Acyrthosiphon_malvae
 GBMIX485-14	Insecta	Hymenoptera	Braconidae	Alysiinae	Dacnusini	Exotela	Exotela_sulcata
 BCHYM1431-13	Insecta	Hymenoptera	Apidae	Nomadinae	Nomadini	Nomada	Nomada_fulvicornis
@@ -11687,7 +11631,6 @@ GCOL11054-16	Insecta	Coleoptera	Curculionidae	Scolytinae	Xyloterini	Trypodendron
 MIDGE949-11	Insecta	Diptera	Chironomidae	Chironominae	Tanytarsini	Tanytarsus	Tanytarsus_gracilentus
 BASYM3530-14	Insecta	Hymenoptera	Tenthredinidae	Heterarthrinae	dummy_Heterarthrinae	Heterarthrus	Heterarthrus_vagans
 FGMLD601-13	Insecta	Lepidoptera	Nepticulidae	dummy_Nepticulidae	dummy_Nepticulidae	Stigmella	Stigmella_glutinosae
-GMGRI078-13	Insecta	Coleoptera	Leiodidae	Leiodinae	Leiodini	Leiodes	Leiodes_spACK2180
 BCHYM9400-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_tessellatus
 FBCOP129-13	Insecta	Coleoptera	Chrysomelidae	Donaciinae	dummy_Donaciinae	Donacia	Donacia_tomentosa
 BASYM2904-13	Insecta	Hymenoptera	Tenthredinidae	Heterarthrinae	dummy_Heterarthrinae	Caliroa	Caliroa_tremulae
@@ -11744,7 +11687,6 @@ FBLMZ620-12	Insecta	Lepidoptera	Epermeniidae	Epermeniinae	dummy_Epermeniinae	Epe
 GCOL12504-16	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Squamapion	Squamapion_atomarium
 FGMLF337-15	Insecta	Lepidoptera	Gracillariidae	Gracillariinae	dummy_Gracillariinae	Caloptilia	Caloptilia_fribergensis
 GBCOU3644-13	Insecta	Coleoptera	Zopheridae	Colydiinae	Colydiini	Aulonium	Aulonium_trisulcum
-BCHYM9068-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1713
 GMGRD2288-13	Insecta	Diptera	Cecidomyiidae	Micromyinae	Peromyiini	Peromyia	Peromyia_intermedia
 GBCOF270-13	Insecta	Coleoptera	Scraptiidae	Anaspidinae	Anaspidini	Anaspis	Anaspis_lurida
 GBCOF197-13	Insecta	Coleoptera	Cryptophagidae	Atomariinae	dummy_Atomariinae	Atomaria	Atomaria_atrata
@@ -11831,7 +11773,6 @@ GCOL11362-16	Insecta	Coleoptera	Chrysomelidae	Cryptocephalinae	Clytrini	Cheiloto
 GCOL7060-16	Insecta	Coleoptera	Zopheridae	Colydiinae	Colydiini	Aulonium	Aulonium_trisulcum
 GCOL495-16	Insecta	Coleoptera	Carabidae	Harpalinae	Pterostichini	Molops	Molops_elatus
 GBLAC1013-13	Insecta	Lepidoptera	Noctuidae	Noctuinae	Orthosiini	Orthosia	Orthosia_miniosa
-GMGRH190-13	Insecta	Diptera	Mycetophilidae	Sciophilinae	dummy_Sciophilinae	Monoclona	Monoclona_sp1
 GMGRG1151-13	Insecta	Hymenoptera	Braconidae	Alysiinae	Dacnusini	Chorebus	Chorebus_merella
 BCHYM7384-15	Insecta	Hymenoptera	Braconidae	Microgastrinae	dummy_Microgastrinae	Glyptapanteles	Glyptapanteles_porthetriae
 FIDIP2863-12	Insecta	Diptera	Tachinidae	Exoristinae	Goniini	Spallanzania	Spallanzania_hebes
@@ -11852,7 +11793,6 @@ GST354-15	Insecta	Trichoptera	Leptoceridae	Leptocerinae	dummy_Leptocerinae	Adice
 GCOL12869-16	Insecta	Coleoptera	Chrysomelidae	Bruchinae	Bruchini	Bruchidius	Bruchidius_cisti
 GCOL6400-16	Insecta	Coleoptera	Carabidae	Carabinae	Carabini	Carabus	Carabus_depressus
 GCOL2504-16	Insecta	Coleoptera	Chrysomelidae	Galerucinae	Alticini	Longitarsus	Longitarsus_pulmonariae
-BCHYM9078-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1713
 FBSYB1142-12	Insecta	Hymenoptera	Cephidae	Cephinae	dummy_Cephinae	Calameuta	Calameuta_filiformis
 GWORA989-08	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Trichopteryx	Trichopteryx_carpinata
 FBLMU272-09	Insecta	Lepidoptera	Scythrididae	Scythridinae	dummy_Scythridinae	Scythris	Scythris_palustris
@@ -11861,7 +11801,6 @@ GBMNE48162-22	Insecta	Coleoptera	Curculionidae	Curculioninae	Rhamphini	Orchestes
 GBPSS088-20	Arachnida	Pseudoscorpiones	Chernetidae	Lamprochernetinae	dummy_Lamprochernetinae	Allochernes	Allochernes_powelli
 MJBRC103-17	Insecta	Diptera	Cecidomyiidae	Micromyinae	Peromyiini	Peromyia	Peromyia_sanguinea
 GWOSI010-10	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Rhoptria	Rhoptria_asperaria
-GMGMC470-14	Insecta	Coleoptera	Mordellidae	Mordellinae	Mordellistenini	Mordellistena	Mordellistena_spACO6512
 GBMWB246-15	Insecta	Diptera	Fanniidae	dummy_Fanniidae	dummy_Fanniidae	Fannia	Fannia_speciosa
 GMGRH408-13	Insecta	Diptera	Muscidae	Coenosiinae	Coenosiini	Coenosia	Coenosia_pudorosa
 GBCOU2110-13	Insecta	Coleoptera	Curculionidae	Ceutorhynchinae	Ceutorhynchini	Thamiocolus	Thamiocolus_signatus
@@ -11949,7 +11888,6 @@ FGMLD383-13	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	dummy_Gelechiinae	Gelech
 GMGMR2100-18	Insecta	Hemiptera	Aphididae	Eriosomatinae	Pemphigini	Pemphigus	Pemphigus_bursarius
 FBACB591-11	Insecta	Hymenoptera	Pemphredonidae	Pemphredoninae	Pemphredonini	Pemphredon	Pemphredon_lugubris
 MJBRC118-17	Insecta	Diptera	Cecidomyiidae	Micromyinae	Peromyiini	Peromyia	Peromyia_ovalis
-GBMIX3377-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1749
 GWOSU086-11	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Epirrhoe	Epirrhoe_hastulata
 GMGME1566-14	Insecta	Hemiptera	Aphididae	Aphidinae	Macrosiphini	Dysaphis	Dysaphis_aucupariae
 FBORT482-13	Insecta	Orthoptera	Tettigoniidae	Phaneropterinae	Barbitistini	Isophya	Isophya_kraussii
@@ -11975,9 +11913,7 @@ FBAQU1029-10	Insecta	Coleoptera	Dytiscidae	Colymbetinae	Colymbetini	Colymbetes	C
 FBACA563-10	Insecta	Hymenoptera	Pemphredonidae	Pemphredoninae	dummy_Pemphredoninae	Diodontus	Diodontus_tristis
 FBLMU709-09	Insecta	Lepidoptera	Depressariidae	Depressariinae	dummy_Depressariinae	Agonopterix	Agonopterix_kaekeritziana
 FBLMV362-09	Insecta	Lepidoptera	Ypsolophidae	Ypsolophinae	dummy_Ypsolophinae	Ypsolopha	Ypsolopha_vittella
-GBDTA9919-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Asynaptini	Camptomyia	Camptomyia_corticalisMJ1
 GMGMP8933-18	Insecta	Hymenoptera	Andrenidae	Andreninae	Andrenini	Andrena	Andrena_viridescens
-GBMIX3333-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1739
 GCOL2449-16	Insecta	Coleoptera	Chrysomelidae	Cassidinae	Cassidini	Cassida	Cassida_ferruginea
 GCOL8148-16	Insecta	Coleoptera	Clambidae	Clambinae	dummy_Clambinae	Clambus	Clambus_minutus
 GCOL5737-16	Insecta	Coleoptera	Attelabidae	Rhynchitinae	Deporaini	Deporaus	Deporaus_tristis
@@ -12169,7 +12105,6 @@ GBDTA10536-21	Insecta	Diptera	Cecidomyiidae	Winnertziinae	Winnertziini	Winnertzi
 BCHYM6155-15	Insecta	Hymenoptera	Eulophidae	Tetrastichinae	dummy_Tetrastichinae	Tetrastichus	Tetrastichus_broncus
 GMGMU1239-20	Insecta	Diptera	Periscelididae	Stenomicrinae	dummy_Stenomicrinae	Stenomicra	Stenomicra_soniae
 GMGMR1925-18	Insecta	Hymenoptera	Ichneumonidae	Phygadeuontinae	dummy_Phygadeuontinae	Theroscopus	Theroscopus_horsfieldi
-GBACU294-12	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1722
 GBEPT329-14	Insecta	Trichoptera	Limnephilidae	Limnephilinae	dummy_Limnephilinae	Limnephilus	Limnephilus_centralis
 GWOTH874-12	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Charissa	Charissa_bellieri
 BCHYM12664-15	Insecta	Hymenoptera	Eulophidae	Tetrastichinae	dummy_Tetrastichinae	Tetrastichus	Tetrastichus_pilemostomae
@@ -12261,7 +12196,6 @@ FBLMX134-11	Insecta	Lepidoptera	Crambidae	Crambinae	dummy_Crambinae	Catoptria	Ca
 BCHYM10966-15	Insecta	Hymenoptera	Philanthidae	Philanthinae	dummy_Philanthinae	Pseudoscolia	Pseudoscolia_dewitzi
 FGMLK607-17	Insecta	Lepidoptera	Gracillariidae	Gracillariinae	dummy_Gracillariinae	Caloptilia	Caloptilia_falconipennella
 GBBSP1369-15	Arachnida	Araneae	Thomisidae	dummy_Thomisidae	dummy_Thomisidae	Xysticus	Xysticus_acerbus
-BCHYM10892-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1712
 FBCAD080-10	Insecta	Trichoptera	Rhyacophilidae	dummy_Rhyacophilidae	dummy_Rhyacophilidae	Rhyacophila	Rhyacophila_tristis
 FBLMT094-09	Insecta	Lepidoptera	Tortricidae	Olethreutinae	Grapholitini	Cydia	Cydia_fagiglandana
 FBAQU258-09	Insecta	Trichoptera	Lepidostomatidae	Theliopsychinae	dummy_Theliopsychinae	Crunoecia	Crunoecia_irrorata
@@ -12273,7 +12207,6 @@ GCOL1119-16	Insecta	Coleoptera	Anthribidae	Anthribinae	Stenocerini	Enedreytes	En
 AMTPD4518-16	Insecta	Diptera	Syrphidae	Eristalinae	Rhingiini	Cheilosia	Cheilosia_lasiopa
 GBLAD088-14	Insecta	Lepidoptera	Pterophoridae	Pterophorinae	dummy_Pterophorinae	Stangeia	Stangeia_siceliota
 GBEPT2288-15	Insecta	Trichoptera	Limnephilidae	Limnephilinae	dummy_Limnephilinae	Halesus	Halesus_rubricollis
-BCHYM11004-15	Insecta	Hymenoptera	Crabronidae	Eremiaspheciinae	dummy_Eremiaspheciinae	Eremiasphecium	Eremiasphecium_spCSE1714
 BCHYM4911-14	Insecta	Hymenoptera	Sphecidae	Sceliphrinae	Sceliphrini	Sceliphron	Sceliphron_destillatorium
 GBMWN2407-15	Insecta	Diptera	Ceratopogonidae	Forcipomyiinae	Forcipomyiini	Forcipomyia	Forcipomyia_aristolochiae
 GBMIX1882-15	Insecta	Trichoptera	Glossosomatidae	Agapetinae	dummy_Agapetinae	Agapetus	Agapetus_nimbulus
@@ -12529,7 +12462,6 @@ GBBSP1329-15	Arachnida	Opiliones	Nemastomatidae	Nemastomatinae	dummy_Nemastomati
 FGMLH356-16	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	Gelechiini	Aroga	Aroga_velocella
 GCOL10049-16	Insecta	Coleoptera	Dytiscidae	Agabinae	Agabini	Agabus	Agabus_unguicularis
 GCOL013-16	Insecta	Coleoptera	Cerambycidae	Cerambycinae	Clytini	Plagionotus	Plagionotus_detritus
-BCHYM6451-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1708
 GMGRC1266-13	Insecta	Hymenoptera	Diapriidae	Diapriinae	Spilomicrini	Entomacis	Entomacis_perplexa
 FBCOJ064-12	Insecta	Coleoptera	Staphylinidae	Staphylininae	Staphylinini	Quedionuchus	Quedionuchus_plagiatus
 GBACU1382-12	Insecta	Hymenoptera	Sphecidae	Ammophilinae	dummy_Ammophilinae	Ammophila	Ammophila_terminata
@@ -12600,7 +12532,6 @@ FBCOG342-12	Insecta	Coleoptera	Staphylinidae	Aleocharinae	Hypocyphtini	Oligota	O
 EUCAR860-11	Insecta	Coleoptera	Carabidae	Harpalinae	Zabrini	Amara	Amara_municipalis
 GCOL6462-16	Insecta	Coleoptera	Scraptiidae	Anaspidinae	Anaspidini	Anaspis	Anaspis_latiuscula
 GBORT775-15	Insecta	Orthoptera	Acrididae	Oedipodinae	Parapleurini	Stethophyma	Stethophyma_grossum
-GMGRG1245-13	Insecta	Diptera	Mycetophilidae	Sciophilinae	dummy_Sciophilinae	Monoclona	Monoclona_sp1
 ODOPE692-11	Insecta	Lepidoptera	Notodontidae	Cerurinae	dummy_Cerurinae	Cerura	Cerura_erminea
 GWORK531-09	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Macaria	Macaria_artesiaria
 FBNE036-11	Insecta	Neuroptera	Hemerobiidae	Hemerobiinae	dummy_Hemerobiinae	Hemerobius	Hemerobius_lutescens
@@ -12784,7 +12715,6 @@ GWOSN439-11	Insecta	Lepidoptera	Noctuidae	Noctuinae	dummy_Noctuinae	Euxoa	Euxoa_
 ODOPE785-11	Insecta	Lepidoptera	Pyralidae	Phycitinae	dummy_Phycitinae	Ephestia	Ephestia_elutella
 GCOL9461-16	Insecta	Coleoptera	Staphylinidae	Staphylininae	Staphylinini	Heterothops	Heterothops_stiglundbergi
 GBORT739-15	Insecta	Orthoptera	Acrididae	Gomphocerinae	Stenobothrini	Omocestus	Omocestus_rufipes
-BCHYM6291-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1704
 BCHYM2903-14	Insecta	Hymenoptera	Cephidae	Cephinae	dummy_Cephinae	Cephus	Cephus_brachycercus
 GBLAF589-14	Insecta	Lepidoptera	Erebidae	Erebinae	Catocalini	Catocala	Catocala_fraxini
 GBSYM2355-13	Insecta	Hymenoptera	Tenthredinidae	Tenthredininae	dummy_Tenthredininae	Macrophya	Macrophya_militaris
@@ -12870,7 +12800,6 @@ GBLAA1249-15	Insecta	Lepidoptera	Noctuidae	Noctuinae	Xylenini	Aporophyla	Aporoph
 GMGRH762-13	Insecta	Diptera	Mycetophilidae	Mycetophilinae	Exechiini	Exechia	Exechia_cornuta
 GBLAA1458-15	Insecta	Lepidoptera	Noctuidae	Noctuinae	Hadenini	Lacanobia	Lacanobia_aliena
 ODOPE605-11	Insecta	Lepidoptera	Coleophoridae	Coleophorinae	dummy_Coleophorinae	Coleophora	Coleophora_trifolii
-GBDTA10200-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Porricondylini	Porricondyla	Porricondyla_colpodioidesMJDE2
 GMGMP8502-18	Insecta	Hymenoptera	Ichneumonidae	Ichneumoninae	dummy_Ichneumoninae	Stenodontus	Stenodontus_marginellus
 GBORT915-15	Insecta	Orthoptera	Acrididae	Calliptaminae	dummy_Calliptaminae	Calliptamus	Calliptamus_siciliae
 GMGMJ1300-14	Insecta	Hymenoptera	Ichneumonidae	Tryphoninae	dummy_Tryphoninae	Polyblastus	Polyblastus_macrocentrus
@@ -13078,7 +13007,6 @@ NZPLC054-16	Copepoda	Calanoida	Diaptomidae	dummy_Diaptomidae	dummy_Diaptomidae	S
 FGMLH750-16	Insecta	Lepidoptera	Gracillariidae	Gracillariinae	dummy_Gracillariinae	Sabulopteryx	Sabulopteryx_limosella
 ODOPE047-11	Insecta	Lepidoptera	Tineidae	Tineinae	dummy_Tineinae	Monopis	Monopis_monachella
 GCOL5726-16	Insecta	Coleoptera	Cantharidae	Malthininae	Malthodini	Malthodes	Malthodes_holdhausi
-BCHYM8076-15	Insecta	Hymenoptera	Ichneumonidae	Orthocentrinae	dummy_Orthocentrinae	Stenomacrus	Stenomacrus_AH9
 GMGML821-14	Insecta	Diptera	Empididae	Empidinae	Empidini	Empis	Empis_lutea
 GBUPS096-14	Insecta	Orthoptera	Acrididae	Oedipodinae	Locustini	Oedaleus	Oedaleus_decorus
 GMGRG1402-13	Insecta	Hymenoptera	Ichneumonidae	Ichneumoninae	dummy_Ichneumoninae	Ichneumon	Ichneumon_spurius
@@ -13257,7 +13185,6 @@ FBLMV753-09	Insecta	Lepidoptera	Tortricidae	Tortricinae	Tortricini	Acleris	Acler
 GWOSI673-10	Insecta	Lepidoptera	Noctuidae	Noctuinae	Noctuini	Agrotis	Agrotis_atrux
 GWOSK770-11	Insecta	Lepidoptera	Hesperiidae	Pyrginae	Pyrgini	Pyrgus	Pyrgus_armoricanus
 GWOSK917-11	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Aplocera	Aplocera_praeformata
-BCHYM10893-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1712
 FBLMZ089-12	Insecta	Lepidoptera	Ypsolophidae	Ypsolophinae	dummy_Ypsolophinae	Ypsolopha	Ypsolopha_horridella
 GCOL11549-16	Insecta	Coleoptera	Curculionidae	Curculioninae	Mecinini	Mecinus	Mecinus_pascuorum
 GCOL1001-16	Insecta	Coleoptera	Georissidae	dummy_Georissidae	dummy_Georissidae	Georissus	Georissus_laesicollis
@@ -13366,7 +13293,6 @@ GCOL6870-16	Insecta	Coleoptera	Curculionidae	Brachycerinae	Erirhinini	Tournotari
 GCOL1509-16	Insecta	Coleoptera	Tenebrionidae	Alleculinae	Alleculini	Hymenalia	Hymenalia_rufipes
 GBBSP668-15	Arachnida	Araneae	Linyphiidae	dummy_Linyphiidae	dummy_Linyphiidae	Donacochara	Donacochara_speciosa
 BCHYM8146-15	Insecta	Hymenoptera	Ichneumonidae	Stilbopinae	dummy_Stilbopinae	Stilbops	Stilbops_limneriaeformis
-BCHYM5037-14	Insecta	Hymenoptera	Sphecidae	Sphecinae	Prionychini	Prionyx	Prionyx_spCSE1722
 GBSYM2059-13	Insecta	Hymenoptera	Bembicidae	Bembicinae	Bembicini	Harpactus	Harpactus_tumidus
 GWORK473-09	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Pelurga	Pelurga_comitata
 ODOPE315-11	Insecta	Lepidoptera	Pyralidae	Phycitinae	dummy_Phycitinae	Delplanqueia	Delplanqueia_inscriptella
@@ -14170,7 +14096,6 @@ GMGMC698-14	Insecta	Hymenoptera	Ichneumonidae	Ichneumoninae	dummy_Ichneumoninae	
 GBMIN41214-14	Insecta	Coleoptera	Carabidae	Carabinae	Carabini	Carabus	Carabus_nitens
 GBLAD150-14	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Pasiphila	Pasiphila_debiliata
 GBCOU3222-13	Insecta	Coleoptera	Leiodidae	Leiodinae	Leiodini	Leiodes	Leiodes_ferruginea
-BCHYM9067-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1719
 GBCOU2606-13	Insecta	Coleoptera	Geotrupidae	Geotrupinae	Geotrupini	Thorectes	Thorectes_hoppei
 FBORT531-13	Insecta	Orthoptera	Acrididae	Gomphocerinae	Stenobothrini	Omocestus	Omocestus_haemorrhoidalis
 GBSYM1409-12	Insecta	Hymenoptera	Megalodontesidae	Megalodontesinae	dummy_Megalodontesinae	Megalodontes	Megalodontes_cephalotes
@@ -14239,7 +14164,6 @@ GMGMP265-18	Insecta	Hymenoptera	Ichneumonidae	Phygadeuontinae	dummy_Phygadeuonti
 GCOL1560-16	Insecta	Coleoptera	Cerambycidae	Lepturinae	Lepturini	Grammoptera	Grammoptera_abdominalis
 GCOL1502-16	Insecta	Coleoptera	Staphylinidae	Oxyporinae	dummy_Oxyporinae	Oxyporus	Oxyporus_rufus
 GBMIX2477-15	Insecta	Trichoptera	Limnephilidae	Limnephilinae	dummy_Limnephilinae	Pseudopsilopteryx	Pseudopsilopteryx_zimmeri
-BCHYM6840-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1710
 FBCOI051-12	Insecta	Coleoptera	Leiodidae	Cholevinae	Cholevini	Catops	Catops_subfuscus
 FBCOE113-12	Insecta	Coleoptera	Buprestidae	Buprestinae	Anthaxiini	Anthaxia	Anthaxia_podolica
 FBLMV168-09	Insecta	Lepidoptera	Noctuidae	Noctuinae	Xylenini	Atethmia	Atethmia_centrago
@@ -14303,7 +14227,6 @@ MIDGE908-11	Insecta	Diptera	Chironomidae	Chironominae	Tanytarsini	Micropsectra	M
 FBLMW412-10	Insecta	Lepidoptera	Yponomeutidae	Yponomeutinae	dummy_Yponomeutinae	Paraswammerdamia	Paraswammerdamia_albicapitella
 GBDTA10734-21	Insecta	Diptera	Cecidomyiidae	Micromyinae	Aprionini	Aprionus	Aprionus_betulae
 GMGMV190-20	Insecta	Hymenoptera	Braconidae	Alysiinae	Dacnusini	Chorebus	Chorebus_cytherea
-GBMIX3375-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1747
 GWOTI447-12	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Charissa	Charissa_pfeifferi
 FBLMZ290-12	Insecta	Lepidoptera	Crambidae	Pyraustinae	dummy_Pyraustinae	Anania	Anania_stachydalis
 GBBSP295-15	Arachnida	Araneae	Theridiidae	dummy_Theridiidae	dummy_Theridiidae	Parasteatoda	Parasteatoda_tabulata
@@ -14412,7 +14335,6 @@ GBLAD451-14	Insecta	Lepidoptera	Noctuidae	Noctuinae	Apameini	Photedes	Photedes_e
 GBCOU3169-13	Insecta	Coleoptera	Staphylinidae	Staphylininae	Staphylinini	Philonthus	Philonthus_intermedius
 GBCHA011-13	Insecta	Hymenoptera	Halictidae	Halictinae	Halictini	Lasioglossum	Lasioglossum_aeratum
 FBAQU1443-13	Insecta	Odonata	Corduliidae	Corduliinae	dummy_Corduliinae	Epitheca	Epitheca_bimaculata
-GBACU298-12	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1715
 FBLMZ151-12	Insecta	Lepidoptera	Noctuidae	Noctuinae	Xylenini	Apterogenum	Apterogenum_ypsillon
 FBCOG035-12	Insecta	Coleoptera	Staphylinidae	Pselaphinae	Batrisini	Batrisodes	Batrisodes_delaporti
 FBACB683-11	Insecta	Hymenoptera	Apidae	Nomadinae	Nomadini	Nomada	Nomada_opaca
@@ -14883,7 +14805,6 @@ GWOSF950-10	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Perizo
 GCOL7084-16	Insecta	Coleoptera	Melandryidae	Melandryinae	Orchesiini	Orchesia	Orchesia_luteipalpis
 GCOL4254-16	Insecta	Coleoptera	Curculionidae	Lixinae	Cleonini	Pseudocleonus	Pseudocleonus_cinereus
 GBORT695-15	Insecta	Orthoptera	Tettigoniidae	Tettigoniinae	Platycleidini	Pachytrachis	Pachytrachis_striolatus
-BCHYM6625-15	Insecta	Hymenoptera	Pemphredonidae	Pemphredoninae	Pemphredonini	Pemphredon	Pemphredon_spCSE1713
 GBACU3293-13	Insecta	Hymenoptera	Apidae	Apinae	Eucerini	Tetraloniella	Tetraloniella_salicariae
 FGMLD608-13	Insecta	Lepidoptera	Nepticulidae	dummy_Nepticulidae	dummy_Nepticulidae	Fomoria	Fomoria_septembrella
 GBSYM1263-12	Insecta	Hymenoptera	Tenthredinidae	Tenthredininae	dummy_Tenthredininae	Tenthredo	Tenthredo_cunyi
@@ -14984,7 +14905,6 @@ FBLMV090-09	Insecta	Lepidoptera	Noctuidae	Noctuinae	dummy_Noctuinae	Mythimna	Myt
 GWOSM188-11	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Odontopera	Odontopera_graecarius
 GMGMV3906-20	Insecta	Hymenoptera	Ichneumonidae	Campopleginae	dummy_Campopleginae	Dusona	Dusona_subimpressa
 FBACB316-11	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_tarsinus
-GBMIX3378-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1746
 GBMIX3319-16	Insecta	Orthoptera	Acrididae	Gomphocerinae	Gomphocerini	Chorthippus	Chorthippus_vagans
 GBEPT953-14	Insecta	Trichoptera	Leptoceridae	Leptocerinae	dummy_Leptocerinae	Oecetis	Oecetis_tripunctata
 FBLMZ313-12	Insecta	Lepidoptera	Crambidae	Crambinae	dummy_Crambinae	Crambus	Crambus_uliginosellus
@@ -15043,7 +14963,6 @@ FBLMW597-10	Insecta	Lepidoptera	Coleophoridae	Coleophorinae	dummy_Coleophorinae	
 FBARB207-11	Arachnida	Araneae	Linyphiidae	dummy_Linyphiidae	dummy_Linyphiidae	Kaestneria	Kaestneria_pullata
 FBAPD048-11	Insecta	Hymenoptera	Andrenidae	Andreninae	Andrenini	Andrena	Andrena_marginata
 GBDTA10629-21	Insecta	Diptera	Cecidomyiidae	Lestremiinae	dummy_Lestremiinae	Allarete	Allarete_vernalis
-GBDTA10192-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Porricondylini	Porricondyla	Porricondyla_colpodioidesMJDE1
 GMGMU2249-20	Insecta	Hymenoptera	Braconidae	Microgastrinae	dummy_Microgastrinae	Glyptapanteles	Glyptapanteles_fulvipes
 GMGMP4512-18	Insecta	Hemiptera	Aphididae	Aphidinae	Macrosiphini	Hyadaphis	Hyadaphis_passerinii
 GMGMP3798-18	Insecta	Hymenoptera	Ichneumonidae	Cryptinae	Cryptini	Ateleute	Ateleute_linearis
@@ -15275,7 +15194,6 @@ GWOSI089-10	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Catacl
 GWOTF368-12	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Megalycinia	Megalycinia_serraria
 ODOPE917-11	Insecta	Lepidoptera	Pyralidae	Phycitinae	dummy_Phycitinae	Dioryctria	Dioryctria_simplicella
 ODOPE725-11	Insecta	Lepidoptera	Cossidae	Cossinae	dummy_Cossinae	Cossus	Cossus_cossus
-BCHYM12249-15	Insecta	Hymenoptera	Bembicidae	Nyssoninae	Nyssonini	Nysson	Nysson_spCSE1716
 GMGMJ564-14	Insecta	Hemiptera	Aphididae	Aphidinae	Macrosiphini	Nasonovia	Nasonovia_ribisnigri
 BCHYM9118-15	Insecta	Hymenoptera	Crabronidae	Crabroninae	dummy_Crabroninae	Pseudomicroides	Pseudomicroides_zimini
 FBSYM708-10	Insecta	Hymenoptera	Tenthredinidae	Heterarthrinae	dummy_Heterarthrinae	Heterarthrus	Heterarthrus_ochropoda
@@ -15298,7 +15216,6 @@ GMGMP7326-18	Insecta	Diptera	Phoridae	Metopininae	dummy_Metopininae	Megaselia	Me
 FBLMZ589-12	Insecta	Lepidoptera	Choreutidae	Choreutinae	dummy_Choreutinae	Prochoreutis	Prochoreutis_holotoxa
 ODOPE117-11	Insecta	Lepidoptera	Gracillariidae	Lithocolletinae	dummy_Lithocolletinae	Phyllonorycter	Phyllonorycter_tristrigella
 GCOL8623-16	Insecta	Coleoptera	Staphylinidae	Scydmaeninae	Stenichnini	Neuraphes	Neuraphes_carinatus
-BCHYM5059-14	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1706
 GBCOU1445-13	Insecta	Coleoptera	Chrysomelidae	Galerucinae	Luperini	Luperus	Luperus_xanthopoda
 GMGRC804-13	Insecta	Diptera	Mycetophilidae	Sciophilinae	dummy_Sciophilinae	Sciophila	Sciophila_altaica
 GBCOD702-13	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Ceratapion	Ceratapion_onopordi
@@ -15342,7 +15259,6 @@ GMGMV2149-20	Insecta	Diptera	Pipunculidae	Pipunculinae	Tomosvaryellini	Eudorylas
 GMGMP1457-18	Insecta	Hymenoptera	Ichneumonidae	Ctenopelmatinae	dummy_Ctenopelmatinae	Hypamblys	Hypamblys_albopictus
 GBLAA2323-15	Insecta	Lepidoptera	Erebidae	Arctiinae	Lithosiini	Thumatha	Thumatha_senex
 GBMIX2492-15	Insecta	Trichoptera	Limnephilidae	Limnephilinae	dummy_Limnephilinae	Parachiona	Parachiona_picicornis
-BCHYM6623-15	Insecta	Hymenoptera	Pemphredonidae	Pemphredoninae	Pemphredonini	Pemphredon	Pemphredon_spCSE1713
 GBLAD283-14	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Deileptenia	Deileptenia_ribeata
 FBSYB1484-12	Insecta	Hymenoptera	Tenthredinidae	Selandriinae	Dolerini	Dolerus	Dolerus_anticus
 GWORO962-09	Insecta	Lepidoptera	Tortricidae	Tortricinae	Archipini	Aphelia	Aphelia_unitana
@@ -15590,7 +15506,6 @@ GBLAA076-14	Insecta	Lepidoptera	Geometridae	Sterrhinae	dummy_Sterrhinae	Cyclopho
 FBSYR1232-13	Insecta	Diptera	Tachinidae	Dexiinae	Voriini	Athrycia	Athrycia_impressa
 GMGRD540-13	Insecta	Diptera	Sciaridae	dummy_Sciaridae	dummy_Sciaridae	Bradysia	Bradysia_subvernalis
 BASYM2286-12	Insecta	Hymenoptera	Tenthredinidae	Tenthredininae	dummy_Tenthredininae	Tenthredo	Tenthredo_omissa
-GWOTL520-13	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Aleucis	Aleucis_distinctataAH01
 CNCDB436-11	Insecta	Diptera	Syrphidae	Eristalinae	Rhingiini	Cheilosia	Cheilosia_carbonaria
 FBSYM152-09	Insecta	Hymenoptera	Tenthredinidae	Allantinae	dummy_Allantinae	Empria	Empria_tridens
 FBLMS031-09	Insecta	Lepidoptera	Crambidae	Spilomelinae	dummy_Spilomelinae	Udea	Udea_uliginosalis
@@ -15876,7 +15791,6 @@ GWORK643-09	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Coenot
 GWOTD470-12	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Glacies	Glacies_coracina
 GBBSP1978-15	Arachnida	Opiliones	Trogulidae	dummy_Trogulidae	dummy_Trogulidae	Trogulus	Trogulus_nepaeformis
 GMGME827-14	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Porricondylini	Parepidosis	Parepidosis_argentifera
-GMGRG3323-13	Insecta	Diptera	Mycetophilidae	Sciophilinae	dummy_Sciophilinae	Monoclona	Monoclona_sp1
 GBCOU2595-13	Insecta	Coleoptera	Cerambycidae	Cerambycinae	Callidiini	Callidium	Callidium_coriaceum
 GBCOG597-13	Insecta	Coleoptera	Curculionidae	Scolytinae	Xyleborini	Anisandrus	Anisandrus_dispar
 FBCON735-13	Insecta	Coleoptera	Staphylinidae	Tachyporinae	Tachinusini	Tachinus	Tachinus_subterraneus
@@ -15925,7 +15839,6 @@ FBLMV795-09	Insecta	Lepidoptera	Pyralidae	Phycitinae	dummy_Phycitinae	Merulempis
 FBNE054-11	Insecta	Neuroptera	Hemerobiidae	Drepanepteryginae	dummy_Drepanepteryginae	Drepanepteryx	Drepanepteryx_phalaenoides
 FBLMX108-11	Insecta	Lepidoptera	Zygaenidae	Zygaeninae	Zygaenini	Zygaena	Zygaena_loti
 FBACB085-11	Insecta	Hymenoptera	Bembicidae	Bembicinae	Bembicini	Bembix	Bembix_tarsata
-GBCOU1720-13	Insecta	Coleoptera	Chrysomelidae	Cryptocephalinae	Cryptocephalini	Cryptocephalus	Cryptocephalus_spACJ6518
 FBCOP140-13	Insecta	Coleoptera	Chrysomelidae	Galerucinae	Alticini	Chaetocnema	Chaetocnema_mannerheimii
 GMGMU4754-20	Insecta	Hymenoptera	Figitidae	Charipinae	dummy_Charipinae	Alloxysta	Alloxysta_arcuata
 GWOTL176-13	Insecta	Lepidoptera	Nymphalidae	Apaturinae	dummy_Apaturinae	Apatura	Apatura_iris
@@ -15945,7 +15858,6 @@ GBCOU3521-13	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Exapion	Exapion_dif
 GBMNF7264-22	Malacostraca	Amphipoda	Niphargidae	dummy_Niphargidae	dummy_Niphargidae	Niphargus	Niphargus_tonywhitteni
 BNSB103-21	Malacostraca	Isopoda	Sphaeromatidae	dummy_Sphaeromatidae	dummy_Sphaeromatidae	Lekanesphaera	Lekanesphaera_rugicauda
 GWOSU064-11	Insecta	Lepidoptera	Saturniidae	Saturniinae	Saturniini	Saturnia	Saturnia_pavonia
-BCHYM10910-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1719
 BCHYM8075-15	Insecta	Hymenoptera	Ichneumonidae	Orthocentrinae	dummy_Orthocentrinae	Picrostigeus	Picrostigeus_obscurus
 FBCOK591-13	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Perapion	Perapion_curtirostre
 FBCOG1527-12	Insecta	Coleoptera	Carabidae	Harpalinae	Harpalini	Harpalus	Harpalus_hirtipes
@@ -16097,7 +16009,6 @@ GBACU942-12	Insecta	Hymenoptera	Crabronidae	Crabroninae	Crabronini	Crabro	Crabro
 BCEAB528-17	Insecta	Hemiptera	Notonectidae	Anisopinae	dummy_Anisopinae	Anisops	Anisops_sardeus
 GWOSI041-10	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Tephronia	Tephronia_lepraria
 GBBSP1901-15	Arachnida	Araneae	Miturgidae	dummy_Miturgidae	dummy_Miturgidae	Zora	Zora_silvestris
-BCHYM6452-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1708
 GMGRF417-13	Insecta	Diptera	Mycetophilidae	Mycetophilinae	Mycetophilini	Platurocypta	Platurocypta_punctum
 GBCOE003-13	Insecta	Coleoptera	Leiodidae	Coloninae	dummy_Coloninae	Colon	Colon_serripes
 FBCOE893-12	Insecta	Coleoptera	Lucanidae	Syndesinae	Ceruchini	Ceruchus	Ceruchus_chrysomelinus
@@ -16407,7 +16318,6 @@ GCOL10714-16	Insecta	Coleoptera	Attelabidae	Rhynchitinae	Rhynchitini	Lasiorhynch
 GCOL4456-16	Insecta	Coleoptera	Curculionidae	Lixinae	Lixini	Larinus	Larinus_iaceae
 GCOL11148-16	Insecta	Coleoptera	Ciidae	Ciinae	dummy_Ciinae	Sulcacis	Sulcacis_fronticornis
 MIDGE1019-14	Insecta	Diptera	Chironomidae	Orthocladiinae	dummy_Orthocladiinae	Chaetocladius	Chaetocladius_purbeckensis
-AMTPB1733-15	Insecta	Hymenoptera	Ichneumonidae	Orthocentrinae	dummy_Orthocentrinae	Stenomacrus	Stenomacrus_AH9
 GBCOU3618-13	Insecta	Coleoptera	Latridiidae	Corticariinae	dummy_Corticariinae	Corticaria	Corticaria_fulva
 GWOTD328-12	Insecta	Lepidoptera	Geometridae	Geometrinae	dummy_Geometrinae	Comibaena	Comibaena_bajularia
 FBSYB839-11	Insecta	Hymenoptera	Tenthredinidae	Selandriinae	Dolerini	Dolerus	Dolerus_niger
@@ -16457,7 +16367,6 @@ GMGMV2458-20	Insecta	Diptera	Scathophagidae	Scathophaginae	Gimnomerini	Norellia	
 GMGMV406-20	Insecta	Hymenoptera	Ichneumonidae	Diplazontinae	dummy_Diplazontinae	Sussaba	Sussaba_erigator
 GMGMU2581-20	Insecta	Hymenoptera	Ichneumonidae	Campopleginae	dummy_Campopleginae	Hyposoter	Hyposoter_alpicola
 GBBSP323-15	Arachnida	Araneae	Liocranidae	dummy_Liocranidae	dummy_Liocranidae	Agroeca	Agroeca_proxima
-BCHYM6286-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1705
 GBLAF576-14	Insecta	Lepidoptera	Noctuidae	Noctuinae	Xylenini	Agrochola	Agrochola_lota
 GBLAA229-14	Insecta	Lepidoptera	Noctuidae	Noctuinae	dummy_Noctuinae	Mythimna	Mythimna_litoralis
 GBCOU2578-13	Insecta	Coleoptera	Latridiidae	Corticariinae	dummy_Corticariinae	Corticaria	Corticaria_fulva
@@ -16806,7 +16715,6 @@ GBEPT449-14	Insecta	Ephemeroptera	Heptageniidae	Rhithrogeniinae	dummy_Rhithrogen
 ODOPE586-11	Insecta	Lepidoptera	Pyralidae	Phycitinae	dummy_Phycitinae	Pyla	Pyla_fusca
 ODOPE882-11	Insecta	Lepidoptera	Pyralidae	Phycitinae	dummy_Phycitinae	Salebriopsis	Salebriopsis_albicilla
 AMTPD4614-16	Insecta	Diptera	Syrphidae	Syrphinae	Syrphini	Eupeodes	Eupeodes_bucculatus
-BCHYM6839-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1703
 GBLAB871-13	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	Litini	Recurvaria	Recurvaria_nanella
 GMGRI689-13	Insecta	Hymenoptera	Ichneumonidae	Orthocentrinae	dummy_Orthocentrinae	Megastylus	Megastylus_orbitator
 GBLAB172-13	Insecta	Lepidoptera	Erebidae	Arctiinae	Lithosiini	Thumatha	Thumatha_senex
@@ -17116,7 +17024,6 @@ FBCOF573-12	Insecta	Coleoptera	Staphylinidae	Staphylininae	Othiini	Atrecus	Atrec
 FBAPC722-11	Insecta	Hymenoptera	Megachilidae	Megachilinae	Osmiini	Chelostoma	Chelostoma_grande
 GBCOU2141-13	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Pseudostenapion	Pseudostenapion_simum
 BNSB002-21	Malacostraca	Amphipoda	Corophiidae	Corophiinae	Corophiini	Monocorophium	Monocorophium_acherusicum
-GBMIX3407-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1736
 GBCX1777-14	Copepoda	Cyclopoida	Mytilicolidae	dummy_Mytilicolidae	dummy_Mytilicolidae	Mytilicola	Mytilicola_orientalis
 FGMLD147-13	Insecta	Lepidoptera	Nolidae	Nolinae	dummy_Nolinae	Meganola	Meganola_albula
 GBCOU3630-13	Insecta	Coleoptera	Carabidae	Trechinae	Bembidiini	Sinechostictus	Sinechostictus_stomoides
@@ -17806,7 +17713,6 @@ FBSYM802-10	Insecta	Hymenoptera	Tenthredinidae	Nematinae	dummy_Nematinae	Dineura
 FBCON220-13	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Omphalapion	Omphalapion_laevigatum
 GBACU2469-13	Insecta	Hymenoptera	Apidae	Nomadinae	Nomadini	Nomada	Nomada_signata
 GBCOC603-12	Insecta	Coleoptera	Latridiidae	Latridiinae	dummy_Latridiinae	Cartodere	Cartodere_bifasciata
-GBACU836-12	Insecta	Hymenoptera	Apidae	Nomadinae	Nomadini	Nomada	Nomada_flava_spec1CSE
 FBCOF1108-12	Insecta	Coleoptera	Curculionidae	Scolytinae	Cryphalini	Ernoporicus	Ernoporicus_fagi
 FBAPD795-11	Insecta	Hymenoptera	Colletidae	Hylaeinae	Hylaeini	Hylaeus	Hylaeus_punctulatissimus
 FBLMV299-09	Insecta	Lepidoptera	Geometridae	Sterrhinae	dummy_Sterrhinae	Idaea	Idaea_dilutaria
@@ -17840,7 +17746,6 @@ GTRI091-18	Insecta	Trichoptera	Hydroptilidae	Hydroptilinae	dummy_Hydroptilinae	H
 GBLAB493-13	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	dummy_Gelechiinae	Teleiodes	Teleiodes_luculella
 ODOPE052-11	Insecta	Lepidoptera	Yponomeutidae	Yponomeutinae	dummy_Yponomeutinae	Swammerdamia	Swammerdamia_pyrella
 FGMLG110-15	Insecta	Lepidoptera	Gracillariidae	Acrocercopinae	dummy_Acrocercopinae	Acrocercops	Acrocercops_brongniardella
-BCHYM10908-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1719
 GBLAA917-14	Insecta	Lepidoptera	Noctuidae	Cuculliinae	dummy_Cuculliinae	Shargacucullia	Shargacucullia_scrophulariae
 FBTAC075-13	Insecta	Diptera	Tachinidae	Tachininae	Nemoraeini	Nemoraea	Nemoraea_pellucida
 GBCOU1805-13	Insecta	Coleoptera	Carabidae	Trechinae	Bembidiini	Bembidion	Bembidion_glaciale
@@ -17970,7 +17875,6 @@ GBBSP1218-15	Arachnida	Araneae	Agelenidae	dummy_Agelenidae	dummy_Agelenidae	Tege
 LEFIJ1432-12	Insecta	Lepidoptera	Noctuidae	Noctuinae	Noctuini	Agrotis	Agrotis_puta
 GCOL3985-16	Insecta	Coleoptera	Cantharidae	Cantharinae	Cantharini	Ancistronycha	Ancistronycha_erichsonii
 FGMLF654-15	Insecta	Lepidoptera	Gelechiidae	Anomologinae	dummy_Anomologinae	Oxypteryx	Oxypteryx_wilkella
-GMGME296-14	Insecta	Hymenoptera	Braconidae	Alysiinae	Alysiini	Orthostigma	Orthostigma_1MJS
 FBCHI050-14	Insecta	Diptera	Tachinidae	Phasiinae	Cylindromyiini	Cylindromyia	Cylindromyia_interrupta
 GBCOU2430-13	Insecta	Coleoptera	Cleridae	Clerinae	dummy_Clerinae	Thanasimus	Thanasimus_femoralis
 FBSYR1185-13	Insecta	Diptera	Tachinidae	Tachininae	Tachinini	Tachina	Tachina_ursina
@@ -18174,7 +18078,6 @@ GWOSD769-10	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Lycia	Lyci
 FBCOD209-11	Insecta	Coleoptera	Dytiscidae	Agabinae	Agabini	Agabus	Agabus_unguicularis
 ISSWG613-21	Insecta	Hemiptera	Oxycarenidae	dummy_Oxycarenidae	dummy_Oxycarenidae	Metopoplax	Metopoplax_origani
 GMGMW813-20	Insecta	Hymenoptera	Eulophidae	Tetrastichinae	dummy_Tetrastichinae	Tamarixia	Tamarixia_pronomus
-GWOTD304-12	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Coenotephria	Coenotephria_tophaceataAH01It
 GCOL10822-16	Insecta	Coleoptera	Elateridae	Cardiophorinae	dummy_Cardiophorinae	Cardiophorus	Cardiophorus_ruficollis
 GCOL2351-16	Insecta	Coleoptera	Chrysomelidae	Galerucinae	Alticini	Altica	Altica_quercetorum
 BCHYM8085-15	Insecta	Hymenoptera	Braconidae	Euphorinae	dummy_Euphorinae	Leiophron	Leiophron_apicalis
@@ -18862,7 +18765,6 @@ GMGMP4018-18	Insecta	Hymenoptera	Braconidae	Alysiinae	Dacnusini	Chorebus	Chorebu
 GBMIN88539-17	Insecta	Odonata	Aeshnidae	Aeshninae	dummy_Aeshninae	Aeshna	Aeshna_viridis
 MJBRC081-17	Insecta	Diptera	Cecidomyiidae	Micromyinae	Peromyiini	Peromyia	Peromyia_sanguinea
 ODOPE904-11	Insecta	Lepidoptera	Pyralidae	Phycitinae	dummy_Phycitinae	Oncocera	Oncocera_semirubella
-GBMIX2407-15	Insecta	Hymenoptera	Sphecidae	Sphecinae	Prionychini	Prionyx	Prionyx_spCSE1723
 BCHYM8485-15	Insecta	Hymenoptera	Ichneumonidae	Phygadeuontinae	dummy_Phygadeuontinae	Gelis	Gelis_orbiculatus
 GMGMI175-14	Insecta	Diptera	Tachinidae	Tachininae	Ernestiini	Panzeria	Panzeria_laevigata
 GMGRF3371-13	Insecta	Hymenoptera	Ichneumonidae	Phygadeuontinae	dummy_Phygadeuontinae	Aclastus	Aclastus_micator
@@ -19189,7 +19091,6 @@ GMGMP6438-18	Insecta	Diptera	Cecidomyiidae	Cecidomyiinae	Dasineurini	Jaapiella	J
 GWOSI008-10	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Isturgia	Isturgia_arenacearia
 GWOTD472-12	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Glacies	Glacies_alpinata
 GCOL3031-16	Insecta	Coleoptera	Dermestidae	Megatominae	Megatomini	Megatoma	Megatoma_undata
-GMGMJ1089-14	Insecta	Diptera	Agromyzidae	Agromyzinae	dummy_Agromyzinae	Agromyza	Agromyza_spBOLDACR0495
 BCHYM2996-14	Insecta	Hymenoptera	Scoliidae	Scoliinae	Campsomerini	Micromeriella	Micromeriella_aureola
 GWOSI083-10	Insecta	Lepidoptera	Geometridae	Sterrhinae	dummy_Sterrhinae	Rhodostrophia	Rhodostrophia_calabra
 GBMWN1171-15	Insecta	Diptera	Sciaridae	dummy_Sciaridae	dummy_Sciaridae	Bradysia	Bradysia_strenua
@@ -19227,11 +19128,9 @@ BCHYM16834-18	Insecta	Hymenoptera	Ichneumonidae	Ctenopelmatinae	dummy_Ctenopelma
 GCOL4334-16	Insecta	Coleoptera	Pythidae	dummy_Pythidae	dummy_Pythidae	Pytho	Pytho_depressus
 GBBSP692-15	Arachnida	Araneae	Linyphiidae	dummy_Linyphiidae	dummy_Linyphiidae	Improphantes	Improphantes_nitidus
 GBMIX1704-15	Insecta	Trichoptera	Rhyacophilidae	dummy_Rhyacophilidae	dummy_Rhyacophilidae	Rhyacophila	Rhyacophila_vulgaris
-BCHYM6289-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1704
 GBLAB459-13	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	Gelechiini	Aroga	Aroga_velocella
 GBACU1212-12	Insecta	Hymenoptera	Megachilidae	Megachilinae	Osmiini	Hoplitis	Hoplitis_mitis
 FBLMT620-09	Insecta	Lepidoptera	Gelechiidae	Dichomeridinae	dummy_Dichomeridinae	Brachmia	Brachmia_blandella
-GWORB3317-08	Insecta	Lepidoptera	Geometridae	Sterrhinae	dummy_Sterrhinae	Rhodostrophia	Rhodostrophia_sieversiAH01Tr
 FBORT365-10	Insecta	Orthoptera	Tettigoniidae	Conocephalinae	Copiphorini	Ruspolia	Ruspolia_nitidula
 FBAQU915-10	Insecta	Coleoptera	Dytiscidae	Agabinae	Agabini	Agabus	Agabus_labiatus
 FBCOB883-10	Insecta	Coleoptera	Staphylinidae	Oxytelinae	Blediini	Bledius	Bledius_tibialis
@@ -19323,7 +19222,6 @@ FBLMT432-09	Insecta	Lepidoptera	Erebidae	Boletobiinae	Aventiini	Trisateles	Trisa
 FBSYM1135-10	Insecta	Hymenoptera	Tenthredinidae	Allantinae	dummy_Allantinae	Allantus	Allantus_melanarius
 GCOL6561-16	Insecta	Coleoptera	Staphylinidae	Omaliinae	Anthophagini	Anthophagus	Anthophagus_fallax
 GCOL5996-16	Insecta	Coleoptera	Carabidae	Harpalinae	Platynini	Agonum	Agonum_gracilipes
-BCHYM10961-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Miscophini	Miscophus	Miscophus_spCSE1712
 GBLAA2028-15	Insecta	Lepidoptera	Noctuidae	Noctuinae	dummy_Noctuinae	Xestia	Xestia_stigmatica
 GBMWB809-15	Insecta	Diptera	Empididae	dummy_Empididae	dummy_Empididae	Dryodromia	Dryodromia_testacea
 BCHYM8872-15	Insecta	Hymenoptera	Tenthredinidae	Tenthredininae	dummy_Tenthredininae	Tenthredopsis	Tenthredopsis_friesei
@@ -19402,12 +19300,10 @@ GDIP3535-22	Insecta	Diptera	Chironomidae	Chironominae	Chironomini	Cladopelma	Cla
 GBDP21559-19	Insecta	Diptera	Pipunculidae	Chalarinae	dummy_Chalarinae	Chalarus	Chalarus_elegantulus
 GMGMP9094-18	Insecta	Diptera	Muscidae	Phaoniinae	Phaoniini	Phaonia	Phaonia_gobertii
 FGMLL203-17	Insecta	Lepidoptera	Gracillariidae	Phyllocnistinae	dummy_Phyllocnistinae	Phyllocnistis	Phyllocnistis_saligna
-GBMIX3395-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1722
 FBLMZ369-12	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	dummy_Gelechiinae	Gelechia	Gelechia_sororculella
 GCOL10365-16	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Phrissotrichum	Phrissotrichum_rugicolle
 GCOL5886-16	Insecta	Coleoptera	Cantharidae	Cantharinae	Cantharini	Cantharis	Cantharis_pagana
 GMGMN1305-14	Insecta	Diptera	Tachinidae	Exoristinae	Exoristini	Bessa	Bessa_selecta
-BCHYM4940-14	Insecta	Hymenoptera	Sphecidae	Sphecinae	Prionychini	Prionyx	Prionyx_spCSE1724
 GBCOU875-13	Insecta	Coleoptera	Scarabaeidae	Cetoniinae	Cetoniini	Tropinota	Tropinota_squalida
 GBLAB805-13	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Deileptenia	Deileptenia_ribeata
 FBAQU365-09	Insecta	Trichoptera	Molannidae	dummy_Molannidae	dummy_Molannidae	Molanna	Molanna_albicans
@@ -19532,7 +19428,6 @@ GWOR4019-09	Insecta	Lepidoptera	Noctuidae	Noctuinae	Hadenini	Polia	Polia_bombyci
 FBLMV346-09	Insecta	Lepidoptera	Argyresthiidae	dummy_Argyresthiidae	dummy_Argyresthiidae	Argyresthia	Argyresthia_pruniella
 FBHET069-11	Insecta	Hemiptera	Hydrometridae	Hydrometrinae	dummy_Hydrometrinae	Hydrometra	Hydrometra_gracilenta
 GBCOU233-13	Insecta	Coleoptera	Scarabaeidae	Aphodiinae	Aphodiini	Teuchestes	Teuchestes_fossor
-GBMIX3367-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1706
 GWOSI136-10	Insecta	Lepidoptera	Geometridae	Larentiinae	Eupitheciini	Eupithecia	Eupithecia_ochridata
 FBLMZ521-12	Insecta	Lepidoptera	Noctuidae	Noctuinae	Xylenini	Aporophyla	Aporophyla_lueneburgensis
 FBLMZ284-12	Insecta	Lepidoptera	Tortricidae	Tortricinae	Cochylini	Cochylidia	Cochylidia_implicitana
@@ -19663,7 +19558,6 @@ GMGMP6651-18	Insecta	Diptera	Calliphoridae	Rhinophorinae	Phytonini	Melanophora	M
 GMGMQ1348-18	Insecta	Diptera	Chironomidae	Tanypodinae	Macropelopiini	Psectrotanypus	Psectrotanypus_varius
 GBLAA1443-15	Insecta	Lepidoptera	Lycaenidae	Polyommatinae	Polyommatini	Glaucopsyche	Glaucopsyche_alexis
 GBICH629-17	Insecta	Hymenoptera	Bembicidae	Bembicinae	Gorytini	Gorytes	Gorytes_sulcifrons
-GBMIX3323-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1732
 GMGMO013-18	Insecta	Diptera	Mycetophilidae	Mycetophilinae	Mycetophilini	Sceptonia	Sceptonia_costata
 ODOPE399-11	Insecta	Lepidoptera	Tischeriidae	dummy_Tischeriidae	dummy_Tischeriidae	Tischeria	Tischeria_ekebladella
 GCOL12602-16	Insecta	Coleoptera	Staphylinidae	Oxytelinae	Thinobiini	Aploderus	Aploderus_caelatus
@@ -19923,7 +19817,6 @@ GBDTA10798-21	Insecta	Diptera	Cecidomyiidae	Micromyinae	Aprionini	Aprionus	Aprio
 GMGMV5079-20	Collembola	Entomobryomorpha	Entomobryidae	Willowsiinae	Willowsiini	Willowsia	Willowsia_nigromaculata
 GMGMU4506-20	Insecta	Hymenoptera	Figitidae	Charipinae	dummy_Charipinae	Alloxysta	Alloxysta_ramulifera
 GMGMU157-20	Insecta	Diptera	Lauxaniidae	Lauxaniinae	dummy_Lauxaniinae	Sapromyza	Sapromyza_zetterstedti
-BCHYM11011-15	Insecta	Hymenoptera	Crabronidae	Eremiaspheciinae	dummy_Eremiaspheciinae	Eremiasphecium	Eremiasphecium_spCSE1714
 FGMLB659-13	Insecta	Lepidoptera	Erebidae	Arctiinae	Arctiini	Arctia	Arctia_caja
 FGMLG614-16	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	dummy_Gelechiinae	Caryocolum	Caryocolum_moehringiae
 FBLMZ312-12	Insecta	Lepidoptera	Tortricidae	Tortricinae	Cnephasiini	Cnephasia	Cnephasia_pasiuana
@@ -20226,7 +20119,6 @@ GBCL4014-09	Insecta	Coleoptera	Scarabaeidae	Cetoniinae	Osmodermatini	Osmoderma	O
 FBLMU898-09	Insecta	Lepidoptera	Noctuidae	Noctuinae	dummy_Noctuinae	Euxoa	Euxoa_obelisca
 FBCOO045-13	Insecta	Coleoptera	Lymexylidae	Lymexylinae	dummy_Lymexylinae	Lymexylon	Lymexylon_navale
 GWOSK899-11	Insecta	Lepidoptera	Nymphalidae	Satyrinae	Satyrini	Erebia	Erebia_pharte
-FBSYB514-11	Insecta	Hymenoptera	Tenthredinidae	Tenthredininae	dummy_Tenthredininae	Tenthredopsis	Tenthredopsis_016_litterata_2
 GCOL12574-16	Insecta	Coleoptera	Curculionidae	Hyperinae	Hyperini	Hypera	Hypera_conmaculata
 BCHYM1946-14	Insecta	Hymenoptera	Pteromalidae	Pteromalinae	Pteromalini	Dinotiscus	Dinotiscus_isvicrensis
 GMGRB1496-13	Insecta	Diptera	Bibionidae	Bibioninae	dummy_Bibioninae	Bibio	Bibio_varipes
@@ -20426,9 +20318,7 @@ GBMIN58865-17	Insecta	Diptera	Fanniidae	dummy_Fanniidae	dummy_Fanniidae	Fannia	F
 GWOTF691-12	Insecta	Lepidoptera	Nymphalidae	Heliconiinae	Argynnini	Brenthis	Brenthis_daphne
 GCOL485-16	Insecta	Coleoptera	Silphidae	Silphinae	dummy_Silphinae	Silpha	Silpha_obscura
 GBMIX2387-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Liris	Liris_atratus
-BCHYM9073-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1717
 GBFCJ204-13	Malacostraca	Decapoda	Cambaridae	dummy_Cambaridae	dummy_Cambaridae	Orconectes	Orconectes_immunis
-GMGRD2789-13	Insecta	Diptera	Mycetophilidae	Sciophilinae	dummy_Sciophilinae	Monoclona	Monoclona_sp1
 FBCOO893-13	Insecta	Coleoptera	Staphylinidae	Scydmaeninae	Stenichnini	Scydmoraphes	Scydmoraphes_helvolus
 FBSYB1409-12	Insecta	Hymenoptera	Cephidae	Cephinae	dummy_Cephinae	Phylloecus	Phylloecus_xanthostoma
 FBLMS350-09	Insecta	Lepidoptera	Tortricidae	Olethreutinae	Eucosmini	Notocelia	Notocelia_trimaculana
@@ -20666,7 +20556,6 @@ GCOL6371-16	Insecta	Coleoptera	Staphylinidae	Omaliinae	Anthophagini	Anthophagus	
 GBLAD203-14	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Alcis	Alcis_bastelbergeri
 ODOPE650-11	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Lythria	Lythria_cruentaria
 GBCOU2298-13	Insecta	Coleoptera	Elateridae	Dendrometrinae	Prosternini	Selatosomus	Selatosomus_rugosus
-GMGRD3018-13	Insecta	Coleoptera	Staphylinidae	Scydmaeninae	Stenichnini	Microscydmus	Microscydmus_spACG3363
 GBSYM1765-13	Insecta	Hymenoptera	Argidae	Arginae	dummy_Arginae	Arge	Arge_rustica
 FBCOJ791-13	Insecta	Coleoptera	Carabidae	Harpalinae	Zabrini	Amara	Amara_anthobia
 GWOTD003-12	Insecta	Lepidoptera	Nolidae	Nolinae	dummy_Nolinae	Nola	Nola_aerugula
@@ -20842,7 +20731,6 @@ GWORZ499-10	Insecta	Lepidoptera	Noctuidae	Noctuinae	dummy_Noctuinae	Euxoa	Euxoa_
 FBSYM964-10	Insecta	Hymenoptera	Tenthredinidae	Allantinae	dummy_Allantinae	Allantus	Allantus_togatus
 FBCOE745-12	Insecta	Coleoptera	Attelabidae	Rhynchitinae	Rhynchitini	Lasiorhynchites	Lasiorhynchites_cavifrons
 GMGMU4428-20	Insecta	Hymenoptera	Braconidae	Opiinae	dummy_Opiinae	Opius	Opius_ocreatus
-GBMIX3376-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1750
 FBLMZ660-12	Insecta	Lepidoptera	Coleophoridae	Coleophorinae	dummy_Coleophorinae	Coleophora	Coleophora_adelogrammella
 GCOL2681-16	Insecta	Coleoptera	Chrysomelidae	Galerucinae	Alticini	Longitarsus	Longitarsus_symphyti
 GCOL10785-16	Insecta	Coleoptera	Buprestidae	Buprestinae	Anthaxiini	Anthaxia	Anthaxia_manca
@@ -20852,7 +20740,6 @@ GCOL4268-16	Insecta	Coleoptera	Cerambycidae	Lamiinae	Phytoeciini	Phytoecia	Phyto
 GCOL1511-16	Insecta	Coleoptera	Chrysomelidae	Chrysomelinae	dummy_Chrysomelinae	Chrysolina	Chrysolina_cerealis
 FGMLF848-15	Insecta	Lepidoptera	Gelechiidae	Anacampsinae	Anacampsini	Aproaerema	Aproaerema_sangiella
 BCHYM8490-15	Insecta	Hymenoptera	Braconidae	Rogadinae	dummy_Rogadinae	Aleiodes	Aleiodes_gastritor_agg
-BCHYM4939-14	Insecta	Hymenoptera	Sphecidae	Sphecinae	Prionychini	Prionyx	Prionyx_spCSE1722
 GMGMC103-14	Insecta	Diptera	Conopidae	Conopinae	Conopini	Leopoldius	Leopoldius_coronatus
 BCHYM2354-14	Insecta	Hymenoptera	Tenthredinidae	Tenthredininae	dummy_Tenthredininae	Pachyprotasis	Pachyprotasis_antennata
 GBCOU644-13	Insecta	Coleoptera	Curculionidae	Curculioninae	Mecinini	Mecinus	Mecinus_janthinus
@@ -20915,10 +20802,8 @@ GMGMW812-20	Insecta	Hymenoptera	Eulophidae	Entedoninae	dummy_Entedoninae	Chrysoc
 GASBB274-18	Insecta	Trichoptera	Sericostomatidae	dummy_Sericostomatidae	dummy_Sericostomatidae	Oecismus	Oecismus_monedula
 GMGMP6823-18	Insecta	Hymenoptera	Ichneumonidae	Diplazontinae	dummy_Diplazontinae	Homotropus	Homotropus_pallipes
 GMGMQ2161-18	Insecta	Hymenoptera	Ichneumonidae	Banchinae	Atrophini	Lissonota	Lissonota_coracina
-GBMIX3409-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1731
 GCOL10941-16	Insecta	Coleoptera	Ciidae	Ciinae	dummy_Ciinae	Cis	Cis_festivus
 GCOL4052-16	Insecta	Coleoptera	Cerambycidae	Lepturinae	Oxymirini	Oxymirus	Oxymirus_cursor
-BCHYM6290-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1709
 GBLAD159-14	Insecta	Lepidoptera	Noctuidae	Noctuinae	Apameini	Photedes	Photedes_fluxa
 GMGRD2817-13	Insecta	Diptera	Mycetophilidae	Sciophilinae	dummy_Sciophilinae	Sciophila	Sciophila_altaica
 GBSYM2055-13	Insecta	Hymenoptera	Bembicidae	Bembicinae	Bembicini	Harpactus	Harpactus_tumidus
@@ -21229,7 +21114,6 @@ GCOL6978-16	Insecta	Coleoptera	Anthribidae	Urodontinae	dummy_Urodontinae	Bruchel
 GBBSP765-15	Arachnida	Araneae	Thomisidae	dummy_Thomisidae	dummy_Thomisidae	Xysticus	Xysticus_acerbus
 GBLAA911-14	Insecta	Lepidoptera	Noctuidae	Bryophilinae	dummy_Bryophilinae	Nyctobrya	Nyctobrya_muralis
 GBACU3325-13	Insecta	Hymenoptera	Halictidae	Nomiinae	dummy_Nomiinae	Nomia	Nomia_diversipes
-GMGRG2195-13	Insecta	Diptera	Mycetophilidae	Sciophilinae	dummy_Sciophilinae	Monoclona	Monoclona_sp1
 GBCOU252-13	Insecta	Coleoptera	Buprestidae	Buprestinae	Anthaxiini	Anthaxia	Anthaxia_istriana
 GBCOU195-13	Insecta	Coleoptera	Scarabaeidae	Aphodiinae	Aphodiini	Ammoecius	Ammoecius_brevis
 GMGRE3351-13	Insecta	Hymenoptera	Braconidae	Euphorinae	dummy_Euphorinae	Microctonus	Microctonus_hellenicus
@@ -21614,11 +21498,9 @@ NEPTA1880-17	Insecta	Lepidoptera	Nepticulidae	dummy_Nepticulidae	dummy_Nepticuli
 GBDTA9895-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Porricondylini	Cryptodontomyia	Cryptodontomyia_nigridens
 BCHYM6558-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Miscophini	Miscophus	Miscophus_helveticus
 GBMIN60771-17	Insecta	Diptera	Sciaridae	dummy_Sciaridae	dummy_Sciaridae	Corynoptera	Corynoptera_luteofusca
-GWOSR349-11	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Coenotephria	Coenotephria_tophaceataAH02Sp
 GCOL2934-16	Insecta	Coleoptera	Staphylinidae	Staphylininae	Staphylinini	Philonthus	Philonthus_longicornis
 GCOL9707-16	Insecta	Coleoptera	Staphylinidae	Staphylininae	Staphylinini	Tasgius	Tasgius_melanarius
 FGMLF749-15	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	Gelechiini	Chionodes	Chionodes_luctuella
-BCHYM6288-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1704
 FBCOQ205-13	Insecta	Coleoptera	Staphylinidae	Euaesthetinae	Euaesthetini	Euaesthetus	Euaesthetus_superlatus
 GMGRC1323-13	Insecta	Diptera	Phoridae	Metopininae	dummy_Metopininae	Megaselia	Megaselia_haraldlundi
 BASYM1116-11	Insecta	Hymenoptera	Tenthredinidae	Allantinae	dummy_Allantinae	Allantus	Allantus_rufocinctus
@@ -21654,7 +21536,6 @@ GBCOG526-13	Insecta	Coleoptera	Curculionidae	Curculioninae	Mecinini	Rhinusa	Rhin
 GMGRD926-13	Insecta	Hymenoptera	Ichneumonidae	Ctenopelmatinae	dummy_Ctenopelmatinae	Rhorus	Rhorus_xanthopygus
 FBCAD083-10	Insecta	Trichoptera	Goeridae	Goerinae	dummy_Goerinae	Silo	Silo_nigricornis
 MIDGE116-06	Insecta	Diptera	Chironomidae	Chironominae	Tanytarsini	Micropsectra	Micropsectra_logani
-GBDTA10195-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Asynaptini	Camptomyia	Camptomyia_corticalisMJ4
 BCHYM2455-14	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Miscophini	Miscophus	Miscophus_mavromoustakisi
 GWOTI867-12	Insecta	Lepidoptera	Geometridae	Larentiinae	Eupitheciini	Eupithecia	Eupithecia_pimpinellata
 GCOL8569-16	Insecta	Coleoptera	Staphylinidae	Scydmaeninae	Stenichnini	Microscydmus	Microscydmus_minimus
@@ -21848,7 +21729,6 @@ GWORU527-10	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Isturgia	I
 FBCOP573-13	Insecta	Coleoptera	Staphylinidae	Tachyporinae	Tachyporini	Tachyporus	Tachyporus_scitulus
 GCOL9470-16	Insecta	Coleoptera	Staphylinidae	Paederinae	Paederini	Paederus	Paederus_brevipennis
 FBAPD403-11	Insecta	Hymenoptera	Andrenidae	Andreninae	Andrenini	Andrena	Andrena_rosae
-GBACU835-12	Insecta	Hymenoptera	Apidae	Nomadinae	Nomadini	Nomada	Nomada_flava_spec1CSE
 GBCOU2214-13	Insecta	Coleoptera	Elateridae	Dendrometrinae	Prosternini	Calambus	Calambus_bipustulatus
 GWORO983-09	Insecta	Lepidoptera	Noctuidae	Noctuinae	Xylenini	Agrochola	Agrochola_nitida
 FBCOC470-10	Insecta	Coleoptera	Erotylidae	Cryptophilinae	Cryptophilini	Cryptophilus	Cryptophilus_obliteratus
@@ -22107,7 +21987,6 @@ GBLAA210-14	Insecta	Lepidoptera	Noctuidae	Acronictinae	dummy_Acronictinae	Acroni
 GMGRG096-13	Insecta	Diptera	Phoridae	Phorinae	dummy_Phorinae	Triphleba	Triphleba_luteifemorata
 GMGRE1927-13	Insecta	Diptera	Phoridae	Metopininae	dummy_Metopininae	Megaselia	Megaselia_albiclava
 BASYM1196-11	Insecta	Hymenoptera	Tenthredinidae	Nematinae	dummy_Nematinae	Pseudodineura	Pseudodineura_fuscula
-GBACU299-12	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1715
 FBAPB584-09	Insecta	Hymenoptera	Colletidae	Hylaeinae	Hylaeini	Hylaeus	Hylaeus_duckei
 FBLMT163-09	Insecta	Lepidoptera	Tortricidae	Tortricinae	Archipini	Philedone	Philedone_gerningana
 GWORA2493-09	Insecta	Lepidoptera	Nymphalidae	Heliconiinae	Argynnini	Brenthis	Brenthis_ino
@@ -22168,7 +22047,6 @@ GBBSP813-15	Arachnida	Araneae	Lycosidae	dummy_Lycosidae	dummy_Lycosidae	Pardosa	
 GCOL11525-16	Insecta	Coleoptera	Curculionidae	Hyperinae	Hyperini	Hypera	Hypera_viciae
 GCOL1318-16	Insecta	Coleoptera	Chrysomelidae	Chrysomelinae	dummy_Chrysomelinae	Timarcha	Timarcha_tenebricosa
 BCHYM7722-15	Insecta	Hymenoptera	Ichneumonidae	Adelognathinae	dummy_Adelognathinae	Adelognathus	Adelognathus_rufithorax
-AMTPB1265-15	Insecta	Hymenoptera	Diapriidae	Belytinae	Belytini	Pantoclis	Pantoclis_VC007
 GBEPT1820-14	Insecta	Trichoptera	Limnephilidae	Limnephilinae	dummy_Limnephilinae	Allogamus	Allogamus_uncatus
 GBEPT792-14	Insecta	Trichoptera	Limnephilidae	Limnephilinae	dummy_Limnephilinae	Limnephilus	Limnephilus_flavicornis
 GBLAB1591-14	Insecta	Lepidoptera	Gelechiidae	Anomologinae	dummy_Anomologinae	Apodia	Apodia_bifractella
@@ -22756,7 +22634,6 @@ GWOSU056-11	Insecta	Lepidoptera	Psychidae	Naryciinae	dummy_Naryciinae	Diplodoma	
 GWOTF683-12	Insecta	Lepidoptera	Lycaenidae	Polyommatinae	dummy_Polyommatinae	Eumedonia	Eumedonia_eumedon
 GWORO992-09	Insecta	Lepidoptera	Nymphalidae	Libytheinae	dummy_Libytheinae	Libythea	Libythea_celtis
 GCOL2833-16	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Ceratapion	Ceratapion_penetrans
-BCHYM5038-14	Insecta	Hymenoptera	Sphecidae	Sphecinae	Prionychini	Prionyx	Prionyx_spCSE1724
 GBLAC628-13	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Deileptenia	Deileptenia_ribeata
 GBCOU2891-13	Insecta	Coleoptera	Oedemeridae	Oedemerinae	Oedemerini	Oedemera	Oedemera_monticola
 GBCOU2950-13	Insecta	Coleoptera	Cantharidae	Cantharinae	Cantharini	Rhagonycha	Rhagonycha_elongata
@@ -23157,7 +23034,6 @@ GWOSI105-10	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Campto
 GCOL2883-16	Insecta	Coleoptera	Staphylinidae	Omaliinae	Omaliini	Acrolocha	Acrolocha_pliginskii
 GCOL6899-16	Insecta	Coleoptera	Nitidulidae	Meligethinae	dummy_Meligethinae	Astylogethes	Astylogethes_subrugosus
 GBBSP291-15	Arachnida	Araneae	Linyphiidae	dummy_Linyphiidae	dummy_Linyphiidae	Araeoncus	Araeoncus_crassiceps
-BCHYM6626-15	Insecta	Hymenoptera	Pemphredonidae	Pemphredoninae	Pemphredonini	Pemphredon	Pemphredon_spCSE1713
 GBLAC534-13	Insecta	Lepidoptera	Noctuidae	Noctuinae	dummy_Noctuinae	Mythimna	Mythimna_straminea
 BCHYM467-13	Insecta	Hymenoptera	Apidae	Apinae	Anthophorini	Anthophora	Anthophora_plagiata
 GMGRF3382-13	Insecta	Hymenoptera	Ichneumonidae	Ichneumoninae	dummy_Ichneumoninae	Ichneumon	Ichneumon_spurius
@@ -23314,7 +23190,6 @@ MYFAB408-11	Diplopoda	Julida	Julidae	Julinae	dummy_Julinae	Allaiulus	Allaiulus_g
 GBCOU955-13	Insecta	Coleoptera	Ciidae	Ciinae	dummy_Ciinae	Ropalodontus	Ropalodontus_perforatus
 GDIP3791-22	Insecta	Diptera	Chironomidae	Chironominae	Tanytarsini	Paratanytarsus	Paratanytarsus_grimmii
 GDIP3712-22	Insecta	Diptera	Chironomidae	Orthocladiinae	dummy_Orthocladiinae	Metriocnemus	Metriocnemus_atriclava
-GBDTA9951-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Porricondylini	Porricondyla	Porricondyla_colpodioidesMJDE2
 GCOL11587-16	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Kalcapion	Kalcapion_pallipes
 GCOL3990-16	Insecta	Coleoptera	Tenebrionidae	Alleculinae	Alleculini	Hymenalia	Hymenalia_rufipes
 GBORT1065-15	Insecta	Orthoptera	Tettigoniidae	Phaneropterinae	Barbitistini	Isophya	Isophya_kraussii
@@ -23440,7 +23315,6 @@ GBBSP1134-15	Arachnida	Araneae	Linyphiidae	dummy_Linyphiidae	dummy_Linyphiidae	S
 GBMAB2046-15	Insecta	Diptera	Cecidomyiidae	Cecidomyiinae	Lasiopterini	Ozirhincus	Ozirhincus_hungaricus
 BCHYM8359-15	Insecta	Hymenoptera	Ichneumonidae	Phygadeuontinae	dummy_Phygadeuontinae	Isadelphus	Isadelphus_tuberculatus
 GMGMN241-14	Insecta	Neuroptera	Myrmeleontidae	Myrmeleontinae	Myrmeleontini	Euroleon	Euroleon_nostras
-BCHYM5057-14	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1707
 GBEPT332-14	Insecta	Trichoptera	Phryganeidae	Phryganeinae	dummy_Phryganeinae	Hagenella	Hagenella_clathrata
 FGMLC239-13	Insecta	Lepidoptera	Nepticulidae	dummy_Nepticulidae	dummy_Nepticulidae	Stigmella	Stigmella_samiatella
 GBGST080-13	Insecta	Hymenoptera	Megachilidae	Megachilinae	Megachilini	Megachile	Megachile_opacifrons
@@ -23601,7 +23475,6 @@ FBLMW053-10	Insecta	Lepidoptera	Yponomeutidae	Yponomeutinae	dummy_Yponomeutinae	
 FBCOP587-13	Insecta	Coleoptera	Staphylinidae	Aleocharinae	Myllaenini	Myllaena	Myllaena_infuscata
 GDIP005-18	Insecta	Diptera	Pediciidae	Pediciinae	dummy_Pediciinae	Dicranota	Dicranota_gracilipes
 GBLAF549-14	Insecta	Lepidoptera	Noctuidae	Noctuinae	Hadenini	Papestra	Papestra_biren
-GBMIX3326-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1734
 GMGMJ819-14	Insecta	Hemiptera	Aphididae	Drepanosiphinae	dummy_Drepanosiphinae	Drepanosiphum	Drepanosiphum_aceris
 BCHYM5100-14	Insecta	Hymenoptera	Bembicidae	Bembicinae	Bembicini	Bembix	Bembix_citrina
 BCHYM2920-14	Insecta	Hymenoptera	Tenthredinidae	Nematinae	dummy_Nematinae	Hoplocampa	Hoplocampa_flava
@@ -23776,7 +23649,6 @@ FBLMW240-10	Insecta	Lepidoptera	Tineidae	dummy_Tineidae	dummy_Tineidae	Stenoptin
 FBCOI418-12	Insecta	Coleoptera	Staphylinidae	Staphylininae	Staphylinini	Bisnius	Bisnius_sordidus
 FBCOH152-12	Insecta	Coleoptera	Carabidae	Trechinae	Pogonini	Pogonus	Pogonus_iridipennis
 GBACU825-12	Insecta	Hymenoptera	Psenidae	dummy_Psenidae	dummy_Psenidae	Psen	Psen_ater
-BCHYM11044-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1701
 BISCE067-17	Malacostraca	Isopoda	Ligiidae	dummy_Ligiidae	dummy_Ligiidae	Ligia	Ligia_oceanica
 ODOPE278-11	Insecta	Lepidoptera	Noctuidae	Noctuinae	Noctuini	Agrotis	Agrotis_vestigialis
 GWOSP717-11	Insecta	Lepidoptera	Psychidae	Epichnopteriginae	dummy_Epichnopteriginae	Epichnopterix	Epichnopterix_sieboldi
@@ -24168,13 +24040,11 @@ ODOPE240-11	Insecta	Lepidoptera	Crambidae	Spilomelinae	dummy_Spilomelinae	Dolich
 ODOPE519-11	Insecta	Lepidoptera	Pyralidae	Phycitinae	dummy_Phycitinae	Myelois	Myelois_circumvoluta
 GCOL12541-16	Insecta	Coleoptera	Buprestidae	Agrilinae	Coraebini	Coraebus	Coraebus_elatus
 GCOL10656-16	Insecta	Coleoptera	Curculionidae	Molytinae	Pissodini	Pissodes	Pissodes_validirostris
-BCHYM11003-15	Insecta	Hymenoptera	Crabronidae	Eremiaspheciinae	dummy_Eremiaspheciinae	Eremiasphecium	Eremiasphecium_spCSE1714
 GMGMD1470-14	Insecta	Hymenoptera	Cynipidae	Cynipinae	Aulacideini	Isocolus	Isocolus_rogenhoferi
 GBLAC014-13	Insecta	Lepidoptera	Lasiocampidae	Lasiocampinae	dummy_Lasiocampinae	Lasiocampa	Lasiocampa_quercus
 GBLAC071-13	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Peribatodes	Peribatodes_secundaria
 FBTAC078-13	Insecta	Diptera	Tachinidae	Dexiinae	Dexiini	Dexia	Dexia_vacua
 GBCOU2725-13	Insecta	Coleoptera	Cerambycidae	Lamiinae	Saperdini	Saperda	Saperda_octopunctata
-GMGRE3497-13	Insecta	Hymenoptera	Ichneumonidae	Campopleginae	dummy_Campopleginae	Campoplex	Campoplex_MR2
 GBACU2447-13	Insecta	Hymenoptera	Vespidae	Eumeninae	dummy_Eumeninae	Symmorphus	Symmorphus_gracilis
 GBACU2331-13	Insecta	Hymenoptera	Apidae	Nomadinae	Nomadini	Nomada	Nomada_rufipes
 FBLMU411-09	Insecta	Lepidoptera	Noctuidae	Noctuinae	Xylenini	Ipimorpha	Ipimorpha_subtusa
@@ -24570,7 +24440,6 @@ GWOSI077-10	Insecta	Lepidoptera	Geometridae	Sterrhinae	dummy_Sterrhinae	Scopula	
 BSOIL253-18	Malacostraca	Isopoda	Ligiidae	dummy_Ligiidae	dummy_Ligiidae	Ligidium	Ligidium_germanicum
 GMGMP6983-18	Insecta	Hymenoptera	Braconidae	Aphidiinae	Trioxini	Trioxys	Trioxys_pallidus
 GMGMP633-18	Insecta	Hemiptera	Aphididae	Aphidinae	Macrosiphini	Myzaphis	Myzaphis_rosarum
-BCHYM6283-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1709
 FBACB147-11	Insecta	Hymenoptera	Bembicidae	Nyssoninae	Nyssonini	Nysson	Nysson_ganglbaueri
 GWOTF308-12	Insecta	Lepidoptera	Erebidae	Boletobiinae	dummy_Boletobiinae	Eublemma	Eublemma_viridula
 FBLMZ297-12	Insecta	Lepidoptera	Tortricidae	Tortricinae	Archipini	Pandemis	Pandemis_heparana
@@ -24676,7 +24545,6 @@ GWORL594-09	Insecta	Lepidoptera	Pyralidae	Phycitinae	dummy_Phycitinae	Hypochalci
 FBSYM333-10	Insecta	Hymenoptera	Argidae	Arginae	dummy_Arginae	Arge	Arge_rustica
 GMGMQ296-18	Insecta	Diptera	Phoridae	Metopininae	dummy_Metopininae	Megaselia	Megaselia_infraposita
 GBMIN64329-17	Insecta	Diptera	Thaumaleidae	dummy_Thaumaleidae	dummy_Thaumaleidae	Thaumalea	Thaumalea_truncata
-GBMIX3347-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1743
 GWOTF314-12	Insecta	Lepidoptera	Geometridae	Larentiinae	Eupitheciini	Eupithecia	Eupithecia_ochridata
 GBORT550-14	Insecta	Orthoptera	Acrididae	Gomphocerinae	Stenobothrini	Stenobothrus	Stenobothrus_crassipes
 FBSYB206-11	Insecta	Hymenoptera	Tenthredinidae	Tenthredininae	dummy_Tenthredininae	Tenthredo	Tenthredo_obsoleta
@@ -24698,7 +24566,6 @@ GBLAA1048-15	Insecta	Lepidoptera	Notodontidae	Pygaerinae	dummy_Pygaerinae	Closte
 GMGMB360-14	Insecta	Hemiptera	Cicadellidae	Typhlocybinae	Erythroneurini	Zygina	Zygina_rubrovittata
 GMGMA1548-14	Insecta	Coleoptera	Mordellidae	Mordellinae	Mordellistenini	Mordellistena	Mordellistena_parvuloides
 GBCOG033-13	Insecta	Coleoptera	Byrrhidae	Byrrhinae	dummy_Byrrhinae	Cytilus	Cytilus_auricomus
-GWOTL495-13	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Triphosa	Triphosa_dubitataAH01
 FBAQU1425-13	Insecta	Trichoptera	Philopotamidae	Philopotaminae	dummy_Philopotaminae	Philopotamus	Philopotamus_ludificatus
 GWOTI827-12	Insecta	Lepidoptera	Geometridae	Sterrhinae	dummy_Sterrhinae	Idaea	Idaea_deversaria
 FBCOD811-11	Insecta	Coleoptera	Staphylinidae	Oxytelinae	Thinobiini	Aploderus	Aploderus_caelatus
@@ -24886,7 +24753,6 @@ FBLMV098-09	Insecta	Lepidoptera	Noctuidae	Noctuinae	dummy_Noctuinae	Mythimna	Myt
 FBCOA642-10	Insecta	Coleoptera	Ciidae	Ciinae	dummy_Ciinae	Cis	Cis_festivus
 BCHYM4367-14	Insecta	Hymenoptera	Braconidae	Euphorinae	dummy_Euphorinae	Ropalophorus	Ropalophorus_clavicornis
 GCOL1565-16	Insecta	Coleoptera	Cerambycidae	Lamiinae	Phytoeciini	Oberea	Oberea_linearis
-GMGRG2183-13	Insecta	Diptera	Mycetophilidae	Sciophilinae	dummy_Sciophilinae	Monoclona	Monoclona_sp1
 GMGRD3145-13	Insecta	Diptera	Lauxaniidae	Lauxaniinae	dummy_Lauxaniinae	Poecilolycia	Poecilolycia_vittata
 GMGRD1592-13	Insecta	Diptera	Pipunculidae	Pipunculinae	Tomosvaryellini	Dorylomorpha	Dorylomorpha_xanthocera
 GMGRA1848-13	Arachnida	Araneae	Linyphiidae	dummy_Linyphiidae	dummy_Linyphiidae	Asthenargus	Asthenargus_helveticus
@@ -25067,7 +24933,6 @@ GBDTA16088-21	Insecta	Hymenoptera	Braconidae	Microgastrinae	dummy_Microgastrinae
 MJBRC082-17	Insecta	Diptera	Cecidomyiidae	Micromyinae	Peromyiini	Peromyia	Peromyia_tundrae
 GBBSP659-15	Arachnida	Araneae	Clubionidae	dummy_Clubionidae	dummy_Clubionidae	Clubiona	Clubiona_diversa
 BCHYM7723-15	Insecta	Hymenoptera	Braconidae	Brachistinae	Diospilini	Baeacis	Baeacis_abietis
-BCHYM6627-15	Insecta	Hymenoptera	Pemphredonidae	Pemphredoninae	Pemphredonini	Pemphredon	Pemphredon_spCSE1713
 GMGMN1579-14	Insecta	Diptera	Pallopteridae	Pallopterinae	dummy_Pallopterinae	Toxonevra	Toxonevra_muliebris
 BCHYM1517-13	Insecta	Hymenoptera	Apidae	Apinae	Anthophorini	Anthophora	Anthophora_furcata
 LEFIJ2296-14	Insecta	Diptera	Tachinidae	Exoristinae	Goniini	Gonia	Gonia_picea
@@ -25322,11 +25187,9 @@ MIDGE439-07	Insecta	Diptera	Chironomidae	Orthocladiinae	dummy_Orthocladiinae	Cri
 FBCOA172-10	Insecta	Coleoptera	Chrysomelidae	Galerucinae	Alticini	Longitarsus	Longitarsus_nigerrimus
 GCOL10493-16	Insecta	Coleoptera	Ptinidae	Dorcatominae	Dorcatomini	Dorcatoma	Dorcatoma_minor
 FBLMZ305-12	Insecta	Lepidoptera	Tortricidae	Olethreutinae	Eucosmini	Epiblema	Epiblema_hepaticana
-BCHYM6453-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1708
 BCHYM5067-14	Insecta	Hymenoptera	Bembicidae	Bembicinae	Bembicini	Bembix	Bembix_flavescens
 GBLAC1136-13	Insecta	Lepidoptera	Noctuidae	Noctuinae	dummy_Noctuinae	Xestia	Xestia_triangulum
 FBCOO136-13	Insecta	Coleoptera	Ptinidae	Dorcatominae	Dorcatomini	Caenocara	Caenocara_affinis
-GBACU1454-12	Insecta	Hymenoptera	Ammoplanidae	dummy_Ammoplanidae	dummy_Ammoplanidae	Ammoplanus	Ammoplanus_spJS1751
 FGMLA598-12	Insecta	Lepidoptera	Gelechiidae	Anacampsinae	Anacampsini	Anacampsis	Anacampsis_blattariella
 FBLMT815-09	Insecta	Lepidoptera	Gelechiidae	Gelechiinae	dummy_Gelechiinae	Teleiopsis	Teleiopsis_rosalbella
 FBAPC114-10	Insecta	Hymenoptera	Melittidae	Melittinae	Melittini	Melitta	Melitta_nigricans
@@ -25546,7 +25409,6 @@ GMGMP4202-18	Insecta	Hymenoptera	Braconidae	Aphidiinae	Ephedrini	Ephedrus	Ephedr
 ODOPE191-11	Insecta	Lepidoptera	Papilionidae	Parnassiinae	Parnassiini	Parnassius	Parnassius_mnemosyne
 GCOL10812-16	Insecta	Coleoptera	Curculionidae	Entiminae	Sciaphilini	Exomias	Exomias_mollicomus
 GCOL11163-16	Insecta	Coleoptera	Curculionidae	Curculioninae	Curculionini	Curculio	Curculio_villosus
-BCHYM10963-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1756
 FGMLF672-15	Insecta	Lepidoptera	Gracillariidae	Parornichinae	dummy_Parornichinae	Callisto	Callisto_coffeella
 GBACU3595-13	Insecta	Hymenoptera	Apidae	Nomadinae	Nomadini	Nomada	Nomada_furva
 FBLMZ118-12	Insecta	Lepidoptera	Pyralidae	Galleriinae	dummy_Galleriinae	Aphomia	Aphomia_zelleri
@@ -25613,7 +25475,6 @@ GCOL2042-16	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Ceratapion	Ceratapio
 GCOL8722-16	Insecta	Coleoptera	Ciidae	Ciinae	dummy_Ciinae	Cis	Cis_comptus
 GCOL9473-16	Insecta	Coleoptera	Elateridae	Dendrometrinae	Prosternini	Calambus	Calambus_bipustulatus
 GCOL2708-16	Insecta	Coleoptera	Chrysomelidae	Cassidinae	Cassidini	Cassida	Cassida_ferruginea
-GMGMJ1066-14	Insecta	Diptera	Agromyzidae	Agromyzinae	dummy_Agromyzinae	Agromyza	Agromyza_spBOLDACR0495
 BASYM1869-11	Insecta	Hymenoptera	Tenthredinidae	Nematinae	dummy_Nematinae	Euura	Euura_acutifoliae
 BCHYM7494-15	Insecta	Hymenoptera	Braconidae	Microgastrinae	dummy_Microgastrinae	Cotesia	Cotesia_jucunda
 GWOTK671-13	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Aplocera	Aplocera_praeformata
@@ -25936,7 +25797,6 @@ ODOPE662-11	Insecta	Lepidoptera	Pyralidae	Phycitinae	dummy_Phycitinae	Selagia	Se
 GWORM067-09	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Catarhoe	Catarhoe_rubidata
 FBCOP079-13	Insecta	Coleoptera	Dytiscidae	Hydroporinae	Bidessini	Bidessus	Bidessus_delicatulus
 FBLMX044-11	Insecta	Lepidoptera	Batrachedridae	Batrachedrinae	dummy_Batrachedrinae	Batrachedra	Batrachedra_confusella
-GBMIX3359-17	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1744
 GCOL12592-16	Insecta	Coleoptera	Buprestidae	Agrilinae	Agrilini	Agrilus	Agrilus_graminis
 GCOL8121-16	Insecta	Coleoptera	Staphylinidae	Oxytelinae	Oxytelini	Anotylus	Anotylus_clypeonitens
 GCOL2724-16	Insecta	Coleoptera	Chrysomelidae	Galerucinae	Alticini	Psylliodes	Psylliodes_toelgi
@@ -26264,7 +26124,6 @@ FBCOD1119-11	Insecta	Coleoptera	Brentidae	Apioninae	Apionini	Cyanapion	Cyanapion
 GBDTA10081-21	Insecta	Diptera	Cecidomyiidae	Porricondylinae	Porricondylini	Monepidosis	Monepidosis_heterocera
 GBODO145-18	Insecta	Odonata	Libellulidae	Libellulinae	dummy_Libellulinae	Libellula	Libellula_depressa
 GMGMP802-18	Insecta	Hemiptera	Aphididae	Phyllaphidinae	dummy_Phyllaphidinae	Phyllaphis	Phyllaphis_fagi
-GBACU300-12	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Larrini	Tachysphex	Tachysphex_spJS1715
 GCOL1621-16	Insecta	Coleoptera	Cerambycidae	Lepturinae	Rhagiini	Evodinus	Evodinus_clathratus
 GCOL5779-16	Insecta	Coleoptera	Attelabidae	Rhynchitinae	Rhynchitini	Rhynchites	Rhynchites_aethiops
 GBBSP249-15	Arachnida	Araneae	Clubionidae	dummy_Clubionidae	dummy_Clubionidae	Clubiona	Clubiona_frutetorum
@@ -26295,8 +26154,6 @@ GWORO290-09	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Almeri
 FBACA364-10	Insecta	Hymenoptera	Vespidae	Polistinae	Polistini	Polistes	Polistes_atrimandibularis
 GWOTF326-12	Insecta	Lepidoptera	Geometridae	Ennominae	dummy_Ennominae	Synopsia	Synopsia_sociaria
 GBEPT2330-15	Insecta	Plecoptera	Leuctridae	Leuctrinae	dummy_Leuctrinae	Leuctra	Leuctra_cingulata
-GBMIX2400-15	Insecta	Hymenoptera	Bembicidae	Bembicinae	Bembicini	Bembix	Bembix_spCSE1717
-BCHYM10986-15	Insecta	Hymenoptera	Crabronidae	Eremiaspheciinae	dummy_Eremiaspheciinae	Eremiasphecium	Eremiasphecium_spCSE1714
 AMTPD777-15	Insecta	Diptera	Bolitophilidae	dummy_Bolitophilidae	dummy_Bolitophilidae	Bolitophila	Bolitophila_austriaca
 GMGML309-14	Insecta	Hemiptera	Aphididae	Aphidinae	Macrosiphini	Hyadaphis	Hyadaphis_foeniculi
 GMGMF045-14	Insecta	Coleoptera	Staphylinidae	Staphylininae	Staphylinini	Quedius	Quedius_invreae
@@ -26502,7 +26359,6 @@ GBCOU8966-14	Insecta	Coleoptera	Carabidae	Trechinae	Bembidiini	Sinechostictus	Si
 GCOL12982-16	Insecta	Coleoptera	Leiodidae	Leiodinae	Anisotomini	Agathidium	Agathidium_haemorrhoum
 GMGMJ1401-14	Insecta	Hymenoptera	Ichneumonidae	Cryptinae	Aptesini	Aptesis	Aptesis_nigricollis
 FGMLD010-13	Insecta	Lepidoptera	Noctuidae	Cuculliinae	dummy_Cuculliinae	Cucullia	Cucullia_asteris
-GMGRD1064-13	Insecta	Hymenoptera	Ichneumonidae	Orthocentrinae	dummy_Orthocentrinae	Stenomacrus	Stenomacrus_AH9
 FBNE133-13	Insecta	Raphidioptera	Raphidiidae	Raphidiinae	Raphidiini	Dichrostigma	Dichrostigma_flavipes
 FBCOG029-12	Insecta	Coleoptera	Anamorphidae	dummy_Anamorphidae	dummy_Anamorphidae	Symbiotes	Symbiotes_gibberosus
 GWORA978-08	Insecta	Lepidoptera	Geometridae	Larentiinae	dummy_Larentiinae	Trichopteryx	Trichopteryx_carpinata
@@ -26682,7 +26538,6 @@ GBCOC848-12	Insecta	Coleoptera	Coccinellidae	Coccinellinae	Epilachnini	Subcoccin
 GBCOL306-12	Insecta	Coleoptera	Phalacridae	Phalacrinae	dummy_Phalacrinae	Olibrus	Olibrus_affinis
 GMGMO078-18	Insecta	Diptera	Phoridae	Phorinae	dummy_Phorinae	Spiniphora	Spiniphora_maculata
 AMTPF6408-16	Insecta	Diptera	Mycetophilidae	Mycomyinae	dummy_Mycomyinae	Mycomya	Mycomya_hackmani
-BCHYM6284-15	Insecta	Hymenoptera	Crabronidae	dummy_Crabronidae	Oxybelini	Oxybelus	Oxybelus_spCSE1709
 GBLAD975-14	Insecta	Lepidoptera	Noctuidae	Noctuinae	Apameini	Eremobia	Eremobia_ochroleuca
 GBCOU415-13	Insecta	Coleoptera	Cerambycidae	Cerambycinae	Clytini	Xylotrechus	Xylotrechus_antilope
 GBLAB350-13	Insecta	Lepidoptera	Noctuidae	Noctuinae	Orthosiini	Orthosia	Orthosia_gracilis
@@ -26772,7 +26627,6 @@ GBBSP1979-15	Arachnida	Opiliones	Trogulidae	dummy_Trogulidae	dummy_Trogulidae	An
 GBBSP1412-15	Arachnida	Araneae	Linyphiidae	dummy_Linyphiidae	dummy_Linyphiidae	Agyneta	Agyneta_ressli
 GBLAA1072-15	Insecta	Lepidoptera	Noctuidae	Noctuinae	Apameini	Hydraecia	Hydraecia_petasitis
 GBCOF542-13	Insecta	Coleoptera	Staphylinidae	Aleocharinae	Homalotini	Gyrophaena	Gyrophaena_bihamata
-GMGRC2237-13	Insecta	Hymenoptera	Ichneumonidae	Orthocentrinae	dummy_Orthocentrinae	Stenomacrus	Stenomacrus_AH9
 GBACU3291-13	Insecta	Hymenoptera	Apidae	Apinae	Eucerini	Tetraloniella	Tetraloniella_salicariae
 GBCOC761-12	Insecta	Coleoptera	Scarabaeidae	Aphodiinae	Aphodiini	Teuchestes	Teuchestes_fossor
 FBLMU222-09	Insecta	Lepidoptera	Pterophoridae	Pterophorinae	dummy_Pterophorinae	Oxyptilus	Oxyptilus_pilosellae

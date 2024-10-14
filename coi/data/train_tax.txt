@@ -194,7 +194,6 @@ SCFI673-16 Insecta|Diptera|Sciaridae|dummy_Sciaridae|dummy_Sciaridae|Bradysia|Br
 TRIFI1062-14 Insecta|Trichoptera|Polycentropodidae|Polycentropodinae|dummy_Polycentropodinae|Neureclipsis|Neureclipsis_bimaculata
 TACFI032-11 Insecta|Diptera|Tachinidae|Exoristinae|Exoristini|Exorista|Exorista_deligata
 SCFI409-15 Insecta|Diptera|Mycetophilidae|Gnoristinae|dummy_Gnoristinae|Boletina|Boletina_borealis
-SCFI517-15 Insecta|Diptera|Mycetophilidae|Mycetophilinae|Exechiini|Exechia|Exechia_cornuta_JKJ-02
 TRIFI1017-13 Insecta|Trichoptera|Rhyacophilidae|dummy_Rhyacophilidae|dummy_Rhyacophilidae|Rhyacophila|Rhyacophila_nubila
 SCFI546-15 Insecta|Diptera|Mycetophilidae|Mycetophilinae|Exechiini|Anatella|Anatella_pseudogibba
 SCFI490-15 Insecta|Diptera|Mycetophilidae|Mycetophilinae|Exechiini|Anatella|Anatella_JKJ-spD
@@ -315,7 +314,6 @@ TRIFI657-12 Insecta|Trichoptera|Hydroptilidae|Hydroptilinae|dummy_Hydroptilinae|
 TRIFI622-11 Insecta|Trichoptera|Hydropsychidae|Hydropsychinae|dummy_Hydropsychinae|Hydropsyche|Hydropsyche_contubernalis
 TRIFI1452-19 Insecta|Trichoptera|Limnephilidae|Limnephilinae|dummy_Limnephilinae|Limnephilus|Limnephilus_lunatus
 TRIFI1151-15 Insecta|Trichoptera|Limnephilidae|Limnephilinae|dummy_Limnephilinae|Limnephilus|Limnephilus_dispar
-SCFI497-15 Insecta|Diptera|Mycetophilidae|Mycetophilinae|Mycetophilini|Sceptonia|Sceptonia_fumipes_JKJ-03
 SCFI493-15 Insecta|Diptera|Mycetophilidae|Mycetophilinae|Exechiini|Exechia|Exechia_similis
 SCFI808-16 Insecta|Diptera|Sciaridae|dummy_Sciaridae|dummy_Sciaridae|Camptochaeta|Camptochaeta_stammeri
 SCFI613-16 Insecta|Diptera|Sciaridae|dummy_Sciaridae|dummy_Sciaridae|Camptochaeta|Camptochaeta_camptochaeta
@@ -457,7 +455,6 @@ SCFI560-15 Insecta|Diptera|Mycetophilidae|Mycetophilinae|Mycetophilini|Mycetophi
 TACFI529-12 Insecta|Diptera|Tachinidae|Exoristinae|Eryciini|Lydella|Lydella_ripae
 TRIFI1128-15 Insecta|Trichoptera|Limnephilidae|Limnephilinae|dummy_Limnephilinae|Limnephilus|Limnephilus_flavicornis
 TRIFI314-11 Insecta|Trichoptera|Limnephilidae|Limnephilinae|dummy_Limnephilinae|Anabolia|Anabolia_laevis
-SCFI755-16 Insecta|Diptera|Mycetophilidae|Mycetophilinae|Exechiini|Allodia|Allodia_JKJ-spA_JKJ-02
 TACFI482-12 Insecta|Diptera|Tachinidae|Exoristinae|Blondeliini|Belida|Belida_angelicae
 TRIFI1354-16 Insecta|Trichoptera|Limnephilidae|Limnephilinae|dummy_Limnephilinae|Limnephilus|Limnephilus_sericeus
 SCFI697-16 Insecta|Diptera|Sciaridae|dummy_Sciaridae|dummy_Sciaridae|Corynoptera|Corynoptera_blanda
@@ -661,7 +658,6 @@ TAMEA070-16 Insecta|Lepidoptera|Noctuidae|Noctuinae|dummy_Noctuinae|Apamea|Apame
 TRIFI723-12 Insecta|Trichoptera|Limnephilidae|Limnephilinae|dummy_Limnephilinae|Annitella|Annitella_obscurata
 SCFI491-15 Insecta|Diptera|Mycetophilidae|Mycetophilinae|Exechiini|Brachypeza|Brachypeza_bisignata
 TACFI217-12 Insecta|Diptera|Tachinidae|Exoristinae|Winthemiini|Winthemia|Winthemia_quadripustulata
-SCFI427-15 Insecta|Diptera|Mycetophilidae|Mycetophilinae|Exechiini|Anatella|Anatella_lenis_JKJ-02
 TRIFI893-13 Insecta|Trichoptera|Limnephilidae|Limnephilinae|dummy_Limnephilinae|Asynarchus|Asynarchus_lapponicus
 TACFI330-12 Insecta|Diptera|Tachinidae|Tachininae|Siphonini|Siphona|Siphona_paludosa
 TRIFI280-11 Insecta|Trichoptera|Glossosomatidae|Glossosomatinae|dummy_Glossosomatinae|Glossosoma|Glossosoma_intermedium
@@ -840,7 +836,6 @@ SCFI666-16 Insecta|Diptera|Sciaridae|dummy_Sciaridae|dummy_Sciaridae|Bradysia|Br
 SCFI126-15 Insecta|Diptera|Keroplatidae|Keroplatinae|Orfeliini|Asindulum|Asindulum_nigrum
 SCFI057-15 Insecta|Diptera|Keroplatidae|Keroplatinae|Orfeliini|Neoplatyura|Neoplatyura_noorae
 TRIFI225-10 Insecta|Trichoptera|Limnephilidae|Limnephilinae|dummy_Limnephilinae|Chaetopteryx|Chaetopteryx_sahlbergi
-SCFI533-15 Insecta|Diptera|Mycetophilidae|Mycetophilinae|Exechiini|Brevicornu|Brevicornu_auriculatum_JKJ-02
 TRIFI1388-16 Insecta|Trichoptera|Limnephilidae|Limnephilinae|dummy_Limnephilinae|Limnephilus|Limnephilus_picturatus
 TRIFI1224-15 Insecta|Trichoptera|Glossosomatidae|Glossosomatinae|dummy_Glossosomatinae|Glossosoma|Glossosoma_intermedium
 SCFI531-15 Insecta|Diptera|Mycetophilidae|Mycetophilinae|Exechiini|Brevicornu|Brevicornu_JKJ-spB
@@ -849,7 +844,6 @@ TACFI232-12 Insecta|Diptera|Tachinidae|Exoristinae|Eryciini|Epicampocera|Epicamp
 TRIFI802-12 Insecta|Trichoptera|Limnephilidae|Limnephilinae|dummy_Limnephilinae|Halesus|Halesus_tessellatus
 SCFI692-16 Insecta|Diptera|Sciaridae|dummy_Sciaridae|dummy_Sciaridae|Pseudolycoriella|Pseudolycoriella_brunnea
 TRIFI1033-14 Insecta|Trichoptera|Polycentropodidae|Polycentropodinae|dummy_Polycentropodinae|Cyrnus|Cyrnus_flavidus
-SCFI527-15 Insecta|Diptera|Mycetophilidae|Mycetophilinae|Exechiini|Brachycampta|Brachycampta_rindeni_JKJ-03
 TRIFI328-11 Insecta|Trichoptera|Psychomyiidae|Psychomyiinae|dummy_Psychomyiinae|Lype|Lype_phaeopa
 TACFI368-12 Insecta|Diptera|Tachinidae|Dexiinae|Voriini|Athrycia|Athrycia_trepida
 SCFI807-16 Insecta|Diptera|Sciaridae|dummy_Sciaridae|dummy_Sciaridae|Peyerimhoffia|Peyerimhoffia_quadrifera
@@ -963,7 +957,6 @@ TRIFI1312-16 Insecta|Plecoptera|Chloroperlidae|Chloroperlinae|dummy_Chloroperlin
 SCFI780-16 Insecta|Diptera|Sciaridae|dummy_Sciaridae|dummy_Sciaridae|Camptochaeta|Camptochaeta_camptochaeta
 TACFI377-12 Insecta|Diptera|Tachinidae|Dexiinae|Voriini|Thelaira|Thelaira_nigrina
 TRIFI192-10 Insecta|Trichoptera|Limnephilidae|Limnephilinae|dummy_Limnephilinae|Limnephilus|Limnephilus_subnitidus
-SCFI069-15 Insecta|Diptera|Mycetophilidae|Mycetophilinae|Mycetophilini|Phronia|Phronia_obtusa_JKJ-02
 SCFI678-16 Insecta|Diptera|Sciaridae|dummy_Sciaridae|dummy_Sciaridae|Scatopsciara|Scatopsciara_brevicornis
 TRIFI274-11 Insecta|Trichoptera|Phryganeidae|Phryganeinae|dummy_Phryganeinae|Agrypnia|Agrypnia_obsoleta
 SCFI082-15 Insecta|Diptera|Mycetophilidae|Leiinae|dummy_Leiinae|Greenomyia|Greenomyia_baikalica
@@ -1145,7 +1138,6 @@ TACFI159-12 Insecta|Diptera|Tachinidae|Tachininae|Siphonini|Ceranthia|Ceranthia_
 TRIFI132-10 Insecta|Trichoptera|Hydroptilidae|Hydroptilinae|dummy_Hydroptilinae|Agraylea|Agraylea_cognatella
 TRIFI481-11 Insecta|Trichoptera|Phryganeidae|Phryganeinae|dummy_Phryganeinae|Phryganea|Phryganea_grandis
 TRIFI1053-14 Insecta|Trichoptera|Limnephilidae|Limnephilinae|dummy_Limnephilinae|Limnephilus|Limnephilus_borealis
-SCFI162-15 Insecta|Diptera|Mycetophilidae|Gnoristinae|dummy_Gnoristinae|Boletina|Boletina_dispecta_JKJ-02
 TRIFI1061-14 Insecta|Trichoptera|Leptoceridae|Leptocerinae|dummy_Leptocerinae|Triaenodes|Triaenodes_simulans
 TRIFI480-11 Insecta|Trichoptera|Phryganeidae|Phryganeinae|dummy_Phryganeinae|Phryganea|Phryganea_grandis
 TRIFI1261-15 Insecta|Trichoptera|Limnephilidae|Limnephilinae|dummy_Limnephilinae|Limnephilus|Limnephilus_politus
@@ -9126,7 +9118,6 @@ LEFIJ1038-11 Insecta|Lepidoptera|Nepticulidae|dummy_Nepticulidae|dummy_Nepticuli
 CHEFI1546-15 Arachnida|Araneae|Gnaphosidae|dummy_Gnaphosidae|dummy_Gnaphosidae|Haplodrassus|Haplodrassus_soerenseni
 FIMYC230-14 Insecta|Diptera|Calliphoridae|Luciliinae|dummy_Luciliinae|Lucilia|Lucilia_illustris
 COLFE063-12 Insecta|Coleoptera|Cerambycidae|Lepturinae|Lepturini|Judolia|Judolia_sexmaculata
-COLFC463-12 Insecta|Coleoptera|Cryptophagidae|Atomariinae|dummy_Atomariinae|Atomaria|Atomaria_spABX1905
 COLFD868-12 Insecta|Coleoptera|Brentidae|Apioninae|Apionini|Eutrichapion|Eutrichapion_ervi
 FIDIP998-12 Insecta|Diptera|Syrphidae|Eristalinae|Milesiini|Xylota|Xylota_segnis
 FIDIP913-12 Insecta|Diptera|Bibionidae|Bibioninae|dummy_Bibioninae|Dilophus|Dilophus_femoratus
@@ -9711,7 +9702,6 @@ LEFIK894-10 Insecta|Lepidoptera|Geometridae|Larentiinae|dummy_Larentiinae|Perizo
 LEFIJ7987-19 Insecta|Coleoptera|Kateretidae|dummy_Kateretidae|dummy_Kateretidae|Kateretes|Kateretes_pusillus
 FISYO4731-19 Insecta|Hymenoptera|Tenthredinidae|Nematinae|dummy_Nematinae|Nematinus|Nematinus_acuminatus
 FISYO3873-19 Insecta|Hymenoptera|Tenthredinidae|Allantinae|dummy_Allantinae|Empria|Empria_longicornis_group
-LEFIJ6550-17 Insecta|Diptera|Mycetophilidae|Gnoristinae|dummy_Gnoristinae|Boletina|Boletina_maculata_JKJ-02
 ICHFI2142-16 Insecta|Hymenoptera|Ichneumonidae|Tryphoninae|dummy_Tryphoninae|Exyston|Exyston_sponsorius
 COLFH1774-16 Insecta|Coleoptera|Curculionidae|Curculioninae|Tychiini|Tychius|Tychius_polylineatus
 HEMFI594-15 Insecta|Hemiptera|Cicadellidae|Evacanthinae|Evacanthini|Evacanthus|Evacanthus_acuminatus
@@ -11918,7 +11908,6 @@ COLFH1651-16 Insecta|Coleoptera|Staphylinidae|Oxytelinae|Thinobiini|Carpelimus|C
 LEFIJ3406-16 Insecta|Diptera|Chironomidae|Tanypodinae|Pentaneurini|Thienemannimyia|Thienemannimyia_lentiginosa
 COLFH513-15 Insecta|Coleoptera|Brentidae|Apioninae|Apionini|Cyanapion|Cyanapion_spencii
 COLFE395-12 Insecta|Coleoptera|Oedemeridae|Oedemerinae|Oedemerini|Oedemera|Oedemera_femorata
-COLFE1467-13 Insecta|Coleoptera|Mordellidae|Mordellinae|Mordellistenini|Mordellistena|Mordellistena_spACG3504
 COLFD708-12 Insecta|Coleoptera|Carabidae|Harpalinae|Platynini|Limodromus|Limodromus_assimilis
 FIDIP3072-12 Insecta|Diptera|Muscidae|Phaoniinae|Phaoniini|Helina|Helina_evecta
 FIDIP2683-12 Insecta|Diptera|Pallopteridae|Pallopterinae|dummy_Pallopterinae|Toxonevra|Toxonevra_trimacula
@@ -14529,7 +14518,6 @@ LEFIG145-10 Insecta|Lepidoptera|Nymphalidae|Heliconiinae|Argynnini|Boloria|Bolor
 LEFIF290-10 Insecta|Lepidoptera|Noctuidae|Cuculliinae|dummy_Cuculliinae|Cucullia|Cucullia_argentea
 LEFIC234-10 Insecta|Lepidoptera|Pyralidae|Phycitinae|dummy_Phycitinae|Phycitodes|Phycitodes_saxicola
 FISYO693-18 Insecta|Hymenoptera|Tenthredinidae|Nematinae|dummy_Nematinae|Euura|Euura_anomaloptera
-FISYO4203-19 Insecta|Hymenoptera|Tenthredinidae|Nematinae|dummy_Nematinae|Pristiphora|Pristiphora_leucopodia_2
 FISYO3853-19 Insecta|Hymenoptera|Tenthredinidae|Nematinae|dummy_Nematinae|Dineura|Dineura_testaceipes
 FISYM492-16 Insecta|Hymenoptera|Tenthredinidae|Tenthredininae|dummy_Tenthredininae|Tenthredo|Tenthredo_arcuata_group
 LOBU072-12 Insecta|Lepidoptera|Lasiocampidae|Lasiocampinae|dummy_Lasiocampinae|Cosmotriche|Cosmotriche_lobulina
@@ -14834,7 +14822,6 @@ FISYO1445-18 Insecta|Hymenoptera|Tenthredinidae|Heterarthrinae|dummy_Heterarthri
 FISYO4209-19 Insecta|Hymenoptera|Tenthredinidae|Selandriinae|Dolerini|Dolerus|Dolerus_aeneus
 LEFIJ8090-19 Insecta|Diptera|Syrphidae|Eristalinae|Milesiini|Lejota|Lejota_ruficornis
 FISYO3965-19 Insecta|Hymenoptera|Tenthredinidae|Selandriinae|Dolerini|Dolerus|Dolerus_germanicus
-FISYO3007-18 Insecta|Hymenoptera|Tenthredinidae|Nematinae|dummy_Nematinae|Euura|Euura_histrio_group1
 FISYO1977-18 Insecta|Hymenoptera|Tenthredinidae|Allantinae|dummy_Allantinae|Empria|Empria_longicornis_group
 LEFII054-10 Insecta|Lepidoptera|Noctuidae|Noctuinae|Apameini|Mesapamea|Mesapamea_secalis
 FISYM365-15 Insecta|Hymenoptera|Tenthredinidae|Selandriinae|dummy_Selandriinae|Strongylogaster|Strongylogaster_multifasciata
@@ -16608,7 +16595,6 @@ FISYM472-16 Insecta|Hymenoptera|Tenthredinidae|Heterarthrinae|dummy_Heterarthrin
 FISYM295-15 Insecta|Hymenoptera|Tenthredinidae|Allantinae|dummy_Allantinae|Allantus|Allantus_basalis
 ACUFI1552-14 Insecta|Hymenoptera|Dryinidae|Anteoninae|dummy_Anteoninae|Anteon|Anteon_jurineanum
 COLFE1087-13 Insecta|Coleoptera|Elateridae|Dendrometrinae|Prosternini|Actenicerus|Actenicerus_sjaelandicus
-FIMYC183-14 Insecta|Diptera|Diadocidiidae|dummy_Diadocidiidae|dummy_Diadocidiidae|Diadocidia|Diadocidia_trispinosa_JKJ-02
 ACUFI1252-13 Insecta|Hymenoptera|Formicidae|Formicinae|Formicini|Formica|Formica_rufa
 ICHFI1144-12 Insecta|Hymenoptera|Ichneumonidae|Campopleginae|dummy_Campopleginae|Dusona|Dusona_pugillator
 COLFD707-12 Insecta|Coleoptera|Carabidae|Harpalinae|Platynini|Limodromus|Limodromus_assimilis
@@ -17925,7 +17911,6 @@ FIEPT139-16 Insecta|Plecoptera|Perlodidae|Isoperlinae|dummy_Isoperlinae|Isoperla
 LEFIJ3765-16 Insecta|Diptera|Chironomidae|Chironominae|Tanytarsini|Tanytarsus|Tanytarsus_innarensis
 LEFIJ2863-15 Insecta|Lepidoptera|Gelechiidae|Anomologinae|dummy_Anomologinae|Monochroa|Monochroa_conspersella
 FISYN088-15 Insecta|Hymenoptera|Tenthredinidae|Nematinae|dummy_Nematinae|Pristiphora|Pristiphora_cincta
-COLFB715-12 Insecta|Coleoptera|Staphylinidae|Aleocharinae|Athetini|Atheta|Atheta_spABW2110
 FINTI1063-12 Insecta|Diptera|Tipulidae|Tipulinae|dummy_Tipulinae|Nigrotipula|Nigrotipula_nigra
 FINTI725-12 Insecta|Diptera|Limoniidae|Chioneinae|dummy_Chioneinae|Molophilus|Molophilus_bifidus
 FINTI358-12 Insecta|Diptera|Tipulidae|Tipulinae|dummy_Tipulinae|Tipula|Tipula_unca
@@ -19214,7 +19199,6 @@ COLFB527-12 Insecta|Coleoptera|Staphylinidae|Staphylininae|Staphylinini|Cafius|C
 COLFE311-12 Insecta|Coleoptera|Carabidae|Harpalinae|Zabrini|Amara|Amara_communis
 COLFB364-12 Insecta|Coleoptera|Staphylinidae|Pselaphinae|Brachyglutini|Rybaxis|Rybaxis_longicornis
 COLFD728-12 Insecta|Coleoptera|Staphylinidae|Aleocharinae|Athetini|Atheta|Atheta_subtilis
-COLFB940-12 Insecta|Coleoptera|Staphylinidae|Staphylininae|Staphylinini|Quedius|Quedius_spABW8823
 FIDIP4287-14 Insecta|Diptera|Tephritidae|Tephritinae|Tephritini|Campiglossa|Campiglossa_absinthii
 COLFF669-13 Insecta|Coleoptera|Carabidae|Harpalinae|Lebiini|Demetrias|Demetrias_imperialis
 FIMIS045-13 Insecta|Hymenoptera|Formicidae|Formicinae|Formicini|Formica|Formica_pressilabris
@@ -26047,7 +26031,6 @@ FISYO1438-18 Insecta|Hymenoptera|Tenthredinidae|Selandriinae|Dolerini|Dolerus|Do
 COLFB004-12 Insecta|Coleoptera|Carabidae|Harpalinae|Pterostichini|Pterostichus|Pterostichus_vernalis
 COLFG522-14 Insecta|Coleoptera|Carabidae|Harpalinae|Zabrini|Amara|Amara_cursitans
 COLFD070-12 Insecta|Coleoptera|Staphylinidae|Mycetoporinae|dummy_Mycetoporinae|Lordithon|Lordithon_lunulatus
-COLFC286-12 Insecta|Coleoptera|Staphylinidae|Aleocharinae|Athetini|Boreophilia|Boreophilia_spABX3767
 LEFIE722-10 Insecta|Lepidoptera|Pyralidae|Phycitinae|dummy_Phycitinae|Acrobasis|Acrobasis_repandana
 LEFIE662-10 Insecta|Lepidoptera|Nepticulidae|dummy_Nepticulidae|dummy_Nepticulidae|Stigmella|Stigmella_incognitella
 LEFIF536-10 Insecta|Lepidoptera|Noctuidae|Plusiinae|Plusiini|Plusia|Plusia_festucae
@@ -26936,7 +26919,6 @@ LEFIJ2049-13 Insecta|Lepidoptera|Elachistidae|Elachistinae|dummy_Elachistinae|El
 FISYO1823-18 Insecta|Hymenoptera|Tenthredinidae|Blennocampinae|dummy_Blennocampinae|Blennocampa|Blennocampa_phyllocolpa
 LEFIJ3497-16 Insecta|Diptera|Chironomidae|Orthocladiinae|dummy_Orthocladiinae|Tavastia|Tavastia_yggdrasilia
 FISYM326-15 Insecta|Hymenoptera|Tenthredinidae|Nematinae|dummy_Nematinae|Hemichroa|Hemichroa_australis
-COLFF026-13 Insecta|Coleoptera|Staphylinidae|Tachyporinae|Tachyporini|Tachyporus|Tachyporus_spACG2604
 COLFF655-13 Insecta|Coleoptera|Curculionidae|Curculioninae|Rhamphini|Rhamphus|Rhamphus_pulicarius
 ICHFI1111-12 Insecta|Hymenoptera|Ichneumonidae|Cryptinae|Cryptini|Helcostizus|Helcostizus_restaurator
 COLFD935-12 Insecta|Coleoptera|Chrysomelidae|Cryptocephalinae|Cryptocephalini|Cryptocephalus|Cryptocephalus_nitidus
@@ -31196,7 +31178,6 @@ FIDIP3130-12 Insecta|Diptera|Calliphoridae|Calliphorinae|dummy_Calliphorinae|Bel
 FIDIP3171-12 Insecta|Diptera|Sarcophagidae|Sarcophaginae|dummy_Sarcophaginae|Sarcophaga|Sarcophaga_pumila
 FIDIP962-12 Insecta|Diptera|Syrphidae|Eristalinae|Brachyopini|Orthonevra|Orthonevra_intermedia
 LEFIA1301-10 Insecta|Lepidoptera|Pieridae|Pierinae|Pierini|Pieris|Pieris_rapae
-COLFA086-10 Insecta|Coleoptera|Staphylinidae|Aleocharinae|Hypocyphtini|Oligota|Oligota_spAAK3543
 LEFIG713-10 Insecta|Lepidoptera|Coleophoridae|Coleophorinae|dummy_Coleophorinae|Coleophora|Coleophora_trifolii
 LEFID544-10 Insecta|Lepidoptera|Tortricidae|Olethreutinae|Olethreutini|Bactra|Bactra_lancealana
 LEFIG457-10 Insecta|Lepidoptera|Noctuidae|Noctuinae|dummy_Noctuinae|Apamea|Apamea_oblonga
@@ -34218,7 +34199,6 @@ FISYO1307-18 Insecta|Hymenoptera|Tenthredinidae|Nematinae|dummy_Nematinae|Cladiu
 FIDIP4313-14 Insecta|Diptera|Syrphidae|Eristalinae|Rhingiini|Cheilosia|Cheilosia_semifasciata
 FISYO473-18 Insecta|Hymenoptera|Tenthredinidae|Heterarthrinae|dummy_Heterarthrinae|Caliroa|Caliroa_annulipes
 FISYO3685-19 Insecta|Hymenoptera|Tenthredinidae|Nematinae|dummy_Nematinae|Euura|Euura_sagmarius
-FISYO3010-18 Insecta|Hymenoptera|Tenthredinidae|Nematinae|dummy_Nematinae|Euura|Euura_histrio_group1
 FISYO1838-18 Insecta|Hymenoptera|Tenthredinidae|Allantinae|dummy_Allantinae|Empria|Empria_longicornis_group
 LEFIJ1000-11 Insecta|Lepidoptera|Sesiidae|Sesiinae|Synanthedonini|Synanthedon|Synanthedon_aurivillii
 COLFF883-13 Insecta|Coleoptera|Pythidae|dummy_Pythidae|dummy_Pythidae|Pytho|Pytho_kolwensis
