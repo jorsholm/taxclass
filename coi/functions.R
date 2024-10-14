@@ -1,24 +1,29 @@
 ################################################################################
 # Functions for analysing performance of taxonomic classification algorithms.
 ################################################################################
-#library(tidyverse)
 
 #' Replaces labels of classes that are unique to test dataset. 
 #' Example of new labels: Araneae_Family_new
 #' Or, if first level is new: Class_new
 #' @param test 
 #' @param train 
-get_data_true <- function(test, train){
+get_data_true <- function(test, train, 
+                          ranks = c("Class", 
+                                    "Order",
+                                    "Family",
+                                    "Subfamily",
+                                    "Tribe",
+                                    "Genus",
+                                    "Species")){
 
-  # Remove ID and DNA columns
-  train <- train[, -c(1, ncol(train))]
-  data_true <- test[, -c(1, ncol(test))]
+  # Keep only ranks columns 
+  train <- train[,ranks]
+  data_true <- test[,ranks]
 
   # Get level names
-  level_names <- names(train)
-  n_levels <- length(level_names)
+  n_ranks <- length(ranks)
 
-  for(l in 1:n_levels){
+  for(l in 1:n_ranks){
     # Find taxa that are unique to test
     id <- !(data_true[,l] %in% unique(train[,l]))
     n_new <- sum(id)
@@ -26,15 +31,15 @@ get_data_true <- function(test, train){
     # Replace new classes with "_new"-name
     if(n_new > 0){
       if(l == 1){
-        name_clust <- paste0(level_names[1], "_new")
-        data_true[id, l:n_levels] <- matrix(rep(name_clust, n_new*n_levels),
-                                            nrow = n_new, ncol = n_levels)
+        name_clust <- paste0(ranks[1], "_new")
+        data_true[id, l:n_ranks] <- matrix(rep(name_clust, n_new*n_ranks),
+                                            nrow = n_new, ncol = n_ranks)
       }else{
 
         for(i in which(id == TRUE)){
           if(!grepl("_new$", data_true[i, l-1])){
-            name_clust <- paste0(data_true[i, l-1], "_", level_names[l], "_new")
-            data_true[i, l:n_levels] <- rep(name_clust, n_levels-l + 1)
+            name_clust <- paste0(data_true[i, l-1], "_", ranks[l], "_new")
+            data_true[i, l:n_ranks] <- rep(name_clust, n_ranks-l + 1)
           }
         }
       }
@@ -60,9 +65,9 @@ rename_unk <- function(x){
   return(x)
 }
 
-#' Renames PROTAX unk to BayesANT standard + sort columns 
+#' Renames 'unk' to BayesANT standard + sort columns 
 #' @param out data frame with PROTAX results. Cannot contain NA values  
-rename_PROTAX_output <- function(out, level = "species"){
+rename_unk_output <- function(out){
   # Rename unk 
   renamed <- cbind("ID" = out[,which(colnames(out) == "ID")],
                    t(apply(out[, which(!stringr::str_detect(colnames(out), "Prob|ID"))],
@@ -72,9 +77,24 @@ rename_PROTAX_output <- function(out, level = "species"){
   return(renamed)
 }
 
+#' Arrange and rename columns in a specified order
+#' @param df The dataframe to rearrange 
+#' @param correct_cols The order and name of columns wanted
+arrange_columns <- function(df, correct_cols){
+  if(!all(sort(stringr::str_to_lower(colnames(df))) ==
+          sort(stringr::str_to_lower(correct_cols)))) print("Mismatching columns.")
+  
+  df <- df[, match(stringr::str_to_lower(correct_cols),
+                   stringr::str_to_lower(colnames(df)))]
+  colnames(df) <- correct_cols
+  return(df)
+}
+
 #' Build data frame with calibration information for each model and set of taxa 
 #' (all/obs/novel)
-get_calibration <- function(results, data_true, id_observed){
+#' If binned = TRUE, will return values for binned intervals 
+get_calibration <- function(results, data_true, observed_everywhere, 
+                            binned = F, bins = seq(0, 1, 0.05)){
   
   ranks <- colnames(data_true)[-1]
   calibration <- data.frame()
@@ -94,21 +114,33 @@ get_calibration <- function(results, data_true, id_observed){
           correct <- results[[i]][,col] == data_true[,col]
           prob <- results[[i]][,col_prob]
         }else if(set == "Observed"){
-          correct <- results[[i]][id_observed,col] == data_true[id_observed,col]
-          prob <- results[[i]][id_observed,col_prob]
+          correct <- results[[i]][observed_everywhere,col] == data_true[observed_everywhere,col]
+          prob <- results[[i]][observed_everywhere,col_prob]
         }else if(set == "Novel"){
-          correct <- results[[i]][!id_observed,col] == data_true[!id_observed,col]
-          prob <- results[[i]][!id_observed,col_prob]
+          correct <- results[[i]][!observed_everywhere,col] == data_true[!observed_everywhere,col]
+          prob <- results[[i]][!observed_everywhere,col_prob]
         }
         
-        cal <- calc_calibration(prob, correct)
-        
-        calibration <- rbind(calibration, 
-                             data.frame(model = names(results)[i], 
-                                        set = set, 
-                                        rank = rank, 
-                                        cumcorr = cal$cumcorr, 
-                                        cumprob = cal$cumprob))
+        if(binned){
+          cal <- calc_calibration_binned(prob, correct, bins)
+          
+          cal <- cal |>
+            dplyr::mutate(model = names(results)[i],
+                          rank = rank,
+                          set = set)
+          
+          calibration <- rbind(calibration,
+                               cal)
+        }else{
+          cal <- calc_calibration(prob, correct)
+          
+          calibration <- rbind(calibration, 
+                               data.frame(model = names(results)[i], 
+                                          set = set, 
+                                          rank = rank, 
+                                          cumcorr = cal$cumcorr, 
+                                          cumprob = cal$cumprob)) 
+        }
       }
     }
   }
@@ -130,8 +162,8 @@ calc_calibration_binned <- function(prob, correct, bins){
   n <- length(prob)
   
   df <- 
-    data.frame(prob = prob, 
-             correct = correct) |> 
+    data.frame(prob = prob,
+               correct = correct) |> 
     dplyr::mutate(bin = cut(prob, bins, include.lowest = T)) |>
     dplyr::group_by(bin) |> 
     dplyr::summarise(correct = sum(correct)/dplyr::n(), 
@@ -139,50 +171,6 @@ calc_calibration_binned <- function(prob, correct, bins){
   
   return(df)
 }
-
-get_binned_calibration <- function(results, data_true, observed_everywhere, 
-                                   bins = seq(0, 1, 0.05)){
-  
-  ranks <- colnames(data_true)[-1]
-  calibration <- data.frame()
-  
-  sets <- c("All", "Observed", "Novel")
-  
-  for(set in sets){
-
-    for(rank in ranks){
-      
-      col <- which(colnames(data_true) == rank)
-      col_prob <- which(colnames(results[[1]]) == paste0("Prob_", rank))
-      
-      for(i in 1:length(results)){
-        
-        if(set == "All"){
-          correct <- results[[i]][,col] == data_true[,col]
-          prob <- results[[i]][,col_prob]
-        }else if(set == "Observed"){
-          correct <- results[[i]][observed_everywhere,col] == data_true[observed_everywhere,col]
-          prob <- results[[i]][observed_everywhere,col_prob]
-        }else if(set == "Novel"){
-          correct <- results[[i]][!observed_everywhere,col] == data_true[!observed_everywhere,col]
-          prob <- results[[i]][!observed_everywhere,col_prob]
-        }
-        
-        cal <- calc_calibration_binned(prob, correct, bins)
-        
-        cal <- cal |> 
-          dplyr::mutate(model = names(results)[i], 
-                        rank = rank, 
-                        set = set)
-        
-        calibration <- rbind(calibration, 
-                             cal)
-      }
-    }
-  }
-  return(calibration)
-}
-
 
 # My attempt for flexible plotting of calibrations 
 # TODO: When plotting a single model + set, include accuracies in legend 
@@ -267,48 +255,38 @@ get_accuracy_from_cal <- function(calibrations, groups = c("model", "rank", "set
   return(accuracies)
 }
 
-get_novelty_accuracy <- function(results, id_novel){
+get_partitioned_novelty <- function(data_true, results, observed_everywhere){
+  
   ranks <- colnames(data_true)[-1]
-  n <- list() 
   
-  acc_df <- data.frame()
-  part_novelty <- data.frame()
+  true_novel_rank <- 
+    sapply(data_true[!observed_everywhere, tail(ranks, 1)],
+           function(x) stringr::str_split(x, "_")[[1]] |>
+             tail(2) |> head(1),
+           USE.NAMES = F)
   
-  for(r in ranks){
-    n[[r]] <- length(id_novel[[r]])
+  df <- data.frame() 
+  
+  for(i in 1:length(results)){
     
-    for(i in 1:length(results)){
-      novel_acc <- sum(stringr::str_ends(results[[i]][id_novel[[r]], r], "_new"))/n[[r]] * 100
-      
-      # False novelty is calc as proportion of falsely predicted novel species on that rank / true novel on that rank  
-      false_novelty <- sum(stringr::str_ends(results[[i]][-id_novel[[r]], r],  paste0(r, "_new")))/n[[r]] * 100
-      
-      acc_df <- rbind(acc_df, 
-                data.frame(model = names(results)[i], 
-                           rank = r, 
-                           novel_accuracy = novel_acc, 
-                           false_novelty = false_novelty)) 
+    sub_df <- 
+      dplyr::tibble(true_rank = true_novel_rank,
+                    pred = results[[i]][!observed_everywhere, tail(ranks, 1)]) |> 
+      dplyr::mutate(pred_rank = map_chr(pred, 
+                                        ~if(stringr::str_ends(.x, "_new")) 
+                                          stringr::str_split(.x, "_")[[1]] |> 
+                                          tail(2) |> head(1) 
+                                        else "None")) |> 
+      dplyr::mutate(true_count = n(), 
+                    .by = true_rank) |> 
+      dplyr::summarise(pred_count = n(), 
+                       .by = c(true_rank, pred_rank, true_count)) |> 
+      dplyr::mutate(model = names(results)[i], 
+                    perc = (pred_count/true_count)*100) 
 
-      suppressMessages(part <- 
-        data.frame(rank = r, 
-                 model = names(results)[i], 
-                 novelty_rank = 
-                   sapply(results[[i]][id_novel[[r]], tail(ranks,1)],
-                          function(x) dplyr::if_else(stringr::str_ends(x, "_new"),
-                                              stringr::str_split(x, "_")[[1]] |> tail(2) |> head(1),
-                                              "None"),
-                          USE.NAMES = F)) |> 
-        dplyr::group_by(rank, model, novelty_rank) |> 
-        dplyr::summarise(count = dplyr::n()) |> 
-        dplyr::mutate(perc = count / n[[r]] * 100))
-      
-      part_novelty <- rbind(part_novelty, part)
-      
-    }
+    df <- rbind(df, sub_df)
   }
-  return(list(count = n, 
-              acc = acc_df, 
-              part_novelty = part_novelty))
+  return(df)
 }
 
 plot_accuracies <- function(accuracies){
@@ -354,26 +332,21 @@ marginal_accuracy <- function(results, data_true, id_list){
   ranks <- colnames(data_true)[-1]
   marg_accuracies <- data.frame()
   
-  for(r in ranks){
-    taxgroups <- unique(data_true[id_list[[r]],r])
+  for(set in names(id_list)){
     
-    denom <- length(data_true[id_list[[r]], r])
-    
-    for(i in 1:length(results)){
+    for(r in ranks){
       
-      correct <- 0
+      denom <- length(data_true[id_list[[set]][[r]], r])
       
-      for(tax in taxgroups){
-        ids <- which(data_true[,r] == tax)
+      for(i in 1:length(results)){
+        correct <- sum(results[[i]][id_list[[set]][[r]],r] == data_true[id_list[[set]][[r]],r])
         
-        correct <- correct + sum(results[[i]][ids,r] == tax)
+        marg_accuracies <- rbind(marg_accuracies, 
+                                 data.frame(model = names(results[i]),
+                                            set = set,
+                                            rank = r,
+                                            marg_accuracy = correct/denom))
       }
-      
-      marg_accuracies <- rbind(marg_accuracies, 
-                               data.frame(model = names(results[i]),
-                                          rank = r,
-                                          marg_accuracy = correct/denom))
-      
     }
   }
   return(marg_accuracies)
@@ -384,41 +357,66 @@ conditional_accuracy <- function(results, data_true, id_list){
   ranks <- colnames(data_true)[-1]
   cond_accuracies <- data.frame()
   
-  for(r in ranks){
-    taxgroups <- unique(data_true[id_list[[r]],r])
+  for(set in names(id_list)){
     
-    for(i in 1:length(results)){
+    ids <- id_list[[set]]
+    
+    for(r in 1:length(ranks)){
       
-      correct <- 0
-      denom <- 0 
-      
-      for(tax in taxgroups){
-        # Which are actually this taxon? 
-        ids_sugg <- which(data_true[,r] == tax)
+      for(i in 1:length(results)){
         
-        if(r == "Class"){
-          correct <- correct + sum(results[[i]][ids_sugg,r] == tax)
-          denom <- length(id_list[[r]])
+        # Denominator: novel taxa correctly predicted on the rank above
+        if(r == 1){
+          denom <- length(ids[[r]])
         }else{
-          
-          higher_rank <- ranks[which(ranks==r)-1]
-          
-          higher_tax <- data_true[ids_sugg, higher_rank][1]
-          
-          # Which are this taxon + have been correctly predicted to the higher rank 
-          correct_higher <- ids_sugg[which(results[[i]][ids_sugg, higher_rank] == higher_tax)]
-          
-          denom <- denom + length(correct_higher)
-          correct <- correct + sum(results[[i]][correct_higher,r] == tax)
+          denom <-
+            sum(
+              results[[i]][ids[[ranks[r]]], ranks[r-1]] == data_true[ids[[ranks[r]]], ranks[r-1]]
+            )
         }
+        
+        correct <- 
+          sum(
+            results[[i]][ids[[ranks[r]]], ranks[r]] == data_true[ids[[ranks[r]]], ranks[r]]
+          )
+        
+        if(correct > denom) print("Error: number of correct predictions larger than the denominator.")
+        
+        cond_accuracies <- rbind(cond_accuracies, 
+                                 data.frame(model = names(results[i]),
+                                            set = set, 
+                                            rank = ranks[r],
+                                            cond_accuracy = correct/denom, 
+                                            denom_cond = denom))
       }
-      cond_accuracies <- rbind(cond_accuracies, 
-                               data.frame(model = names(results[i]),
-                                          rank = r,
-                                          cond_accuracy = correct/denom, 
-                                          denom_cond = denom))
     }
   }
   return(cond_accuracies)
 }
-# 
+
+count_novel <- function(results, data_true, id_novel){
+  
+  ranks <- colnames(data_true)[-1]
+  pred_df <- data.frame()
+  
+  for(i in 1:length(results)){
+    
+    sum_novel <- 0 
+    pred_novel <- 0 
+    
+    for(r in ranks){
+      
+      sum_novel <- sum_novel + length(id_novel[[r]])
+      pred_novel <- pred_novel + 
+        sum(stringr::str_ends(results[[i]][,r], "_new"))
+      
+      df <- data.frame(model = names(results)[i], 
+                       rank = r,
+                       sum_novel = sum_novel, 
+                       pred_novel = pred_novel)
+      
+      pred_df <- rbind(pred_df, df)
+    }
+  }
+  return(pred_df)
+}
