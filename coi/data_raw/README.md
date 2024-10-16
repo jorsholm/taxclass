@@ -1,4 +1,4 @@
-# Raw data
+# Instructions to download raw data and generate COI datasets
 
 ## BOLD
 
@@ -34,7 +34,7 @@ awk -F"\t" '
   $23 != "None" &&
   $16=="Arthropoda" &&
   ($1 in seq) &&
-  !($23 ~ /sp[.]|aff[.]|cf[.]|nr[.]|agg[.]|t[.]|cluster/){
+  !($23 ~ /sp[.]|aff[.]|cf[.]|nr[.]|agg[.]|t[.]|cluster/) {
     for (i=17;i<=21;i++) {
       if ($i == "None") {
         $i = "dummy_" $(i-1);
@@ -42,17 +42,20 @@ awk -F"\t" '
       }
     }
     sub(/ var\..*/, "", $23) 
-    gsub(/ /, "_", $23);
-    print ">" $1, $17 "|" $18 "|" $19 "|" $20 "|" $21 "|" $22 "|" $23;
-    print seq[$1];
+    gsub(/ /, "_", $23)
+    taxon=$17
+    for (i=18; i<=23; i++) taxon = taxon "|" $i
+    if (taxon ~ /[0-9]/) next
+    print ">" $1, taxon
+    print seq[$1]
     delete seq[$1]
   }
-' data_bolgermany_de_gbol1-search_results-guest-2023-11-22184603.csv\
+' <(zcat data_bolgermany_de_gbol1-search_results-guest-2023-11-22184603.csv.gz)\
  <(tar -xOf BOLD_Public.29-Mar-2024.tar.gz BOLD_Public.29-Mar-2024.tsv)\
  >test_gbol_raw.fasta
 ```
 
-This yielded 27346 sequences with species ID.
+This yielded 27200 sequences with species ID.
 
 ```sh
 awk -F"[ |]" '/^>/{
@@ -75,10 +78,10 @@ The taxonomic breakdown is:
 - 11 unique classes
 - 51 unique orders
 - 564 unique families
-- 1031 unique subfamilies
-- 1505 unique tribes
-- 3799 unique genera
-- 9103 unique species
+- 1030 unique subfamilies
+- 1504 unique tribes
+- 3795 unique genera
+- 9031 unique species
 
 ## FinBOL (train)
 
@@ -98,14 +101,17 @@ awk -F"\t" '
         sub(/dummy_dummy/, "dummy", $i)
       }
     }
-    gsub(/ /, "_", $23);
-    print ">" $1, $17 "|" $18 "|" $19 "|" $20 "|" $21 "|" $22 "|" $23;
-    gsub(/-/, "", $65);
+    gsub(/ /, "_", $23)
+    taxon=$17
+    for (i=18; i<=23; i++) taxon = taxon "|" $i
+    if (taxon ~ /[0-9]/) next
+    print ">" $1, taxon
+    gsub(/-/, "", $65)
     print $65
 }' >train_finbol_raw.fasta
 ```
 
-36854 sequences
+36833 sequences
 
 ```sh
 awk -F"[ |]" '/^>/{
@@ -128,10 +134,15 @@ END{
 - 477 unique families
 - 916 unique subfamilies
 - 1372 unique tribes
-- 3896 unique genera
-- 11249 unique species
+- 3895 unique genera
+- 11229 unique species
 
 # Alignment via MACSE pipeline
+
+Download [MACSE v2.0.7 jar file](https://www.agap-ge2pop.org/wp-content/uploads/macse/releases/macse_v2.07.jar)
+and [MACSE pipelines](https://github.com/ranwez/MACSE_V2_PIPELINES/releases/tag/11.05).
+
+Build singularity container for REPRESENTATIVE_SEQ pipeline from `representative_seqs_v01_sing_3.3.def` and save `representative_seqs_v01_sing_3.3.sif` in this directory.
 
 ## Generate representative sequences
 
@@ -139,9 +150,11 @@ I downloaded the repseq of the cox1 CDS from _Drosophila melanogaster_ to use as
 
 Then the MACSE pipeline selects 100 sequences from the dataset which align to the reference, and cover the diversity present.
 
+Setting `TMPDIR` and `APPTAINER_TMPDIR` may not be necessary; and would certainly need to be changed for a different system.
+
 ```sh
-TMPDIR=/home/brfurnea/tmp\
-APPTAINER_TMPDIR=/home/brfurnea/tmp\
+TMPDIR=/home/brfurnea/tmp \
+APPTAINER_TMPDIR=/home/brfurnea/tmp \
 ./representative_seqs_v01_sing_3.3.sif\
   --in_refSeq Drosophila_melanogaster_cox1_refseq.fasta\
   --in_seqFile train_finbol_raw.fasta\
@@ -153,7 +166,7 @@ APPTAINER_TMPDIR=/home/brfurnea/tmp\
 
 ```sh
 cat Drosophila_melanogaster_cox1_refseq.fasta >>representative_seq_NT.fasta
-java -jar ../../bin/macse_v2.07.jar\
+java -jar macse_v2.07.jar\
  -prog alignSequences\
  -gc_def 5\
  -out_AA finbol_repseq_aln_aa.fasta\
@@ -165,9 +178,11 @@ java -jar ../../bin/macse_v2.07.jar\
 
 ## MACSE alignment and translation of other sequences
 
+This runs test and train in parallel, but it still takes ~8 hours.
+
 ```sh
 for data in test_gbol train_finbol; do
-  time java -jar ../../bin/macse_v2.07.jar\
+  time java -jar macse_v2.07.jar\
     -prog enrichAlignment\
     -align finbol_repseq_aln_nt.fasta\
     -seq ${data}_raw.fasta\
@@ -219,4 +234,33 @@ for data in test train; do
   ' <(esl-alimask --outformat afa -g ${data}_${source}_raw_nt.fasta)\
     <(esl-alimask --outformat afa -g ${data}_${source}_raw_aa.fasta)
 done
+```
+
+## Full BOLD taxonomy (only used by PROTAX)
+
+```sh
+tar -xOf BOLD_Public.29-Mar-2024.tar.gz BOLD_Public.29-Mar-2024.tsv |
+awk -F"\t" '
+  !($23 ~ /sp[.]|aff[.]|cf[.]|nr[.]|agg[.]|t[.]|cluster/) &&
+  $16=="Arthropoda" {
+    for (i=17;i<=21;i++) {
+      if ($i == "None") {
+        $i = "dummy_" $(i-1);
+        sub(/dummy_dummy/, "dummy", $i)
+      }
+    }
+    for (i=23; i>17; i--) {
+      if ($i == "None" && $(i-1) ~ /^dummy_/) $(i-1) = "None"
+    }
+    if ($17=="None") next
+    gsub(/ /, "_", $23);
+    taxon=$17
+    for (i=18; i<=23; i++) {
+      if ($i != "None") taxon = taxon "|" $i
+    }
+    if (taxon in c) next
+    if (taxon~/[0-9]/) next
+    c[taxon]=1
+    print $1, taxon
+  }' >../data/full_tax.txt
 ```

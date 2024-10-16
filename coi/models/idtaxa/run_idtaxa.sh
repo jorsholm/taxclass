@@ -4,8 +4,8 @@
 #SBATCH --partition=small
 #SBATCH --time=24:00:00
 #SBATCH --mem=16G
-#SBATCH --cpus-per-task=1
-#SBATCH --array=1
+#SBATCH --cpus-per-task=40
+#SBATCH --array=40
 #SBATCH --output=idtaxa_%a.out
 #SBATCH --error=idtaxa_%a.out
 #SBATCH --mail-type=ALL
@@ -50,7 +50,7 @@ do
   # classify the test sequences
   for TEST in test testshort
   do
-    export TEST_FILE=$DATA/${TEST}_nt.fasta
+    export TEST_FILE=$DATA/${TEST}_${alphabet}.fasta
     export RESULT_FILE=${RESULTS}/${MODEL}_${TEST}_${alphabet}_$SLURM_ARRAY_TASK_ID.tsv
 
     $TIME Rscript id_taxa.R
