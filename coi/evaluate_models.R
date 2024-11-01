@@ -15,11 +15,14 @@ undshort <- ""
 if(short){
   shorttxt <- "short"
   undshort <- "_short"
-} 
+}
+keep_na <- T
+natxt <- ""
+if(keep_na) natxt <- "_keepNA"
 
 # LOAD DATA --------------------------------------------------------------------
 
-# Load test and train data 
+# Load test and train data
 data <- load_FinBOL_GBOL()
 
 # Replace labels of taxa unique to test
@@ -27,124 +30,20 @@ data <- load_FinBOL_GBOL()
 data_true <- get_data_true(data$test, data$train) |>
   dplyr::arrange(ID)
 
+class_order_match <- data$train |>
+  dplyr::select(Class, Order) |>
+  dplyr::distinct()
+
 # CORRECT COLUMN NAMES AND ORDER -----------------------------------------------
 
 ranks <- colnames(data_true)[-1]
-correct_cols <- c("ID", 
-                  ranks, 
+correct_cols <- c("ID",
+                  ranks,
                   sapply(ranks, function(x) paste0("Prob_", x), USE.NAMES = F))
 
 # READ RESULTS -----------------------------------------------------------------
 
-# BayesANT
-# result_BayesANT <-
-#   read.table(paste0("models/results_bayesant_finbol_gbol/bayesant_test", 
-#                     shorttxt, "_finbol-gbol_", level, ".txt"),
-#              header = T) |>
-#   dplyr::arrange(ID)
-
-# RDP
-# result_RDP <-
-#   read.table(paste0("models/results_rdp_finbol_gbol/rdp_test", 
-#                     shorttxt, "_finbol-gbol_", level, ".txt"),
-#              header = T) |>
-#   dplyr::arrange(ID)
-
-# PROTAX
-# result_PROTAX <- 
-#   read.table(paste0("models/results_protax_finbol_gbol/protax_finbol_gbol_",
-#                     level, undshort, ".txt"),
-#              header = T)
-# result_PROTAX[is.na(result_PROTAX)] <- 0
-# result_PROTAX <- rename_PROTAX_output(result_PROTAX)
-# # Quick check that order of columns is identical to BayesANT
-# # all(stringr::str_to_lower(colnames(result_PROTAX)) ==
-# #       stringr::str_to_lower(colnames(result_BayesANT)))
-# # Rename Protax columns
-# colnames(result_PROTAX) <- colnames(result_BayesANT)
-
-# EPA-ng Taxonomy tree
-result_epatax <-
-  read.table(paste0("results/epang_taxtree/epang_taxtree_test", shorttxt,
-                    "_nt_all.tsv"),
-             header = T) |>
-  dplyr::arrange(ID)
-result_epatax <- rename_unk_output(result_epatax)
-result_epatax <- arrange_columns(result_epatax, correct_cols)
-
-# Sintax
-result_SINTAX <-
-  read.table(paste0("results/sintax/sintax_test", shorttxt, "_nt_4.tsv"),
-                            header = TRUE)
-result_SINTAX <- dplyr::arrange(result_SINTAX, ID)
-result_SINTAX <- arrange_columns(result_SINTAX, correct_cols)
-
-# EPA-ng phylogenetic tree 
-result_epaphyl <- 
-  read.table(paste0("results/epang_phyltree/epang_phyltree_test",
-                  shorttxt, "_finbol-gbol.txt"),
-           header = T, sep = "\t")  |>
-  dplyr::arrange(ID)
-result_epaphyl$species <- sapply(result_epaphyl$species, 
-                                 function(x) stringr::str_replace(x, " ", "_"),
-                                 USE.NAMES = F)
-result_epaphyl <- rename_unk_output(result_epaphyl)
-result_epaphyl <- arrange_columns(result_epaphyl, correct_cols)
-
-# BLAST 
-# TODO: what is the species column separated by ";"? 
-# result_blast <- 
-#   read.table(paste0("results/blast/blast_top_hit_test", shorttxt, "_nt_16.tsv"), 
-#            header = T)
-
-# DNA-barcoder
-# result_dnabarcoder <- 
-#   read.table(paste0("results/dnabarcoder/test", shorttxt, "_nt_4.tsv"), 
-#            header = T)
-# result_dnabarcoder <- arrange_columns(result_dnabarcoder, correct_cols)
-
-# IDTAXA 
-# TODO: Some are missing an identification 
-#result_idtaxa <- 
-#  read.table(paste0("results/idtaxa/idtaxa_test", shorttxt, "_nt_4.tsv"))
-
-# MycoAI-BERT
-# TODO: deal with missing class 
-# result_aibert <- 
-#   read.table(paste0("results/mycoai_bert/mycoai_bert_test", shorttxt, 
-#                     "_nt_gpu.tsv"), 
-#              header = T) |> 
-#   dplyr::arrange(ID)
-# result_aibert <- arrange_columns(result_aibert, correct_cols)
-
-# MycoAI-CNN 
-# TODO: deal with missing class 
-# result_aicnn <-
-#   read.table(paste0("results/mycoai_cnn/mycoai_cnn_test", shorttxt,
-#                     "_nt_gpu.tsv"),
-#              header = T) |>
-#   dplyr::arrange(ID)
-# result_aicnn <- arrange_columns(result_aicnn, correct_cols)
-
-# Brendan's mystery model 
-result_mystery <- read.table("models/mystery/mystery_model_finbol_gbol.txt",
-                             header = T) |> 
-  dplyr::arrange(ID)
-result_mystery[is.na(result_mystery)] <- 0
-result_mystery <- arrange_columns(result_mystery, correct_cols)
-
-
-# PREPARE AND CHECK RESULT -----------------------------------------------------
-
-results <- list(
-#  "BayesANT" = result_BayesANT,
-#  "PROTAX" = result_PROTAX,
-  "EPA-ng taxtree" = result_epatax,
-#  "RDP" = result_RDP,
-  "SINTAX" = result_SINTAX,
-  "Mystery" = result_mystery,
-  "EPA-ng phyltree" = result_epaphyl
-)
+results <- readRDS(paste0("result_list", natxt, ".rds"))
 
 #### Identify novel taxa across all ranks 
 
@@ -161,6 +60,10 @@ for(rank in colnames(data_true)[-1]){
 }
 
 id_all <- lapply(data_true, function(x) 1:length(x))
+
+# data_true has a subset of sequences 
+results <- lapply(results, function(x) x[which(x[,1] %in% data_true[,1]),])
+
 
 # Some quick checks 
 if(!length(unique(lapply(results, function(x) colnames(x)))) == 1) print("One of the results data frames have wrong column names.")
@@ -180,8 +83,7 @@ calibrations$set <- factor(calibrations$set,
 p_cal <- plot_calibration(calibrations) 
 
 ggplot2::ggsave(plot = p_cal, 
-                filename = paste0("../plots/calibration_COI_all", undshort,
-                                  "_", level, ".pdf"), 
+                filename = paste0("../plots/calibration_COI_all", undshort, ".pdf"), 
                 width = 210, 
                 height = 297, 
                 units = "mm")
@@ -304,8 +206,7 @@ accuracies$set <- factor(accuracies$set,
 p_acc <- plot_accuracies(accuracies)
 
 ggplot2::ggsave(plot = p_acc, 
-                filename = paste0("../plots/accuracy_COI", undshort, 
-                                  "_", level, ".pdf"), 
+                filename = paste0("../plots/accuracy_COI", undshort, ".pdf"), 
                 width = 210, 
                 height = 150, 
                 units = "mm")
@@ -344,24 +245,24 @@ accuracy_df$measure <- factor(accuracy_df$measure,
 
 fourpanel_accuracy <-
   accuracy_df |> 
-  filter(measure == "marginal", set != "All") |> 
-  select(-denom_cond) |> 
-  mutate(set = map_chr(set, ~str_to_sentence(paste(.x, "taxa"))), 
-         accuracy = accuracy * 100) |> 
-  bind_rows(accuracies |> 
-              filter(set != "All") |> 
-              mutate(set = paste(set, "species"), 
-                     measure = "accuracy")) |> 
-  mutate(set = factor(set, levels = c("Observed species",
+  dplyr::filter(measure == "marginal", set != "All") |> 
+  dplyr::select(-denom_cond) |> 
+  dplyr::mutate(set = purrr::map_chr(set, ~stringr::str_to_sentence(paste(.x, "taxa"))),
+                accuracy = accuracy * 100) |> 
+  dplyr::bind_rows(accuracies |>
+                     dplyr::filter(set != "All") |>
+                     dplyr::mutate(set = paste(set, "species"),
+                                   measure = "accuracy")) |> 
+  dplyr::mutate(set = factor(set, levels = c("Observed species",
                                       "Novel species",
                                       "Observed taxa",
                                       "Novel taxa"))) |> 
   ggplot2::ggplot() + 
   ggplot2::theme_bw() + 
   ggplot2::theme(aspect.ratio = 1, 
-                 panel.grid.minor = element_blank(), 
-                 axis.title.x = element_blank(), 
-                 axis.text.x = element_text(angle = 45, hjust = 1)) + 
+                 panel.grid.minor = ggplot2::element_blank(), 
+                 axis.title.x = ggplot2::element_blank(), 
+                 axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) + 
   ggplot2::aes(x = rank, 
                y = accuracy, 
                color = model) + 
@@ -481,3 +382,55 @@ ggsave(plot = p_part_novelty,
        width = 220, 
        height = 130, 
        units = "mm")
+
+# % CLASSIFIED ~ % CORRECT -----------------------------------------------------
+
+
+# TODO: BLAST can be included with % identity 
+
+threshold_curve <- function(results, data_true, thresholds = seq(0, 1, 0.01)){
+  
+  out <- data.frame()
+  ranks <- colnames(data_true)[-1]
+  n <- nrow(data_true)
+  
+  for(i in 1:length(results)){
+    
+    for(r in ranks){
+      
+      probcol <- paste0("Prob_", r)
+      
+      correct <- sapply(thresholds, function(x)
+        sum(results[[i]][which(results[[i]][, probcol] >= x), r] == data_true[which(results[[i]][, probcol] >= x), r]) /
+          length(which(results[[i]][, probcol] >= x)) * 100)
+      classified <- sapply(thresholds, 
+                           function(x) length(which(results[[i]][,probcol] >= x))/n * 100)
+      
+      out <- rbind(out, 
+            data.frame(model = names(results)[i], 
+                       rank = r, 
+                       threshold = thresholds, 
+                       correct = correct, 
+                       classified = classified))
+      
+    }
+  }
+  return(out)
+}
+
+test <- threshold_curve(results, data_true)
+
+test |> 
+  ggplot2::ggplot() + 
+  ggplot2::geom_line(ggplot2::aes(x = classified, 
+                                  y = correct, 
+                                  color = model)) + 
+  ggplot2::facet_wrap(~rank, 
+                      scales = "free_x") + 
+  ggplot2::theme_bw() + 
+  ggplot2::theme(aspect.ratio = 1) + 
+  ggplot2::labs(x = "% classified", 
+                y = "% correct", 
+                color = "Model")
+
+

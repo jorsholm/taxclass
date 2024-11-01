@@ -51,27 +51,35 @@ get_data_true <- function(test, train,
 #' Renames PROTAX new taxa ("unk") to BayesANT standard. 
 #' Only deals with taxonomy-columns (not prob-columns). 
 #' @param x one row data frame with taxonomy columns of protax output 
-rename_unk <- function(x){
-  is_unk <- x == "unk"
+rename_unk <- function(x, unktxt = "unk"){
+  # Remove NAs 
+  cols <- names(x)
+  na_cols <- names(x[which(is.na(x))])
+  if(length(na_cols) > 0) x <- x[-which(names(x) %in% na_cols)]
   
-  if(sum(is_unk) > 0){
-    if(all(x == "unk")){
+  is_unk <- x == unktxt
+  
+  if (sum(is_unk) > 0) {
+    if (all(x == unktxt)) {
       x[1:length(x)] <- "Class_new"
-    }else{
+    } else{
       d <- min(which(is_unk))
-      x[d:length(x)] <- paste0(x[d-1], "_", stringr::str_to_title(names(x)[d]), "_new")
+      x[d:length(x)] <- paste0(x[d - 1], "_", stringr::str_to_title(names(x)[d]), "_new")
     }
   }
-  return(x)
+  # Replace NAs
+  x[na_cols] <- NA
+  # Return sorted to original order 
+  return(x[cols])
 }
 
 #' Renames 'unk' to BayesANT standard + sort columns 
 #' @param out data frame with PROTAX results. Cannot contain NA values  
-rename_unk_output <- function(out){
+rename_unk_output <- function(out, unktxt = "unk"){
   # Rename unk 
   renamed <- cbind("ID" = out[,which(colnames(out) == "ID")],
                    t(apply(out[, which(!stringr::str_detect(colnames(out), "Prob|ID"))],
-                           1, function(x) rename_unk(x))), 
+                           1, function(x) rename_unk(x, unktxt = unktxt))), 
                    out[,which(stringr::str_detect(colnames(out), "Prob_"))])
   
   return(renamed)
@@ -119,6 +127,13 @@ get_calibration <- function(results, data_true, observed_everywhere,
         }else if(set == "Novel"){
           correct <- results[[i]][!observed_everywhere,col] == data_true[!observed_everywhere,col]
           prob <- results[[i]][!observed_everywhere,col_prob]
+        }
+        
+        # Skip over NAs
+        na_pos <- which(is.na(results[[i]][,col]))
+        if(length(na_pos) > 0){
+          correct <- correct[-na_pos]
+          prob <- prob[-na_pos]
         }
         
         if(binned){
@@ -230,7 +245,7 @@ plot_calibration <- function(calibrations){
 
   if(length(groups) == 3){
     p <- p + 
-      ggplot2::facet_grid(model~set)
+      ggplot2::facet_grid(set~model)
   }else if(all(groups == c("model", "rank"))){
     p <- p + 
       ggplot2::facet_wrap(~model)
@@ -336,16 +351,21 @@ marginal_accuracy <- function(results, data_true, id_list){
     
     for(r in ranks){
       
-      denom <- length(data_true[id_list[[set]][[r]], r])
-      
       for(i in 1:length(results)){
-        correct <- sum(results[[i]][id_list[[set]][[r]],r] == data_true[id_list[[set]][[r]],r])
+        
+        positions <- id_list[[set]][[r]]
+        na_pos <- which(is.na(results[[i]][positions,r]))
+        
+        # Skip NAs in the calculation
+        if(length(na_pos) > 0) positions <- positions[-na_pos]
+        
+        correct <- sum(results[[i]][positions,r] == data_true[positions,r])
         
         marg_accuracies <- rbind(marg_accuracies, 
                                  data.frame(model = names(results[i]),
                                             set = set,
                                             rank = r,
-                                            marg_accuracy = correct/denom))
+                                            marg_accuracy = correct/length(positions)))
       }
     }
   }
@@ -365,19 +385,31 @@ conditional_accuracy <- function(results, data_true, id_list){
       
       for(i in 1:length(results)){
         
+        positions <- ids[[ranks[r]]]
+        
+        # Both the target rank and the rank above 
+        if(r == 1){
+          na_pos <- which(is.na(results[[i]][positions, ranks[r]]))
+        }else{
+          na_pos <- union(which(is.na(results[[i]][positions, ranks[r]])),
+                          which(is.na(results[[i]][positions, ranks[r-1]])))
+        }
+        
+        if(length(na_pos) > 0) positions <- positions[-na_pos]
+        
         # Denominator: novel taxa correctly predicted on the rank above
         if(r == 1){
-          denom <- length(ids[[r]])
+          denom <- length(positions)
         }else{
           denom <-
             sum(
-              results[[i]][ids[[ranks[r]]], ranks[r-1]] == data_true[ids[[ranks[r]]], ranks[r-1]]
+              results[[i]][positions, ranks[r-1]] == data_true[positions, ranks[r-1]]
             )
         }
         
         correct <- 
           sum(
-            results[[i]][ids[[ranks[r]]], ranks[r]] == data_true[ids[[ranks[r]]], ranks[r]]
+            results[[i]][positions, ranks[r]] == data_true[positions, ranks[r]]
           )
         
         if(correct > denom) print("Error: number of correct predictions larger than the denominator.")
@@ -420,3 +452,43 @@ count_novel <- function(results, data_true, id_novel){
   }
   return(pred_df)
 }
+
+#' @param taxdf data frame with allowed taxonomy. Must only contain rank columns (ordered). 
+check_taxonomy <- function(taxdf, results, ranks){
+  
+  # Build a list of all allowed taxonomic combinations 
+  taxlist <- unique(taxdf[,1])
+  for(r in 2:length(ranks)){
+    taxlist <- c(taxlist, 
+                 apply(taxdf[1:r] |> dplyr::distinct(), 1, function(row) paste(row, collapse = "|")))
+  }
+  
+  mismatch <- data.frame() 
+  
+  for(i in 1:length(results)){
+    
+    print(names(results)[i])
+    
+    df <- results[[i]][,ranks] |> dplyr::distinct()
+    
+    for(j in 1:nrow(df)){
+      
+      if(is.na(df[j,1])) next
+      
+      df_row <- df[j,which(!is.na(df[j,]))]
+      
+      nonew_ranks <- which(!stringr::str_ends(df_row, "_new"))
+      
+      # Skip if Class_new
+      if(length(nonew_ranks) == 0) next 
+      
+      taxstr <- paste(df[j, 1:max(nonew_ranks)], collapse = "|")
+      match <- taxstr %in% taxlist
+      
+      if(!match) mismatch <- rbind(mismatch, 
+                                   df[j,] |> dplyr::mutate(model = names(results)[i]))
+    }
+  }
+  return(mismatch)
+}
+
