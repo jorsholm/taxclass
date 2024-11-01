@@ -67,7 +67,7 @@ results <- lapply(results, function(x) x[which(x[,1] %in% data_true[,1]),])
 
 # Some quick checks 
 if(!length(unique(lapply(results, function(x) colnames(x)))) == 1) print("One of the results data frames have wrong column names.")
-if(!all(sapply(results, function(x) all(x[,1] == data_true[,1])))) print("One of the results data frames is not sorted by ID.")
+if(!all(sapply(results[8], function(x) all(x[,1] == data_true[,1])))) print("One of the results data frames is not sorted by ID.")
 if(!all(colnames(data_true) == colnames(results[[1]])[1:ncol(data_true)])) print("Column names containing taxonomic information not identical to data_true")
 
 
@@ -84,8 +84,8 @@ p_cal <- plot_calibration(calibrations)
 
 ggplot2::ggsave(plot = p_cal, 
                 filename = paste0("../plots/calibration_COI_all", undshort, ".pdf"), 
-                width = 210, 
-                height = 297, 
+                width = 500, 
+                height = 300, 
                 units = "mm")
 
 #### Subset plot for publication: observed and novel sets only #### 
@@ -156,10 +156,10 @@ p_cal_binned_genus <-
                                breaks = c(10, 100, 1000),
                                labels = c(10, 100, 1000))
 
-ggsave(plot = binned_genus, 
+ggplot2::ggsave(plot = p_cal_binned_genus, 
        filename = paste0("../plots/binned_calibration_genus_COI", undshort, ".pdf"), 
-       width = 200, 
-       height = 90, 
+       width = 500, 
+       height = 200, 
        units = "mm")
 
 #### All ranks for all models #### 
@@ -316,7 +316,7 @@ pred_novel$rank <- factor(pred_novel$rank, levels = names(data_true)[-1])
 p_tot_novel <-
   pred_novel |> 
   ggplot2::ggplot() + 
-  ggplot2::geom_line(data = pred_novel |> filter(model == model[1]),
+  ggplot2::geom_line(data = pred_novel |> dplyr::filter(model == model[1]),
                      ggplot2::aes(x = rank, y = sum_novel, group = model),
                      color = "black",
                      linetype = "dashed") + 
@@ -327,7 +327,7 @@ p_tot_novel <-
   ggplot2::theme_bw() + 
   ggplot2::scale_y_log10()
 
-ggsave(plot = p_tot_novel, 
+ggplot2::ggsave(plot = p_tot_novel, 
        filename = paste0("../plots/sum_novel_COI", undshort, ".pdf"), 
        height = 150, 
        width = 200, 
@@ -367,17 +367,17 @@ p_part_novelty <-
   ggplot2::facet_wrap(~model) + 
   ggplot2::scale_fill_manual(limits = c(colnames(data_true)[-1],
                                         "Correct"), 
-                             values = c(color_alternatives[1:length(colnames(data_true)[-1])],
+                             values = c(plot_colors[1:length(colnames(data_true)[-1])],
                                         "grey")) + 
   ggplot2::labs(fill = "Predicted novel rank",
                 y= "Proportion of predictions (%)") + 
   ggplot2::theme_bw() + 
-  ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1), 
-                 axis.title.x = element_blank()) + 
+  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1), 
+                 axis.title.x = ggplot2::element_blank()) + 
   ggplot2::geom_hline(yintercept = 0, 
                       color = "grey20", linetype = "dashed")
 
-ggsave(plot = p_part_novelty, 
+ggplot2::ggsave(plot = p_part_novelty, 
        filename = paste0("../plots/part_novelty_COI", undshort, ".pdf"), 
        width = 220, 
        height = 130, 

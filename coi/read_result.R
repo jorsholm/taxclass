@@ -17,7 +17,7 @@ if(short){
   shorttxt <- "short"
   undshort <- "_short"
 }
-keep_na <- F
+keep_na <- T
 natxt <- ""
 if(keep_na) natxt <- "_keepNA"
 
@@ -107,6 +107,7 @@ result_epaphyl <-
                     shorttxt, "_finbol-gbol.txt"),
              header = T, sep = "\t")  |>
   dplyr::arrange(ID)
+result_epaphyl$class[which(result_epaphyl$class == "DISTANT")] <- "unk"
 result_epaphyl$species <- sapply(result_epaphyl$species, 
                                  function(x) stringr::str_replace(x, " ", "_"),
                                  USE.NAMES = F)
@@ -156,7 +157,7 @@ result_blast_thresh <-
              header = T) |> 
   dplyr::arrange(ID)
 result_blast_thresh <- arrange_columns(result_blast_thresh, correct_cols)
-if(keep_na){
+if(!keep_na){
   result_blast_thresh[is.na(result_blast_thresh)] <- "unk"
   result_blast_thresh[,correct_cols[which(stringr::str_starts(correct_cols, "Prob_"))]] <- 1
   result_blast_thresh <- rename_unk_output(result_blast_thresh)
@@ -315,6 +316,8 @@ results <- list(
   "MycoAI-CNN" = result_aicnn, 
   "MycoAI-BERT" = result_aibert
 )
+
+results <- lapply(results, function(x) as.data.frame(x))
 
 saveRDS(results, paste0("result_list", natxt, ".rds"))
 

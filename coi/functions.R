@@ -130,7 +130,7 @@ get_calibration <- function(results, data_true, observed_everywhere,
         }
         
         # Skip over NAs
-        na_pos <- which(is.na(results[[i]][,col]))
+        na_pos <- which(is.na(correct))
         if(length(na_pos) > 0){
           correct <- correct[-na_pos]
           prob <- prob[-na_pos]
@@ -287,14 +287,14 @@ get_partitioned_novelty <- function(data_true, results, observed_everywhere){
     sub_df <- 
       dplyr::tibble(true_rank = true_novel_rank,
                     pred = results[[i]][!observed_everywhere, tail(ranks, 1)]) |> 
-      dplyr::mutate(pred_rank = map_chr(pred, 
-                                        ~if(stringr::str_ends(.x, "_new")) 
+      dplyr::mutate(pred_rank = purrr::map_chr(pred, 
+                                        ~if(!is.na(.x) & stringr::str_ends(.x, "_new")) 
                                           stringr::str_split(.x, "_")[[1]] |> 
                                           tail(2) |> head(1) 
                                         else "None")) |> 
-      dplyr::mutate(true_count = n(), 
+      dplyr::mutate(true_count = dplyr::n(), 
                     .by = true_rank) |> 
-      dplyr::summarise(pred_count = n(), 
+      dplyr::summarise(pred_count = dplyr::n(), 
                        .by = c(true_rank, pred_rank, true_count)) |> 
       dplyr::mutate(model = names(results)[i], 
                     perc = (pred_count/true_count)*100) 
