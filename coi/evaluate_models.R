@@ -16,7 +16,7 @@ if(short){
   shorttxt <- "short"
   undshort <- "_short"
 }
-keep_na <- T
+keep_na <- F
 natxt <- ""
 if(keep_na) natxt <- "_keepNA"
 
@@ -83,7 +83,7 @@ calibrations$set <- factor(calibrations$set,
 p_cal <- plot_calibration(calibrations) 
 
 ggplot2::ggsave(plot = p_cal, 
-                filename = paste0("../plots/calibration_COI_all", undshort, ".pdf"), 
+                filename = paste0("../plots/calibration_COI_all", natxt, undshort, ".pdf"), 
                 width = 500, 
                 height = 300, 
                 units = "mm")
@@ -103,7 +103,7 @@ p_cal_subset <-
   ggplot2::guides(color = ggplot2::guide_legend(nrow = 1))
 
 ggplot2::ggsave(plot = p_cal_subset, 
-                filename = paste0("../plots/calibration_COI_subset", undshort, ".pdf"), 
+                filename = paste0("../plots/calibration_COI_subset", natxt, undshort, ".pdf"), 
                 width = 235, 
                 height = 130, 
                 units = "mm")
@@ -157,7 +157,7 @@ p_cal_binned_genus <-
                                labels = c(10, 100, 1000))
 
 ggplot2::ggsave(plot = p_cal_binned_genus, 
-       filename = paste0("../plots/binned_calibration_genus_COI", undshort, ".pdf"), 
+       filename = paste0("../plots/binned_calibration_genus_COI", natxt, undshort, ".pdf"), 
        width = 500, 
        height = 200, 
        units = "mm")
@@ -187,7 +187,7 @@ for(m in names(results)){
     ggplot2::ggtitle(m)
 }
 
-pdf(paste0("../plots/binned_calibration_COI", undshort, ".pdf"), 
+pdf(paste0("../plots/binned_calibration_COI", natxt, undshort, ".pdf"), 
     width = 10)
 lapply(plotlist, print)
 dev.off()
@@ -206,7 +206,7 @@ accuracies$set <- factor(accuracies$set,
 p_acc <- plot_accuracies(accuracies)
 
 ggplot2::ggsave(plot = p_acc, 
-                filename = paste0("../plots/accuracy_COI", undshort, ".pdf"), 
+                filename = paste0("../plots/accuracy_COI", natxt, undshort, ".pdf"), 
                 width = 210, 
                 height = 150, 
                 units = "mm")
@@ -272,7 +272,7 @@ fourpanel_accuracy <-
   ggplot2::labs(color = "Model", y = "Accuracy (%)") 
 
 ggplot2::ggsave(filename = paste0("../plots/fourpanel_accuracy_COI", 
-                                  undshort, ".pdf"), 
+                                  natxt, undshort, ".pdf"), 
                 plot = fourpanel_accuracy, 
                 height = 150, 
                 width = 200, 
@@ -328,13 +328,14 @@ p_tot_novel <-
   ggplot2::scale_y_log10()
 
 ggplot2::ggsave(plot = p_tot_novel, 
-       filename = paste0("../plots/sum_novel_COI", undshort, ".pdf"), 
+       filename = paste0("../plots/sum_novel_COI", natxt, undshort, ".pdf"), 
        height = 150, 
        width = 200, 
        units = "mm")
 
 # NOVELTY: PARTITIONED ---------------------------------------------------------
 
+# TODO: Change so that correct prediction is actually a fully correct (not just correct novel) 
 partitioned_novelty <- 
   get_partitioned_novelty(data_true, results, observed_everywhere) |> 
   dplyr::filter(pred_rank != "None")
@@ -378,7 +379,7 @@ p_part_novelty <-
                       color = "grey20", linetype = "dashed")
 
 ggplot2::ggsave(plot = p_part_novelty, 
-       filename = paste0("../plots/part_novelty_COI", undshort, ".pdf"), 
+       filename = paste0("../plots/part_novelty_COI", natxt, undshort, ".pdf"), 
        width = 220, 
        height = 130, 
        units = "mm")
