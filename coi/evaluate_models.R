@@ -16,7 +16,7 @@ if(short){
   shorttxt <- "short"
   undshort <- "_short"
 }
-keep_na <- F
+keep_na <- T
 natxt <- ""
 if(keep_na) natxt <- "_keepNA"
 
@@ -433,5 +433,34 @@ test |>
   ggplot2::labs(x = "% classified", 
                 y = "% correct", 
                 color = "Model")
+
+# NA counts --------------------------------------------------------------------
+
+if(keep_na){
+  p_na_count <- 
+    dplyr::bind_rows(results, .id = "model") |> 
+    dplyr::mutate(across(all_of(ranks), is.na)) |> 
+    dplyr::summarise(across(all_of(ranks), sum), 
+                     .by = model) |> 
+    tidyr::pivot_longer(cols = all_of(ranks), 
+                        names_to = "rank", 
+                        values_to = "na_count") |> 
+    dplyr::filter(!all(na_count == 0), .by = model) |>
+    dplyr::mutate(rank = factor(rank, levels = ranks)) |> 
+    ggplot2::ggplot() + 
+    ggplot2::geom_bar(ggplot2::aes(x = rank, 
+                                   y = na_count), 
+                      stat = "identity") + 
+    ggplot2::facet_wrap(~model) + 
+    ggplot2::theme_bw() + 
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
+  
+  ggplot2::ggsave(plot = p_na_count, 
+                  filename = paste0("../plots/na_count", undshort, ".pdf"), 
+                  width = 6, 
+                  height = 5, 
+                  units = "in")
+}
+
 
 
