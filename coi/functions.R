@@ -492,3 +492,32 @@ check_taxonomy <- function(taxdf, results, ranks){
   return(mismatch)
 }
 
+threshold_curve <- function(results, data_true, thresholds = seq(0, 1, 0.01)){
+  
+  out <- data.frame()
+  ranks <- colnames(data_true)[-1]
+  n <- nrow(data_true)
+  
+  for(i in 1:length(results)){
+    
+    for(r in ranks){
+      
+      probcol <- paste0("Prob_", r)
+      
+      correct <- sapply(thresholds, function(x)
+        sum(results[[i]][which(results[[i]][, probcol] >= x), r] == data_true[which(results[[i]][, probcol] >= x), r]) /
+          length(which(results[[i]][, probcol] >= x)) * 100)
+      classified <- sapply(thresholds, 
+                           function(x) length(which(results[[i]][,probcol] >= x))/n * 100)
+      
+      out <- rbind(out, 
+                   data.frame(model = names(results)[i], 
+                              rank = r, 
+                              threshold = thresholds, 
+                              correct = correct, 
+                              classified = classified))
+      
+    }
+  }
+  return(out)
+}

@@ -30,10 +30,6 @@ data <- load_FinBOL_GBOL()
 data_true <- get_data_true(data$test, data$train) |>
   dplyr::arrange(ID)
 
-class_order_match <- data$train |>
-  dplyr::select(Class, Order) |>
-  dplyr::distinct()
-
 # CORRECT COLUMN NAMES AND ORDER -----------------------------------------------
 
 ranks <- colnames(data_true)[-1]
@@ -386,55 +382,72 @@ ggplot2::ggsave(plot = p_part_novelty,
 
 # % CLASSIFIED ~ % CORRECT -----------------------------------------------------
 
+result_blast_top_similarity <-
+  read.table(paste0("results/blast/blast_top_hit_test", shorttxt, "_nt_16.tsv"),
+             header = T) |> 
+  dplyr::arrange(ID) 
+result_blast_top_similarity <- arrange_columns(result_blast_top_similarity, correct_cols)
+result_blast_top_similarity <- 
+  result_blast_top_similarity |> 
+  dplyr::select(ID, all_of(ranks)) |> 
+  tidyr::separate(Species, into = c("Species", "Similarity"), 
+                  sep = ";") 
+result_blast_top_similarity[,correct_cols[which(stringr::str_starts(correct_cols, "Prob_"))]] <- as.numeric(result_blast_top_similarity$Similarity)/100
+result_blast_top_similarity <- result_blast_top_similarity |> dplyr::select(-Similarity)
 
-# TODO: BLAST can be included with % identity 
+add_blast_top_similarity <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_top_similarity$ID))])
+add_blast_top_similarity[,correct_cols[-1]] <- NA
 
-threshold_curve <- function(results, data_true, thresholds = seq(0, 1, 0.01)){
-  
-  out <- data.frame()
-  ranks <- colnames(data_true)[-1]
-  n <- nrow(data_true)
-  
-  for(i in 1:length(results)){
-    
-    for(r in ranks){
-      
-      probcol <- paste0("Prob_", r)
-      
-      correct <- sapply(thresholds, function(x)
-        sum(results[[i]][which(results[[i]][, probcol] >= x), r] == data_true[which(results[[i]][, probcol] >= x), r]) /
-          length(which(results[[i]][, probcol] >= x)) * 100)
-      classified <- sapply(thresholds, 
-                           function(x) length(which(results[[i]][,probcol] >= x))/n * 100)
-      
-      out <- rbind(out, 
-            data.frame(model = names(results)[i], 
-                       rank = r, 
-                       threshold = thresholds, 
-                       correct = correct, 
-                       classified = classified))
-      
-    }
-  }
-  return(out)
-}
+result_blast_top_similarity <- rbind(result_blast_top_similarity, add_blast_top_similarity) |> dplyr::arrange(ID)
 
-test <- threshold_curve(results, data_true)
+result_blast_top_similarity <- 
+  result_blast_top_similarity |> 
+  dplyr::filter(ID %in% data_true$ID)
 
-test |> 
+results_similarity <- results
+results_similarity$`BLAST top hit` <- result_blast_top_similarity
+
+classified_correct <- threshold_curve(results_similarity, data_true)
+
+point_models <- 
+  classified_correct |> 
+    dplyr::group_by(model) |> 
+    dplyr::distinct(correct, classified) |> 
+    dplyr::summarise(count = dplyr::n()) |> 
+    dplyr::filter(count == length(ranks)) |> 
+    dplyr::pull(model)
+
+p_class_correct <- 
+  classified_correct |> 
+  dplyr::mutate(rank = factor(rank, levels = ranks)) |> 
   ggplot2::ggplot() + 
   ggplot2::geom_line(ggplot2::aes(x = classified, 
                                   y = correct, 
-                                  color = model)) + 
+                                  color = model), 
+                     alpha = 0.7) + 
+  ggplot2::geom_point(data = classified_correct |> 
+                        dplyr::filter(model %in% point_models) |> 
+                        dplyr::group_by(model, rank) |> 
+                        dplyr::distinct(classified, correct), 
+                      ggplot2::aes(x = classified, 
+                                   y = correct, 
+                                   color = model))+ 
   ggplot2::facet_wrap(~rank, 
                       scales = "free_x") + 
   ggplot2::theme_bw() + 
   ggplot2::theme(aspect.ratio = 1) + 
   ggplot2::labs(x = "% classified", 
                 y = "% correct", 
-                color = "Model")
+                color = "Model") + 
+  ggplot2::ylim(c(0, 110))
 
-# NA counts --------------------------------------------------------------------
+ggplot2::ggsave(plot = p_class_correct, 
+                filename = paste0("../plots/classified_correct_COI", natxt, undshort, ".pdf"), 
+                width = 220, 
+                height = 130, 
+                units = "mm")
+
+# NA COUNTS --------------------------------------------------------------------
 
 if(keep_na){
   p_na_count <- 
@@ -446,14 +459,16 @@ if(keep_na){
                         names_to = "rank", 
                         values_to = "na_count") |> 
     dplyr::filter(!all(na_count == 0), .by = model) |>
+    dplyr::mutate(na_perc = na_count/nrow(data_true) * 100) |> 
     dplyr::mutate(rank = factor(rank, levels = ranks)) |> 
     ggplot2::ggplot() + 
     ggplot2::geom_bar(ggplot2::aes(x = rank, 
-                                   y = na_count), 
+                                   y = na_perc), 
                       stat = "identity") + 
     ggplot2::facet_wrap(~model) + 
     ggplot2::theme_bw() + 
-    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) + 
+    ggplot2::ylim(c(0, 100))
   
   ggplot2::ggsave(plot = p_na_count, 
                   filename = paste0("../plots/na_count", undshort, ".pdf"), 
