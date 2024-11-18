@@ -49,3 +49,7 @@ po/*~
 rsconnect/
 
 coi/trash.R
+
+coi/results/bayesant/old_results
+coi/models/bayesant/all_models/
+
