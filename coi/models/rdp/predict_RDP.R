@@ -5,6 +5,9 @@ result_file <- Sys.getenv("RESULT_FILE")
 path_to_rdp_jar <- Sys.getenv("PATH_TO_CLASSIFIER")
 model_dir <- Sys.getenv("MODEL_DIR")
 
+# Source RDP classifier R functions
+source("~/taxclass/coi/models/rdp/rRDP.R")
+
 # Point to the RDP classifier
 model_RDP <- list(dir = model_dir)
 attr(model_RDP, "class") <- "RDPClassifier"
