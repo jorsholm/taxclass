@@ -22,7 +22,7 @@ registerDoParallel(22)
 
 # Load data
 file.train <- paste0(data_dir, "train_nt_aln_label.fasta")
-rank_names <- c("Class", "Order", "Family", "Subfamily", "Genus", "Tribe", "Species")
+rank_names <- c("Class", "Order", "Family", "Subfamily", "Tribe", "Genus", "Species")
 data_train <- read.BayesANT.data(file.train, rank_names = rank_names, sep = "\\s+|\\|")
 
 # Train BayesANT
@@ -62,6 +62,9 @@ output_short <- read.table(paste0(out_dir, "bayesant_", "testshort_nt_aln_label.
 plot_accuracies(output_short, data_test_lab)
 #---------------------------------
 
+
+
+
 ################################################################################
 # Part 2 - aminoacids
 ################################################################################
@@ -75,7 +78,7 @@ plot_accuracies(output_short, data_test_lab)
 
 # Load data
 file.train <- paste0(data_dir, "train_aa_aln_label.fasta")
-rank_names <- c("Class", "Order", "Family", "Subfamily", "Genus", "Tribe", "Species")
+rank_names <- c("Class", "Order", "Family", "Subfamily", "Tribe", "Genus", "Species")
 data_train <- read.BayesANT.data(file.train, rank_names = rank_names, sep = "\\s+|\\|")
 
 # Train BayesANT
@@ -113,3 +116,5 @@ plot_accuracies(output, data_testshort_lab)
 # Show accuracies in full case
 output_short <- read.table(paste0(out_dir, "bayesant_", "testshort_aa_aln_label.txt"))
 plot_accuracies(output_short, data_testshort_lab)
+
+
