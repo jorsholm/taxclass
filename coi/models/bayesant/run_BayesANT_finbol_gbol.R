@@ -51,6 +51,16 @@ output_short <- predict(classifier, DNA = data_testshort, rho = 0.1, cores = 22)
 write.table(output, file = paste0(out_dir, "bayesant_", "test_nt_aln_label.txt"))
 write.table(output_short, file = paste0(out_dir, "bayesant_", "testshort_nt_aln_label.txt"))
 
+#--------------------------------- Show accuracies 
+output <- read.table(paste0(out_dir, "bayesant_", "test_nt_aln_label.txt"))
+data_test_lab <- read.BayesANT.data(file.test, rank_names = rank_names, sep = "\\s+|\\|")
+data_test_lab <- add_novelty_to_test_data(data_train, data_test_lab)
+plot_accuracies(output, data_test_lab)
+
+# Show accuracies in full case
+output_short <- read.table(paste0(out_dir, "bayesant_", "testshort_nt_aln_label.txt"))
+plot_accuracies(output_short, data_test_lab)
+#---------------------------------
 
 ################################################################################
 # Part 2 - aminoacids
@@ -94,3 +104,12 @@ output_short <- predict(classifier, DNA = data_testshort, rho = 0.3, cores = 22)
 write.table(output, file = paste0(out_dir, "bayesant_", "test_aa_aln_label.txt"))
 write.table(output_short, file = paste0(out_dir, "bayesant_", "testshort_aa_aln_label.txt"))
 
+# Show accuracies 
+output <- read.table(paste0(out_dir, "bayesant_", "test_aa_aln_label.txt"))
+data_testshort_lab <- read.BayesANT.data(file.testshort, rank_names = rank_names, sep = "\\s+|\\|")
+data_testshort_lab <- add_novelty_to_test_data(data_train, data_test_lab)
+plot_accuracies(output, data_testshort_lab)
+
+# Show accuracies in full case
+output_short <- read.table(paste0(out_dir, "bayesant_", "testshort_aa_aln_label.txt"))
+plot_accuracies(output_short, data_testshort_lab)
