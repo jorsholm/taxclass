@@ -17,7 +17,7 @@ if(short){
   shorttxt <- "short"
   undshort <- "_short"
 }
-keep_na <- T
+keep_na <- F
 natxt <- ""
 if(keep_na) natxt <- "_keepNA"
 
@@ -59,18 +59,20 @@ correct_cols <- c("ID",
 # READ RESULTS -----------------------------------------------------------------
 
 # BayesANT
-# result_BayesANT <-
-#   read.table(paste0("models/results_bayesant_finbol_gbol/bayesant_test", 
-#                     shorttxt, "_finbol-gbol_", level, ".txt"),
-#              header = T) |>
-#   dplyr::arrange(ID)
+result_BayesANT <-
+  read.table(paste0("results/bayesant/bayesant_test", shorttxt, "_nt_aln_label.txt"),
+             header = T) |>
+  tibble::rownames_to_column("ID") |> 
+  dplyr::arrange(ID)
+result_BayesANT <- arrange_columns(result_BayesANT, correct_cols)
 
 # RDP
 # result_RDP <-
-#   read.table(paste0("models/results_rdp_finbol_gbol/rdp_test", 
-#                     shorttxt, "_finbol-gbol_", level, ".txt"),
+#   read.table(paste0("results/rdp/rdp_test", shorttxt, "_nt_aln_label.txt"),
 #              header = T) |>
+#   tibble::rownames_to_column("ID") |> 
 #   dplyr::arrange(ID)
+# result_RDP <- arrange_columns(result_RDP, correct_cols)
 
 # PROTAX
 # result_PROTAX <- 
@@ -231,63 +233,64 @@ if(keep_na){
   result_idtaxa <- rename_unk_output(result_idtaxa)
 }
 
-# Brendan's mystery model
-# Special keep_na case: 
-# Unknown = novel (has probability), NA = NA (no probability)
-# if the rank above is unknown, then the whole row should be unknown with the same probability.
-# When not keep_na, the same rule applies for all unknown and NAs. 
-result_mystery <- read.table("models/mystery/mystery_model_finbol_gbol.txt",
-                             header = T) |> 
-  dplyr::arrange(ID)
-result_mystery <- arrange_columns(result_mystery, correct_cols)
-if(keep_na){
-  result_mystery <- 
-    result_mystery |> 
-    dplyr::mutate(across(all_of(ranks), 
-                         ~stringr::str_replace(., "^unknown_.*", "unk"))) |> 
-    tidyr::pivot_longer(cols = all_of(ranks),
-                        names_to = "rank",
-                        values_to = "taxon") |>
-    tidyr::pivot_longer(cols = paste0("Prob_", ranks),
-                        names_to = "Prob_rank",
-                        names_pattern = "Prob_(.*)",
-                        values_to = "Prob") |> 
-    dplyr::filter(rank == Prob_rank) |> 
-    dplyr::group_by(ID) |> 
-    dplyr::mutate(taxon = dplyr::if_else(is.na(taxon) & any(taxon == "unk"), "unk", taxon)) |> 
-    dplyr::mutate(Prob_filled = dplyr::if_else(taxon == "unk" & is.na(Prob), dplyr::lag(Prob, default = NA), Prob)) |> 
-    tidyr::fill(Prob_filled, .direction = "down") |> 
-    dplyr::mutate(Prob = dplyr::if_else(taxon == "unk" & is.na(Prob), Prob_filled, Prob)) |> 
-    dplyr::select(-Prob_filled) |> 
-    dplyr::ungroup() |> 
-    dplyr::select(-Prob_rank) |> 
-    tidyr::pivot_wider(names_from = rank,
-                       values_from = c(taxon, Prob)) |> 
-    dplyr::rename_with(~gsub("taxon_", "", .), dplyr::starts_with("taxon_")) 
-}else{
-  result_mystery <- 
-    result_mystery |> 
-    dplyr::mutate(across(all_of(ranks), 
-                         ~stringr::str_replace(., "^unknown_.*", "unk"))) |> 
-    tidyr::pivot_longer(cols = all_of(ranks),
-                        names_to = "rank",
-                        values_to = "taxon") |>
-    tidyr::pivot_longer(cols = paste0("Prob_", ranks),
-                        names_to = "Prob_rank",
-                        names_pattern = "Prob_(.*)",
-                        values_to = "Prob") |> 
-    dplyr::filter(rank == Prob_rank) |> 
-    dplyr::group_by(ID) |> 
-    dplyr::mutate(taxon = dplyr::if_else(is.na(taxon), "unk", taxon)) |>  
-    dplyr::mutate(Prob = dplyr::if_else(is.na(Prob), dplyr::lag(Prob, default = NA), Prob)) |> 
-    tidyr::fill(Prob, .direction = "down") |> 
-    dplyr::ungroup() |> 
-    dplyr::select(-Prob_rank) |> 
-    tidyr::pivot_wider(names_from = rank,
-                       values_from = c(taxon, Prob)) |> 
-    dplyr::rename_with(~gsub("taxon_", "", .), dplyr::starts_with("taxon_")) 
-}
-result_mystery <- rename_unk_output(result_mystery)
+# Mystery result ------
+# # Brendan's mystery model
+# # Special keep_na case: 
+# # Unknown = novel (has probability), NA = NA (no probability)
+# # if the rank above is unknown, then the whole row should be unknown with the same probability.
+# # When not keep_na, the same rule applies for all unknown and NAs. 
+# result_mystery <- read.table("models/mystery/mystery_model_finbol_gbol.txt",
+#                              header = T) |> 
+#   dplyr::arrange(ID)
+# result_mystery <- arrange_columns(result_mystery, correct_cols)
+# if(keep_na){
+#   result_mystery <- 
+#     result_mystery |> 
+#     dplyr::mutate(across(all_of(ranks), 
+#                          ~stringr::str_replace(., "^unknown_.*", "unk"))) |> 
+#     tidyr::pivot_longer(cols = all_of(ranks),
+#                         names_to = "rank",
+#                         values_to = "taxon") |>
+#     tidyr::pivot_longer(cols = paste0("Prob_", ranks),
+#                         names_to = "Prob_rank",
+#                         names_pattern = "Prob_(.*)",
+#                         values_to = "Prob") |> 
+#     dplyr::filter(rank == Prob_rank) |> 
+#     dplyr::group_by(ID) |> 
+#     dplyr::mutate(taxon = dplyr::if_else(is.na(taxon) & any(taxon == "unk"), "unk", taxon)) |> 
+#     dplyr::mutate(Prob_filled = dplyr::if_else(taxon == "unk" & is.na(Prob), dplyr::lag(Prob, default = NA), Prob)) |> 
+#     tidyr::fill(Prob_filled, .direction = "down") |> 
+#     dplyr::mutate(Prob = dplyr::if_else(taxon == "unk" & is.na(Prob), Prob_filled, Prob)) |> 
+#     dplyr::select(-Prob_filled) |> 
+#     dplyr::ungroup() |> 
+#     dplyr::select(-Prob_rank) |> 
+#     tidyr::pivot_wider(names_from = rank,
+#                        values_from = c(taxon, Prob)) |> 
+#     dplyr::rename_with(~gsub("taxon_", "", .), dplyr::starts_with("taxon_")) 
+# }else{
+#   result_mystery <- 
+#     result_mystery |> 
+#     dplyr::mutate(across(all_of(ranks), 
+#                          ~stringr::str_replace(., "^unknown_.*", "unk"))) |> 
+#     tidyr::pivot_longer(cols = all_of(ranks),
+#                         names_to = "rank",
+#                         values_to = "taxon") |>
+#     tidyr::pivot_longer(cols = paste0("Prob_", ranks),
+#                         names_to = "Prob_rank",
+#                         names_pattern = "Prob_(.*)",
+#                         values_to = "Prob") |> 
+#     dplyr::filter(rank == Prob_rank) |> 
+#     dplyr::group_by(ID) |> 
+#     dplyr::mutate(taxon = dplyr::if_else(is.na(taxon), "unk", taxon)) |>  
+#     dplyr::mutate(Prob = dplyr::if_else(is.na(Prob), dplyr::lag(Prob, default = NA), Prob)) |> 
+#     tidyr::fill(Prob, .direction = "down") |> 
+#     dplyr::ungroup() |> 
+#     dplyr::select(-Prob_rank) |> 
+#     tidyr::pivot_wider(names_from = rank,
+#                        values_from = c(taxon, Prob)) |> 
+#     dplyr::rename_with(~gsub("taxon_", "", .), dplyr::starts_with("taxon_")) 
+# }
+# result_mystery <- rename_unk_output(result_mystery)
 
 # UGLY FIX FOR BLAST MISSING DATA ----------------------------------------------
 
@@ -302,14 +305,14 @@ add_blast_top[,correct_cols[-1]] <- NA
 result_blast_top <- rbind(result_blast_top, add_blast_top) |> dplyr::arrange(ID)
 
 results <- list(
-  #  "BayesANT" = result_BayesANT,
+  "BayesANT" = result_BayesANT,
   #  "PROTAX" = result_PROTAX,
   "EPA-ng taxtree" = result_epatax,
   #  "RDP" = result_RDP,
   "BLAST top hit" = result_blast_top, 
   "BLAST threshold" = result_blast_thresh, 
   "SINTAX" = result_SINTAX,
-  "Mystery" = result_mystery,
+  # "Mystery" = result_mystery,
   "EPA-ng phyltree" = result_epaphyl,
   "DNABarcoder" = result_dnabarcoder,
   "IDTAXA" = result_idtaxa, 
