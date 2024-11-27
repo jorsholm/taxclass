@@ -48,11 +48,17 @@ output_short <- predict_RDP_parallel(model_RDP = model_RDP,
                                      dataRDP_test = data_testshort,
                                      cores = 22)
 
+# Rename the ranks 
+rank_names <- c("Class", "Order", "Family", "Subfamily", "Genus", "Tribe", "Species")
+colnames(output) <- c(rank_names, paste0("Prob_", rank_names))
+colnames(output_short) <- c(rank_names, paste0("Prob_", rank_names))
+
 # Save output
 write.table(output, 
             file = "~/taxclass/coi/results/rdp/rdp_test_nt_aln_label.txt")
 write.table(output_short, 
             file = "~/taxclass/coi/results/rdp/rdp_testshort_nt_aln_label.txt")
+
 
 
 

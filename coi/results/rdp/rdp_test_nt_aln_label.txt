@@ -1,4 +1,4 @@
-"Kingdom" "Phylum" "Class" "Order" "Family" "Genus" "Species" "Prob_Kingdom" "Prob_Phylum" "Prob_Class" "Prob_Order" "Prob_Family" "Prob_Genus" "Prob_Species"
+"Class" "Order" "Family" "Subfamily" "Genus" "Tribe" "Species" "Prob_Class" "Prob_Order" "Prob_Family" "Prob_Subfamily" "Prob_Genus" "Prob_Tribe" "Prob_Species"
 "TACFI441-12" "Insecta" "Diptera" "Tachinidae" "Phasiinae" "Phasiini" "Phasia" "Phasia_obesa" 1 1 1 1 1 1 0.95
 "TBGMI030-21" "Insecta" "Coleoptera" "Cimberididae" "dummy_Cimberididae" "dummy_Cimberididae" "Cimberis" "Cimberis_attelaboides" 1 0.27 0.09 0.09 0.09 0.09 0.09
 "TACFI440-12" "Insecta" "Diptera" "Tachinidae" "Phasiinae" "Phasiini" "Phasia" "Phasia_hemiptera" 1 1 0.86 0.85 0.85 0.85 0.33
