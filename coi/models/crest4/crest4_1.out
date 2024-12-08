@@ -1,0 +1,287 @@
+EMBOSS  6.5.7  environment loaded 
+BLAST  2.15.0  environment loaded 
+('train_nt_1.tre', 'train_nt_1.map', 'train_nt_1.names')
+Success.
+	Command being timed: "python3 ../crest4_utils/dev_scripts/make_new_crest_db.py train_nt_1.tsv"
+	User time (seconds): 1.17
+	System time (seconds): 0.14
+	Percent of CPU this job got: 17%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:07.52
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 54608
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 619
+	Minor (reclaiming a frame) page faults: 12139
+	Voluntary context switches: 1730
+	Involuntary context switches: 10
+	Swaps: 0
+	File system inputs: 15304
+	File system outputs: 2360
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+
+
+Building a new DB, current time: 12/05/2024 10:48:20
+New DB name:   /scratch/project_2003104/brendan/taxclass/coi/models/crest4/train_nt_1/train_nt_1
+New DB title:  train_nt_1.fasta
+Sequence type: Nucleotide
+Keep MBits: T
+Maximum file size: 3000000000B
+Adding sequences from FASTA; added 35603 sequences in 0.727373 seconds.
+
+
+	Command being timed: "makeblastdb -in train_nt_1.fasta -out train_nt_1 -dbtype nucl"
+	User time (seconds): 0.82
+	System time (seconds): 0.05
+	Percent of CPU this job got: 44%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.95
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 12372
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 33
+	Minor (reclaiming a frame) page faults: 2821
+	Voluntary context switches: 338
+	Involuntary context switches: 18
+	Swaps: 0
+	File system inputs: 45048
+	File system outputs: 18736
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+	Command being timed: "blastn -query ../../data/test_nt.fasta -db train_nt_1/train_nt_1 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_test_nt_1/search.hits -strand plus -num_threads 1"
+	User time (seconds): 9434.04
+	System time (seconds): 16.48
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:38:27
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 103308
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1848
+	Minor (reclaiming a frame) page faults: 5040027
+	Voluntary context switches: 967
+	Involuntary context switches: 50356
+	Swaps: 0
+	File system inputs: 159552
+	File system outputs: 203240
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+Running crest4 v.4.3.7
+Calling `makeblastdb` on '/scratch/project_2003104/brendan/taxclass/coi/models/crest4/train_nt_1/train_nt_1.fasta'...
+Classification ran successfully. Results are placed in 'crest4_test_nt_1/assignments.txt'.
+crest4_test_nt_1/assignments.txt
+Command exited with non-zero status 1
+	Command being timed: "crest4 --fasta ../../data/test_nt.fasta --search_db train_nt_1/ --search_hits crest4_test_nt_1/search.hits --num_threads 1 --output_dir crest4_test_nt_1"
+	User time (seconds): 695.89
+	System time (seconds): 3.49
+	Percent of CPU this job got: 97%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 11:59.74
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 4128636
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 654
+	Minor (reclaiming a frame) page faults: 1040429
+	Voluntary context switches: 3639
+	Involuntary context switches: 3982
+	Swaps: 0
+	File system inputs: 116256
+	File system outputs: 22344
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
+	Command being timed: "blastn -query ../../data/testshort_nt.fasta -db train_nt_1/train_nt_1 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_testshort_nt_1/search.hits -strand plus -num_threads 1"
+	User time (seconds): 3417.40
+	System time (seconds): 11.91
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 57:26.48
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 157124
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 15
+	Minor (reclaiming a frame) page faults: 4185223
+	Voluntary context switches: 148
+	Involuntary context switches: 19944
+	Swaps: 0
+	File system inputs: 34280
+	File system outputs: 200632
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+Running crest4 v.4.3.7
+Classification ran successfully. Results are placed in 'crest4_testshort_nt_1/assignments.txt'.
+crest4_testshort_nt_1/assignments.txt
+Command exited with non-zero status 1
+	Command being timed: "crest4 --fasta ../../data/testshort_nt.fasta --search_db train_nt_1/ --search_hits crest4_testshort_nt_1/search.hits --num_threads 1 --output_dir crest4_testshort_nt_1"
+	User time (seconds): 704.12
+	System time (seconds): 3.53
+	Percent of CPU this job got: 97%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 12:02.74
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 4104516
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 30
+	Minor (reclaiming a frame) page faults: 1024901
+	Voluntary context switches: 2659
+	Involuntary context switches: 3935
+	Swaps: 0
+	File system inputs: 16048
+	File system outputs: 3576
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
+('train_aa_1.tre', 'train_aa_1.map', 'train_aa_1.names')
+Success.
+	Command being timed: "python3 ../crest4_utils/dev_scripts/make_new_crest_db.py train_aa_1.tsv"
+	User time (seconds): 1.11
+	System time (seconds): 0.06
+	Percent of CPU this job got: 91%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.28
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 54532
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 12756
+	Voluntary context switches: 390
+	Involuntary context switches: 7
+	Swaps: 0
+	File system inputs: 16
+	File system outputs: 2360
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+
+
+Building a new DB, current time: 12/05/2024 14:48:34
+New DB name:   /scratch/project_2003104/brendan/taxclass/coi/models/crest4/train_aa_1/train_aa_1
+New DB title:  train_aa_1.fasta
+Sequence type: Protein
+Keep MBits: T
+Maximum file size: 3000000000B
+Adding sequences from FASTA; added 35603 sequences in 0.639038 seconds.
+
+
+	Command being timed: "makeblastdb -in train_aa_1.fasta -out train_aa_1 -dbtype prot"
+	User time (seconds): 0.69
+	System time (seconds): 0.06
+	Percent of CPU this job got: 44%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.68
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 12224
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 26
+	Minor (reclaiming a frame) page faults: 2732
+	Voluntary context switches: 328
+	Involuntary context switches: 13
+	Swaps: 0
+	File system inputs: 44992
+	File system outputs: 22240
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+FASTA-Reader: Ignoring invalid residues at position(s): On line 3622: 201
+FASTA-Reader: Ignoring invalid residues at position(s): On line 7996: 201
+FASTA-Reader: Ignoring invalid residues at position(s): On line 10150: 205
+FASTA-Reader: Ignoring invalid residues at position(s): On line 12446: 27
+FASTA-Reader: Ignoring invalid residues at position(s): On line 39994: 205
+FASTA-Reader: Ignoring invalid residues at position(s): On line 40972: 205
+FASTA-Reader: Ignoring invalid residues at position(s): On line 44580: 168
+FASTA-Reader: Ignoring invalid residues at position(s): On line 48902: 205
+FASTA-Reader: Ignoring invalid residues at position(s): On line 51600: 15
+FASTA-Reader: Ignoring invalid residues at position(s): On line 52216: 203
+FASTA-Reader: Ignoring invalid residues at position(s): On line 52866: 205
+	Command being timed: "blastp -query ../../data/test_aa.fasta -db train_aa_1/train_aa_1 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_test_aa_1/search.hits -num_threads 1"
+	User time (seconds): 48216.36
+	System time (seconds): 31.29
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 13:28:40
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 82808
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 5582
+	Minor (reclaiming a frame) page faults: 5841320
+	Voluntary context switches: 5817
+	Involuntary context switches: 251417
+	Swaps: 0
+	File system inputs: 333480
+	File system outputs: 205648
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+Running crest4 v.4.3.7
+Calling `makeblastdb` on '/scratch/project_2003104/brendan/taxclass/coi/models/crest4/train_aa_1/train_aa_1.fasta'...
+Classification ran successfully. Results are placed in 'crest4_test_aa_1/assignments.txt'.
+crest4_test_aa_1/assignments.txt
+Command exited with non-zero status 1
+	Command being timed: "crest4 --fasta ../../data/test_aa.fasta --search_db train_aa_1/ --search_hits crest4_test_aa_1/search.hits --num_threads 1 --output_dir crest4_test_aa_1"
+	User time (seconds): 570.42
+	System time (seconds): 3.05
+	Percent of CPU this job got: 94%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 10:05.92
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3967588
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 818
+	Minor (reclaiming a frame) page faults: 1003664
+	Voluntary context switches: 4229
+	Involuntary context switches: 3669
+	Swaps: 0
+	File system inputs: 87400
+	File system outputs: 32840
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
+FASTA-Reader: Ignoring invalid residues at position(s): On line 3622: 122
+FASTA-Reader: Ignoring invalid residues at position(s): On line 7996: 122
+FASTA-Reader: Ignoring invalid residues at position(s): On line 10150: 125
+slurmstepd: error: *** JOB 24696610 ON r18c48 CANCELLED AT 2024-12-06T10:48:26 DUE TO TIME LIMIT ***
