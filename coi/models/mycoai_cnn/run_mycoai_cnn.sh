@@ -2,7 +2,7 @@
 #SBATCH --job-name=mycoai_cnn
 #SBATCH --account=project_2005718
 #SBATCH --partition=small
-#SBATCH --time=24:00:00
+#SBATCH --time=72:00:00
 #SBATCH --mem=32G
 #SBATCH --cpus-per-task=40
 #SBATCH --array=40
@@ -28,7 +28,7 @@ mkdir -p $RESULTS
 TRAIN_FILE=$DATA/train_nt_unite.fasta
 MODEL_FILE=train_nt_cnn_$SLURM_ARRAY_TASK_ID.pt
 
-$TIME mycoai-train --out MODEL_FILE\
+$TIME mycoai-train --out $MODEL_FILE\
                    --base_arch_type CNN\
                    $TRAIN_FILE
 

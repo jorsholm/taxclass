@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=mycoai_bert
 #SBATCH --account=project_2005718
-#SBATCH --partition=small
-#SBATCH --time=24:00:00
+#SBATCH --partition=longrun
+#SBATCH --time=7-00:00:00
 #SBATCH --mem=32G
-#SBATCH --cpus-per-task=40
-#SBATCH --array=40
+#SBATCH --cpus-per-task=1
+#SBATCH --array=1
 ##SBATCH --gres=gpu:v100:1
 #SBATCH --output=mycoai_bert_%a.out
 #SBATCH --error=mycoai_bert_%a.out
