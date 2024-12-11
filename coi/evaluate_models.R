@@ -1,6 +1,6 @@
 
-rm(list = ls())
 setwd("coi")
+rm(list = ls())
 
 # LOAD FUNCTIONS ---------------------------------------------------------------
 
@@ -208,6 +208,69 @@ lapply(plotlist, print)
 dev.off()
 
 
+# COLORS -----------------------------------------------------------------------
+
+algs_sorted <- c(
+  # Similarity
+  "BLAST top hit", 
+  "BLAST threshold",
+  "DNABarcoder",
+  "Crest4", 
+  # K-mer 
+  "IDTAXA",
+  "RDP", 
+  "SINTAX",
+  # Probabilistic
+  "BayesANT", 
+  #"PROTAX", 
+  #Neural networks
+  "MycoAI-BERT", 
+  "MycoAI-CNN", 
+  # phylogenetic 
+  "EPA-ng phyltree", 
+  "EPA-ng taxtree")
+
+plot_colors <- c(
+  # Similarity
+  "#bdd7e7",
+  "#6baed6",
+  "#3182bd",
+  "#08519c", 
+  # K-mer
+  "#bae4b3",
+  "#74c476",
+  "#238b45",
+  # Probabilistic
+  "#bcbddc",
+  "#756bb1",
+  #Neural networks
+  "#fdae6b",
+  #"#e6550d",
+  # phylogenetic
+  "#fbb4b9",
+  "#f768a1")
+
+point_shapes <- c( 
+  #similarity 
+  1,
+  2,
+  4,
+  5, 
+  # k-mer
+  1,
+  4,
+  5,
+  # probabilistic 
+  1,
+  # 4,
+  # neural
+  1,
+  4,
+  # phylogenetic
+  1,
+  4
+)
+
 # PLOT ACCURACIES --------------------------------------------------------------
 
 ### If a sequence belongs to a new taxon (on any rank), how well is it predicted on higher ranks? 
@@ -259,48 +322,6 @@ accuracy_df$measure <- factor(accuracy_df$measure,
 
 #### Plot marginal and conditional accuracy #### 
 
-# COLORS -----------------------------------------------------------------------
-
-algs_sorted <- c(# Similarity
-  "BLAST top hit", 
-  "BLAST threshold",
-  "DNABarcoder",
-  #"Quiime2", 
-  # K-mer 
-  "IDTAXA",
-  "RDP", 
-  "SINTAX",
-  # Probabilistic
-  "BayesANT", 
-  #"PROTAX", 
-  #Neural networks
-  # "BarcodeBERT", 
-  "MycoAI-BERT", 
-  "MycoAI-CNN", 
-  # phylogenetic 
-  "EPA-ng phyltree", 
-  "EPA-ng taxtree")
-
-plot_colors <- c(# Similarity
-  "#afe4fa", 
-  "#3fc8f2",
-  "#0072B2",
-  # "#03468a", 
-  # K-mer
-  "#0cf0d1",
-  "#009E73",
-  "#015c43",
-  # Probabilistic
-  "#c1a5fa",
-  # "#7560a6",
-  #Neural networks
- # "#f0ad32",
-  "#D55E00",
-  "#ad3805",
-  # phylogenetic
-  "#CC79A7",
-  "#8f2e63")
-
 fourpanel_accuracy <-
   accuracy_df |> 
   dplyr::filter(measure == "marginal", set != "All") |> 
@@ -324,12 +345,18 @@ fourpanel_accuracy <-
                  axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) + 
   ggplot2::aes(x = rank, 
                y = accuracy, 
-               color = model) + 
+               color = model, 
+               shape = model) + 
   ggplot2::geom_line(mapping = ggplot2::aes(group = model)) + 
   ggplot2::geom_point() + 
   ggplot2::facet_wrap(~set) + 
   ggplot2::labs(color = "Model", y = "Accuracy (%)") + 
-  ggplot2::scale_color_manual(values = plot_colors, breaks = algs_sorted)
+  ggplot2::scale_color_manual(name = "Model",
+                              labels = algs_sorted, 
+                              values = plot_colors, breaks = algs_sorted) + 
+  ggplot2::scale_shape_manual(name = "Model",
+                              labels = algs_sorted,
+                              values = point_shapes, breaks = algs_sorted)
 
 ggplot2::ggsave(filename = paste0("../plots/fourpanel_accuracy_COI", 
                                   natxt, undshort, ".pdf"), 
