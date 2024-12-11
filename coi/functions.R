@@ -329,7 +329,8 @@ plot_accuracies <- function(accuracies){
     ggplot2::geom_point(data = accuracies, 
                         mapping = ggplot2::aes(x = rank,
                                                y = accuracy,
-                                               color = model)) + 
+                                               color = model, 
+                                               shape = model)) + 
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) + 
     ggplot2::labs(color = "Model")
   
@@ -520,4 +521,59 @@ threshold_curve <- function(results, data_true, thresholds = seq(0, 1, 0.01)){
     }
   }
   return(out)
+}
+
+underclass_rate <- function(results, id_observed){
+  uclass_df <- data.frame() 
+  
+  for(i in 1:length(results)){
+    
+    uclass_df <- 
+      rbind(uclass_df, 
+            data.frame(underclassification = sapply(ranks, function(x)
+              sum(
+                stringr::str_ends(results[[i]][id_observed[[x]], x], "_new") |
+                  is.na(results[[i]][id_observed[[x]], x])
+              )/length(id_observed[[x]]) * 100)) |> 
+              tibble::rownames_to_column("rank") |> 
+              dplyr::mutate(model = names(results)[i]))
+  }
+  return(uclass_df)
+}
+
+overclass_rate <- function(results, id_novel){
+  oclass_df <- data.frame() 
+  
+  for(i in 1:length(results)){
+    
+    oclass_df <- 
+      rbind(oclass_df, 
+            data.frame(overclassification = sapply(ranks, function(x)
+              sum(
+                !stringr::str_ends(results[[i]][id_novel[[x]], x], "_new") &
+                  !is.na(results[[i]][id_novel[[x]], x])
+              )/length(id_novel[[x]]) * 100)) |> 
+              tibble::rownames_to_column("rank") |> 
+              dplyr::mutate(model = names(results)[i]))
+  }
+  return(oclass_df)
+}
+
+misclass_rate <- function(results, data_true, id_observed){
+  misclass_df <- data.frame() 
+  
+  for(i in 1:length(results)){
+    
+    misclass_df <- 
+      rbind(misclass_df, 
+            data.frame(misclassification = sapply(ranks, function(x)
+              sum(
+                results[[i]][id_observed[[x]], x] != data_true[id_observed[[x]], x] &
+                  !is.na(results[[i]][id_observed[[x]], x]) & 
+                  !stringr::str_ends(results[[i]][id_observed[[x]], x], "_new")
+              )/length(id_observed[[x]]) * 100)) |> 
+              tibble::rownames_to_column("rank") |> 
+              dplyr::mutate(model = names(results)[i]))
+  }
+  return(misclass_df)
 }

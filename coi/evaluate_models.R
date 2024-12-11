@@ -111,23 +111,23 @@ plot_colors <- c(
 
 point_shapes <- c( 
   #similarity 
-  1,
+  20,
   2,
   4,
   5, 
   # k-mer
-  1,
+  20,
   4,
   5,
   # probabilistic 
-  1,
+  20,
   # 4,
   # neural
-  1,
+  20,
   4,
   # phylogenetic
-  1,
-  4
+  2,
+  5
 )
 
 
@@ -622,4 +622,49 @@ dplyr::bind_rows(results, .id = "model") |>
   ggplot2::ggplot() + 
   ggplot2::geom_histogram(ggplot2::aes(x = probability)) + 
   ggplot2::facet_grid(rank~model)
+
+# MIS-, OVER-, AND UNDERCLASSIFICATION -----------------------------------------
+
+oclass_df <- overclass_rate(results, id_novel)
+uclass_df <- underclass_rate(results, id_observed)
+misclass_df <- misclass_rate(results, data_true, id_observed)
+
+errorrates <- 
+  oclass_df |> 
+  dplyr::full_join(uclass_df) |> 
+  dplyr::full_join(misclass_df) |> 
+  dplyr::mutate(rank = factor(rank, levels = ranks)) |> 
+  tidyr::pivot_longer(c("overclassification", "underclassification", "misclassification"), 
+                      names_to = "error_type",
+                      values_to = "error_rate") |> 
+  ggplot2::ggplot() + 
+  ggplot2::geom_line(ggplot2::aes(x = rank, 
+                                  y = error_rate, 
+                                  color = model, 
+                                  group = model)) +
+  ggplot2::geom_point(ggplot2::aes(x = rank, 
+                                  y = error_rate, 
+                                  color = model, 
+                                  shape = model)) + 
+  ggplot2::facet_wrap(~error_type) + 
+  ggplot2::scale_color_manual(name = "Model",
+                              labels = algs_sorted, 
+                              values = plot_colors, breaks = algs_sorted) + 
+  ggplot2::scale_shape_manual(name = "Model",
+                              labels = algs_sorted,
+                              values = point_shapes, breaks = algs_sorted) + 
+  ggplot2::theme_bw() + 
+  ggplot2::ylab("Error rate (%)") + 
+  ggplot2::theme(axis.title.x = ggplot2::element_blank(), 
+                 axis.text.x = ggplot2::element_text(angle = 45, 
+                                                     hjust = 1))
+
+ggplot2::ggsave(filename = paste0("../plots/errorrates_COI", undshort, natxt, ".pdf"), 
+                plot = errorrates, 
+                width = 10,
+                height = 5, 
+                units = "in")
+
+
+
 
