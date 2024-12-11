@@ -62,17 +62,17 @@ correct_cols <- c("ID",
 result_BayesANT <-
   read.table(paste0("results/bayesant/bayesant_test", shorttxt, "_nt_aln_label.txt"),
              header = T) |>
-  tibble::rownames_to_column("ID") |> 
+  tibble::rownames_to_column("ID") |>
   dplyr::arrange(ID)
 result_BayesANT <- arrange_columns(result_BayesANT, correct_cols)
 
 # RDP
-# result_RDP <-
-#   read.table(paste0("results/rdp/rdp_test", shorttxt, "_nt_aln_label.txt"),
-#              header = T) |>
-#   tibble::rownames_to_column("ID") |> 
-#   dplyr::arrange(ID)
-# result_RDP <- arrange_columns(result_RDP, correct_cols)
+result_RDP <-
+  read.table(paste0("results/rdp/rdp_test", shorttxt, "_nt_aln_label.txt"),
+             header = T) |>
+  tibble::rownames_to_column("ID") |>
+  dplyr::arrange(ID)
+result_RDP <- arrange_columns(result_RDP, correct_cols)
 
 # PROTAX
 # result_PROTAX <- 
@@ -233,6 +233,15 @@ if(keep_na){
   result_idtaxa <- rename_unk_output(result_idtaxa)
 }
 
+# Crest4
+result_crest4 <- 
+  read.table(paste0("results/crest4/crest4_test", shorttxt, "_nt_4.tsv"), 
+             header = T)
+result_crest4[result_crest4 == "unclassified"] <- NA
+result_crest4[paste0("Prob_", ranks)] <- 1
+result_crest4 <- arrange_columns(result_crest4, correct_cols)
+
+
 # Mystery result ------
 # # Brendan's mystery model
 # # Special keep_na case: 
@@ -308,7 +317,7 @@ results <- list(
   "BayesANT" = result_BayesANT,
   #  "PROTAX" = result_PROTAX,
   "EPA-ng taxtree" = result_epatax,
-  #  "RDP" = result_RDP,
+  "RDP" = result_RDP,
   "BLAST top hit" = result_blast_top, 
   "BLAST threshold" = result_blast_thresh, 
   "SINTAX" = result_SINTAX,
@@ -317,7 +326,8 @@ results <- list(
   "DNABarcoder" = result_dnabarcoder,
   "IDTAXA" = result_idtaxa, 
   "MycoAI-CNN" = result_aicnn, 
-  "MycoAI-BERT" = result_aibert
+  "MycoAI-BERT" = result_aibert, 
+  "Crest4" = result_crest4
 )
 
 results <- lapply(results, function(x) as.data.frame(x))
