@@ -16,7 +16,7 @@ if(short){
   shorttxt <- "short"
   undshort <- "_short"
 }
-keep_na <- T
+keep_na <- F
 natxt <- ""
 if(keep_na) natxt <- "_keepNA"
 
@@ -98,10 +98,29 @@ p_cal_subset <-
                  legend.position = "bottom") + 
   ggplot2::guides(color = ggplot2::guide_legend(nrow = 1))
 
-ggplot2::ggsave(plot = p_cal_subset, 
+plotlist_cal <- list() 
+for(i in 1:2){
+  plotsets <- c("Observed", "Novel")
+  
+  plotlist_cal[[i]] <- 
+    plot_calibration(calibrations |> 
+                     dplyr::filter(set == plotsets[i])) +
+    ggplot2::facet_wrap(~model, ncol = 6) + 
+    ggplot2::theme(panel.grid.minor = ggplot2::element_blank(),
+                   legend.position = "bottom") + 
+    ggplot2::guides(color = ggplot2::guide_legend(nrow = 1))
+}
+
+p_cal_subset_divided <- 
+  ggpubr::ggarrange(plotlist = plotlist_cal, nrow = round(length(results)/6), 
+                  common.legend = T, 
+                  legend = "bottom", 
+                  labels = c("a", "b"))
+
+ggplot2::ggsave(plot = p_cal_subset_divided, 
                 filename = paste0("../plots/calibration_COI_subset", natxt, undshort, ".pdf"), 
-                width = 235, 
-                height = 130, 
+                width = 200, 
+                height = 180, 
                 units = "mm")
 
 # PLOT BINNED CALIBRATIONS -----------------------------------------------------
@@ -188,6 +207,7 @@ pdf(paste0("../plots/binned_calibration_COI", natxt, undshort, ".pdf"),
 lapply(plotlist, print)
 dev.off()
 
+
 # PLOT ACCURACIES --------------------------------------------------------------
 
 ### If a sequence belongs to a new taxon (on any rank), how well is it predicted on higher ranks? 
@@ -239,6 +259,48 @@ accuracy_df$measure <- factor(accuracy_df$measure,
 
 #### Plot marginal and conditional accuracy #### 
 
+# COLORS -----------------------------------------------------------------------
+
+algs_sorted <- c(# Similarity
+  "BLAST top hit", 
+  "BLAST threshold",
+  "DNABarcoder",
+  #"Quiime2", 
+  # K-mer 
+  "IDTAXA",
+  "RDP", 
+  "SINTAX",
+  # Probabilistic
+  "BayesANT", 
+  #"PROTAX", 
+  #Neural networks
+  # "BarcodeBERT", 
+  "MycoAI-BERT", 
+  "MycoAI-CNN", 
+  # phylogenetic 
+  "EPA-ng phyltree", 
+  "EPA-ng taxtree")
+
+plot_colors <- c(# Similarity
+  "#afe4fa", 
+  "#3fc8f2",
+  "#0072B2",
+  # "#03468a", 
+  # K-mer
+  "#0cf0d1",
+  "#009E73",
+  "#015c43",
+  # Probabilistic
+  "#c1a5fa",
+  # "#7560a6",
+  #Neural networks
+ # "#f0ad32",
+  "#D55E00",
+  "#ad3805",
+  # phylogenetic
+  "#CC79A7",
+  "#8f2e63")
+
 fourpanel_accuracy <-
   accuracy_df |> 
   dplyr::filter(measure == "marginal", set != "All") |> 
@@ -252,7 +314,8 @@ fourpanel_accuracy <-
   dplyr::mutate(set = factor(set, levels = c("Observed species",
                                       "Novel species",
                                       "Observed taxa",
-                                      "Novel taxa"))) |> 
+                                      "Novel taxa")), 
+                model = factor(model, levels = algs_sorted)) |> 
   ggplot2::ggplot() + 
   ggplot2::theme_bw() + 
   ggplot2::theme(aspect.ratio = 1, 
@@ -265,7 +328,8 @@ fourpanel_accuracy <-
   ggplot2::geom_line(mapping = ggplot2::aes(group = model)) + 
   ggplot2::geom_point() + 
   ggplot2::facet_wrap(~set) + 
-  ggplot2::labs(color = "Model", y = "Accuracy (%)") 
+  ggplot2::labs(color = "Model", y = "Accuracy (%)") + 
+  ggplot2::scale_color_manual(values = plot_colors, breaks = algs_sorted)
 
 ggplot2::ggsave(filename = paste0("../plots/fourpanel_accuracy_COI", 
                                   natxt, undshort, ".pdf"), 
@@ -275,34 +339,44 @@ ggplot2::ggsave(filename = paste0("../plots/fourpanel_accuracy_COI",
                 units = "mm")
 
 #### Single panel conditional accuracy ####
+no_novel <- accuracy_df |>
+  dplyr::filter(measure == "conditional" & set == "Novel") |>
+  dplyr::filter(all(accuracy == 0), .by = model) |> 
+  dplyr::distinct(model) |> 
+  dplyr::pull(model)
+
 # TODO: Fix this for new models 
 cond_accuracy_novel_taxa <- 
   accuracy_df |> 
-  filter(measure == "conditional" & set == "Novel") |> 
+  dplyr::filter(measure == "conditional" & set == "Novel") |> 
+  dplyr::filter(!(model %in% no_novel)) |> 
+  dplyr::mutate(rank = factor(rank, levels = ranks)) |> 
+  dplyr::mutate(accuracy = dplyr::if_else(is.na(denom_cond), 0, accuracy)) |> 
+  dplyr::mutate(denom_cond = dplyr::if_else(is.na(denom_cond), 0, denom_cond)) |> 
   # filter(model != "RDP" & model != "SINTAX") |> 
-  ggplot() + 
-  geom_line(aes(x = rank, y = accuracy * 100, 
+  ggplot2::ggplot() + 
+  ggplot2::geom_line(ggplot2::aes(x = rank, y = accuracy * 100, 
                 group = model, color = model)) + 
-  geom_point(aes(x = rank, y = accuracy * 100, 
+  ggplot2::geom_point(ggplot2::aes(x = rank, y = accuracy * 100, 
                  group = model, color = model)) + 
-  geom_text(aes(x = rank, y = accuracy * 100, 
+  ggplot2::geom_text(ggplot2::aes(x = rank, y = accuracy * 100, 
                 color = model, group = model, 
                 label = denom_cond), 
             nudge_y = 5, size = 3) + 
-  # scale_color_manual(limits = c("BayesANT", "EPA-ng taxtree", "PROTAX"), 
-  #                    values = c("#f8766d", "#a3a500", "#00bf7d")) + 
-  theme_bw() + 
-  ylab("Conditional recall (%)") + 
-  theme(axis.title.x = element_blank(), 
-        axis.text.x = element_text(angle = 45, hjust = 1), 
-        panel.grid.minor.y = element_blank()) + 
-  labs(color = "Model")
+  ggplot2::scale_color_manual(limits = algs_sorted[which(!(algs_sorted %in% no_novel))], 
+                      values = plot_colors[which(!(algs_sorted %in% no_novel))]) + 
+  ggplot2::theme_bw() + 
+  ggplot2::ylab("Conditional recall (%)") + 
+  ggplot2::theme(axis.title.x = ggplot2::element_blank(), 
+        axis.text.x = ggplot2::element_text(angle = 45, hjust = 1), 
+        panel.grid.minor.y = ggplot2::element_blank()) + 
+  ggplot2::labs(color = "Model")
 
-# ggsave(plot = cond_accuracy_novel_taxa, 
-#        filename = "../plots/publication/cond_recall.pdf", 
-#        width = 130, 
-#        height = 90, 
-#        units = "mm")
+ggplot2::ggsave(plot = cond_accuracy_novel_taxa,
+       filename = paste0("../plots/cond_recall", natxt, undshort, ".pdf"),
+       width = 200,
+       height = 130,
+       units = "mm")
 
 # NOVELTY: TOTAL NUMBER OF PREDICTION ------------------------------------------
 
@@ -477,5 +551,15 @@ if(keep_na){
                   units = "in")
 }
 
+# PREDICTION PROBABILITY -------------------------------------------------------
 
+dplyr::bind_rows(results, .id = "model") |> 
+  tidyr::pivot_longer(cols = all_of(paste0("Prob_", ranks)), 
+                      names_to = "rank", 
+                      values_to = "probability", 
+                      names_prefix = "Prob_") |> 
+  dplyr::mutate(rank = factor(rank, levels = ranks)) |> 
+  ggplot2::ggplot() + 
+  ggplot2::geom_histogram(ggplot2::aes(x = probability)) + 
+  ggplot2::facet_grid(rank~model)
 
