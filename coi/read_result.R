@@ -1,7 +1,7 @@
 # Read and modify model results, because it is becoming too much for the same script 
 
-rm(list = ls())
 setwd("coi")
+rm(list = ls())
 
 # LOAD FUNCTIONS ---------------------------------------------------------------
 
@@ -236,8 +236,13 @@ if(keep_na){
 # Crest4
 result_crest4 <- 
   read.table(paste0("results/crest4/crest4_test", shorttxt, "_nt_4.tsv"), 
-             header = T)
-result_crest4[result_crest4 == "unclassified"] <- NA
+             header = T) |> 
+  dplyr::arrange(ID)
+if(keep_na){
+  result_crest4[result_crest4 == "unclassified"] <- NA
+}else{
+  result_crest4 <- rename_unk_output(result_crest4, unktxt = "unclassified")
+}
 result_crest4[paste0("Prob_", ranks)] <- 1
 result_crest4 <- arrange_columns(result_crest4, correct_cols)
 

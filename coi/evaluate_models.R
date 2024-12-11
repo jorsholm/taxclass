@@ -67,13 +67,79 @@ if(!all(sapply(results[8], function(x) all(x[,1] == data_true[,1])))) print("One
 if(!all(colnames(data_true) == colnames(results[[1]])[1:ncol(data_true)])) print("Column names containing taxonomic information not identical to data_true")
 
 
+# FOR PLOTTING -----------------------------------------------------------------
+
+algs_sorted <- c(
+  # Similarity
+  "BLAST top hit", 
+  "BLAST threshold",
+  "DNABarcoder",
+  "Crest4", 
+  # K-mer 
+  "IDTAXA",
+  "RDP", 
+  "SINTAX",
+  # Probabilistic
+  "BayesANT", 
+  #"PROTAX", 
+  #Neural networks
+  "MycoAI-BERT", 
+  "MycoAI-CNN", 
+  # phylogenetic 
+  "EPA-ng phyltree", 
+  "EPA-ng taxtree")
+
+plot_colors <- c(
+  # Similarity
+  "#bdd7e7",
+  "#6baed6",
+  "#3182bd",
+  "#08519c", 
+  # K-mer
+  "#bae4b3",
+  "#74c476",
+  "#238b45",
+  # Probabilistic
+  "#bcbddc",
+  #"#756bb1",
+  #Neural networks
+  "#fdae6b",
+  "#e6550d",
+  # phylogenetic
+  "#fbb4b9",
+  "#f768a1")
+
+point_shapes <- c( 
+  #similarity 
+  1,
+  2,
+  4,
+  5, 
+  # k-mer
+  1,
+  4,
+  5,
+  # probabilistic 
+  1,
+  # 4,
+  # neural
+  1,
+  4,
+  # phylogenetic
+  1,
+  4
+)
+
+
 # PLOT CALIBRATION CURVES ------------------------------------------------------
 
 calibrations <- get_calibration(results, data_true, observed_everywhere)
 calibrations$rank <- factor(calibrations$rank, 
-                            levels = colnames(data_true)[-1])
+                            levels = ranks)
 calibrations$set <- factor(calibrations$set, 
                            levels = c("All", "Observed", "Novel"))
+calibrations$model <- factor(calibrations$model, 
+                             levels = algs_sorted)
 
 #### Plot all calibration curves (all ranks, taxa sets and models) #####
 p_cal <- plot_calibration(calibrations) 
@@ -207,70 +273,6 @@ pdf(paste0("../plots/binned_calibration_COI", natxt, undshort, ".pdf"),
 lapply(plotlist, print)
 dev.off()
 
-
-# COLORS -----------------------------------------------------------------------
-
-algs_sorted <- c(
-  # Similarity
-  "BLAST top hit", 
-  "BLAST threshold",
-  "DNABarcoder",
-  "Crest4", 
-  # K-mer 
-  "IDTAXA",
-  "RDP", 
-  "SINTAX",
-  # Probabilistic
-  "BayesANT", 
-  #"PROTAX", 
-  #Neural networks
-  "MycoAI-BERT", 
-  "MycoAI-CNN", 
-  # phylogenetic 
-  "EPA-ng phyltree", 
-  "EPA-ng taxtree")
-
-plot_colors <- c(
-  # Similarity
-  "#bdd7e7",
-  "#6baed6",
-  "#3182bd",
-  "#08519c", 
-  # K-mer
-  "#bae4b3",
-  "#74c476",
-  "#238b45",
-  # Probabilistic
-  "#bcbddc",
-  "#756bb1",
-  #Neural networks
-  "#fdae6b",
-  #"#e6550d",
-  # phylogenetic
-  "#fbb4b9",
-  "#f768a1")
-
-point_shapes <- c( 
-  #similarity 
-  1,
-  2,
-  4,
-  5, 
-  # k-mer
-  1,
-  4,
-  5,
-  # probabilistic 
-  1,
-  # 4,
-  # neural
-  1,
-  4,
-  # phylogenetic
-  1,
-  4
-)
-
 # PLOT ACCURACIES --------------------------------------------------------------
 
 ### If a sequence belongs to a new taxon (on any rank), how well is it predicted on higher ranks? 
@@ -283,6 +285,14 @@ accuracies$set <- factor(accuracies$set,
 
 #### Plot across all models and species sets ####
 p_acc <- plot_accuracies(accuracies)
+p_acc + 
+  ggplot2::scale_color_manual(name = "Model",
+                              labels = algs_sorted, 
+                              values = plot_colors, breaks = algs_sorted) + 
+  ggplot2::scale_shape_manual(name = "Model",
+                              labels = algs_sorted,
+                              values = point_shapes, breaks = algs_sorted)
+  
 
 ggplot2::ggsave(plot = p_acc, 
                 filename = paste0("../plots/accuracy_COI", natxt, undshort, ".pdf"), 
@@ -385,13 +395,19 @@ cond_accuracy_novel_taxa <-
   ggplot2::geom_line(ggplot2::aes(x = rank, y = accuracy * 100, 
                 group = model, color = model)) + 
   ggplot2::geom_point(ggplot2::aes(x = rank, y = accuracy * 100, 
-                 group = model, color = model)) + 
+                 group = model, color = model, shape = model)) + 
   ggplot2::geom_text(ggplot2::aes(x = rank, y = accuracy * 100, 
                 color = model, group = model, 
                 label = denom_cond), 
-            nudge_y = 5, size = 3) + 
-  ggplot2::scale_color_manual(limits = algs_sorted[which(!(algs_sorted %in% no_novel))], 
+            nudge_y = 5, size = 3, show.legend = F) + 
+  ggplot2::scale_color_manual(name = "Model",
+                              labels = algs_sorted[which(!(algs_sorted %in% no_novel))],
+                              limits = algs_sorted[which(!(algs_sorted %in% no_novel))], 
                       values = plot_colors[which(!(algs_sorted %in% no_novel))]) + 
+  ggplot2::scale_shape_manual(name = "Model",
+                              labels = algs_sorted[which(!(algs_sorted %in% no_novel))],
+                              limits = algs_sorted[which(!(algs_sorted %in% no_novel))], 
+                              values = point_shapes[which(!(algs_sorted %in% no_novel))]) + 
   ggplot2::theme_bw() + 
   ggplot2::ylab("Conditional recall (%)") + 
   ggplot2::theme(axis.title.x = ggplot2::element_blank(), 
@@ -400,7 +416,7 @@ cond_accuracy_novel_taxa <-
   ggplot2::labs(color = "Model")
 
 ggplot2::ggsave(plot = cond_accuracy_novel_taxa,
-       filename = paste0("../plots/cond_recall", natxt, undshort, ".pdf"),
+       filename = paste0("../plots/cond_recall", natxt, undshort, "_COI.pdf"),
        width = 200,
        height = 130,
        units = "mm")
@@ -418,11 +434,21 @@ p_tot_novel <-
                      color = "black",
                      linetype = "dashed") + 
   ggplot2::aes(x = rank, y = pred_novel,
-               color = model, group = model) +
+               color = model, group = model, shape = model) +
   ggplot2::geom_line() + 
   ggplot2::geom_point() + 
   ggplot2::theme_bw() + 
-  ggplot2::scale_y_log10()
+  ggplot2::scale_y_log10(labels = c("10", "1000", "100000"), 
+                         breaks = c(10, 1000, 100000)) + 
+  ggplot2::scale_color_manual(name = "Model",
+                              labels = algs_sorted, 
+                              values = plot_colors, breaks = algs_sorted) + 
+  ggplot2::scale_shape_manual(name = "Model",
+                              labels = algs_sorted,
+                              values = point_shapes, breaks = algs_sorted) +
+  ggplot2::labs(y = "# predicted novel") + 
+  ggplot2::theme(axis.title.x = ggplot2::element_blank(), 
+                 axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
 
 ggplot2::ggsave(plot = p_tot_novel, 
        filename = paste0("../plots/sum_novel_COI", natxt, undshort, ".pdf"), 
@@ -510,6 +536,9 @@ results_similarity$`BLAST top hit` <- result_blast_top_similarity
 
 classified_correct <- threshold_curve(results_similarity, data_true)
 
+classified_correct$rank <- factor(classified_correct$rank, 
+                                  levels = ranks)
+
 point_models <- 
   classified_correct |> 
     dplyr::group_by(model) |> 
@@ -540,7 +569,10 @@ p_class_correct <-
   ggplot2::labs(x = "% classified", 
                 y = "% correct", 
                 color = "Model") + 
-  ggplot2::ylim(c(0, 110))
+  ggplot2::ylim(c(0, 110)) + 
+  ggplot2::scale_color_manual(name = "Model",
+                              labels = algs_sorted, 
+                              values = plot_colors, breaks = algs_sorted)
 
 ggplot2::ggsave(plot = p_class_correct, 
                 filename = paste0("../plots/classified_correct_COI", natxt, undshort, ".pdf"), 
@@ -585,7 +617,8 @@ dplyr::bind_rows(results, .id = "model") |>
                       names_to = "rank", 
                       values_to = "probability", 
                       names_prefix = "Prob_") |> 
-  dplyr::mutate(rank = factor(rank, levels = ranks)) |> 
+  dplyr::mutate(rank = factor(rank, levels = ranks), 
+                ) |> 
   ggplot2::ggplot() + 
   ggplot2::geom_histogram(ggplot2::aes(x = probability)) + 
   ggplot2::facet_grid(rank~model)
