@@ -35,4 +35,4 @@ if (grepl("aa", train_file)) {     # <---- Check for aminoacid sequences
 }
 
 # Write the output
-saveRDS(model, model_file) # <----- suggestion: do `compress = "gzip"` to save space
+saveRDS(model, model_file, compress = "gzip") # <----- suggestion: do `compress = "gzip"` to save space

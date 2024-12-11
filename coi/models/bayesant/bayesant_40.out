@@ -1,0 +1,209 @@
+- The project is out-of-sync -- use `renv::status()` for details.
+Welcome to BayesANT 🐜 🐜 🐜 🐜  
+No missing annotations detected. 
+Estimating the Pitman-Yor parameters: Now. 
+Estimating the Pitman-Yor parameters: Done. 
+Computing prior probabilities: Now 
+Computing prior probabilities: Done. 
+Extracting nucleotide location counts from sequences: Now. 
+Extracting nucleotide location counts from sequences: Done. 
+Tuning hyperparameters: Now. 
+Tuning hyperparameters: Done. 
+Aggregating parameters: Now 
+Aggregating parameters: Done 
+	Command being timed: "Rscript fit_BayesANT.R"
+	User time (seconds): 172.85
+	System time (seconds): 1.72
+	Percent of CPU this job got: 83%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:28.97
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1612328
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 599
+	Minor (reclaiming a frame) page faults: 575835
+	Voluntary context switches: 5788
+	Involuntary context switches: 183
+	Swaps: 0
+	File system inputs: 132064
+	File system outputs: 311552
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+- The project is out-of-sync -- use `renv::status()` for details.
+Number of sequences predicted =  2692 / 26925  
+Number of sequences predicted =  5384 / 26925  
+Number of sequences predicted =  8076 / 26925  
+Number of sequences predicted =  10768 / 26925  
+Number of sequences predicted =  13460 / 26925  
+Number of sequences predicted =  16152 / 26925  
+Number of sequences predicted =  18844 / 26925  
+Number of sequences predicted =  21536 / 26925  
+Number of sequences predicted =  24228 / 26925  
+Number of sequences predicted =  26920 / 26925  
+	Command being timed: "Rscript predict_BayesANT.R"
+	User time (seconds): 5387.17
+	System time (seconds): 1495.32
+	Percent of CPU this job got: 3738%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:04.07
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 955764
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 3
+	Minor (reclaiming a frame) page faults: 610096557
+	Voluntary context switches: 3008
+	Involuntary context switches: 19849
+	Swaps: 0
+	File system inputs: 35784
+	File system outputs: 13480
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+- The project is out-of-sync -- use `renv::status()` for details.
+Number of sequences predicted =  2692 / 26925  
+Number of sequences predicted =  5384 / 26925  
+Number of sequences predicted =  8076 / 26925  
+Number of sequences predicted =  10768 / 26925  
+Number of sequences predicted =  13460 / 26925  
+Number of sequences predicted =  16152 / 26925  
+Number of sequences predicted =  18844 / 26925  
+Number of sequences predicted =  21536 / 26925  
+Number of sequences predicted =  24228 / 26925  
+Number of sequences predicted =  26920 / 26925  
+	Command being timed: "Rscript predict_BayesANT.R"
+	User time (seconds): 3658.34
+	System time (seconds): 960.35
+	Percent of CPU this job got: 3682%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:05.40
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 922620
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 389634457
+	Voluntary context switches: 2862
+	Involuntary context switches: 15703
+	Swaps: 0
+	File system inputs: 35360
+	File system outputs: 13488
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+- The project is out-of-sync -- use `renv::status()` for details.
+Welcome to BayesANT 🐜 🐜 🐜 🐜  
+No missing annotations detected. 
+Estimating the Pitman-Yor parameters: Now. 
+Estimating the Pitman-Yor parameters: Done. 
+Computing prior probabilities: Now 
+Computing prior probabilities: Done. 
+Extracting nucleotide location counts from sequences: Now. 
+Extracting nucleotide location counts from sequences: Done. 
+Tuning hyperparameters: Now. 
+Tuning hyperparameters: Done. 
+Aggregating parameters: Now 
+Aggregating parameters: Done 
+	Command being timed: "Rscript fit_BayesANT.R"
+	User time (seconds): 103.87
+	System time (seconds): 2.28
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:46.99
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2262184
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1148526
+	Voluntary context switches: 2445
+	Involuntary context switches: 134
+	Swaps: 0
+	File system inputs: 22408
+	File system outputs: 477504
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+- The project is out-of-sync -- use `renv::status()` for details.
+Number of sequences predicted =  2692 / 26925  
+Number of sequences predicted =  5384 / 26925  
+Number of sequences predicted =  8076 / 26925  
+Number of sequences predicted =  10768 / 26925  
+Number of sequences predicted =  13460 / 26925  
+Number of sequences predicted =  16152 / 26925  
+Number of sequences predicted =  18844 / 26925  
+Number of sequences predicted =  21536 / 26925  
+Number of sequences predicted =  24228 / 26925  
+Number of sequences predicted =  26920 / 26925  
+	Command being timed: "Rscript predict_BayesANT.R"
+	User time (seconds): 2511.22
+	System time (seconds): 20.28
+	Percent of CPU this job got: 3458%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:13.20
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1286164
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 7090113
+	Voluntary context switches: 2758
+	Involuntary context switches: 6996
+	Swaps: 0
+	File system inputs: 12272
+	File system outputs: 12856
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+- The project is out-of-sync -- use `renv::status()` for details.
+Number of sequences predicted =  2692 / 26925  
+Number of sequences predicted =  5384 / 26925  
+Number of sequences predicted =  8076 / 26925  
+Number of sequences predicted =  10768 / 26925  
+Number of sequences predicted =  13460 / 26925  
+Number of sequences predicted =  16152 / 26925  
+Number of sequences predicted =  18844 / 26925  
+Number of sequences predicted =  21536 / 26925  
+Number of sequences predicted =  24228 / 26925  
+Number of sequences predicted =  26920 / 26925  
+	Command being timed: "Rscript predict_BayesANT.R"
+	User time (seconds): 1781.11
+	System time (seconds): 20.41
+	Percent of CPU this job got: 3304%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:54.51
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1275064
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 6828695
+	Voluntary context switches: 2733
+	Involuntary context switches: 5374
+	Swaps: 0
+	File system inputs: 12272
+	File system outputs: 13008
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+Job 24562211 completed

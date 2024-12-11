@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=dnabarcoder
 #SBATCH --account=project_2005718
-#SBATCH --partition=small
-#SBATCH --time=72:00:00
+#SBATCH --partition=longrun
+#SBATCH --time=7-00:00:00
 #SBATCH --mem=64G
-#SBATCH --cpus-per-task=4
-#SBATCH --array=4
+#SBATCH --cpus-per-task=1
+#SBATCH --array=1
 ##SBATCH --gres=gpu:v100:1
 #SBATCH --output=dnabarcoder_%a.out
 #SBATCH --error=dnabarcoder_%a.out

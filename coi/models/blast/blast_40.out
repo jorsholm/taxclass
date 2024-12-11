@@ -1,0 +1,1142 @@
+EMBOSS  6.5.7  environment loaded 
+BLAST  2.15.0  environment loaded 
+
+
+Building a new DB, current time: 10/21/2024 13:43:32
+New DB name:   /scratch/project_2003104/brendan/taxclass/coi/models/blast/train_nt_40
+New DB title:  ../../data/train_nt_sintax.fasta
+Sequence type: Nucleotide
+Deleted existing Nucleotide BLAST database named /scratch/project_2003104/brendan/taxclass/coi/models/blast/train_nt_40
+Keep MBits: T
+Maximum file size: 3000000000B
+Adding sequences from FASTA; added 35603 sequences in 0.641051 seconds.
+
+
+	Command being timed: "makeblastdb -in ../../data/train_nt_sintax.fasta -dbtype nucl -out train_nt_40"
+	User time (seconds): 0.54
+	System time (seconds): 0.05
+	Percent of CPU this job got: 27%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.17
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 12244
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 40
+	Minor (reclaiming a frame) page faults: 2814
+	Voluntary context switches: 412
+	Involuntary context switches: 2
+	Swaps: 0
+	File system inputs: 99688
+	File system outputs: 26176
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+Warning: [blastn] Examining 5 or more matches is recommended
+Warning: [Query 1-7663] Examining 5 or more matches is recommended
+Warning: [Query 7664-15323] Examining 5 or more matches is recommended
+Warning: [Query 15324-22985] Examining 5 or more matches is recommended
+Warning: [Query 22986-26925] Examining 5 or more matches is recommended
+	Command being timed: "blastn -query ../../data/test_nt.fasta -db train_nt_40 -out blast_test_nt_40.raw -strand plus -num_threads 40 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"
+	User time (seconds): 8046.89
+	System time (seconds): 0.43
+	Percent of CPU this job got: 443%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 30:15.66
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 144384
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 9
+	Minor (reclaiming a frame) page faults: 185118
+	Voluntary context switches: 941
+	Involuntary context switches: 4788
+	Swaps: 0
+	File system inputs: 99104
+	File system outputs: 7240
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+Warning: [blastn] Examining 5 or more matches is recommended
+Warning: [Query 1-12049] Examining 5 or more matches is recommended
+Warning: [Query 12050-24103] Examining 5 or more matches is recommended
+Warning: [Query 24104-26925] Examining 5 or more matches is recommended
+	Command being timed: "blastn -query ../../data/testshort_nt.fasta -db train_nt_40 -out blast_testshort_nt_40.raw -strand plus -num_threads 40 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"
+	User time (seconds): 3060.19
+	System time (seconds): 0.66
+	Percent of CPU this job got: 320%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 15:55.68
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 117588
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 417761
+	Voluntary context switches: 427
+	Involuntary context switches: 2129
+	Swaps: 0
+	File system inputs: 22576
+	File system outputs: 7200
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+
+
+Building a new DB, current time: 10/21/2024 14:29:45
+New DB name:   /scratch/project_2003104/brendan/taxclass/coi/models/blast/train_aa_40
+New DB title:  ../../data/train_aa_sintax.fasta
+Sequence type: Protein
+Deleted existing Protein BLAST database named /scratch/project_2003104/brendan/taxclass/coi/models/blast/train_aa_40
+Keep MBits: T
+Maximum file size: 3000000000B
+Adding sequences from FASTA; added 35603 sequences in 0.55141 seconds.
+
+
+	Command being timed: "makeblastdb -in ../../data/train_aa_sintax.fasta -dbtype prot -out train_aa_40"
+	User time (seconds): 0.48
+	System time (seconds): 0.04
+	Percent of CPU this job got: 29%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.78
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 12268
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 2
+	Minor (reclaiming a frame) page faults: 2755
+	Voluntary context switches: 323
+	Involuntary context switches: 0
+	Swaps: 0
+	File system inputs: 23568
+	File system outputs: 29664
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+Warning: [blastp] Examining 5 or more matches is recommended
+Warning: [Query 1-46] Examining 5 or more matches is recommended
+Warning: [Query 47-92] Examining 5 or more matches is recommended
+Warning: [Query 93-138] Examining 5 or more matches is recommended
+Warning: [Query 186-231] Examining 5 or more matches is recommended
+Warning: [Query 139-185] Examining 5 or more matches is recommended
+Warning: [Query 232-278] Examining 5 or more matches is recommended
+Warning: [Query 279-324] Examining 5 or more matches is recommended
+Warning: [Query 325-370] Examining 5 or more matches is recommended
+Warning: [Query 371-417] Examining 5 or more matches is recommended
+Warning: [Query 418-464] Examining 5 or more matches is recommended
+Warning: [Query 465-511] Examining 5 or more matches is recommended
+Warning: [Query 512-558] Examining 5 or more matches is recommended
+Warning: [Query 559-605] Examining 5 or more matches is recommended
+Warning: [Query 606-651] Examining 5 or more matches is recommended
+Warning: [Query 652-698] Examining 5 or more matches is recommended
+Warning: [Query 699-745] Examining 5 or more matches is recommended
+Warning: [Query 746-792] Examining 5 or more matches is recommended
+Warning: [Query 793-839] Examining 5 or more matches is recommended
+Warning: [Query 840-885] Examining 5 or more matches is recommended
+Warning: [Query 886-932] Examining 5 or more matches is recommended
+Warning: [Query 933-978] Examining 5 or more matches is recommended
+Warning: [Query 979-1025] Examining 5 or more matches is recommended
+Warning: [Query 1026-1072] Examining 5 or more matches is recommended
+Warning: [Query 1073-1119] Examining 5 or more matches is recommended
+Warning: [Query 1120-1166] Examining 5 or more matches is recommended
+Warning: [Query 1167-1213] Examining 5 or more matches is recommended
+Warning: [Query 1261-1307] Examining 5 or more matches is recommended
+Warning: [Query 1214-1260] Examining 5 or more matches is recommended
+Warning: [Query 1308-1353] Examining 5 or more matches is recommended
+Warning: [Query 1354-1400] Examining 5 or more matches is recommended
+Warning: [Query 1401-1446] Examining 5 or more matches is recommended
+Warning: [Query 1447-1493] Examining 5 or more matches is recommended
+Warning: [Query 1494-1539] Examining 5 or more matches is recommended
+Warning: [Query 1540-1586] Examining 5 or more matches is recommended
+Warning: [Query 1587-1633] Examining 5 or more matches is recommended
+Warning: [Query 1634-1680] Examining 5 or more matches is recommended
+Warning: [Query 1681-1726] Examining 5 or more matches is recommended
+Warning: [Query 1727-1773] Examining 5 or more matches is recommended
+Warning: [Query 1774-1819] Examining 5 or more matches is recommended
+Warning: [Query 1820-1866] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 76: 201
+Warning: [Query 1867-1913] Examining 5 or more matches is recommended
+Warning: [Query 1914-1960] Examining 5 or more matches is recommended
+Warning: [Query 1961-2007] Examining 5 or more matches is recommended
+Warning: [Query 2008-2054] Examining 5 or more matches is recommended
+Warning: [Query 2055-2101] Examining 5 or more matches is recommended
+Warning: [Query 2102-2148] Examining 5 or more matches is recommended
+Warning: [Query 2149-2195] Examining 5 or more matches is recommended
+Warning: [Query 2196-2242] Examining 5 or more matches is recommended
+Warning: [Query 2243-2289] Examining 5 or more matches is recommended
+Warning: [Query 2290-2335] Examining 5 or more matches is recommended
+Warning: [Query 2336-2382] Examining 5 or more matches is recommended
+Warning: [Query 2383-2428] Examining 5 or more matches is recommended
+Warning: [Query 2429-2474] Examining 5 or more matches is recommended
+Warning: [Query 2475-2521] Examining 5 or more matches is recommended
+Warning: [Query 2522-2568] Examining 5 or more matches is recommended
+Warning: [Query 2569-2614] Examining 5 or more matches is recommended
+Warning: [Query 2615-2660] Examining 5 or more matches is recommended
+Warning: [Query 2661-2707] Examining 5 or more matches is recommended
+Warning: [Query 2708-2754] Examining 5 or more matches is recommended
+Warning: [Query 2755-2801] Examining 5 or more matches is recommended
+Warning: [Query 2802-2847] Examining 5 or more matches is recommended
+Warning: [Query 2848-2894] Examining 5 or more matches is recommended
+Warning: [Query 2895-2940] Examining 5 or more matches is recommended
+Warning: [Query 2941-2987] Examining 5 or more matches is recommended
+Warning: [Query 2988-3033] Examining 5 or more matches is recommended
+Warning: [Query 3034-3079] Examining 5 or more matches is recommended
+Warning: [Query 3080-3126] Examining 5 or more matches is recommended
+Warning: [Query 3127-3172] Examining 5 or more matches is recommended
+Warning: [Query 3173-3219] Examining 5 or more matches is recommended
+Warning: [Query 3220-3266] Examining 5 or more matches is recommended
+Warning: [Query 3267-3313] Examining 5 or more matches is recommended
+Warning: [Query 3314-3360] Examining 5 or more matches is recommended
+Warning: [Query 3361-3407] Examining 5 or more matches is recommended
+Warning: [Query 3408-3454] Examining 5 or more matches is recommended
+Warning: [Query 3455-3501] Examining 5 or more matches is recommended
+Warning: [Query 3502-3548] Examining 5 or more matches is recommended
+Warning: [Query 3549-3595] Examining 5 or more matches is recommended
+Warning: [Query 3596-3642] Examining 5 or more matches is recommended
+Warning: [Query 3643-3689] Examining 5 or more matches is recommended
+Warning: [Query 3690-3736] Examining 5 or more matches is recommended
+Warning: [Query 3737-3783] Examining 5 or more matches is recommended
+Warning: [Query 3784-3829] Examining 5 or more matches is recommended
+Warning: [Query 3830-3875] Examining 5 or more matches is recommended
+Warning: [Query 3876-3922] Examining 5 or more matches is recommended
+Warning: [Query 3923-3969] Examining 5 or more matches is recommended
+Warning: [Query 3970-4016] Examining 5 or more matches is recommended
+Warning: [Query 4017-4062] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 58: 201
+Warning: [Query 4063-4108] Examining 5 or more matches is recommended
+Warning: [Query 4109-4154] Examining 5 or more matches is recommended
+Warning: [Query 4155-4201] Examining 5 or more matches is recommended
+Warning: [Query 4202-4247] Examining 5 or more matches is recommended
+Warning: [Query 4248-4293] Examining 5 or more matches is recommended
+Warning: [Query 4294-4340] Examining 5 or more matches is recommended
+Warning: [Query 4388-4434] Examining 5 or more matches is recommended
+Warning: [Query 4341-4387] Examining 5 or more matches is recommended
+Warning: [Query 4435-4481] Examining 5 or more matches is recommended
+Warning: [Query 4482-4528] Examining 5 or more matches is recommended
+Warning: [Query 4529-4575] Examining 5 or more matches is recommended
+Warning: [Query 4576-4621] Examining 5 or more matches is recommended
+Warning: [Query 4622-4668] Examining 5 or more matches is recommended
+Warning: [Query 4669-4714] Examining 5 or more matches is recommended
+Warning: [Query 4715-4760] Examining 5 or more matches is recommended
+Warning: [Query 4761-4807] Examining 5 or more matches is recommended
+Warning: [Query 4808-4854] Examining 5 or more matches is recommended
+Warning: [Query 4855-4901] Examining 5 or more matches is recommended
+Warning: [Query 4902-4948] Examining 5 or more matches is recommended
+Warning: [Query 4949-4995] Examining 5 or more matches is recommended
+Warning: [Query 4996-5042] Examining 5 or more matches is recommended
+Warning: [Query 5043-5088] Examining 5 or more matches is recommended
+Warning: [Query 5089-5135] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 66: 205
+Warning: [Query 5136-5181] Examining 5 or more matches is recommended
+Warning: [Query 5182-5228] Examining 5 or more matches is recommended
+Warning: [Query 5229-5274] Examining 5 or more matches is recommended
+Warning: [Query 5275-5321] Examining 5 or more matches is recommended
+Warning: [Query 5322-5368] Examining 5 or more matches is recommended
+Warning: [Query 5369-5414] Examining 5 or more matches is recommended
+Warning: [Query 5415-5460] Examining 5 or more matches is recommended
+Warning: [Query 5461-5506] Examining 5 or more matches is recommended
+Warning: [Query 5507-5553] Examining 5 or more matches is recommended
+Warning: [Query 5554-5599] Examining 5 or more matches is recommended
+Warning: [Query 5600-5645] Examining 5 or more matches is recommended
+Warning: [Query 5646-5691] Examining 5 or more matches is recommended
+Warning: [Query 5692-5738] Examining 5 or more matches is recommended
+Warning: [Query 5739-5785] Examining 5 or more matches is recommended
+Warning: [Query 5786-5832] Examining 5 or more matches is recommended
+Warning: [Query 5833-5878] Examining 5 or more matches is recommended
+Warning: [Query 5879-5924] Examining 5 or more matches is recommended
+Warning: [Query 5925-5970] Examining 5 or more matches is recommended
+Warning: [Query 5971-6017] Examining 5 or more matches is recommended
+Warning: [Query 6018-6063] Examining 5 or more matches is recommended
+Warning: [Query 6064-6109] Examining 5 or more matches is recommended
+Warning: [Query 6110-6155] Examining 5 or more matches is recommended
+Warning: [Query 6156-6201] Examining 5 or more matches is recommended
+Warning: [Query 6202-6248] Examining 5 or more matches is recommended
+Warning: [Query 6249-6295] Examining 5 or more matches is recommended
+Warning: [Query 6296-6342] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 44: 27
+Warning: [Query 6343-6389] Examining 5 or more matches is recommended
+Warning: [Query 6390-6436] Examining 5 or more matches is recommended
+Warning: [Query 6437-6483] Examining 5 or more matches is recommended
+Warning: [Query 6484-6530] Examining 5 or more matches is recommended
+Warning: [Query 6531-6576] Examining 5 or more matches is recommended
+Warning: [Query 6577-6623] Examining 5 or more matches is recommended
+Warning: [Query 6624-6670] Examining 5 or more matches is recommended
+Warning: [Query 6671-6717] Examining 5 or more matches is recommended
+Warning: [Query 6718-6763] Examining 5 or more matches is recommended
+Warning: [Query 6764-6810] Examining 5 or more matches is recommended
+Warning: [Query 6811-6857] Examining 5 or more matches is recommended
+Warning: [Query 6858-6904] Examining 5 or more matches is recommended
+Warning: [Query 6905-6951] Examining 5 or more matches is recommended
+Warning: [Query 6952-6998] Examining 5 or more matches is recommended
+Warning: [Query 6999-7045] Examining 5 or more matches is recommended
+Warning: [Query 7046-7092] Examining 5 or more matches is recommended
+Warning: [Query 7093-7139] Examining 5 or more matches is recommended
+Warning: [Query 7140-7186] Examining 5 or more matches is recommended
+Warning: [Query 7187-7233] Examining 5 or more matches is recommended
+Warning: [Query 7234-7280] Examining 5 or more matches is recommended
+Warning: [Query 7281-7326] Examining 5 or more matches is recommended
+Warning: [Query 7327-7372] Examining 5 or more matches is recommended
+Warning: [Query 7373-7419] Examining 5 or more matches is recommended
+Warning: [Query 7420-7465] Examining 5 or more matches is recommended
+Warning: [Query 7466-7512] Examining 5 or more matches is recommended
+Warning: [Query 7513-7559] Examining 5 or more matches is recommended
+Warning: [Query 7560-7606] Examining 5 or more matches is recommended
+Warning: [Query 7607-7652] Examining 5 or more matches is recommended
+Warning: [Query 7653-7698] Examining 5 or more matches is recommended
+Warning: [Query 7699-7745] Examining 5 or more matches is recommended
+Warning: [Query 7746-7791] Examining 5 or more matches is recommended
+Warning: [Query 7792-7838] Examining 5 or more matches is recommended
+Warning: [Query 7839-7885] Examining 5 or more matches is recommended
+Warning: [Query 7886-7932] Examining 5 or more matches is recommended
+Warning: [Query 7933-7979] Examining 5 or more matches is recommended
+Warning: [Query 7980-8026] Examining 5 or more matches is recommended
+Warning: [Query 8027-8073] Examining 5 or more matches is recommended
+Warning: [Query 8074-8119] Examining 5 or more matches is recommended
+Warning: [Query 8120-8166] Examining 5 or more matches is recommended
+Warning: [Query 8167-8213] Examining 5 or more matches is recommended
+Warning: [Query 8214-8260] Examining 5 or more matches is recommended
+Warning: [Query 8261-8306] Examining 5 or more matches is recommended
+Warning: [Query 8307-8352] Examining 5 or more matches is recommended
+Warning: [Query 8353-8399] Examining 5 or more matches is recommended
+Warning: [Query 8400-8445] Examining 5 or more matches is recommended
+Warning: [Query 8446-8491] Examining 5 or more matches is recommended
+Warning: [Query 8492-8538] Examining 5 or more matches is recommended
+Warning: [Query 8539-8585] Examining 5 or more matches is recommended
+Warning: [Query 8586-8631] Examining 5 or more matches is recommended
+Warning: [Query 8632-8677] Examining 5 or more matches is recommended
+Warning: [Query 8678-8724] Examining 5 or more matches is recommended
+Warning: [Query 8725-8770] Examining 5 or more matches is recommended
+Warning: [Query 8771-8817] Examining 5 or more matches is recommended
+Warning: [Query 8818-8864] Examining 5 or more matches is recommended
+Warning: [Query 8865-8910] Examining 5 or more matches is recommended
+Warning: [Query 8911-8957] Examining 5 or more matches is recommended
+Warning: [Query 8958-9003] Examining 5 or more matches is recommended
+Warning: [Query 9004-9050] Examining 5 or more matches is recommended
+Warning: [Query 9051-9097] Examining 5 or more matches is recommended
+Warning: [Query 9098-9144] Examining 5 or more matches is recommended
+Warning: [Query 9145-9190] Examining 5 or more matches is recommended
+Warning: [Query 9191-9236] Examining 5 or more matches is recommended
+Warning: [Query 9237-9283] Examining 5 or more matches is recommended
+Warning: [Query 9284-9329] Examining 5 or more matches is recommended
+Warning: [Query 9330-9376] Examining 5 or more matches is recommended
+Warning: [Query 9377-9423] Examining 5 or more matches is recommended
+Warning: [Query 9424-9469] Examining 5 or more matches is recommended
+Warning: [Query 9470-9515] Examining 5 or more matches is recommended
+Warning: [Query 9516-9561] Examining 5 or more matches is recommended
+Warning: [Query 9562-9608] Examining 5 or more matches is recommended
+Warning: [Query 9609-9655] Examining 5 or more matches is recommended
+Warning: [Query 9656-9701] Examining 5 or more matches is recommended
+Warning: [Query 9702-9747] Examining 5 or more matches is recommended
+Warning: [Query 9748-9793] Examining 5 or more matches is recommended
+Warning: [Query 9794-9839] Examining 5 or more matches is recommended
+Warning: [Query 9840-9886] Examining 5 or more matches is recommended
+Warning: [Query 9887-9933] Examining 5 or more matches is recommended
+Warning: [Query 9934-9980] Examining 5 or more matches is recommended
+Warning: [Query 9981-10026] Examining 5 or more matches is recommended
+Warning: [Query 10027-10072] Examining 5 or more matches is recommended
+Warning: [Query 10073-10118] Examining 5 or more matches is recommended
+Warning: [Query 10119-10164] Examining 5 or more matches is recommended
+Warning: [Query 10165-10210] Examining 5 or more matches is recommended
+Warning: [Query 10211-10256] Examining 5 or more matches is recommended
+Warning: [Query 10257-10303] Examining 5 or more matches is recommended
+Warning: [Query 10304-10349] Examining 5 or more matches is recommended
+Warning: [Query 10350-10395] Examining 5 or more matches is recommended
+Warning: [Query 10396-10441] Examining 5 or more matches is recommended
+Warning: [Query 10442-10488] Examining 5 or more matches is recommended
+Warning: [Query 10489-10535] Examining 5 or more matches is recommended
+Warning: [Query 10536-10582] Examining 5 or more matches is recommended
+Warning: [Query 10583-10628] Examining 5 or more matches is recommended
+Warning: [Query 10629-10675] Examining 5 or more matches is recommended
+Warning: [Query 10676-10722] Examining 5 or more matches is recommended
+Warning: [Query 10723-10768] Examining 5 or more matches is recommended
+Warning: [Query 10769-10815] Examining 5 or more matches is recommended
+Warning: [Query 10816-10862] Examining 5 or more matches is recommended
+Warning: [Query 10863-10909] Examining 5 or more matches is recommended
+Warning: [Query 10910-10956] Examining 5 or more matches is recommended
+Warning: [Query 10957-11003] Examining 5 or more matches is recommended
+Warning: [Query 11004-11050] Examining 5 or more matches is recommended
+Warning: [Query 11051-11096] Examining 5 or more matches is recommended
+Warning: [Query 11097-11142] Examining 5 or more matches is recommended
+Warning: [Query 11143-11189] Examining 5 or more matches is recommended
+Warning: [Query 11190-11236] Examining 5 or more matches is recommended
+Warning: [Query 11237-11283] Examining 5 or more matches is recommended
+Warning: [Query 11284-11330] Examining 5 or more matches is recommended
+Warning: [Query 11331-11377] Examining 5 or more matches is recommended
+Warning: [Query 11378-11424] Examining 5 or more matches is recommended
+Warning: [Query 11471-11516] Examining 5 or more matches is recommended
+Warning: [Query 11425-11470] Examining 5 or more matches is recommended
+Warning: [Query 11517-11562] Examining 5 or more matches is recommended
+Warning: [Query 11563-11608] Examining 5 or more matches is recommended
+Warning: [Query 11609-11655] Examining 5 or more matches is recommended
+Warning: [Query 11656-11702] Examining 5 or more matches is recommended
+Warning: [Query 11703-11748] Examining 5 or more matches is recommended
+Warning: [Query 11749-11795] Examining 5 or more matches is recommended
+Warning: [Query 11796-11842] Examining 5 or more matches is recommended
+Warning: [Query 11843-11888] Examining 5 or more matches is recommended
+Warning: [Query 11889-11934] Examining 5 or more matches is recommended
+Warning: [Query 11935-11981] Examining 5 or more matches is recommended
+Warning: [Query 11982-12027] Examining 5 or more matches is recommended
+Warning: [Query 12028-12073] Examining 5 or more matches is recommended
+Warning: [Query 12121-12167] Examining 5 or more matches is recommended
+Warning: [Query 12074-12120] Examining 5 or more matches is recommended
+Warning: [Query 12168-12214] Examining 5 or more matches is recommended
+Warning: [Query 12215-12261] Examining 5 or more matches is recommended
+Warning: [Query 12262-12308] Examining 5 or more matches is recommended
+Warning: [Query 12309-12355] Examining 5 or more matches is recommended
+Warning: [Query 12356-12402] Examining 5 or more matches is recommended
+Warning: [Query 12403-12449] Examining 5 or more matches is recommended
+Warning: [Query 12450-12496] Examining 5 or more matches is recommended
+Warning: [Query 12497-12543] Examining 5 or more matches is recommended
+Warning: [Query 12544-12589] Examining 5 or more matches is recommended
+Warning: [Query 12590-12636] Examining 5 or more matches is recommended
+Warning: [Query 12637-12682] Examining 5 or more matches is recommended
+Warning: [Query 12683-12729] Examining 5 or more matches is recommended
+Warning: [Query 12730-12775] Examining 5 or more matches is recommended
+Warning: [Query 12776-12822] Examining 5 or more matches is recommended
+Warning: [Query 12823-12869] Examining 5 or more matches is recommended
+Warning: [Query 12870-12916] Examining 5 or more matches is recommended
+Warning: [Query 12917-12963] Examining 5 or more matches is recommended
+Warning: [Query 12964-13009] Examining 5 or more matches is recommended
+Warning: [Query 13010-13056] Examining 5 or more matches is recommended
+Warning: [Query 13057-13103] Examining 5 or more matches is recommended
+Warning: [Query 13104-13150] Examining 5 or more matches is recommended
+Warning: [Query 13151-13197] Examining 5 or more matches is recommended
+Warning: [Query 13198-13244] Examining 5 or more matches is recommended
+Warning: [Query 13245-13291] Examining 5 or more matches is recommended
+Warning: [Query 13292-13338] Examining 5 or more matches is recommended
+Warning: [Query 13339-13385] Examining 5 or more matches is recommended
+Warning: [Query 13386-13432] Examining 5 or more matches is recommended
+Warning: [Query 13433-13478] Examining 5 or more matches is recommended
+Warning: [Query 13479-13525] Examining 5 or more matches is recommended
+Warning: [Query 13526-13572] Examining 5 or more matches is recommended
+Warning: [Query 13573-13619] Examining 5 or more matches is recommended
+Warning: [Query 13620-13666] Examining 5 or more matches is recommended
+Warning: [Query 13667-13712] Examining 5 or more matches is recommended
+Warning: [Query 13713-13759] Examining 5 or more matches is recommended
+Warning: [Query 13760-13806] Examining 5 or more matches is recommended
+Warning: [Query 13807-13852] Examining 5 or more matches is recommended
+Warning: [Query 13853-13899] Examining 5 or more matches is recommended
+Warning: [Query 13900-13946] Examining 5 or more matches is recommended
+Warning: [Query 13947-13993] Examining 5 or more matches is recommended
+Warning: [Query 13994-14039] Examining 5 or more matches is recommended
+Warning: [Query 14040-14086] Examining 5 or more matches is recommended
+Warning: [Query 14087-14132] Examining 5 or more matches is recommended
+Warning: [Query 14133-14178] Examining 5 or more matches is recommended
+Warning: [Query 14179-14225] Examining 5 or more matches is recommended
+Warning: [Query 14226-14272] Examining 5 or more matches is recommended
+Warning: [Query 14273-14319] Examining 5 or more matches is recommended
+Warning: [Query 14320-14365] Examining 5 or more matches is recommended
+Warning: [Query 14366-14412] Examining 5 or more matches is recommended
+Warning: [Query 14413-14459] Examining 5 or more matches is recommended
+Warning: [Query 14460-14505] Examining 5 or more matches is recommended
+Warning: [Query 14506-14551] Examining 5 or more matches is recommended
+Warning: [Query 14552-14598] Examining 5 or more matches is recommended
+Warning: [Query 14599-14645] Examining 5 or more matches is recommended
+Warning: [Query 14646-14692] Examining 5 or more matches is recommended
+Warning: [Query 14693-14738] Examining 5 or more matches is recommended
+Warning: [Query 14739-14784] Examining 5 or more matches is recommended
+Warning: [Query 14785-14831] Examining 5 or more matches is recommended
+Warning: [Query 14832-14877] Examining 5 or more matches is recommended
+Warning: [Query 14878-14924] Examining 5 or more matches is recommended
+Warning: [Query 14925-14971] Examining 5 or more matches is recommended
+Warning: [Query 14972-15017] Examining 5 or more matches is recommended
+Warning: [Query 15018-15063] Examining 5 or more matches is recommended
+Warning: [Query 15064-15110] Examining 5 or more matches is recommended
+Warning: [Query 15111-15157] Examining 5 or more matches is recommended
+Warning: [Query 15158-15203] Examining 5 or more matches is recommended
+Warning: [Query 15204-15250] Examining 5 or more matches is recommended
+Warning: [Query 15251-15296] Examining 5 or more matches is recommended
+Warning: [Query 15297-15342] Examining 5 or more matches is recommended
+Warning: [Query 15343-15388] Examining 5 or more matches is recommended
+Warning: [Query 15389-15434] Examining 5 or more matches is recommended
+Warning: [Query 15435-15480] Examining 5 or more matches is recommended
+Warning: [Query 15481-15526] Examining 5 or more matches is recommended
+Warning: [Query 15527-15572] Examining 5 or more matches is recommended
+Warning: [Query 15573-15618] Examining 5 or more matches is recommended
+Warning: [Query 15619-15665] Examining 5 or more matches is recommended
+Warning: [Query 15666-15712] Examining 5 or more matches is recommended
+Warning: [Query 15713-15758] Examining 5 or more matches is recommended
+Warning: [Query 15759-15805] Examining 5 or more matches is recommended
+Warning: [Query 15806-15852] Examining 5 or more matches is recommended
+Warning: [Query 15853-15899] Examining 5 or more matches is recommended
+Warning: [Query 15900-15945] Examining 5 or more matches is recommended
+Warning: [Query 15946-15992] Examining 5 or more matches is recommended
+Warning: [Query 15993-16039] Examining 5 or more matches is recommended
+Warning: [Query 16040-16086] Examining 5 or more matches is recommended
+Warning: [Query 16087-16133] Examining 5 or more matches is recommended
+Warning: [Query 16134-16180] Examining 5 or more matches is recommended
+Warning: [Query 16181-16227] Examining 5 or more matches is recommended
+Warning: [Query 16228-16273] Examining 5 or more matches is recommended
+Warning: [Query 16274-16320] Examining 5 or more matches is recommended
+Warning: [Query 16321-16366] Examining 5 or more matches is recommended
+Warning: [Query 16367-16412] Examining 5 or more matches is recommended
+Warning: [Query 16413-16459] Examining 5 or more matches is recommended
+Warning: [Query 16460-16506] Examining 5 or more matches is recommended
+Warning: [Query 16507-16553] Examining 5 or more matches is recommended
+Warning: [Query 16554-16600] Examining 5 or more matches is recommended
+Warning: [Query 16601-16647] Examining 5 or more matches is recommended
+Warning: [Query 16648-16694] Examining 5 or more matches is recommended
+Warning: [Query 16695-16740] Examining 5 or more matches is recommended
+Warning: [Query 16741-16787] Examining 5 or more matches is recommended
+Warning: [Query 16788-16834] Examining 5 or more matches is recommended
+Warning: [Query 16835-16881] Examining 5 or more matches is recommended
+Warning: [Query 16882-16928] Examining 5 or more matches is recommended
+Warning: [Query 16929-16975] Examining 5 or more matches is recommended
+Warning: [Query 16976-17021] Examining 5 or more matches is recommended
+Warning: [Query 17022-17068] Examining 5 or more matches is recommended
+Warning: [Query 17069-17114] Examining 5 or more matches is recommended
+Warning: [Query 17115-17160] Examining 5 or more matches is recommended
+Warning: [Query 17161-17207] Examining 5 or more matches is recommended
+Warning: [Query 17208-17254] Examining 5 or more matches is recommended
+Warning: [Query 17255-17300] Examining 5 or more matches is recommended
+Warning: [Query 17301-17347] Examining 5 or more matches is recommended
+Warning: [Query 17348-17393] Examining 5 or more matches is recommended
+Warning: [Query 17394-17440] Examining 5 or more matches is recommended
+Warning: [Query 17441-17487] Examining 5 or more matches is recommended
+Warning: [Query 17488-17533] Examining 5 or more matches is recommended
+Warning: [Query 17534-17580] Examining 5 or more matches is recommended
+Warning: [Query 17581-17626] Examining 5 or more matches is recommended
+Warning: [Query 17627-17673] Examining 5 or more matches is recommended
+Warning: [Query 17674-17720] Examining 5 or more matches is recommended
+Warning: [Query 17721-17766] Examining 5 or more matches is recommended
+Warning: [Query 17767-17813] Examining 5 or more matches is recommended
+Warning: [Query 17814-17860] Examining 5 or more matches is recommended
+Warning: [Query 17861-17907] Examining 5 or more matches is recommended
+Warning: [Query 17908-17953] Examining 5 or more matches is recommended
+Warning: [Query 17954-18000] Examining 5 or more matches is recommended
+Warning: [Query 18001-18047] Examining 5 or more matches is recommended
+Warning: [Query 18048-18094] Examining 5 or more matches is recommended
+Warning: [Query 18095-18141] Examining 5 or more matches is recommended
+Warning: [Query 18142-18188] Examining 5 or more matches is recommended
+Warning: [Query 18189-18235] Examining 5 or more matches is recommended
+Warning: [Query 18236-18282] Examining 5 or more matches is recommended
+Warning: [Query 18283-18328] Examining 5 or more matches is recommended
+Warning: [Query 18329-18374] Examining 5 or more matches is recommended
+Warning: [Query 18375-18421] Examining 5 or more matches is recommended
+Warning: [Query 18422-18468] Examining 5 or more matches is recommended
+Warning: [Query 18469-18514] Examining 5 or more matches is recommended
+Warning: [Query 18515-18560] Examining 5 or more matches is recommended
+Warning: [Query 18561-18606] Examining 5 or more matches is recommended
+Warning: [Query 18607-18653] Examining 5 or more matches is recommended
+Warning: [Query 18654-18700] Examining 5 or more matches is recommended
+Warning: [Query 18701-18746] Examining 5 or more matches is recommended
+Warning: [Query 18747-18793] Examining 5 or more matches is recommended
+Warning: [Query 18794-18840] Examining 5 or more matches is recommended
+Warning: [Query 18841-18887] Examining 5 or more matches is recommended
+Warning: [Query 18888-18933] Examining 5 or more matches is recommended
+Warning: [Query 18934-18979] Examining 5 or more matches is recommended
+Warning: [Query 18980-19026] Examining 5 or more matches is recommended
+Warning: [Query 19027-19072] Examining 5 or more matches is recommended
+Warning: [Query 19073-19119] Examining 5 or more matches is recommended
+Warning: [Query 19120-19165] Examining 5 or more matches is recommended
+Warning: [Query 19166-19212] Examining 5 or more matches is recommended
+Warning: [Query 19213-19259] Examining 5 or more matches is recommended
+Warning: [Query 19260-19306] Examining 5 or more matches is recommended
+Warning: [Query 19307-19352] Examining 5 or more matches is recommended
+Warning: [Query 19353-19398] Examining 5 or more matches is recommended
+Warning: [Query 19399-19445] Examining 5 or more matches is recommended
+Warning: [Query 19446-19492] Examining 5 or more matches is recommended
+Warning: [Query 19493-19538] Examining 5 or more matches is recommended
+Warning: [Query 19539-19585] Examining 5 or more matches is recommended
+Warning: [Query 19586-19632] Examining 5 or more matches is recommended
+Warning: [Query 19633-19678] Examining 5 or more matches is recommended
+Warning: [Query 19679-19724] Examining 5 or more matches is recommended
+Warning: [Query 19725-19770] Examining 5 or more matches is recommended
+Warning: [Query 19771-19816] Examining 5 or more matches is recommended
+Warning: [Query 19817-19862] Examining 5 or more matches is recommended
+Warning: [Query 19863-19909] Examining 5 or more matches is recommended
+Warning: [Query 19910-19955] Examining 5 or more matches is recommended
+Warning: [Query 19956-20001] Examining 5 or more matches is recommended
+Warning: [Query 20002-20048] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 84: 205
+Warning: [Query 20049-20094] Examining 5 or more matches is recommended
+Warning: [Query 20095-20141] Examining 5 or more matches is recommended
+Warning: [Query 20142-20188] Examining 5 or more matches is recommended
+Warning: [Query 20189-20234] Examining 5 or more matches is recommended
+Warning: [Query 20235-20281] Examining 5 or more matches is recommended
+Warning: [Query 20282-20327] Examining 5 or more matches is recommended
+Warning: [Query 20328-20374] Examining 5 or more matches is recommended
+Warning: [Query 20375-20420] Examining 5 or more matches is recommended
+Warning: [Query 20421-20467] Examining 5 or more matches is recommended
+Warning: [Query 20468-20514] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 38: 205
+Warning: [Query 20515-20561] Examining 5 or more matches is recommended
+Warning: [Query 20562-20608] Examining 5 or more matches is recommended
+Warning: [Query 20609-20655] Examining 5 or more matches is recommended
+Warning: [Query 20656-20702] Examining 5 or more matches is recommended
+Warning: [Query 20703-20749] Examining 5 or more matches is recommended
+Warning: [Query 20750-20796] Examining 5 or more matches is recommended
+Warning: [Query 20797-20842] Examining 5 or more matches is recommended
+Warning: [Query 20843-20889] Examining 5 or more matches is recommended
+Warning: [Query 20890-20935] Examining 5 or more matches is recommended
+Warning: [Query 20936-20982] Examining 5 or more matches is recommended
+Warning: [Query 20983-21029] Examining 5 or more matches is recommended
+Warning: [Query 21030-21075] Examining 5 or more matches is recommended
+Warning: [Query 21076-21122] Examining 5 or more matches is recommended
+Warning: [Query 21123-21169] Examining 5 or more matches is recommended
+Warning: [Query 21170-21216] Examining 5 or more matches is recommended
+Warning: [Query 21217-21262] Examining 5 or more matches is recommended
+Warning: [Query 21310-21355] Examining 5 or more matches is recommended
+Warning: [Query 21263-21309] Examining 5 or more matches is recommended
+Warning: [Query 21356-21402] Examining 5 or more matches is recommended
+Warning: [Query 21403-21449] Examining 5 or more matches is recommended
+Warning: [Query 21450-21495] Examining 5 or more matches is recommended
+Warning: [Query 21496-21541] Examining 5 or more matches is recommended
+Warning: [Query 21542-21588] Examining 5 or more matches is recommended
+Warning: [Query 21589-21635] Examining 5 or more matches is recommended
+Warning: [Query 21636-21682] Examining 5 or more matches is recommended
+Warning: [Query 21683-21729] Examining 5 or more matches is recommended
+Warning: [Query 21730-21775] Examining 5 or more matches is recommended
+Warning: [Query 21776-21821] Examining 5 or more matches is recommended
+Warning: [Query 21822-21868] Examining 5 or more matches is recommended
+Warning: [Query 21869-21915] Examining 5 or more matches is recommended
+Warning: [Query 21916-21962] Examining 5 or more matches is recommended
+Warning: [Query 21963-22009] Examining 5 or more matches is recommended
+Warning: [Query 22010-22055] Examining 5 or more matches is recommended
+Warning: [Query 22056-22102] Examining 5 or more matches is recommended
+Warning: [Query 22103-22148] Examining 5 or more matches is recommended
+Warning: [Query 22149-22194] Examining 5 or more matches is recommended
+Warning: [Query 22195-22241] Examining 5 or more matches is recommended
+Warning: [Query 22242-22288] Examining 5 or more matches is recommended
+Warning: [Query 22289-22335] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 4: 168
+Warning: [Query 22336-22382] Examining 5 or more matches is recommended
+Warning: [Query 22383-22429] Examining 5 or more matches is recommended
+Warning: [Query 22430-22475] Examining 5 or more matches is recommended
+Warning: [Query 22523-22569] Examining 5 or more matches is recommended
+Warning: [Query 22476-22522] Examining 5 or more matches is recommended
+Warning: [Query 22570-22615] Examining 5 or more matches is recommended
+Warning: [Query 22616-22662] Examining 5 or more matches is recommended
+Warning: [Query 22663-22709] Examining 5 or more matches is recommended
+Warning: [Query 22710-22755] Examining 5 or more matches is recommended
+Warning: [Query 22756-22802] Examining 5 or more matches is recommended
+Warning: [Query 22803-22849] Examining 5 or more matches is recommended
+Warning: [Query 22850-22896] Examining 5 or more matches is recommended
+Warning: [Query 22897-22942] Examining 5 or more matches is recommended
+Warning: [Query 22943-22988] Examining 5 or more matches is recommended
+Warning: [Query 22989-23034] Examining 5 or more matches is recommended
+Warning: [Query 23035-23080] Examining 5 or more matches is recommended
+Warning: [Query 23081-23126] Examining 5 or more matches is recommended
+Warning: [Query 23127-23173] Examining 5 or more matches is recommended
+Warning: [Query 23174-23219] Examining 5 or more matches is recommended
+Warning: [Query 23220-23265] Examining 5 or more matches is recommended
+Warning: [Query 23266-23311] Examining 5 or more matches is recommended
+Warning: [Query 23312-23357] Examining 5 or more matches is recommended
+Warning: [Query 23358-23403] Examining 5 or more matches is recommended
+Warning: [Query 23404-23450] Examining 5 or more matches is recommended
+Warning: [Query 23451-23496] Examining 5 or more matches is recommended
+Warning: [Query 23497-23542] Examining 5 or more matches is recommended
+Warning: [Query 23543-23588] Examining 5 or more matches is recommended
+Warning: [Query 23589-23635] Examining 5 or more matches is recommended
+Warning: [Query 23636-23682] Examining 5 or more matches is recommended
+Warning: [Query 23683-23728] Examining 5 or more matches is recommended
+Warning: [Query 23729-23774] Examining 5 or more matches is recommended
+Warning: [Query 23775-23821] Examining 5 or more matches is recommended
+Warning: [Query 23822-23867] Examining 5 or more matches is recommended
+Warning: [Query 23868-23914] Examining 5 or more matches is recommended
+Warning: [Query 23915-23960] Examining 5 or more matches is recommended
+Warning: [Query 23961-24007] Examining 5 or more matches is recommended
+Warning: [Query 24008-24054] Examining 5 or more matches is recommended
+Warning: [Query 24055-24101] Examining 5 or more matches is recommended
+Warning: [Query 24102-24148] Examining 5 or more matches is recommended
+Warning: [Query 24149-24195] Examining 5 or more matches is recommended
+Warning: [Query 24196-24241] Examining 5 or more matches is recommended
+Warning: [Query 24242-24287] Examining 5 or more matches is recommended
+Warning: [Query 24288-24334] Examining 5 or more matches is recommended
+Warning: [Query 24335-24380] Examining 5 or more matches is recommended
+Warning: [Query 24381-24426] Examining 5 or more matches is recommended
+Warning: [Query 24427-24472] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 50: 205
+Warning: [Query 24473-24518] Examining 5 or more matches is recommended
+Warning: [Query 24519-24565] Examining 5 or more matches is recommended
+Warning: [Query 24566-24612] Examining 5 or more matches is recommended
+Warning: [Query 24613-24658] Examining 5 or more matches is recommended
+Warning: [Query 24659-24705] Examining 5 or more matches is recommended
+Warning: [Query 24706-24751] Examining 5 or more matches is recommended
+Warning: [Query 24752-24798] Examining 5 or more matches is recommended
+Warning: [Query 24799-24845] Examining 5 or more matches is recommended
+Warning: [Query 24846-24892] Examining 5 or more matches is recommended
+Warning: [Query 24893-24938] Examining 5 or more matches is recommended
+Warning: [Query 24939-24985] Examining 5 or more matches is recommended
+Warning: [Query 24986-25032] Examining 5 or more matches is recommended
+Warning: [Query 25033-25079] Examining 5 or more matches is recommended
+Warning: [Query 25080-25126] Examining 5 or more matches is recommended
+Warning: [Query 25127-25173] Examining 5 or more matches is recommended
+Warning: [Query 25174-25220] Examining 5 or more matches is recommended
+Warning: [Query 25221-25266] Examining 5 or more matches is recommended
+Warning: [Query 25267-25313] Examining 5 or more matches is recommended
+Warning: [Query 25314-25359] Examining 5 or more matches is recommended
+Warning: [Query 25360-25406] Examining 5 or more matches is recommended
+Warning: [Query 25407-25452] Examining 5 or more matches is recommended
+Warning: [Query 25453-25498] Examining 5 or more matches is recommended
+Warning: [Query 25499-25544] Examining 5 or more matches is recommended
+Warning: [Query 25545-25591] Examining 5 or more matches is recommended
+Warning: [Query 25592-25637] Examining 5 or more matches is recommended
+Warning: [Query 25638-25683] Examining 5 or more matches is recommended
+Warning: [Query 25684-25730] Examining 5 or more matches is recommended
+Warning: [Query 25731-25776] Examining 5 or more matches is recommended
+Warning: [Query 25777-25822] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 48: 15
+Warning: [Query 25823-25869] Examining 5 or more matches is recommended
+Warning: [Query 25870-25916] Examining 5 or more matches is recommended
+Warning: [Query 25917-25962] Examining 5 or more matches is recommended
+Warning: [Query 25963-26009] Examining 5 or more matches is recommended
+Warning: [Query 26010-26055] Examining 5 or more matches is recommended
+Warning: [Query 26056-26102] Examining 5 or more matches is recommended
+Warning: [Query 26103-26148] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 12: 203
+Warning: [Query 26149-26195] Examining 5 or more matches is recommended
+Warning: [Query 26196-26242] Examining 5 or more matches is recommended
+Warning: [Query 26243-26289] Examining 5 or more matches is recommended
+Warning: [Query 26290-26336] Examining 5 or more matches is recommended
+Warning: [Query 26337-26383] Examining 5 or more matches is recommended
+Warning: [Query 26384-26430] Examining 5 or more matches is recommended
+Warning: [Query 26431-26476] Examining 5 or more matches is recommended
+Warning: [Query 26477-26523] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 6: 205
+Warning: [Query 26524-26569] Examining 5 or more matches is recommended
+Warning: [Query 26570-26615] Examining 5 or more matches is recommended
+Warning: [Query 26616-26661] Examining 5 or more matches is recommended
+Warning: [Query 26662-26708] Examining 5 or more matches is recommended
+Warning: [Query 26709-26754] Examining 5 or more matches is recommended
+Warning: [Query 26755-26800] Examining 5 or more matches is recommended
+Warning: [Query 26801-26846] Examining 5 or more matches is recommended
+Warning: [Query 26847-26893] Examining 5 or more matches is recommended
+Warning: [Query 26894-26925] Examining 5 or more matches is recommended
+	Command being timed: "blastp -query ../../data/test_aa.fasta -db train_aa_40 -out blast_test_aa_40.raw -num_threads 40 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"
+	User time (seconds): 45900.17
+	System time (seconds): 22.01
+	Percent of CPU this job got: 3849%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 19:52.93
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2185708
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1410
+	Minor (reclaiming a frame) page faults: 7883585
+	Voluntary context switches: 214538
+	Involuntary context switches: 104158
+	Swaps: 0
+	File system inputs: 106488
+	File system outputs: 7496
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+Warning: [blastp] Examining 5 or more matches is recommended
+Warning: [Query 1-73] Examining 5 or more matches is recommended
+Warning: [Query 74-146] Examining 5 or more matches is recommended
+Warning: [Query 147-219] Examining 5 or more matches is recommended
+Warning: [Query 220-292] Examining 5 or more matches is recommended
+Warning: [Query 293-365] Examining 5 or more matches is recommended
+Warning: [Query 366-438] Examining 5 or more matches is recommended
+Warning: [Query 439-511] Examining 5 or more matches is recommended
+Warning: [Query 512-584] Examining 5 or more matches is recommended
+Warning: [Query 585-657] Examining 5 or more matches is recommended
+Warning: [Query 658-730] Examining 5 or more matches is recommended
+Warning: [Query 731-803] Examining 5 or more matches is recommended
+Warning: [Query 804-876] Examining 5 or more matches is recommended
+Warning: [Query 877-949] Examining 5 or more matches is recommended
+Warning: [Query 950-1022] Examining 5 or more matches is recommended
+Warning: [Query 1023-1095] Examining 5 or more matches is recommended
+Warning: [Query 1096-1168] Examining 5 or more matches is recommended
+Warning: [Query 1169-1241] Examining 5 or more matches is recommended
+Warning: [Query 1242-1314] Examining 5 or more matches is recommended
+Warning: [Query 1315-1387] Examining 5 or more matches is recommended
+Warning: [Query 1388-1460] Examining 5 or more matches is recommended
+Warning: [Query 1461-1533] Examining 5 or more matches is recommended
+Warning: [Query 1534-1606] Examining 5 or more matches is recommended
+Warning: [Query 1607-1679] Examining 5 or more matches is recommended
+Warning: [Query 1680-1752] Examining 5 or more matches is recommended
+Warning: [Query 1753-1825] Examining 5 or more matches is recommended
+Warning: [Query 1826-1898] Examining 5 or more matches is recommended
+Warning: [Query 1899-1971] Examining 5 or more matches is recommended
+Warning: [Query 1972-2044] Examining 5 or more matches is recommended
+Warning: [Query 2045-2117] Examining 5 or more matches is recommended
+Warning: [Query 2118-2190] Examining 5 or more matches is recommended
+Warning: [Query 2191-2263] Examining 5 or more matches is recommended
+Warning: [Query 2264-2336] Examining 5 or more matches is recommended
+Warning: [Query 2337-2409] Examining 5 or more matches is recommended
+Warning: [Query 2410-2482] Examining 5 or more matches is recommended
+Warning: [Query 2483-2555] Examining 5 or more matches is recommended
+Warning: [Query 2556-2628] Examining 5 or more matches is recommended
+Warning: [Query 2629-2701] Examining 5 or more matches is recommended
+Warning: [Query 2702-2774] Examining 5 or more matches is recommended
+Warning: [Query 2775-2847] Examining 5 or more matches is recommended
+Warning: [Query 2848-2920] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 118: 122
+Warning: [Query 2921-2993] Examining 5 or more matches is recommended
+Warning: [Query 2994-3066] Examining 5 or more matches is recommended
+Warning: [Query 3067-3139] Examining 5 or more matches is recommended
+Warning: [Query 3140-3212] Examining 5 or more matches is recommended
+Warning: [Query 3213-3285] Examining 5 or more matches is recommended
+Warning: [Query 3286-3358] Examining 5 or more matches is recommended
+Warning: [Query 3359-3431] Examining 5 or more matches is recommended
+Warning: [Query 3432-3504] Examining 5 or more matches is recommended
+Warning: [Query 3505-3577] Examining 5 or more matches is recommended
+Warning: [Query 3578-3650] Examining 5 or more matches is recommended
+Warning: [Query 3724-3796] Examining 5 or more matches is recommended
+Warning: [Query 3651-3723] Examining 5 or more matches is recommended
+Warning: [Query 3797-3869] Examining 5 or more matches is recommended
+Warning: [Query 3870-3942] Examining 5 or more matches is recommended
+Warning: [Query 3943-4015] Examining 5 or more matches is recommended
+Warning: [Query 4016-4088] Examining 5 or more matches is recommended
+Warning: [Query 4089-4161] Examining 5 or more matches is recommended
+Warning: [Query 4162-4234] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 112: 122
+Warning: [Query 4235-4307] Examining 5 or more matches is recommended
+Warning: [Query 4308-4380] Examining 5 or more matches is recommended
+Warning: [Query 4381-4453] Examining 5 or more matches is recommended
+Warning: [Query 4454-4526] Examining 5 or more matches is recommended
+Warning: [Query 4527-4599] Examining 5 or more matches is recommended
+Warning: [Query 4600-4672] Examining 5 or more matches is recommended
+Warning: [Query 4673-4745] Examining 5 or more matches is recommended
+Warning: [Query 4746-4818] Examining 5 or more matches is recommended
+Warning: [Query 4819-4891] Examining 5 or more matches is recommended
+Warning: [Query 4892-4964] Examining 5 or more matches is recommended
+Warning: [Query 4965-5037] Examining 5 or more matches is recommended
+Warning: [Query 5038-5110] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 76: 125
+Warning: [Query 5111-5183] Examining 5 or more matches is recommended
+Warning: [Query 5184-5256] Examining 5 or more matches is recommended
+Warning: [Query 5257-5329] Examining 5 or more matches is recommended
+Warning: [Query 5330-5402] Examining 5 or more matches is recommended
+Warning: [Query 5403-5475] Examining 5 or more matches is recommended
+Warning: [Query 5476-5548] Examining 5 or more matches is recommended
+Warning: [Query 5549-5621] Examining 5 or more matches is recommended
+Warning: [Query 5622-5694] Examining 5 or more matches is recommended
+Warning: [Query 5695-5767] Examining 5 or more matches is recommended
+Warning: [Query 5768-5840] Examining 5 or more matches is recommended
+Warning: [Query 5841-5913] Examining 5 or more matches is recommended
+Warning: [Query 5914-5986] Examining 5 or more matches is recommended
+Warning: [Query 5987-6059] Examining 5 or more matches is recommended
+Warning: [Query 6060-6132] Examining 5 or more matches is recommended
+Warning: [Query 6133-6205] Examining 5 or more matches is recommended
+Warning: [Query 6279-6351] Examining 5 or more matches is recommended
+Warning: [Query 6206-6278] Examining 5 or more matches is recommended
+Warning: [Query 6352-6424] Examining 5 or more matches is recommended
+Warning: [Query 6425-6497] Examining 5 or more matches is recommended
+Warning: [Query 6498-6570] Examining 5 or more matches is recommended
+Warning: [Query 6571-6643] Examining 5 or more matches is recommended
+Warning: [Query 6644-6716] Examining 5 or more matches is recommended
+Warning: [Query 6717-6789] Examining 5 or more matches is recommended
+Warning: [Query 6790-6862] Examining 5 or more matches is recommended
+Warning: [Query 6863-6935] Examining 5 or more matches is recommended
+Warning: [Query 6936-7008] Examining 5 or more matches is recommended
+Warning: [Query 7009-7081] Examining 5 or more matches is recommended
+Warning: [Query 7082-7154] Examining 5 or more matches is recommended
+Warning: [Query 7155-7227] Examining 5 or more matches is recommended
+Warning: [Query 7228-7300] Examining 5 or more matches is recommended
+Warning: [Query 7301-7373] Examining 5 or more matches is recommended
+Warning: [Query 7374-7446] Examining 5 or more matches is recommended
+Warning: [Query 7447-7519] Examining 5 or more matches is recommended
+Warning: [Query 7520-7592] Examining 5 or more matches is recommended
+Warning: [Query 7593-7665] Examining 5 or more matches is recommended
+Warning: [Query 7666-7738] Examining 5 or more matches is recommended
+Warning: [Query 7739-7811] Examining 5 or more matches is recommended
+Warning: [Query 7812-7884] Examining 5 or more matches is recommended
+Warning: [Query 7885-7957] Examining 5 or more matches is recommended
+Warning: [Query 7958-8030] Examining 5 or more matches is recommended
+Warning: [Query 8031-8103] Examining 5 or more matches is recommended
+Warning: [Query 8104-8176] Examining 5 or more matches is recommended
+Warning: [Query 8177-8249] Examining 5 or more matches is recommended
+Warning: [Query 8250-8322] Examining 5 or more matches is recommended
+Warning: [Query 8323-8395] Examining 5 or more matches is recommended
+Warning: [Query 8396-8468] Examining 5 or more matches is recommended
+Warning: [Query 8469-8541] Examining 5 or more matches is recommended
+Warning: [Query 8542-8614] Examining 5 or more matches is recommended
+Warning: [Query 8615-8687] Examining 5 or more matches is recommended
+Warning: [Query 8688-8760] Examining 5 or more matches is recommended
+Warning: [Query 8761-8833] Examining 5 or more matches is recommended
+Warning: [Query 8834-8906] Examining 5 or more matches is recommended
+Warning: [Query 8907-8979] Examining 5 or more matches is recommended
+Warning: [Query 8980-9052] Examining 5 or more matches is recommended
+Warning: [Query 9053-9125] Examining 5 or more matches is recommended
+Warning: [Query 9126-9198] Examining 5 or more matches is recommended
+Warning: [Query 9199-9271] Examining 5 or more matches is recommended
+Warning: [Query 9272-9344] Examining 5 or more matches is recommended
+Warning: [Query 9345-9417] Examining 5 or more matches is recommended
+Warning: [Query 9418-9490] Examining 5 or more matches is recommended
+Warning: [Query 9491-9563] Examining 5 or more matches is recommended
+Warning: [Query 9564-9636] Examining 5 or more matches is recommended
+Warning: [Query 9637-9709] Examining 5 or more matches is recommended
+Warning: [Query 9710-9782] Examining 5 or more matches is recommended
+Warning: [Query 9783-9855] Examining 5 or more matches is recommended
+Warning: [Query 9856-9928] Examining 5 or more matches is recommended
+Warning: [Query 9929-10001] Examining 5 or more matches is recommended
+Warning: [Query 10002-10074] Examining 5 or more matches is recommended
+Warning: [Query 10075-10147] Examining 5 or more matches is recommended
+Warning: [Query 10148-10220] Examining 5 or more matches is recommended
+Warning: [Query 10221-10293] Examining 5 or more matches is recommended
+Warning: [Query 10294-10366] Examining 5 or more matches is recommended
+Warning: [Query 10367-10439] Examining 5 or more matches is recommended
+Warning: [Query 10440-10512] Examining 5 or more matches is recommended
+Warning: [Query 10513-10585] Examining 5 or more matches is recommended
+Warning: [Query 10586-10658] Examining 5 or more matches is recommended
+Warning: [Query 10659-10731] Examining 5 or more matches is recommended
+Warning: [Query 10732-10804] Examining 5 or more matches is recommended
+Warning: [Query 10805-10877] Examining 5 or more matches is recommended
+Warning: [Query 10878-10950] Examining 5 or more matches is recommended
+Warning: [Query 10951-11023] Examining 5 or more matches is recommended
+Warning: [Query 11024-11096] Examining 5 or more matches is recommended
+Warning: [Query 11097-11169] Examining 5 or more matches is recommended
+Warning: [Query 11170-11242] Examining 5 or more matches is recommended
+Warning: [Query 11243-11315] Examining 5 or more matches is recommended
+Warning: [Query 11316-11388] Examining 5 or more matches is recommended
+Warning: [Query 11389-11461] Examining 5 or more matches is recommended
+Warning: [Query 11462-11534] Examining 5 or more matches is recommended
+Warning: [Query 11535-11607] Examining 5 or more matches is recommended
+Warning: [Query 11608-11680] Examining 5 or more matches is recommended
+Warning: [Query 11681-11753] Examining 5 or more matches is recommended
+Warning: [Query 11754-11826] Examining 5 or more matches is recommended
+Warning: [Query 11827-11899] Examining 5 or more matches is recommended
+Warning: [Query 11900-11972] Examining 5 or more matches is recommended
+Warning: [Query 11973-12045] Examining 5 or more matches is recommended
+Warning: [Query 12046-12118] Examining 5 or more matches is recommended
+Warning: [Query 12119-12191] Examining 5 or more matches is recommended
+Warning: [Query 12192-12264] Examining 5 or more matches is recommended
+Warning: [Query 12265-12337] Examining 5 or more matches is recommended
+Warning: [Query 12338-12410] Examining 5 or more matches is recommended
+Warning: [Query 12411-12483] Examining 5 or more matches is recommended
+Warning: [Query 12484-12556] Examining 5 or more matches is recommended
+Warning: [Query 12557-12629] Examining 5 or more matches is recommended
+Warning: [Query 12630-12702] Examining 5 or more matches is recommended
+Warning: [Query 12703-12775] Examining 5 or more matches is recommended
+Warning: [Query 12776-12848] Examining 5 or more matches is recommended
+Warning: [Query 12849-12921] Examining 5 or more matches is recommended
+Warning: [Query 12922-12994] Examining 5 or more matches is recommended
+Warning: [Query 12995-13067] Examining 5 or more matches is recommended
+Warning: [Query 13068-13140] Examining 5 or more matches is recommended
+Warning: [Query 13141-13213] Examining 5 or more matches is recommended
+Warning: [Query 13288-13360] Examining 5 or more matches is recommended
+Warning: [Query 13214-13287] Examining 5 or more matches is recommended
+Warning: [Query 13361-13433] Examining 5 or more matches is recommended
+Warning: [Query 13434-13506] Examining 5 or more matches is recommended
+Warning: [Query 13507-13579] Examining 5 or more matches is recommended
+Warning: [Query 13580-13652] Examining 5 or more matches is recommended
+Warning: [Query 13653-13725] Examining 5 or more matches is recommended
+Warning: [Query 13726-13798] Examining 5 or more matches is recommended
+Warning: [Query 13799-13871] Examining 5 or more matches is recommended
+Warning: [Query 13872-13944] Examining 5 or more matches is recommended
+Warning: [Query 13945-14017] Examining 5 or more matches is recommended
+Warning: [Query 14018-14090] Examining 5 or more matches is recommended
+Warning: [Query 14091-14163] Examining 5 or more matches is recommended
+Warning: [Query 14237-14309] Examining 5 or more matches is recommended
+Warning: [Query 14164-14236] Examining 5 or more matches is recommended
+Warning: [Query 14310-14382] Examining 5 or more matches is recommended
+Warning: [Query 14383-14455] Examining 5 or more matches is recommended
+Warning: [Query 14456-14528] Examining 5 or more matches is recommended
+Warning: [Query 14529-14601] Examining 5 or more matches is recommended
+Warning: [Query 14602-14674] Examining 5 or more matches is recommended
+Warning: [Query 14748-14820] Examining 5 or more matches is recommended
+Warning: [Query 14675-14747] Examining 5 or more matches is recommended
+Warning: [Query 14821-14893] Examining 5 or more matches is recommended
+Warning: [Query 14894-14966] Examining 5 or more matches is recommended
+Warning: [Query 14967-15039] Examining 5 or more matches is recommended
+Warning: [Query 15040-15112] Examining 5 or more matches is recommended
+Warning: [Query 15113-15185] Examining 5 or more matches is recommended
+Warning: [Query 15186-15258] Examining 5 or more matches is recommended
+Warning: [Query 15259-15331] Examining 5 or more matches is recommended
+Warning: [Query 15332-15404] Examining 5 or more matches is recommended
+Warning: [Query 15405-15477] Examining 5 or more matches is recommended
+Warning: [Query 15478-15550] Examining 5 or more matches is recommended
+Warning: [Query 15551-15623] Examining 5 or more matches is recommended
+Warning: [Query 15624-15696] Examining 5 or more matches is recommended
+Warning: [Query 15697-15769] Examining 5 or more matches is recommended
+Warning: [Query 15770-15842] Examining 5 or more matches is recommended
+Warning: [Query 15843-15915] Examining 5 or more matches is recommended
+Warning: [Query 15916-15988] Examining 5 or more matches is recommended
+Warning: [Query 15989-16061] Examining 5 or more matches is recommended
+Warning: [Query 16062-16134] Examining 5 or more matches is recommended
+Warning: [Query 16135-16207] Examining 5 or more matches is recommended
+Warning: [Query 16208-16280] Examining 5 or more matches is recommended
+Warning: [Query 16281-16353] Examining 5 or more matches is recommended
+Warning: [Query 16354-16426] Examining 5 or more matches is recommended
+Warning: [Query 16427-16499] Examining 5 or more matches is recommended
+Warning: [Query 16500-16572] Examining 5 or more matches is recommended
+Warning: [Query 16573-16646] Examining 5 or more matches is recommended
+Warning: [Query 16647-16719] Examining 5 or more matches is recommended
+Warning: [Query 16720-16792] Examining 5 or more matches is recommended
+Warning: [Query 16793-16865] Examining 5 or more matches is recommended
+Warning: [Query 16866-16938] Examining 5 or more matches is recommended
+Warning: [Query 16939-17011] Examining 5 or more matches is recommended
+Warning: [Query 17012-17084] Examining 5 or more matches is recommended
+Warning: [Query 17085-17157] Examining 5 or more matches is recommended
+Warning: [Query 17158-17230] Examining 5 or more matches is recommended
+Warning: [Query 17231-17303] Examining 5 or more matches is recommended
+Warning: [Query 17304-17376] Examining 5 or more matches is recommended
+Warning: [Query 17377-17449] Examining 5 or more matches is recommended
+Warning: [Query 17450-17522] Examining 5 or more matches is recommended
+Warning: [Query 17523-17595] Examining 5 or more matches is recommended
+Warning: [Query 17596-17668] Examining 5 or more matches is recommended
+Warning: [Query 17669-17741] Examining 5 or more matches is recommended
+Warning: [Query 17742-17814] Examining 5 or more matches is recommended
+Warning: [Query 17815-17887] Examining 5 or more matches is recommended
+Warning: [Query 17888-17960] Examining 5 or more matches is recommended
+Warning: [Query 17961-18033] Examining 5 or more matches is recommended
+Warning: [Query 18034-18106] Examining 5 or more matches is recommended
+Warning: [Query 18107-18179] Examining 5 or more matches is recommended
+Warning: [Query 18180-18252] Examining 5 or more matches is recommended
+Warning: [Query 18253-18325] Examining 5 or more matches is recommended
+Warning: [Query 18326-18398] Examining 5 or more matches is recommended
+Warning: [Query 18399-18471] Examining 5 or more matches is recommended
+Warning: [Query 18472-18544] Examining 5 or more matches is recommended
+Warning: [Query 18545-18617] Examining 5 or more matches is recommended
+Warning: [Query 18618-18690] Examining 5 or more matches is recommended
+Warning: [Query 18691-18763] Examining 5 or more matches is recommended
+Warning: [Query 18764-18836] Examining 5 or more matches is recommended
+Warning: [Query 18837-18909] Examining 5 or more matches is recommended
+Warning: [Query 18910-18982] Examining 5 or more matches is recommended
+Warning: [Query 18983-19055] Examining 5 or more matches is recommended
+Warning: [Query 19056-19128] Examining 5 or more matches is recommended
+Warning: [Query 19129-19201] Examining 5 or more matches is recommended
+Warning: [Query 19202-19274] Examining 5 or more matches is recommended
+Warning: [Query 19275-19347] Examining 5 or more matches is recommended
+Warning: [Query 19348-19420] Examining 5 or more matches is recommended
+Warning: [Query 19421-19493] Examining 5 or more matches is recommended
+Warning: [Query 19494-19566] Examining 5 or more matches is recommended
+Warning: [Query 19567-19639] Examining 5 or more matches is recommended
+Warning: [Query 19640-19712] Examining 5 or more matches is recommended
+Warning: [Query 19713-19785] Examining 5 or more matches is recommended
+Warning: [Query 19786-19858] Examining 5 or more matches is recommended
+Warning: [Query 19859-19931] Examining 5 or more matches is recommended
+Warning: [Query 19932-20004] Examining 5 or more matches is recommended
+Warning: [Query 20005-20077] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 132: 125
+Warning: [Query 20078-20150] Examining 5 or more matches is recommended
+Warning: [Query 20151-20223] Examining 5 or more matches is recommended
+Warning: [Query 20224-20296] Examining 5 or more matches is recommended
+Warning: [Query 20297-20369] Examining 5 or more matches is recommended
+Warning: [Query 20370-20442] Examining 5 or more matches is recommended
+Warning: [Query 20443-20515] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 88: 125
+Warning: [Query 20516-20588] Examining 5 or more matches is recommended
+Warning: [Query 20589-20661] Examining 5 or more matches is recommended
+Warning: [Query 20662-20734] Examining 5 or more matches is recommended
+Warning: [Query 20735-20807] Examining 5 or more matches is recommended
+Warning: [Query 20808-20880] Examining 5 or more matches is recommended
+Warning: [Query 20881-20953] Examining 5 or more matches is recommended
+Warning: [Query 20954-21026] Examining 5 or more matches is recommended
+Warning: [Query 21027-21099] Examining 5 or more matches is recommended
+Warning: [Query 21100-21172] Examining 5 or more matches is recommended
+Warning: [Query 21173-21245] Examining 5 or more matches is recommended
+Warning: [Query 21319-21391] Examining 5 or more matches is recommended
+Warning: [Query 21246-21318] Examining 5 or more matches is recommended
+Warning: [Query 21392-21464] Examining 5 or more matches is recommended
+Warning: [Query 21465-21537] Examining 5 or more matches is recommended
+Warning: [Query 21538-21610] Examining 5 or more matches is recommended
+Warning: [Query 21611-21683] Examining 5 or more matches is recommended
+Warning: [Query 21684-21756] Examining 5 or more matches is recommended
+Warning: [Query 21757-21829] Examining 5 or more matches is recommended
+Warning: [Query 21830-21902] Examining 5 or more matches is recommended
+Warning: [Query 21903-21975] Examining 5 or more matches is recommended
+Warning: [Query 21976-22048] Examining 5 or more matches is recommended
+Warning: [Query 22049-22121] Examining 5 or more matches is recommended
+Warning: [Query 22122-22194] Examining 5 or more matches is recommended
+Warning: [Query 22195-22267] Examining 5 or more matches is recommended
+Warning: [Query 22268-22340] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 46: 89
+Warning: [Query 22341-22413] Examining 5 or more matches is recommended
+Warning: [Query 22414-22486] Examining 5 or more matches is recommended
+Warning: [Query 22487-22559] Examining 5 or more matches is recommended
+Warning: [Query 22560-22632] Examining 5 or more matches is recommended
+Warning: [Query 22633-22705] Examining 5 or more matches is recommended
+Warning: [Query 22706-22778] Examining 5 or more matches is recommended
+Warning: [Query 22779-22851] Examining 5 or more matches is recommended
+Warning: [Query 22852-22924] Examining 5 or more matches is recommended
+Warning: [Query 22925-22997] Examining 5 or more matches is recommended
+Warning: [Query 22998-23070] Examining 5 or more matches is recommended
+Warning: [Query 23071-23143] Examining 5 or more matches is recommended
+Warning: [Query 23144-23216] Examining 5 or more matches is recommended
+Warning: [Query 23217-23289] Examining 5 or more matches is recommended
+Warning: [Query 23290-23362] Examining 5 or more matches is recommended
+Warning: [Query 23363-23435] Examining 5 or more matches is recommended
+Warning: [Query 23436-23508] Examining 5 or more matches is recommended
+Warning: [Query 23509-23581] Examining 5 or more matches is recommended
+Warning: [Query 23582-23654] Examining 5 or more matches is recommended
+Warning: [Query 23655-23727] Examining 5 or more matches is recommended
+Warning: [Query 23728-23800] Examining 5 or more matches is recommended
+Warning: [Query 23801-23873] Examining 5 or more matches is recommended
+Warning: [Query 23874-23946] Examining 5 or more matches is recommended
+Warning: [Query 23947-24019] Examining 5 or more matches is recommended
+Warning: [Query 24020-24092] Examining 5 or more matches is recommended
+Warning: [Query 24093-24165] Examining 5 or more matches is recommended
+Warning: [Query 24166-24238] Examining 5 or more matches is recommended
+Warning: [Query 24239-24311] Examining 5 or more matches is recommended
+Warning: [Query 24312-24384] Examining 5 or more matches is recommended
+Warning: [Query 24385-24457] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 134: 125
+Warning: [Query 24458-24530] Examining 5 or more matches is recommended
+Warning: [Query 24531-24603] Examining 5 or more matches is recommended
+Warning: [Query 24604-24676] Examining 5 or more matches is recommended
+Warning: [Query 24677-24749] Examining 5 or more matches is recommended
+Warning: [Query 24750-24822] Examining 5 or more matches is recommended
+Warning: [Query 24896-24968] Examining 5 or more matches is recommended
+Warning: [Query 24823-24895] Examining 5 or more matches is recommended
+Warning: [Query 24969-25041] Examining 5 or more matches is recommended
+Warning: [Query 25042-25114] Examining 5 or more matches is recommended
+Warning: [Query 25115-25187] Examining 5 or more matches is recommended
+Warning: [Query 25188-25260] Examining 5 or more matches is recommended
+Warning: [Query 25261-25333] Examining 5 or more matches is recommended
+Warning: [Query 25334-25406] Examining 5 or more matches is recommended
+Warning: [Query 25407-25479] Examining 5 or more matches is recommended
+Warning: [Query 25480-25552] Examining 5 or more matches is recommended
+Warning: [Query 25553-25625] Examining 5 or more matches is recommended
+Warning: [Query 25626-25698] Examining 5 or more matches is recommended
+Warning: [Query 25699-25771] Examining 5 or more matches is recommended
+Warning: [Query 25772-25844] Examining 5 or more matches is recommended
+Warning: [Query 25845-25917] Examining 5 or more matches is recommended
+Warning: [Query 25918-25990] Examining 5 or more matches is recommended
+Warning: [Query 25991-26063] Examining 5 or more matches is recommended
+Warning: [Query 26064-26136] Examining 5 or more matches is recommended
+Warning: [Query 26137-26209] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 90: 127
+Warning: [Query 26210-26282] Examining 5 or more matches is recommended
+Warning: [Query 26283-26356] Examining 5 or more matches is recommended
+Warning: [Query 26357-26429] Examining 5 or more matches is recommended
+Warning: [Query 26430-26502] Examining 5 or more matches is recommended
+Warning: [Query 26503-26575] Examining 5 or more matches is recommended
+FASTA-Reader: Ignoring invalid residues at position(s): On line 8: 125
+Warning: [Query 26576-26648] Examining 5 or more matches is recommended
+Warning: [Query 26649-26721] Examining 5 or more matches is recommended
+Warning: [Query 26722-26794] Examining 5 or more matches is recommended
+Warning: [Query 26795-26867] Examining 5 or more matches is recommended
+Warning: [Query 26868-26925] Examining 5 or more matches is recommended
+	Command being timed: "blastp -query ../../data/testshort_aa.fasta -db train_aa_40 -out blast_testshort_aa_40.raw -num_threads 40 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"
+	User time (seconds): 33946.87
+	System time (seconds): 42.26
+	Percent of CPU this job got: 3747%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 15:07.00
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3416728
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 126
+	Minor (reclaiming a frame) page faults: 7882267
+	Voluntary context switches: 407388
+	Involuntary context switches: 73113
+	Swaps: 0
+	File system inputs: 19960
+	File system outputs: 7160
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
