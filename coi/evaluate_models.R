@@ -63,7 +63,7 @@ results <- lapply(results, function(x) x[which(x[,1] %in% data_true[,1]),])
 
 # Some quick checks 
 if(!length(unique(lapply(results, function(x) colnames(x)))) == 1) print("One of the results data frames have wrong column names.")
-if(!all(sapply(results[8], function(x) all(x[,1] == data_true[,1])))) print("One of the results data frames is not sorted by ID.")
+if(!all(sapply(results, function(x) all(x[,1] == data_true[,1])))) print("One of the results data frames is not sorted by ID.")
 if(!all(colnames(data_true) == colnames(results[[1]])[1:ncol(data_true)])) print("Column names containing taxonomic information not identical to data_true")
 
 
@@ -103,8 +103,8 @@ plot_colors <- c(
   "#bcbddc",
   #"#756bb1",
   #Neural networks
-  "#fdae6b",
-  "#e6550d",
+  "#fdbe85",
+  "#fd8d3c",
   # phylogenetic
   "#fbb4b9",
   "#f768a1")
@@ -129,7 +129,6 @@ point_shapes <- c(
   2,
   5
 )
-
 
 # PLOT CALIBRATION CURVES ------------------------------------------------------
 
@@ -210,36 +209,46 @@ binned_calibrations <-
   dplyr::mutate(bin = bin + 0.05)
 
 #### Genus-level plot #### 
+
+plotlist_cal <- list() 
+plotsets <- c("Observed", "Novel")
+
+for(i in 1:2){
+  plotlist_cal[[i]] <- 
+    binned_calibrations |> 
+    filter(set == plotsets[i], 
+           rank == "Genus") |> 
+    ggplot2::ggplot() + 
+    ggplot2::ylim(0, 1) +
+    ggplot2::xlim(0, 1.05) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(aspect.ratio = 1) +
+    ggplot2::geom_abline(intercept = 0, slope = 1, color = "grey") +
+    ggplot2::geom_bar(ggplot2::aes(x = bin, 
+                                   y = correct, 
+                                   fill = count), 
+                      stat = "identity", 
+                      alpha = 0.5, 
+                      width = 0.05) + 
+    ggplot2::facet_wrap(~model, ncol = 6)  + 
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90)) + 
+    ggplot2::ylab("Prop. correct") + 
+    ggplot2::xlab("Pred. probability") +
+    ggplot2::scale_fill_gradient(name = "# predictions",
+                                 trans = "log",
+                                 breaks = c(10, 100, 1000),
+                                 labels = c(10, 100, 1000))
+}
+
 p_cal_binned_genus <- 
-  binned_calibrations |> 
-  dplyr::filter(set != "All") |> 
-  dplyr::filter(rank == "Genus") |> 
-  ggplot2::ggplot() + 
-  ggplot2::ylim(0, 1) +
-  ggplot2::xlim(0, 1.05) +
-  ggplot2::theme_bw() +
-  ggplot2::theme(aspect.ratio = 1) +
-  ggplot2::geom_abline(intercept = 0, slope = 1, color = "grey") +
-  ggplot2::geom_bar(ggplot2::aes(x = bin, 
-                                 y = correct, 
-                                 fill = count), 
-                    stat = "identity", 
-                    alpha = 0.5) + 
-  ggplot2::facet_grid(set~model, 
-                      labeller = ggplot2::labeller(set = 
-                                                     c(Observed = paste0("Observed species (", obs_perc, "%)"),
-                                                       Novel = paste0("Novel species (", novel_perc, "%)")))) + 
-  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90)) + 
-  ggplot2::ylab("Prop. correct") + 
-  ggplot2::xlab("Pred. probability") +
-  ggplot2::scale_fill_gradient(name = "# predictions",
-                               trans = "log",
-                               breaks = c(10, 100, 1000),
-                               labels = c(10, 100, 1000))
+  ggpubr::ggarrange(plotlist = plotlist_cal, nrow = round(length(results)/6), 
+                    common.legend = T, 
+                    legend = "right", 
+                    labels = c("a", "b"))
 
 ggplot2::ggsave(plot = p_cal_binned_genus, 
        filename = paste0("../plots/binned_calibration_genus_COI", natxt, undshort, ".pdf"), 
-       width = 500, 
+       width = 250, 
        height = 200, 
        units = "mm")
 
@@ -250,8 +259,6 @@ for(m in names(results)){
   
   plotlist[[m]] <- 
     ggplot2::ggplot() + 
-    ggplot2::ylim(0, 1) +
-    ggplot2::xlim(0, 1.05) +
     ggplot2::theme_bw() +
     ggplot2::theme(aspect.ratio = 1) +
     ggplot2::geom_abline(intercept = 0, slope = 1, color = "grey") +
@@ -260,7 +267,10 @@ for(m in names(results)){
                                    y = correct, 
                                    fill = log(count)), 
                       stat = "identity", 
-                      alpha = 0.5) + 
+                      alpha = 0.5, 
+                      width = 0.05)  + 
+    ggplot2::ylim(0, 1) +
+    ggplot2::xlim(0, 1.05) +
     ggplot2::facet_grid(set~rank) + 
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90)) + 
     ggplot2::ylab("Prop. correct") + 
@@ -332,7 +342,7 @@ accuracy_df$measure <- factor(accuracy_df$measure,
 
 #### Plot marginal and conditional accuracy #### 
 
-fourpanel_accuracy <-
+#fourpanel_accuracy <-
   accuracy_df |> 
   dplyr::filter(measure == "marginal", set != "All") |> 
   dplyr::select(-denom_cond) |> 
@@ -382,7 +392,6 @@ no_novel <- accuracy_df |>
   dplyr::distinct(model) |> 
   dplyr::pull(model)
 
-# TODO: Fix this for new models 
 cond_accuracy_novel_taxa <- 
   accuracy_df |> 
   dplyr::filter(measure == "conditional" & set == "Novel") |> 
@@ -390,7 +399,6 @@ cond_accuracy_novel_taxa <-
   dplyr::mutate(rank = factor(rank, levels = ranks)) |> 
   dplyr::mutate(accuracy = dplyr::if_else(is.na(denom_cond), 0, accuracy)) |> 
   dplyr::mutate(denom_cond = dplyr::if_else(is.na(denom_cond), 0, denom_cond)) |> 
-  # filter(model != "RDP" & model != "SINTAX") |> 
   ggplot2::ggplot() + 
   ggplot2::geom_line(ggplot2::aes(x = rank, y = accuracy * 100, 
                 group = model, color = model)) + 
@@ -664,7 +672,3 @@ ggplot2::ggsave(filename = paste0("../plots/errorrates_COI", undshort, natxt, ".
                 width = 10,
                 height = 5, 
                 units = "in")
-
-
-
-
