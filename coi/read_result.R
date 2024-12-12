@@ -5,6 +5,7 @@ rm(list = ls())
 
 # LOAD FUNCTIONS ---------------------------------------------------------------
 
+library(tidyverse)
 source("load_FinBOL_GBOL.R")
 source("functions.R")
 
@@ -60,10 +61,26 @@ correct_cols <- c("ID",
 
 # BayesANT
 result_BayesANT <-
-  read.table(paste0("results/bayesant/bayesant_test", shorttxt, "_nt_aln_label.txt"),
+  read.table(paste0("results/bayesant/bayesant_test", shorttxt, "_nt_16.tsv"),
              header = T) |>
   tibble::rownames_to_column("ID") |>
   dplyr::arrange(ID)
+substitutions <- c(
+  "Level1" = "Class",
+  "Level2" = "Order",
+  "Level3" = "Family",
+  "Level4" = "Subfamily",
+  "Level5" = "Tribe",
+  "Level6" = "Genus",
+  "Level7" = "Species"
+)
+names(result_BayesANT) <- 
+  str_replace_all(names(result_BayesANT),
+                  setNames(substitutions, names(substitutions)))
+result_BayesANT <- 
+  result_BayesANT |> 
+  dplyr::mutate(dplyr::across(ranks, 
+                              ~stringr::str_replace_all(., substitutions))) 
 result_BayesANT <- arrange_columns(result_BayesANT, correct_cols)
 
 # RDP
@@ -75,9 +92,8 @@ result_RDP <-
 result_RDP <- arrange_columns(result_RDP, correct_cols)
 
 # PROTAX
-# result_PROTAX <- 
-#   read.table(paste0("models/results_protax_finbol_gbol/protax_finbol_gbol_",
-#                     level, undshort, ".txt"),
+# result_PROTAX <-
+#   read.table(paste0("results/protax-a/protax-a_test", shorttxt, "_nt_1.tsv"),
 #              header = T)
 # result_PROTAX[is.na(result_PROTAX)] <- 0
 # result_PROTAX <- rename_PROTAX_output(result_PROTAX)
@@ -167,7 +183,7 @@ if(!keep_na){
 
 # DNA-barcoder
 result_dnabarcoder <-
-  read.table(paste0("results/dnabarcoder/test", shorttxt, "_nt_4.tsv"),
+  read.table(paste0("results/dnabarcoder/test", shorttxt, "_nt_1.tsv"),
              header = T) |> 
   dplyr::arrange(ID)
 if(keep_na){
@@ -309,13 +325,19 @@ result_crest4 <- arrange_columns(result_crest4, correct_cols)
 # UGLY FIX FOR BLAST MISSING DATA ----------------------------------------------
 
 add_blast_thresh <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_thresh$ID))])
-add_blast_thresh[,correct_cols[-1]] <- NA
+add_blast_top <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_top$ID))])
+
+if(keep_na){
+  add_blast_thresh[,correct_cols[-1]] <- NA
+  add_blast_top[,correct_cols[-1]] <- NA
+}else{
+  add_blast_thresh[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
+  add_blast_top[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
+  add_blast_thresh[,ranks] <- "dummy"
+  add_blast_top[,ranks] <- "dummy"  
+}
 
 result_blast_thresh <- rbind(result_blast_thresh, add_blast_thresh) |> dplyr::arrange(ID)
-
-add_blast_top <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_top$ID))])
-add_blast_top[,correct_cols[-1]] <- NA
-
 result_blast_top <- rbind(result_blast_top, add_blast_top) |> dplyr::arrange(ID)
 
 results <- list(
