@@ -2,6 +2,84 @@
 # Functions for analysing performance of taxonomic classification algorithms.
 ################################################################################
 
+# FOR PLOTTING -----------------------------------------------------------------
+
+algs_sorted <- c(
+  # Similarity
+  "BLAST top hit", 
+  "BLAST threshold",
+  "DNABarcoder",
+  "Crest4", 
+  # K-mer 
+  "IDTAXA",
+  "RDP", 
+  "SINTAX",
+  # Probabilistic
+  "BayesANT", 
+  #"PROTAX", 
+  #Neural networks
+  "MycoAI-BERT", 
+  "MycoAI-CNN", 
+  # phylogenetic 
+  "EPA-ng phyltree", 
+  "EPA-ng taxtree")
+
+plot_colors <- c(
+  # Similarity
+  "#bdd7e7",
+  "#6baed6",
+  "#3182bd",
+  "#08519c", 
+  # K-mer
+  "#bae4b3",
+  "#74c476",
+  "#238b45",
+  # Probabilistic
+  "#bcbddc",
+  #"#756bb1",
+  #Neural networks
+  "#fdbe85",
+  "#fd8d3c",
+  # phylogenetic
+  "#fbb4b9",
+  "#f768a1")
+
+point_shapes <- c( 
+  #similarity 
+  20,
+  2,
+  4,
+  5, 
+  # k-mer
+  20,
+  4,
+  5,
+  # probabilistic 
+  2,
+  # 5,
+  # neural
+  20,
+  4,
+  # phylogenetic
+  2,
+  5
+)
+
+change_plot_colors <- function(x){
+  return(x + 
+    scale_color_manual(name = "Model",
+                     labels = algs_sorted, 
+                     values = plot_colors, 
+                     breaks = algs_sorted) + 
+    scale_shape_manual(name = "Model",
+                       labels = algs_sorted,
+                       values = point_shapes, 
+                       breaks = algs_sorted)
+  )
+} 
+
+# OTHER FUNCTIONS --------------------------------------------------------------
+
 #' Replaces labels of classes that are unique to test dataset. 
 #' Example of new labels: Araneae_Family_new
 #' Or, if first level is new: Class_new

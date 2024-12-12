@@ -2,8 +2,9 @@
 setwd("coi")
 rm(list = ls())
 
-# LOAD FUNCTIONS ---------------------------------------------------------------
+# LOAD FUNCTIONS AND PACKAGES --------------------------------------------------
 
+library(tidyverse)
 source("load_FinBOL_GBOL.R")
 source("functions.R")
 
@@ -25,8 +26,8 @@ if(keep_na) natxt <- "_keepNA"
 # Load test and train data
 data <- load_FinBOL_GBOL()
 
-# Replace labels of taxa unique to test
-# Sort test data in alphabetical order
+# Replace labels of taxa unique to test set
+# Sort IDs in alphabetical order
 data_true <- get_data_true(data$test, data$train) |>
   dplyr::arrange(ID)
 
@@ -41,15 +42,18 @@ correct_cols <- c("ID",
 
 results <- readRDS(paste0("result_list", natxt, ".rds"))
 
-#### Identify novel taxa across all ranks 
+# IDENTIFY TAXA SETS -----------------------------------------------------------
 
+# Observed on all ranks ("Observed species")
 observed_everywhere <- !grepl("_new$", data_true[, ncol(data_true)])
 
+# Novel at each rank ("Novel taxa")
 id_novel <- list()
 for(rank in colnames(data_true)[-1]){
   id_novel[[rank]] <- which(stringr::str_ends(data_true[,rank], paste0(rank, "_new")))
 }
 
+# Observed at each rank ("Observed taxa")
 id_observed <- list()
 for(rank in colnames(data_true)[-1]){
   id_observed[[rank]] <- which(!stringr::str_ends(data_true[,rank], "_new"))
@@ -57,97 +61,32 @@ for(rank in colnames(data_true)[-1]){
 
 id_all <- lapply(data_true, function(x) 1:length(x))
 
-# data_true has a subset of sequences 
+# TODO: Some of our results have more sequences than data_true
+# Here, I remove them as a temporary solution 
 results <- lapply(results, function(x) x[which(x[,1] %in% data_true[,1]),])
 
-
-# Some quick checks 
+# Some quick checks of results structure 
 if(!length(unique(lapply(results, function(x) colnames(x)))) == 1) print("One of the results data frames have wrong column names.")
 if(!all(sapply(results, function(x) all(x[,1] == data_true[,1])))) print("One of the results data frames is not sorted by ID.")
 if(!all(colnames(data_true) == colnames(results[[1]])[1:ncol(data_true)])) print("Column names containing taxonomic information not identical to data_true")
 
 
-# FOR PLOTTING -----------------------------------------------------------------
-
-algs_sorted <- c(
-  # Similarity
-  "BLAST top hit", 
-  "BLAST threshold",
-  "DNABarcoder",
-  "Crest4", 
-  # K-mer 
-  "IDTAXA",
-  "RDP", 
-  "SINTAX",
-  # Probabilistic
-  "BayesANT", 
-  #"PROTAX", 
-  #Neural networks
-  "MycoAI-BERT", 
-  "MycoAI-CNN", 
-  # phylogenetic 
-  "EPA-ng phyltree", 
-  "EPA-ng taxtree")
-
-plot_colors <- c(
-  # Similarity
-  "#bdd7e7",
-  "#6baed6",
-  "#3182bd",
-  "#08519c", 
-  # K-mer
-  "#bae4b3",
-  "#74c476",
-  "#238b45",
-  # Probabilistic
-  "#bcbddc",
-  #"#756bb1",
-  #Neural networks
-  "#fdbe85",
-  "#fd8d3c",
-  # phylogenetic
-  "#fbb4b9",
-  "#f768a1")
-
-point_shapes <- c( 
-  #similarity 
-  20,
-  2,
-  4,
-  5, 
-  # k-mer
-  20,
-  4,
-  5,
-  # probabilistic 
-  20,
-  # 4,
-  # neural
-  20,
-  4,
-  # phylogenetic
-  2,
-  5
-)
-
 # PLOT CALIBRATION CURVES ------------------------------------------------------
 
-calibrations <- get_calibration(results, data_true, observed_everywhere)
-calibrations$rank <- factor(calibrations$rank, 
-                            levels = ranks)
-calibrations$set <- factor(calibrations$set, 
-                           levels = c("All", "Observed", "Novel"))
-calibrations$model <- factor(calibrations$model, 
-                             levels = algs_sorted)
+calibrations <- 
+  get_calibration(results, data_true, observed_everywhere) |> 
+  mutate(rank = factor(rank, levels = ranks), 
+         set = factor(set, levels = c("All", "Observed", "Novel")), 
+         model = factor(model, levels = algs_sorted))
 
 #### Plot all calibration curves (all ranks, taxa sets and models) #####
 p_cal <- plot_calibration(calibrations) 
 
-ggplot2::ggsave(plot = p_cal, 
-                filename = paste0("../plots/calibration_COI_all", natxt, undshort, ".pdf"), 
-                width = 500, 
-                height = 300, 
-                units = "mm")
+ggsave(plot = p_cal, 
+       filename = paste0("../plots/calibration_COI_all", natxt, undshort, ".pdf"), 
+       width = 500, 
+       height = 300, 
+       units = "mm")
 
 #### Subset plot for publication: observed and novel sets only #### 
 obs_perc <- round(sum(observed_everywhere)/nrow(data_true) * 100, 1)
@@ -155,58 +94,58 @@ novel_perc <- round(sum(!observed_everywhere)/nrow(data_true) * 100, 1)
 
 p_cal_subset <- 
   plot_calibration(calibrations |> 
-                     dplyr::filter(set != "All")) +
-  ggplot2::facet_grid(set~model, 
-                      labeller = ggplot2::labeller(set = c(Observed = paste0("Observed species (", obs_perc, "%)"),
-                                                           Novel = paste0("Novel species (", novel_perc, "%)")))) + 
-  ggplot2::theme(panel.grid.minor = ggplot2::element_blank(),
-                 legend.position = "bottom") + 
-  ggplot2::guides(color = ggplot2::guide_legend(nrow = 1))
+                     filter(set != "All")) +
+  facet_grid(set~model, 
+             labeller = labeller(set = c(Observed = paste0("Observed species (", obs_perc, "%)"),
+                                         Novel = paste0("Novel species (", novel_perc, "%)")))) + 
+  theme(panel.grid.minor = element_blank(),
+        legend.position = "bottom") + 
+  guides(color = guide_legend(nrow = 1))
 
 plotlist_cal <- list() 
 for(i in 1:2){
   plotsets <- c("Observed", "Novel")
   
   plotlist_cal[[i]] <- 
-    plot_calibration(calibrations |> 
-                     dplyr::filter(set == plotsets[i])) +
-    ggplot2::facet_wrap(~model, ncol = 6) + 
-    ggplot2::theme(panel.grid.minor = ggplot2::element_blank(),
-                   legend.position = "bottom") + 
-    ggplot2::guides(color = ggplot2::guide_legend(nrow = 1))
+    plot_calibration(calibrations |>
+                       filter(set == plotsets[i])) +
+    facet_wrap(~model, ncol = 6) + 
+    theme(panel.grid.minor = element_blank(),
+          legend.position = "bottom") + 
+    guides(color = guide_legend(nrow = 1))
 }
 
 p_cal_subset_divided <- 
-  ggpubr::ggarrange(plotlist = plotlist_cal, nrow = round(length(results)/6), 
-                  common.legend = T, 
-                  legend = "bottom", 
-                  labels = c("a", "b"))
+  ggpubr::ggarrange(plotlist = plotlist_cal, 
+                    nrow = round(length(results)/6), 
+                    common.legend = T, 
+                    legend = "bottom", 
+                    labels = c("a", "b"))
 
-ggplot2::ggsave(plot = p_cal_subset_divided, 
-                filename = paste0("../plots/calibration_COI_subset", natxt, undshort, ".pdf"), 
-                width = 200, 
-                height = 180, 
-                units = "mm")
+ggsave(plot = p_cal_subset_divided, 
+       filename = paste0("../plots/calibration_COI_subset", natxt, undshort, ".pdf"), 
+       width = 200, 
+       height = 180, 
+       units = "mm")
 
 # PLOT BINNED CALIBRATIONS -----------------------------------------------------
-binned_calibrations <- get_calibration(results, data_true, observed_everywhere, 
-                                       binned = T) 
 
-binned_calibrations$rank <- factor(binned_calibrations$rank, 
-                                   levels = colnames(data_true)[-1])
-binned_calibrations$set <- factor(binned_calibrations$set, 
-                                   levels = c("All", "Observed", "Novel"))
+binned_calibrations <- get_calibration(results, data_true, observed_everywhere, 
+                                       binned = T) |> 
+  mutate(rank = factor(rank, levels = ranks), 
+         set = factor(set, levels = c("All", "Observed", "Novel")))
+
 binned_calibrations <- 
   binned_calibrations |> 
-  dplyr::mutate(bin = purrr::map_dbl(bin,
-                                     function(x)
-                                       stringr::str_remove(x, "\\(") |>
-                                       stringr::str_remove("\\[") |>
-                                       stringr::str_split(",") |>
-                                       unlist() |>
-                                       head(1) |>
-                                       as.numeric())) |> 
-  dplyr::mutate(bin = bin + 0.05)
+  mutate(bin = purrr::map_dbl(bin,
+                              function(x)
+                                str_remove(x, "\\(") |>
+                                str_remove("\\[") |>
+                                str_split(",") |>
+                                unlist() |>
+                                head(1) |>
+                                as.numeric())) |> 
+  mutate(bin = bin + 0.05)
 
 #### Genus-level plot #### 
 
@@ -217,36 +156,37 @@ for(i in 1:2){
   plotlist_cal[[i]] <- 
     binned_calibrations |> 
     filter(set == plotsets[i], 
-           rank == "Genus") |> 
-    ggplot2::ggplot() + 
-    ggplot2::ylim(0, 1) +
-    ggplot2::xlim(0, 1.05) +
-    ggplot2::theme_bw() +
-    ggplot2::theme(aspect.ratio = 1) +
-    ggplot2::geom_abline(intercept = 0, slope = 1, color = "grey") +
-    ggplot2::geom_bar(ggplot2::aes(x = bin, 
-                                   y = correct, 
-                                   fill = count), 
-                      stat = "identity", 
-                      alpha = 0.5, 
-                      width = 0.05) + 
-    ggplot2::facet_wrap(~model, ncol = 6)  + 
-    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90)) + 
-    ggplot2::ylab("Prop. correct") + 
-    ggplot2::xlab("Pred. probability") +
-    ggplot2::scale_fill_gradient(name = "# predictions",
-                                 trans = "log",
-                                 breaks = c(10, 100, 1000),
-                                 labels = c(10, 100, 1000))
+           rank == "Genus") |>
+    ggplot() + 
+    ylim(0, 1) +
+    xlim(0, 1.05) +
+    theme_bw() +
+    theme(aspect.ratio = 1) +
+    geom_abline(intercept = 0, slope = 1, color = "grey") +
+    geom_bar(aes(x = bin, 
+                 y = correct, 
+                 fill = count), 
+             stat = "identity", 
+             alpha = 0.5, 
+             width = 0.05) + 
+    facet_wrap(~model, ncol = 6)  + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    ylab("Prop. correct") + 
+    xlab("Pred. probability") +
+    scale_fill_gradient(name = "# predictions",
+                        trans = "log",
+                        breaks = c(10, 100, 1000),
+                        labels = c(10, 100, 1000))
 }
 
 p_cal_binned_genus <- 
-  ggpubr::ggarrange(plotlist = plotlist_cal, nrow = round(length(results)/6), 
+  ggpubr::ggarrange(plotlist = plotlist_cal, 
+                    nrow = round(length(results)/6), 
                     common.legend = T, 
                     legend = "right", 
                     labels = c("a", "b"))
 
-ggplot2::ggsave(plot = p_cal_binned_genus, 
+ggsave(plot = p_cal_binned_genus, 
        filename = paste0("../plots/binned_calibration_genus_COI", natxt, undshort, ".pdf"), 
        width = 250, 
        height = 200, 
@@ -258,24 +198,24 @@ plotlist <- list()
 for(m in names(results)){
   
   plotlist[[m]] <- 
-    ggplot2::ggplot() + 
-    ggplot2::theme_bw() +
-    ggplot2::theme(aspect.ratio = 1) +
-    ggplot2::geom_abline(intercept = 0, slope = 1, color = "grey") +
-    ggplot2::geom_bar(data = binned_calibrations |> dplyr::filter(model == m), 
-                      ggplot2::aes(x = bin, 
-                                   y = correct, 
-                                   fill = log(count)), 
-                      stat = "identity", 
-                      alpha = 0.5, 
-                      width = 0.05)  + 
-    ggplot2::ylim(0, 1) +
-    ggplot2::xlim(0, 1.05) +
-    ggplot2::facet_grid(set~rank) + 
-    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90)) + 
-    ggplot2::ylab("Prop. correct") + 
-    ggplot2::xlab("Pred. probability") + 
-    ggplot2::ggtitle(m)
+    ggplot() + 
+    theme_bw() +
+    theme(aspect.ratio = 1) +
+    geom_abline(intercept = 0, slope = 1, color = "grey") +
+    geom_bar(data = binned_calibrations |> filter(model == m),
+             aes(x = bin,
+                 y = correct,
+                 fill = log(count)),
+             stat = "identity",
+             alpha = 0.5,
+             width = 0.05)  + 
+    ylim(0, 1) +
+    xlim(0, 1.05) +
+    facet_grid(set~rank) + 
+    theme(axis.text.x = element_text(angle = 90)) + 
+    ylab("Prop. correct") + 
+    xlab("Pred. probability") + 
+    ggtitle(m)
 }
 
 pdf(paste0("../plots/binned_calibration_COI", natxt, undshort, ".pdf"), 
@@ -286,29 +226,20 @@ dev.off()
 # PLOT ACCURACIES --------------------------------------------------------------
 
 ### If a sequence belongs to a new taxon (on any rank), how well is it predicted on higher ranks? 
-accuracies <- get_accuracy_from_cal(calibrations)
-
-accuracies$rank <- factor(accuracies$rank,
-                          levels = colnames(data_true)[-1])
-accuracies$set <- factor(accuracies$set,
-                         levels = c("All", "Observed", "Novel"))
+accuracies <- get_accuracy_from_cal(calibrations) |> 
+  mutate(rank = factor(rank, levels = ranks), 
+         set = factor(set, levels = c("All", "Observed", "Novel")))
 
 #### Plot across all models and species sets ####
-p_acc <- plot_accuracies(accuracies)
-p_acc + 
-  ggplot2::scale_color_manual(name = "Model",
-                              labels = algs_sorted, 
-                              values = plot_colors, breaks = algs_sorted) + 
-  ggplot2::scale_shape_manual(name = "Model",
-                              labels = algs_sorted,
-                              values = point_shapes, breaks = algs_sorted)
-  
+p_acc <- 
+  plot_accuracies(accuracies) |> 
+  change_plot_colors()
 
-ggplot2::ggsave(plot = p_acc, 
-                filename = paste0("../plots/accuracy_COI", natxt, undshort, ".pdf"), 
-                width = 210, 
-                height = 150, 
-                units = "mm")
+ggsave(plot = p_acc, 
+       filename = paste0("../plots/accuracy_COI", natxt, undshort, ".pdf"), 
+       width = 210, 
+       height = 150, 
+       units = "mm")
 
 # MARGINAL AND CONDITIONAL ACCURACY --------------------------------------------
 
@@ -324,106 +255,100 @@ cond_accuracies <- conditional_accuracy(results, data_true,
 
 accuracy_df <- 
   marg_accuracies |> 
-  dplyr::left_join(cond_accuracies) |>
-  dplyr::rename(marginal = marg_accuracy, 
-                conditional = cond_accuracy) |> 
-  tidyr::pivot_longer(c("marginal", "conditional"), 
-                      names_to = "measure", 
-                      values_to = "accuracy") |> 
-  dplyr::mutate(denom_cond = dplyr::if_else(measure == "marginal", 0, denom_cond)) |> 
-  dplyr::mutate(denom_cond = dplyr::na_if(denom_cond, 0))
-
-accuracy_df$rank <- factor(accuracy_df$rank, 
-                           levels = colnames(data_true)[-1])
-accuracy_df$set <- factor(accuracy_df$set, 
-                          levels = c("All", "Observed", "Novel"))
-accuracy_df$measure <- factor(accuracy_df$measure, 
-                              levels = c("marginal", "conditional"))
+  left_join(cond_accuracies) |>
+  rename(marginal = marg_accuracy,
+         conditional = cond_accuracy) |> 
+  pivot_longer(c("marginal", "conditional"),
+               names_to = "measure",
+               values_to = "accuracy") |> 
+  mutate(denom_cond = if_else(measure == "marginal", 0, denom_cond)) |> 
+  mutate(denom_cond = na_if(denom_cond, 0)) |> 
+  mutate(rank = factor(rank, levels = ranks), 
+         set = factor(set, levels = c("All", "Observed", "Novel")), 
+         measure = factor(measure, levels = c("marginal", "conditional")))
 
 #### Plot marginal and conditional accuracy #### 
 
-#fourpanel_accuracy <-
+fourpanel_accuracy <-
   accuracy_df |> 
-  dplyr::filter(measure == "marginal", set != "All") |> 
-  dplyr::select(-denom_cond) |> 
-  dplyr::mutate(set = purrr::map_chr(set, ~stringr::str_to_sentence(paste(.x, "taxa"))),
-                accuracy = accuracy * 100) |> 
-  dplyr::bind_rows(accuracies |>
-                     dplyr::filter(set != "All") |>
-                     dplyr::mutate(set = paste(set, "species"),
-                                   measure = "accuracy")) |> 
-  dplyr::mutate(set = factor(set, levels = c("Observed species",
+  filter(measure == "marginal", set != "All") |> 
+  select(-denom_cond) |> 
+  mutate(set = map_chr(set, ~str_to_sentence(paste(.x, "taxa"))),
+         accuracy = accuracy * 100) |> 
+  bind_rows(accuracies |>
+              filter(set != "All") |>
+              mutate(set = paste(set, "species"),
+                     measure = "accuracy")) |> 
+  mutate(set = factor(set, levels = c("Observed species",
                                       "Novel species",
                                       "Observed taxa",
                                       "Novel taxa")), 
-                model = factor(model, levels = algs_sorted)) |> 
-  ggplot2::ggplot() + 
-  ggplot2::theme_bw() + 
-  ggplot2::theme(aspect.ratio = 1, 
-                 panel.grid.minor = ggplot2::element_blank(), 
-                 axis.title.x = ggplot2::element_blank(), 
-                 axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) + 
-  ggplot2::aes(x = rank, 
-               y = accuracy, 
-               color = model, 
-               shape = model) + 
-  ggplot2::geom_line(mapping = ggplot2::aes(group = model)) + 
-  ggplot2::geom_point() + 
-  ggplot2::facet_wrap(~set) + 
-  ggplot2::labs(color = "Model", y = "Accuracy (%)") + 
-  ggplot2::scale_color_manual(name = "Model",
-                              labels = algs_sorted, 
-                              values = plot_colors, breaks = algs_sorted) + 
-  ggplot2::scale_shape_manual(name = "Model",
-                              labels = algs_sorted,
-                              values = point_shapes, breaks = algs_sorted)
-
-ggplot2::ggsave(filename = paste0("../plots/fourpanel_accuracy_COI", 
-                                  natxt, undshort, ".pdf"), 
-                plot = fourpanel_accuracy, 
-                height = 150, 
-                width = 200, 
-                units = "mm")
+         model = factor(model, levels = algs_sorted)) |> 
+  ggplot() + 
+  theme_bw() + 
+  theme(aspect.ratio = 1, 
+        panel.grid.minor = element_blank(), 
+        axis.title.x = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  aes(x = rank, 
+      y = accuracy, 
+      color = model, 
+      shape = model) + 
+  geom_line(mapping = aes(group = model)) + 
+  geom_point() + 
+  facet_wrap(~set) + 
+  labs(color = "Model", y = "Accuracy (%)") 
+fourpanel_accuracy <- change_plot_colors(fourpanel_accuracy)
+  
+ggsave(filename = paste0("../plots/fourpanel_accuracy_COI", 
+                         natxt, undshort, ".pdf"), 
+       plot = fourpanel_accuracy, 
+       height = 150, 
+       width = 200, 
+       units = "mm")
 
 #### Single panel conditional accuracy ####
 no_novel <- accuracy_df |>
-  dplyr::filter(measure == "conditional" & set == "Novel") |>
-  dplyr::filter(all(accuracy == 0), .by = model) |> 
-  dplyr::distinct(model) |> 
-  dplyr::pull(model)
+  filter(measure == "conditional" & set == "Novel") |>
+  filter(all(accuracy == 0), .by = model) |> 
+  distinct(model) |> 
+  pull(model)
 
 cond_accuracy_novel_taxa <- 
   accuracy_df |> 
-  dplyr::filter(measure == "conditional" & set == "Novel") |> 
-  dplyr::filter(!(model %in% no_novel)) |> 
-  dplyr::mutate(rank = factor(rank, levels = ranks)) |> 
-  dplyr::mutate(accuracy = dplyr::if_else(is.na(denom_cond), 0, accuracy)) |> 
-  dplyr::mutate(denom_cond = dplyr::if_else(is.na(denom_cond), 0, denom_cond)) |> 
-  ggplot2::ggplot() + 
-  ggplot2::geom_line(ggplot2::aes(x = rank, y = accuracy * 100, 
-                group = model, color = model)) + 
-  ggplot2::geom_point(ggplot2::aes(x = rank, y = accuracy * 100, 
-                 group = model, color = model, shape = model)) + 
-  ggplot2::geom_text(ggplot2::aes(x = rank, y = accuracy * 100, 
-                color = model, group = model, 
-                label = denom_cond), 
-            nudge_y = 5, size = 3, show.legend = F) + 
-  ggplot2::scale_color_manual(name = "Model",
-                              labels = algs_sorted[which(!(algs_sorted %in% no_novel))],
-                              limits = algs_sorted[which(!(algs_sorted %in% no_novel))], 
-                      values = plot_colors[which(!(algs_sorted %in% no_novel))]) + 
-  ggplot2::scale_shape_manual(name = "Model",
-                              labels = algs_sorted[which(!(algs_sorted %in% no_novel))],
-                              limits = algs_sorted[which(!(algs_sorted %in% no_novel))], 
-                              values = point_shapes[which(!(algs_sorted %in% no_novel))]) + 
-  ggplot2::theme_bw() + 
-  ggplot2::ylab("Conditional recall (%)") + 
-  ggplot2::theme(axis.title.x = ggplot2::element_blank(), 
-        axis.text.x = ggplot2::element_text(angle = 45, hjust = 1), 
-        panel.grid.minor.y = ggplot2::element_blank()) + 
-  ggplot2::labs(color = "Model")
+  filter(measure == "conditional" & set == "Novel") |> 
+  filter(!(model %in% no_novel)) |> 
+  mutate(rank = factor(rank, levels = ranks)) |> 
+  mutate(accuracy = if_else(is.na(denom_cond), 0, accuracy)) |> 
+  mutate(denom_cond = if_else(is.na(denom_cond), 0, denom_cond)) |> 
+  ggplot() + 
+  aes(x = rank,
+      y = accuracy * 100, 
+      group = model, 
+      color = model, 
+      shape = model, 
+      label = denom_cond) + 
+  geom_line() + 
+  geom_point() + 
+  geom_text(nudge_y = 5, 
+            size = 3, 
+            show.legend = F) + 
+  scale_color_manual(name = "Model",
+                     labels = algs_sorted[which(!(algs_sorted %in% no_novel))],
+                     limits = algs_sorted[which(!(algs_sorted %in% no_novel))],
+                     values = plot_colors[which(!(algs_sorted %in% no_novel))]) + 
+  scale_shape_manual(name = "Model",
+                     labels = algs_sorted[which(!(algs_sorted %in% no_novel))],
+                     limits = algs_sorted[which(!(algs_sorted %in% no_novel))], 
+                     values = point_shapes[which(!(algs_sorted %in% no_novel))]) + 
+  theme_bw() + 
+  ylab("Conditional recall (%)") + 
+  theme(axis.title.x = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1), 
+        panel.grid.minor.y = element_blank()) + 
+  labs(color = "Model")
 
-ggplot2::ggsave(plot = cond_accuracy_novel_taxa,
+ggsave(plot = cond_accuracy_novel_taxa,
        filename = paste0("../plots/cond_recall", natxt, undshort, "_COI.pdf"),
        width = 200,
        height = 130,
@@ -436,29 +361,29 @@ pred_novel$rank <- factor(pred_novel$rank, levels = names(data_true)[-1])
 
 p_tot_novel <-
   pred_novel |> 
-  ggplot2::ggplot() + 
-  ggplot2::geom_line(data = pred_novel |> dplyr::filter(model == model[1]),
-                     ggplot2::aes(x = rank, y = sum_novel, group = model),
-                     color = "black",
-                     linetype = "dashed") + 
-  ggplot2::aes(x = rank, y = pred_novel,
-               color = model, group = model, shape = model) +
-  ggplot2::geom_line() + 
-  ggplot2::geom_point() + 
-  ggplot2::theme_bw() + 
-  ggplot2::scale_y_log10(labels = c("10", "1000", "100000"), 
-                         breaks = c(10, 1000, 100000)) + 
-  ggplot2::scale_color_manual(name = "Model",
-                              labels = algs_sorted, 
-                              values = plot_colors, breaks = algs_sorted) + 
-  ggplot2::scale_shape_manual(name = "Model",
-                              labels = algs_sorted,
-                              values = point_shapes, breaks = algs_sorted) +
-  ggplot2::labs(y = "# predicted novel") + 
-  ggplot2::theme(axis.title.x = ggplot2::element_blank(), 
-                 axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
+  ggplot() + 
+  geom_line(data = pred_novel |> filter(model == model[1]),
+            aes(x = rank, 
+                y = sum_novel, 
+                group = model),
+            color = "black",
+            linetype = "dashed") + 
+  aes(x = rank, 
+      y = pred_novel,
+      color = model, 
+      group = model, 
+      shape = model) +
+  geom_line() + 
+  geom_point() + 
+  theme_bw() + 
+  scale_y_log10(labels = c("10", "1000", "100000"), 
+                breaks = c(10, 1000, 100000)) +
+  labs(y = "# predicted novel") + 
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+p_tot_novel <- change_plot_colors(p_tot_novel)
 
-ggplot2::ggsave(plot = p_tot_novel, 
+ggsave(plot = p_tot_novel, 
        filename = paste0("../plots/sum_novel_COI", natxt, undshort, ".pdf"), 
        height = 150, 
        width = 200, 
@@ -466,50 +391,55 @@ ggplot2::ggsave(plot = p_tot_novel,
 
 # NOVELTY: PARTITIONED ---------------------------------------------------------
 
-# TODO: Change so that correct prediction is actually a fully correct (not just correct novel) 
 partitioned_novelty <- 
   get_partitioned_novelty(data_true, results, observed_everywhere) |> 
-  dplyr::filter(pred_rank != "None")
+  filter(pred_rank != "None")
 
 partitioned_novelty <- 
   partitioned_novelty |> 
-  dplyr::mutate(pred_lower = purrr::map2_lgl(true_rank, pred_rank,
-                                             ~which(ranks == .x) < which(ranks == .y))) |> 
-  dplyr::mutate(perc = purrr::map2_dbl(pred_lower, perc,
-                                       ~dplyr::if_else(.x, -.y, .y))) |> 
-  dplyr::mutate(pred_rank = dplyr::if_else(pred_rank == true_rank, 
-                                           "Correct", pred_rank))
-  
-partitioned_novelty$true_rank <- factor(partitioned_novelty$true_rank,
-                                        levels = colnames(data_true)[-1])
-partitioned_novelty$pred_rank <- factor(partitioned_novelty$pred_rank,
-                                        levels = c(colnames(data_true)[-1], 
-                                                   "Correct"))
+  mutate(pred_lower = map2_lgl(true_rank, pred_rank,
+                               ~which(ranks == .x) < which(ranks == .y))) |> 
+  mutate(perc = map2_dbl(pred_lower, perc,
+                         ~if_else(.x, -.y, .y))) |> 
+  mutate(pred_rank = if_else(pred_rank == true_rank, 
+                             "Correct", pred_rank)) |> 
+  mutate(true_rank = factor(true_rank, levels = colnames(data_true)[-1]), 
+         pred_rank = factor(pred_rank, levels = c(colnames(data_true)[-1], 
+                                                  "Correct")))
 
-plot_colors <- c("#EFF3FF", "#C6DBEF", "#9ECAE1", "#6BAED6", "#3182BD", "#08519C")
+plot_colors_blue <- c(
+  "#eff3ff",
+  "#c6dbef",
+  "#9ecae1",
+  "#6baed6",
+  "#4292c6",
+  "#2171b5",
+  "#084594"
+  )
 
 p_part_novelty <- 
-  ggplot2::ggplot() + 
-  ggplot2::geom_bar(data = partitioned_novelty, 
-                    ggplot2::aes(x = true_rank, 
-                                 y = perc, 
-                                 fill = pred_rank), 
-                    position = "stack", 
-                    stat = "identity") + 
-  ggplot2::facet_wrap(~model) + 
-  ggplot2::scale_fill_manual(limits = c(colnames(data_true)[-1],
-                                        "Correct"), 
-                             values = c(plot_colors[1:length(colnames(data_true)[-1])],
-                                        "grey")) + 
-  ggplot2::labs(fill = "Predicted novel rank",
-                y= "Proportion of predictions (%)") + 
-  ggplot2::theme_bw() + 
-  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1), 
-                 axis.title.x = ggplot2::element_blank()) + 
-  ggplot2::geom_hline(yintercept = 0, 
-                      color = "grey20", linetype = "dashed")
+  ggplot() + 
+  geom_bar(data = partitioned_novelty, 
+           aes(x = true_rank, 
+               y = perc, 
+               fill = pred_rank), 
+           position = "stack", 
+           stat = "identity") + 
+  facet_wrap(~model) + 
+  scale_fill_manual(limits = c(colnames(data_true)[-1],
+                               "Correct"),
+                    values = c(plot_colors_blue[1:length(colnames(data_true)[-1])],
+                               "grey")) + 
+  labs(fill = "Predicted novel rank",
+       y = "Proportion of predictions (%)") + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+        axis.title.x = element_blank()) + 
+  geom_hline(yintercept = 0, 
+             color = "grey20", 
+             linetype = "dashed")
 
-ggplot2::ggsave(plot = p_part_novelty, 
+ggsave(plot = p_part_novelty, 
        filename = paste0("../plots/part_novelty_COI", natxt, undshort, ".pdf"), 
        width = 220, 
        height = 130, 
@@ -517,119 +447,135 @@ ggplot2::ggsave(plot = p_part_novelty,
 
 # % CLASSIFIED ~ % CORRECT -----------------------------------------------------
 
+# Add similarity as "probability" for BLAST top hit 
 result_blast_top_similarity <-
   read.table(paste0("results/blast/blast_top_hit_test", shorttxt, "_nt_16.tsv"),
              header = T) |> 
-  dplyr::arrange(ID) 
+  arrange(ID) 
 result_blast_top_similarity <- arrange_columns(result_blast_top_similarity, correct_cols)
 result_blast_top_similarity <- 
   result_blast_top_similarity |> 
-  dplyr::select(ID, all_of(ranks)) |> 
-  tidyr::separate(Species, into = c("Species", "Similarity"), 
-                  sep = ";") 
-result_blast_top_similarity[,correct_cols[which(stringr::str_starts(correct_cols, "Prob_"))]] <- as.numeric(result_blast_top_similarity$Similarity)/100
-result_blast_top_similarity <- result_blast_top_similarity |> dplyr::select(-Similarity)
+  select(ID, all_of(ranks)) |> 
+  separate(Species, into = c("Species", "Similarity"), 
+           sep = ";") 
+result_blast_top_similarity[,correct_cols[which(str_starts(correct_cols, "Prob_"))]] <- as.numeric(result_blast_top_similarity$Similarity)/100
+result_blast_top_similarity <- result_blast_top_similarity |> select(-Similarity)
 
 add_blast_top_similarity <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_top_similarity$ID))])
 add_blast_top_similarity[,correct_cols[-1]] <- NA
 
-result_blast_top_similarity <- rbind(result_blast_top_similarity, add_blast_top_similarity) |> dplyr::arrange(ID)
+result_blast_top_similarity <- 
+  rbind(result_blast_top_similarity, 
+        add_blast_top_similarity) |> 
+  arrange(ID)
 
 result_blast_top_similarity <- 
   result_blast_top_similarity |> 
-  dplyr::filter(ID %in% data_true$ID)
+  filter(ID %in% data_true$ID)
 
 results_similarity <- results
 results_similarity$`BLAST top hit` <- result_blast_top_similarity
 
-classified_correct <- threshold_curve(results_similarity, data_true)
-
-classified_correct$rank <- factor(classified_correct$rank, 
-                                  levels = ranks)
+classified_correct <- 
+  threshold_curve(results_similarity, data_true) |> 
+  mutate(rank = factor(rank, levels = ranks))
 
 point_models <- 
   classified_correct |> 
-    dplyr::group_by(model) |> 
-    dplyr::distinct(correct, classified) |> 
-    dplyr::summarise(count = dplyr::n()) |> 
-    dplyr::filter(count == length(ranks)) |> 
-    dplyr::pull(model)
+    group_by(model) |> 
+    distinct(correct, classified) |> 
+    summarise(count = n()) |> 
+    filter(count == length(ranks)) |> 
+    pull(model)
 
 p_class_correct <- 
   classified_correct |> 
-  dplyr::mutate(rank = factor(rank, levels = ranks)) |> 
-  ggplot2::ggplot() + 
-  ggplot2::geom_line(ggplot2::aes(x = classified, 
-                                  y = correct, 
-                                  color = model), 
-                     alpha = 0.7) + 
-  ggplot2::geom_point(data = classified_correct |> 
-                        dplyr::filter(model %in% point_models) |> 
-                        dplyr::group_by(model, rank) |> 
-                        dplyr::distinct(classified, correct), 
-                      ggplot2::aes(x = classified, 
-                                   y = correct, 
-                                   color = model))+ 
-  ggplot2::facet_wrap(~rank, 
-                      scales = "free_x") + 
-  ggplot2::theme_bw() + 
-  ggplot2::theme(aspect.ratio = 1) + 
-  ggplot2::labs(x = "% classified", 
-                y = "% correct", 
-                color = "Model") + 
-  ggplot2::ylim(c(0, 110)) + 
-  ggplot2::scale_color_manual(name = "Model",
-                              labels = algs_sorted, 
-                              values = plot_colors, breaks = algs_sorted)
+  mutate(rank = factor(rank, levels = ranks)) |> 
+  ggplot() + 
+  geom_line(aes(x = classified, 
+                y = correct, 
+                color = model),
+            alpha = 0.7) + 
+  geom_point(data = classified_correct |> 
+               filter(model %in% point_models) |> 
+               group_by(model, rank) |> 
+               distinct(classified, correct), 
+             aes(x = classified, 
+                 y = correct, 
+                 color = model)) +  
+  facet_wrap(~rank, 
+             scales = "free_x", 
+             nrow = 2) + 
+  theme_bw() + 
+  theme(aspect.ratio = 1) + 
+  labs(x = "% classified", 
+       y = "% correct", 
+       color = "Model") + 
+  ylim(c(0, 110)) + 
+  scale_color_manual(name = "Model",
+                     labels = algs_sorted, 
+                     values = plot_colors, 
+                     breaks = algs_sorted)
 
-ggplot2::ggsave(plot = p_class_correct, 
-                filename = paste0("../plots/classified_correct_COI", natxt, undshort, ".pdf"), 
-                width = 220, 
-                height = 130, 
-                units = "mm")
+ggsave(plot = p_class_correct, 
+       filename = paste0("../plots/classified_correct_COI", natxt, undshort, ".pdf"), 
+       width = 250, 
+       height = 130, 
+       units = "mm")
 
 # NA COUNTS --------------------------------------------------------------------
 
 if(keep_na){
   p_na_count <- 
-    dplyr::bind_rows(results, .id = "model") |> 
-    dplyr::mutate(across(all_of(ranks), is.na)) |> 
-    dplyr::summarise(across(all_of(ranks), sum), 
-                     .by = model) |> 
-    tidyr::pivot_longer(cols = all_of(ranks), 
-                        names_to = "rank", 
-                        values_to = "na_count") |> 
-    dplyr::filter(!all(na_count == 0), .by = model) |>
-    dplyr::mutate(na_perc = na_count/nrow(data_true) * 100) |> 
-    dplyr::mutate(rank = factor(rank, levels = ranks)) |> 
-    ggplot2::ggplot() + 
-    ggplot2::geom_bar(ggplot2::aes(x = rank, 
-                                   y = na_perc), 
-                      stat = "identity") + 
-    ggplot2::facet_wrap(~model) + 
-    ggplot2::theme_bw() + 
-    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) + 
-    ggplot2::ylim(c(0, 100))
+    bind_rows(results, .id = "model") |> 
+    mutate(across(all_of(ranks), is.na)) |> 
+    summarise(across(all_of(ranks), sum), 
+              .by = model) |> 
+    pivot_longer(cols = all_of(ranks), 
+                 names_to = "rank", 
+                 values_to = "na_count") |> 
+    filter(!all(na_count == 0), .by = model) |>
+    mutate(na_perc = na_count/nrow(data_true) * 100) |> 
+    mutate(rank = factor(rank, levels = ranks)) |> 
+    ggplot() + 
+    geom_bar(aes(x = rank, 
+                 y = na_perc), 
+             stat = "identity") + 
+    facet_wrap(~model) + 
+    theme_bw() + 
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+    ylim(c(0, 100)) + 
+    ylab("Missing predictions (%)")
   
-  ggplot2::ggsave(plot = p_na_count, 
-                  filename = paste0("../plots/na_count", undshort, ".pdf"), 
-                  width = 6, 
-                  height = 5, 
-                  units = "in")
+  ggsave(plot = p_na_count,
+         filename = paste0("../plots/na_count", undshort, ".pdf"), 
+         width = 6, 
+         height = 5, 
+         units = "in")
 }
 
 # PREDICTION PROBABILITY -------------------------------------------------------
 
-dplyr::bind_rows(results, .id = "model") |> 
-  tidyr::pivot_longer(cols = all_of(paste0("Prob_", ranks)), 
-                      names_to = "rank", 
-                      values_to = "probability", 
-                      names_prefix = "Prob_") |> 
-  dplyr::mutate(rank = factor(rank, levels = ranks), 
-                ) |> 
-  ggplot2::ggplot() + 
-  ggplot2::geom_histogram(ggplot2::aes(x = probability)) + 
-  ggplot2::facet_grid(rank~model)
+p_pred_prob <- 
+  bind_rows(results, .id = "model") |> 
+  pivot_longer(cols = all_of(paste0("Prob_", ranks)), 
+               names_to = "rank", 
+               values_to = "probability", 
+               names_prefix = "Prob_") |> 
+  mutate(rank = factor(rank, levels = ranks)) |> 
+  filter(!all(probability == 1), .by = model) |> 
+  ggplot() + 
+  geom_histogram(aes(x = probability)) + 
+  facet_grid(rank~model) + 
+  ylab("Probabilty") + 
+  xlab("Number of predictions") + 
+  theme_bw() 
+
+ggsave(filename = paste0("../plots/pred_prob_COI", undshort, natxt, ".pdf"), 
+       plot = p_pred_prob, 
+       width = 350, 
+       height = 150, 
+       units = "mm")
 
 # MIS-, OVER-, AND UNDERCLASSIFICATION -----------------------------------------
 
@@ -639,36 +585,33 @@ misclass_df <- misclass_rate(results, data_true, id_observed)
 
 errorrates <- 
   oclass_df |> 
-  dplyr::full_join(uclass_df) |> 
-  dplyr::full_join(misclass_df) |> 
-  dplyr::mutate(rank = factor(rank, levels = ranks)) |> 
-  tidyr::pivot_longer(c("overclassification", "underclassification", "misclassification"), 
-                      names_to = "error_type",
-                      values_to = "error_rate") |> 
-  ggplot2::ggplot() + 
-  ggplot2::geom_line(ggplot2::aes(x = rank, 
-                                  y = error_rate, 
-                                  color = model, 
-                                  group = model)) +
-  ggplot2::geom_point(ggplot2::aes(x = rank, 
-                                  y = error_rate, 
-                                  color = model, 
-                                  shape = model)) + 
-  ggplot2::facet_wrap(~error_type) + 
-  ggplot2::scale_color_manual(name = "Model",
-                              labels = algs_sorted, 
-                              values = plot_colors, breaks = algs_sorted) + 
-  ggplot2::scale_shape_manual(name = "Model",
-                              labels = algs_sorted,
-                              values = point_shapes, breaks = algs_sorted) + 
-  ggplot2::theme_bw() + 
-  ggplot2::ylab("Error rate (%)") + 
-  ggplot2::theme(axis.title.x = ggplot2::element_blank(), 
-                 axis.text.x = ggplot2::element_text(angle = 45, 
-                                                     hjust = 1))
+  full_join(uclass_df) |> 
+  full_join(misclass_df) |> 
+  mutate(rank = factor(rank, levels = ranks)) |> 
+  pivot_longer(c("overclassification", "underclassification", "misclassification"), 
+               names_to = "error_type",
+               values_to = "error_rate") |> 
+  mutate(error_type = str_to_sentence(error_type)) |> 
+  ggplot() + 
+  geom_line(aes(x = rank, 
+                y = error_rate, 
+                color = model, 
+                group = model)) +
+  geom_point(aes(x = rank, 
+                 y = error_rate, 
+                 color = model, 
+                 shape = model)) + 
+  facet_wrap(~error_type) + 
+  theme_bw() + 
+  ylab("Error rate (%)") + 
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_text(angle = 45, 
+                                   hjust = 1), 
+        aspect.ratio = 1)
+errorrates <- change_plot_colors(errorrates)
 
-ggplot2::ggsave(filename = paste0("../plots/errorrates_COI", undshort, natxt, ".pdf"), 
-                plot = errorrates, 
-                width = 10,
-                height = 5, 
-                units = "in")
+ggsave(filename = paste0("../plots/errorrates_COI", undshort, natxt, ".pdf"), 
+       plot = errorrates, 
+       width = 10,
+       height = 4, 
+       units = "in")
