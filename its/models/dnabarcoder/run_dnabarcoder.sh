@@ -92,19 +92,18 @@ do
         -higherrank $(IFS=",$IFS"; echo "${superrank[*]}")
 done
 
-# kingdom does not have any superranks; also there are only two "kingdoms"
-# (actually classes) so we need minGroupNo
-$TIME $DNABARCODER predict\
-      -i $TRAIN_FILE\
-      -c $TAX_FILE\
-      -sim $SIM_FILE\
-      -st 0.85\
-      -et 1.0\
-      -s 0.001\
-      -minGroupNo 2\
-      -prefix $SIM_DIR\
-      -o $SIM_DIR\
-      -rank "kingdom"
+# there is only one kingdom so we cannot actually make a prediction
+# $TIME $DNABARCODER predict\
+#       -i $TRAIN_FILE\
+#       -c $TAX_FILE\
+#       -sim $SIM_FILE\
+#       -st 0.85\
+#       -et 1.0\
+#       -s 0.001\
+#       -minGroupNo 2\
+#       -prefix $SIM_DIR\
+#       -o $SIM_DIR\
+#       -rank "kingdom"
 
 # calculate best thresholds
 # this is the final "model"
@@ -141,7 +140,7 @@ done
 for f in *_$SLURM_ARRAY_TASK_ID.classified
 do
   RESULT_FILE=$RESULTS/${f%.classified}.tsv
-  echo "ID	class	order	family	subfamily	tribe	genus	species"\
+  echo "ID	kingdom	phylum	class	order	family	genus	species"\
        >$RESULT_FILE
   cut -d$'\t'\
       -f1,4\
