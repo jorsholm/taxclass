@@ -61,9 +61,9 @@ result <- trimws(result)
 
 # add IDs
 result <- paste(names(result), result, sep = "\t")
-header <- paste("ID", "class", "Prob_class", "order", "Prob_order", "family",
-               "Prob_family", "subfamily", "Prob_subfamily", "tribe",
-               "Prob_tribe", "genus", "Prob_genus", "species", "Prob_species",
+header <- paste("ID", "kingdom", "Prob_kingdom", "phylum", "Prob_phylum",
+               "class", "Prob_class", "order", "Prob_order", "family",
+               "Prob_family", "genus", "Prob_genus", "species", "Prob_species",
                sep = "\t")
 
 writeLines(c(header, result), result_file)
