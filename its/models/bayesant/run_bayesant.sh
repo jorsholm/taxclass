@@ -39,7 +39,7 @@ RESULTS=../../results/$MODEL
 # make sure the results directory exists
 mkdir -p $RESULTS
 
-for alphabet in nt aa
+for alphabet in nt
 do
   # train the model
   export TRAIN_FILE=$DATA/train_${alphabet}_aln_label.fasta
