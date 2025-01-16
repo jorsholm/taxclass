@@ -4,8 +4,8 @@
 #SBATCH --partition=small
 #SBATCH --time=24:00:00
 #SBATCH --mem=32G
-#SBATCH --cpus-per-task=40
-#SBATCH --array=40
+#SBATCH --cpus-per-task=16
+#SBATCH --array=16
 #SBATCH --output=bayesant_%a.out
 #SBATCH --error=bayesant_%a.out
 #SBATCH --mail-type=ALL
@@ -42,7 +42,7 @@ mkdir -p $RESULTS
 for alphabet in nt
 do
   # train the model
-  export TRAIN_FILE=$DATA/train_${alphabet}_aln_label.fasta
+  export TRAIN_FILE=$DATA/train_${alphabet}_label.fasta
   export MODEL_FILE=train_${alphabet}_$SLURM_ARRAY_TASK_ID.rds
 
   $TIME Rscript fit_BayesANT.R
@@ -50,7 +50,7 @@ do
   # classify the test sequences
   for TEST in test testshort
   do
-    export TEST_FILE=$DATA/${TEST}_${alphabet}_aln.fasta
+    export TEST_FILE=$DATA/${TEST}_${alphabet}.fasta
     export RESULT_FILE=${RESULTS}/${MODEL}_${TEST}_${alphabet}_$SLURM_ARRAY_TASK_ID.tsv
 
     $TIME Rscript predict_BayesANT.R
