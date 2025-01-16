@@ -59,8 +59,8 @@ do
   RESULT_FILE=$RESULTS/${f%.raw}.tsv
 
   # write the header
-  echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	"\
-       "subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	"\
+  echo "ID	kingdom	Prob_kingdom	phylum	Prob_phylum	class	Prob_class	"\
+       "order	Prob_order	family	Prob_family	genus	Prob_genus	"\
        "species	Prob_species" >$RESULT_FILE
   # write the data
   sed -r 's/ [^\t]*\t//; s/[kpcofgs]:([^,\t]+)\(([01][.][0-9]+)\),?/\t\1\t\2/g; s/\t\+.*//'\
