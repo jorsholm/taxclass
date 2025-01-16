@@ -1,94 +1,60 @@
 # Formatting train/test data
 
 The commands shown here generate all variants of the test and train data based
-on the files `train_nt_aln_label.fasta`, `train_aa_aln_label.fasta`,
-`test_nt_aln_label.fasta` and `test_aa_aln_label.fasta`,
+on the files `train_nt_unite.fasta` and `test_nt_unite.fasta`,
 which are generated from files in `../data_raw`
 
 ## Artificial metabarcoding -- testshort
 
-Generate simulated short "metabarcoding" test sequences, starting only after
-the BF3 primer site, which ends 240bp (80 aa) after the alignment start.
-240 gaps are included so that the alignment is still accurate.
+Generate short test sequences, including only ITS2.
+This is accomplished by deleting everything up to the end of 5.8S, as detected
+by the Rfam covariance model.
 
 ```sh
-awk '
-  BEGIN{
-    blank=sprintf("%240s", "");
-    gsub(/ /, "-", blank)
-  };
-  /^>/{print; next};
-  {print blank substr($1, 241)}
-' \
-test_nt_aln_label.fasta \
->testshort_nt_aln_label.fasta
-
-
-awk '
-  BEGIN{
-    blank=sprintf("%80s", "");
-    gsub(/ /, "-", blank)
-  };
-  /^>/{print; next};
-  {print blank substr($1, 81)}
-' \
-test_aa_aln_label.fasta \
->testshort_aa_aln_label.fasta
+# micromamba create -n LSUx -c bioconda -c bfurneaux r-lsux
+# micromamba activate LSUx
+R --vanilla -e '
+  seq <- Biostrings::readDNAStringSet("test_nt_unite.fasta")
+  pos <- inferrnal::cmsearch(inferrnal::cm_5_8S(), seq, cpu = 20)
+  pos <- pos[pos$inc == "!",]
+  seq[pos$target_name] <- Biostrings::subseq(seq[pos$target_name], pos$seq_to + 1L)
+  Biostrings::writeXStringSet(seq, "testshort_nt_unite.fasta", width = 10000L)
+'
 ```
-
-## Unaligned sequences
-
-```sh
-for f in *_aln_label.fasta
-do
-  sed '/^>/!s/-//g' $f >${f%aln_label.fasta}label.fasta
-done
-```
-
 ## Alternate annotations
 
 ### Unlabeled sequences
 
 ```sh
-for f in *_label.fasta
+for f in *_unite.fasta
 do
-  sed '/^>/s/ .*//' $f >${f%_label.fasta}.fasta
+  sed '/^>/s/[|].*//' $f >${f%_unite.fasta}.fasta
 done
 ```
 
 ### Sintax-style labels
 
 Sintax requires taxonomic annotations with single-letter codes representing the
-primary Linnean ranks.  In this case we are using secondary ranks (subfamily
-and tribe) but the total number of ranks still fits within the number Sintax
-accepts.
+primary Linnean ranks.
 
 ```sh
-for f in train_*_label.fasta;
-do
-  awk -F"[ |]" '
-    /^>/ {
-      print $1 ";tax=k:" $2 ",p:" $3 ",c:" $4 ",o:" $5 ",f:" $6 ",g:" $7 ",s:" $8;
-      next
-    }
-    {
-      print
-    }
-  ' $f >${f%_label.fasta}_sintax.fasta
-done
+sed -r '/^>/{
+  s/[|]k__/;tax=k:/
+  s/;([pcofgs])__/,\1:/g
+}'\
+ train_nt_unite.fasta\
+ >train_nt_sintax.fasta
 ```
 
-### Unite-style labels
-
-Some algorithms are configured to use taxonomic annotations as used by the Unite
-database. These are similar to Sintax, but use different delimiters.
+### "Basic" labels
 
 ```sh
-for f in train_*_sintax.fasta
-do
-  sed -r 's/;tax=/|/; s/([kpcofgst]):/\1__/g; y/,/;/' ${f}\
-      >${f%sintax.fasta}unite.fasta
-done
+tr '|' ' ' <train_nt_unite.fasta |
+sed -r '/^>/ {
+  s/k__//
+  s/;([pcofgs])__/|/g
+ }'\
+ >train_nt_label.fasta
 ```
 
 ## ID-taxonomy maps (without sequences)
@@ -102,19 +68,20 @@ classification.
 ```sh
 for type in test train
 do
-  awk -F" " '
-    /^>/ {
-      sub(/^>/, "", $1)
-      print
-    }
-  ' ${type}_nt_label.fasta >${type}_tax.txt
+  tr '|' ' ' <${type}_nt_unite.fasta |
+  sed -nr '/^>/ {
+    s/^>//
+    s/k__//
+    s/;([pcofgs])__/|/g
+    p
+   }'\
+   >${type}_tax.txt
 done
 ```
 
 ### TSV with headers
 
-This is the format used by Dnabarcoder. It is also convenient to load into R
-(although the ranks need to be renamed).
+This is the format used by Dnabarcoder. It is also convenient to load into R.
 
 ```sh
 for f in *_tax.txt
