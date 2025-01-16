@@ -50,7 +50,7 @@ blastcmd["nt"]="blastn"
 blastcmd["aa"]="blastp"
 
 # classify the test sequences
-for TYPE in nt aa
+for TYPE in nt
 do
   TRAIN_FILE=$DATA/train_$TYPE.fasta
   MODEL_DIR=train_${TYPE}_$SLURM_ARRAY_TASK_ID
@@ -107,7 +107,7 @@ do
   RESULT_FILE=$RESULTS/$(dirname $f).tsv
 
   # write the header
-  echo "ID	class	order	family	subfamily	tribe	genus	species" >$RESULT_FILE
+  echo "ID	kingdom	phylum	class	order	family	genus	species" >$RESULT_FILE
   # write the data
   awk -F'[;\t] *'\
       '{
