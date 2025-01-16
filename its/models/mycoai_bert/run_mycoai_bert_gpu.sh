@@ -49,9 +49,9 @@ done
 for f in ${MODEL}_*_$SLURM_ARRAY_TASK_ID.raw
 do
   RESULT_FILE=$RESULTS/${f%.raw}.tsv
-  echo -n "ID	order	family	subfamily	tribe	genus	" >$RESULT_FILE
-  echo -n "species	Prob_order	Prob_family	" >>$RESULT_FILE
-  echo "Prob_subfamily	Prob_tribe	Prob_genus	Prob_species" >>$RESULT_FILE
+  echo -n "ID	phylum	class	order	family	genus	" >$RESULT_FILE
+  echo -n "species	Prob_phylum	Prob_class	Prob_order	" >>$RESULT_FILE
+  echo "Prob_family	Prob_genus	Prob_species" >>$RESULT_FILE
   cut  -d","\
        --output-delimiter=$'\t'\
        -f1\
