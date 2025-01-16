@@ -1,0 +1,221 @@
+wandb: Currently logged in as: anony-moose-767377289203985031. Use `wandb login --relogin` to force relogin
+  0%|          | 0/10776 [00:00<?, ?it/s]100%|██████████| 10776/10776 [00:00<00:00, 153606.08it/s]
+8475 samples loaded into dataframe.
+Encoding the data into network-readable format...
+0it [00:00, ?it/s]1it [00:01,  1.23s/it]30it [00:01, 30.78it/s]59it [00:01, 64.11it/s]87it [00:01, 97.54it/s]113it [00:01, 126.73it/s]141it [00:01, 158.04it/s]170it [00:01, 186.77it/s]199it [00:01, 211.32it/s]229it [00:02, 232.37it/s]258it [00:02, 246.68it/s]287it [00:02, 257.17it/s]316it [00:02, 265.33it/s]345it [00:02, 271.15it/s]374it [00:02, 274.53it/s]403it [00:02, 278.26it/s]432it [00:02, 281.36it/s]461it [00:02, 282.09it/s]490it [00:02, 283.26it/s]519it [00:03, 283.60it/s]548it [00:03, 284.74it/s]577it [00:03, 283.37it/s]606it [00:03, 284.43it/s]635it [00:03, 284.86it/s]664it [00:03, 284.42it/s]693it [00:03, 284.97it/s]722it [00:03, 285.22it/s]751it [00:03, 284.86it/s]780it [00:03, 285.48it/s]809it [00:04, 285.48it/s]838it [00:04, 285.27it/s]867it [00:04, 286.12it/s]896it [00:04, 286.31it/s]925it [00:04, 285.89it/s]954it [00:04, 286.24it/s]983it [00:04, 286.59it/s]1012it [00:04, 286.19it/s]1041it [00:04, 285.63it/s]1070it [00:04, 285.83it/s]1099it [00:05, 285.76it/s]1128it [00:05, 286.75it/s]1157it [00:05, 286.59it/s]1186it [00:05, 286.94it/s]1215it [00:05, 286.49it/s]1244it [00:05, 286.18it/s]1274it [00:05, 287.43it/s]1303it [00:05, 286.49it/s]1332it [00:05, 287.01it/s]1361it [00:06, 286.15it/s]1390it [00:06, 286.20it/s]1419it [00:06, 286.08it/s]1448it [00:06, 286.35it/s]1477it [00:06, 286.77it/s]1506it [00:06, 286.90it/s]1535it [00:06, 285.88it/s]1564it [00:06, 286.17it/s]1593it [00:06, 286.81it/s]1622it [00:06, 286.24it/s]1651it [00:07, 286.83it/s]1680it [00:07, 285.53it/s]1709it [00:07, 284.75it/s]1738it [00:07, 284.54it/s]1767it [00:07, 284.67it/s]1796it [00:07, 216.60it/s]1825it [00:07, 232.90it/s]1854it [00:07, 246.30it/s]1883it [00:07, 256.43it/s]1912it [00:08, 264.20it/s]1941it [00:08, 270.18it/s]1970it [00:08, 275.14it/s]1999it [00:08, 277.50it/s]2028it [00:08, 278.68it/s]2057it [00:08, 280.05it/s]2086it [00:08, 281.25it/s]2115it [00:08, 282.71it/s]2144it [00:08, 282.61it/s]2173it [00:08, 282.90it/s]2202it [00:09, 283.91it/s]2231it [00:09, 284.74it/s]2260it [00:09, 284.90it/s]2289it [00:09, 284.66it/s]2318it [00:09, 284.93it/s]2347it [00:09, 284.53it/s]2376it [00:09, 283.83it/s]2405it [00:09, 284.36it/s]2434it [00:09, 285.51it/s]2463it [00:09, 285.96it/s]2492it [00:10, 285.81it/s]2521it [00:10, 285.20it/s]2550it [00:10, 284.99it/s]2579it [00:10, 286.07it/s]2608it [00:10, 286.27it/s]2637it [00:10, 285.99it/s]2666it [00:10, 286.87it/s]2695it [00:10, 286.12it/s]2724it [00:10, 286.18it/s]2753it [00:10, 286.24it/s]2782it [00:11, 286.97it/s]2812it [00:11, 288.16it/s]2841it [00:11, 287.80it/s]2870it [00:11, 287.64it/s]2899it [00:11, 287.12it/s]2928it [00:11, 287.12it/s]2957it [00:11, 285.55it/s]2986it [00:11, 286.05it/s]3015it [00:11, 285.67it/s]3044it [00:12, 285.94it/s]3073it [00:12, 285.82it/s]3102it [00:12, 285.17it/s]3131it [00:12, 285.05it/s]3160it [00:12, 284.19it/s]3189it [00:12, 284.00it/s]3218it [00:12, 284.36it/s]3247it [00:12, 284.52it/s]3276it [00:12, 284.15it/s]3305it [00:12, 284.98it/s]3334it [00:13, 285.91it/s]3363it [00:13, 286.33it/s]3392it [00:13, 285.94it/s]3421it [00:13, 285.62it/s]3450it [00:13, 285.28it/s]3479it [00:13, 285.33it/s]3508it [00:13, 285.32it/s]3537it [00:13, 284.75it/s]3566it [00:13, 284.80it/s]3595it [00:13, 285.09it/s]3624it [00:14, 285.85it/s]3653it [00:14, 285.60it/s]3682it [00:14, 286.06it/s]3711it [00:14, 285.63it/s]3740it [00:14, 286.02it/s]3769it [00:14, 286.00it/s]3798it [00:14, 286.36it/s]3827it [00:14, 285.58it/s]3856it [00:14, 285.54it/s]3885it [00:14, 286.13it/s]3914it [00:15, 286.17it/s]3943it [00:15, 286.79it/s]3972it [00:15, 287.20it/s]4001it [00:15, 286.75it/s]4030it [00:15, 286.36it/s]4059it [00:15, 285.80it/s]4088it [00:15, 285.25it/s]4117it [00:15, 284.90it/s]4146it [00:15, 284.19it/s]4175it [00:15, 284.54it/s]4204it [00:16, 285.19it/s]4233it [00:16, 285.12it/s]4262it [00:16, 284.64it/s]4291it [00:16, 284.47it/s]4320it [00:16, 283.67it/s]4349it [00:16, 276.56it/s]4378it [00:16, 278.30it/s]4407it [00:16, 278.82it/s]4436it [00:16, 280.61it/s]4465it [00:17, 281.55it/s]4494it [00:17, 283.15it/s]4523it [00:17, 283.29it/s]4552it [00:17, 284.02it/s]4581it [00:17, 283.82it/s]4610it [00:17, 284.05it/s]4639it [00:17, 283.89it/s]4668it [00:17, 283.58it/s]4697it [00:17, 283.29it/s]4726it [00:17, 283.70it/s]4755it [00:18, 283.29it/s]4784it [00:18, 283.05it/s]4813it [00:18, 283.20it/s]4842it [00:18, 283.01it/s]4871it [00:18, 283.75it/s]4900it [00:18, 284.23it/s]4929it [00:18, 283.65it/s]4958it [00:18, 283.80it/s]4987it [00:18, 282.99it/s]5016it [00:18, 282.95it/s]5045it [00:19, 282.87it/s]5074it [00:19, 282.80it/s]5103it [00:19, 282.95it/s]5132it [00:19, 284.16it/s]5161it [00:19, 284.78it/s]5190it [00:19, 284.74it/s]5219it [00:19, 284.30it/s]5248it [00:19, 284.12it/s]5277it [00:19, 283.54it/s]5306it [00:19, 283.90it/s]5335it [00:20, 284.85it/s]5364it [00:20, 284.52it/s]5393it [00:20, 284.24it/s]5422it [00:20, 282.59it/s]5451it [00:20, 281.09it/s]5480it [00:20, 279.86it/s]5508it [00:20, 278.75it/s]5536it [00:20, 278.11it/s]5564it [00:20, 278.03it/s]5592it [00:20, 278.54it/s]5621it [00:21, 279.09it/s]5649it [00:21, 276.42it/s]5677it [00:21, 277.15it/s]5705it [00:21, 275.20it/s]5733it [00:21, 275.15it/s]5761it [00:21, 276.08it/s]5790it [00:21, 277.77it/s]5819it [00:21, 279.20it/s]5848it [00:21, 280.55it/s]5877it [00:22, 279.81it/s]5906it [00:22, 280.42it/s]5935it [00:22, 279.60it/s]5964it [00:22, 280.85it/s]5993it [00:22, 280.46it/s]6022it [00:22, 280.82it/s]6051it [00:22, 281.04it/s]6080it [00:22, 281.32it/s]6109it [00:22, 281.75it/s]6138it [00:22, 281.21it/s]6167it [00:23, 281.05it/s]6196it [00:23, 282.15it/s]6225it [00:23, 282.50it/s]6254it [00:23, 282.85it/s]6283it [00:23, 283.39it/s]6312it [00:23, 283.18it/s]6341it [00:23, 282.99it/s]6370it [00:23, 284.06it/s]6399it [00:23, 284.17it/s]6428it [00:23, 283.67it/s]6457it [00:24, 283.57it/s]6486it [00:24, 283.95it/s]6515it [00:24, 283.89it/s]6544it [00:24, 283.26it/s]6573it [00:24, 282.25it/s]6602it [00:24, 279.63it/s]6630it [00:24, 279.55it/s]6658it [00:24, 278.86it/s]6686it [00:24, 278.08it/s]6714it [00:24, 276.65it/s]6743it [00:25, 277.87it/s]6772it [00:25, 279.10it/s]6801it [00:25, 280.05it/s]6830it [00:25, 281.75it/s]6859it [00:25, 282.33it/s]6888it [00:25, 282.23it/s]6917it [00:25, 282.92it/s]6946it [00:25, 283.00it/s]6975it [00:25, 281.99it/s]7004it [00:26, 282.61it/s]7033it [00:26, 283.18it/s]7062it [00:26, 283.27it/s]7091it [00:26, 283.00it/s]7120it [00:26, 283.19it/s]7149it [00:26, 283.29it/s]7178it [00:26, 283.38it/s]7207it [00:26, 284.31it/s]7236it [00:26, 284.33it/s]7265it [00:26, 284.87it/s]7294it [00:27, 284.57it/s]7323it [00:27, 283.41it/s]7352it [00:27, 283.43it/s]7381it [00:27, 282.94it/s]7410it [00:27, 283.25it/s]7439it [00:27, 283.49it/s]7468it [00:27, 283.26it/s]7497it [00:27, 282.89it/s]7526it [00:27, 282.44it/s]7555it [00:27, 282.87it/s]7584it [00:28, 282.84it/s]7613it [00:28, 282.71it/s]7627it [00:28, 270.35it/s]
+No. of to-be-predicted classes:
+             phylum  class  order  family  genus  species
+                                                         
+Classes (#)       8     70    212     591   1465     3614
+No. unrecognized target labels:
+           phylum  class  order  family  genus  species
+                                                       
+Exact (#)     0.0    0.0    0.0     0.0    0.0      0.0
+Perc. (%)     0.0    0.0    0.0     0.0    0.0      0.0
+Encoding the data into network-readable format...
+0it [00:00, ?it/s]31it [00:00, 303.99it/s]62it [00:00, 305.43it/s]93it [00:00, 306.18it/s]124it [00:00, 307.64it/s]155it [00:00, 308.10it/s]186it [00:00, 307.48it/s]217it [00:00, 307.35it/s]248it [00:00, 307.06it/s]279it [00:00, 307.65it/s]310it [00:01, 306.63it/s]341it [00:01, 306.77it/s]372it [00:01, 306.61it/s]403it [00:01, 307.22it/s]434it [00:01, 306.88it/s]466it [00:01, 308.26it/s]497it [00:01, 307.49it/s]528it [00:01, 307.06it/s]559it [00:01, 306.40it/s]590it [00:01, 306.35it/s]621it [00:02, 305.98it/s]653it [00:02, 307.46it/s]684it [00:02, 306.95it/s]715it [00:02, 306.82it/s]746it [00:02, 306.05it/s]777it [00:02, 306.08it/s]808it [00:02, 305.66it/s]839it [00:02, 304.93it/s]848it [00:02, 306.62it/s]
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/mycoai/train/seq_class_trainer.py:112: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.grad_scaler.GradScaler()
+wandb: wandb version 0.19.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.12
+wandb: Run data is saved locally in wandb/run-20250116_153119-fk70xrq7
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run upbeat-feather-40
+wandb: ⭐️ View project at https://wandb.ai/anony-moose-767377289203985031/ITS%20Classification
+wandb: 🚀 View run at https://wandb.ai/anony-moose-767377289203985031/ITS%20Classification/runs/fk70xrq7
+No. of to-be-predicted classes:
+             phylum  class  order  family  genus  species
+                                                         
+Classes (#)       8     70    212     591   1465     3614
+No. unrecognized target labels:
+           phylum  class  order  family  genus  species
+                                                       
+Exact (#)     0.0    6.0    8.0    22.0   70.0    300.0
+Perc. (%)     0.0    0.7    0.9     2.6    8.3     35.4
+Training classification task...
+  0%|          | 0/50 [00:00<?, ?it/s]  2%|▏         | 1/50 [00:35<28:35, 35.00s/it]  4%|▍         | 2/50 [00:40<14:08, 17.68s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+  6%|▌         | 3/50 [00:41<07:58, 10.19s/it]  8%|▊         | 4/50 [00:43<05:06,  6.67s/it] 10%|█         | 5/50 [00:44<03:32,  4.71s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 12%|█▏        | 6/50 [00:45<02:35,  3.53s/it] 14%|█▍        | 7/50 [00:46<02:00,  2.80s/it] 16%|█▌        | 8/50 [00:48<01:36,  2.30s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 18%|█▊        | 9/50 [00:49<01:20,  1.96s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 20%|██        | 10/50 [00:50<01:10,  1.75s/it] 22%|██▏       | 11/50 [00:51<01:02,  1.59s/it] 24%|██▍       | 12/50 [00:53<00:56,  1.48s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 26%|██▌       | 13/50 [00:54<00:52,  1.42s/it] 28%|██▊       | 14/50 [00:55<00:48,  1.36s/it] 30%|███       | 15/50 [00:56<00:46,  1.32s/it] 32%|███▏      | 16/50 [00:58<00:44,  1.31s/it] 34%|███▍      | 17/50 [00:59<00:43,  1.30s/it] 36%|███▌      | 18/50 [01:00<00:41,  1.28s/it] 38%|███▊      | 19/50 [01:01<00:39,  1.28s/it] 40%|████      | 20/50 [01:03<00:38,  1.27s/it] 42%|████▏     | 21/50 [01:04<00:36,  1.26s/it] 44%|████▍     | 22/50 [01:05<00:35,  1.26s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 46%|████▌     | 23/50 [01:06<00:33,  1.25s/it] 48%|████▊     | 24/50 [01:08<00:32,  1.24s/it] 50%|█████     | 25/50 [01:09<00:31,  1.25s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 52%|█████▏    | 26/50 [01:10<00:29,  1.25s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 54%|█████▍    | 27/50 [01:11<00:28,  1.24s/it] 56%|█████▌    | 28/50 [01:13<00:27,  1.25s/it] 58%|█████▊    | 29/50 [01:14<00:26,  1.25s/it] 60%|██████    | 30/50 [01:15<00:24,  1.24s/it] 62%|██████▏   | 31/50 [01:16<00:23,  1.25s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 64%|██████▍   | 32/50 [01:18<00:22,  1.24s/it] 66%|██████▌   | 33/50 [01:19<00:21,  1.24s/it] 68%|██████▊   | 34/50 [01:20<00:20,  1.25s/it] 70%|███████   | 35/50 [01:21<00:18,  1.24s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 72%|███████▏  | 36/50 [01:23<00:17,  1.24s/it] 74%|███████▍  | 37/50 [01:24<00:16,  1.25s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 76%|███████▌  | 38/50 [01:25<00:14,  1.24s/it] 78%|███████▊  | 39/50 [01:26<00:13,  1.23s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 80%|████████  | 40/50 [01:27<00:12,  1.25s/it] 82%|████████▏ | 41/50 [01:29<00:11,  1.25s/it] 84%|████████▍ | 42/50 [01:30<00:10,  1.26s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 86%|████████▌ | 43/50 [01:31<00:08,  1.27s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 88%|████████▊ | 44/50 [01:33<00:07,  1.27s/it] 90%|█████████ | 45/50 [01:34<00:06,  1.26s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 92%|█████████▏| 46/50 [01:35<00:05,  1.28s/it] 94%|█████████▍| 47/50 [01:36<00:03,  1.27s/it] 96%|█████████▌| 48/50 [01:38<00:02,  1.26s/it] 98%|█████████▊| 49/50 [01:39<00:01,  1.28s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+100%|██████████| 50/50 [01:40<00:00,  1.26s/it]100%|██████████| 50/50 [01:40<00:00,  2.01s/it]
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/mycoai/train/seq_class_trainer.py:285: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  history.replace('NaN', np.nan, inplace=True)
+wandb: Waiting for W&B process to finish... (success).
+wandb: 🚀 View run upbeat-feather-40 at: https://wandb.ai/anony-moose-767377289203985031/ITS%20Classification/runs/fk70xrq7
+wandb: Synced 5 W&B file(s), 6 media file(s), 6 artifact file(s) and 0 other file(s)
+Training finished, log saved to wandb (see above).
+Final accuracy scores:
+---------------------
+Valid:
+     phylum     class     order    family     genus   species
+0  0.760613  0.245843  0.146429  0.076271  0.048843  0.029197
+Model saved to train_nt_cnn_gpu.pt.
+	Command being timed: "mycoai-train --out train_nt_cnn_gpu.pt --base_arch_type CNN ../../data/train_nt_unite.fasta"
+	User time (seconds): 97.99
+	System time (seconds): 3.13
+	Percent of CPU this job got: 25%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 6:34.73
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1351532
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 15077
+	Minor (reclaiming a frame) page faults: 435558
+	Voluntary context switches: 65262
+	Involuntary context switches: 2217
+	Swaps: 0
+	File system inputs: 1906184
+	File system outputs: 93912
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+wandb: Currently logged in as: anony-moose-767377289203985031. Use `wandb login --relogin` to force relogin
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/mycoai/scripts/classify.py:11: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  deep_its_model = torch.load(model, map_location=utils.DEVICE)
+  0%|          | 0/17226 [00:00<?, ?it/s]100%|██████████| 17226/17226 [00:00<00:00, 647753.57it/s]
+17226 samples loaded into dataframe.
+Encoding the data into network-readable format...
+No data labels have been imported.
+If the data is labelled, specify tax_parser in init.
+0it [00:00, ?it/s]306it [00:00, 3053.78it/s]617it [00:00, 3085.18it/s]926it [00:00, 3074.02it/s]1234it [00:00, 3054.66it/s]1540it [00:00, 3056.54it/s]1846it [00:00, 3043.60it/s]2153it [00:00, 3050.93it/s]2460it [00:00, 3054.36it/s]2766it [00:00, 3044.61it/s]3071it [00:01, 3033.91it/s]3375it [00:01, 3013.69it/s]3677it [00:01, 3010.15it/s]3979it [00:01, 2406.51it/s]4290it [00:01, 2585.19it/s]4592it [00:01, 2700.71it/s]4896it [00:01, 2793.70it/s]5197it [00:01, 2853.70it/s]5496it [00:01, 2891.47it/s]5798it [00:01, 2927.17it/s]6105it [00:02, 2966.94it/s]6417it [00:02, 3011.86it/s]6726it [00:02, 3034.79it/s]7032it [00:02, 3041.58it/s]7338it [00:02, 3037.77it/s]7644it [00:02, 3041.90it/s]7949it [00:02, 3036.36it/s]8256it [00:02, 3043.79it/s]8563it [00:02, 3050.20it/s]8869it [00:02, 3043.57it/s]9174it [00:03, 3035.94it/s]9478it [00:03, 3031.01it/s]9782it [00:03, 3029.56it/s]10085it [00:03, 3019.85it/s]10388it [00:03, 3015.61it/s]10690it [00:03, 3002.82it/s]10992it [00:03, 3005.33it/s]11295it [00:03, 3012.16it/s]11597it [00:03, 3013.34it/s]11907it [00:04, 3037.90it/s]12213it [00:04, 3042.84it/s]12522it [00:04, 3055.25it/s]12828it [00:04, 3052.78it/s]13135it [00:04, 3056.74it/s]13441it [00:04, 3035.97it/s]13745it [00:04, 3029.90it/s]14051it [00:04, 3038.01it/s]14355it [00:04, 3036.29it/s]14664it [00:04, 3049.99it/s]14970it [00:05, 3046.78it/s]15276it [00:05, 3050.03it/s]15582it [00:05, 3041.78it/s]15887it [00:05, 3037.71it/s]16191it [00:05, 3028.68it/s]16494it [00:05, 3023.93it/s]16802it [00:05, 3038.37it/s]17106it [00:05, 3028.56it/s]17226it [00:05, 2992.32it/s]
+Classification took 6.574541807174683 seconds.
+Classification saved to mycoai_cnn_test_nt_gpu.raw
+	Command being timed: "mycoai-classify --model train_nt_cnn_gpu.pt --out mycoai_cnn_test_nt_gpu.raw --confidence ../../data/test_nt.fasta"
+	User time (seconds): 9.97
+	System time (seconds): 1.17
+	Percent of CPU this job got: 86%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:12.89
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 816660
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 14
+	Minor (reclaiming a frame) page faults: 274133
+	Voluntary context switches: 9220
+	Involuntary context switches: 132
+	Swaps: 0
+	File system inputs: 18488
+	File system outputs: 5904
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+wandb: Currently logged in as: anony-moose-767377289203985031. Use `wandb login --relogin` to force relogin
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/mycoai/scripts/classify.py:11: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  deep_its_model = torch.load(model, map_location=utils.DEVICE)
+  0%|          | 0/17226 [00:00<?, ?it/s]100%|██████████| 17226/17226 [00:00<00:00, 871860.51it/s]
+17226 samples loaded into dataframe.
+Encoding the data into network-readable format...
+No data labels have been imported.
+If the data is labelled, specify tax_parser in init.
+0it [00:00, ?it/s]494it [00:00, 4934.21it/s]988it [00:00, 4936.92it/s]1490it [00:00, 4972.65it/s]1992it [00:00, 4988.91it/s]2492it [00:00, 4992.38it/s]2992it [00:00, 4958.98it/s]3488it [00:00, 4907.83it/s]3979it [00:00, 3872.13it/s]4457it [00:00, 4108.78it/s]4936it [00:01, 4292.54it/s]5415it [00:01, 4430.06it/s]5897it [00:01, 4539.79it/s]6382it [00:01, 4629.23it/s]6876it [00:01, 4719.00it/s]7369it [00:01, 4780.03it/s]7858it [00:01, 4812.36it/s]8348it [00:01, 4837.75it/s]8842it [00:01, 4867.61it/s]9333it [00:01, 4877.47it/s]9825it [00:02, 4888.15it/s]10315it [00:02, 4878.05it/s]10804it [00:02, 4872.90it/s]11292it [00:02, 4858.09it/s]11787it [00:02, 4882.74it/s]12276it [00:02, 4880.20it/s]12773it [00:02, 4906.92it/s]13272it [00:02, 4929.03it/s]13765it [00:02, 4912.31it/s]14257it [00:02, 4913.40it/s]14749it [00:03, 4908.28it/s]15245it [00:03, 4922.29it/s]15738it [00:03, 4920.18it/s]16231it [00:03, 4922.53it/s]16724it [00:03, 4914.75it/s]17216it [00:03, 4910.17it/s]17226it [00:03, 4783.85it/s]
+Classification took 4.405763864517212 seconds.
+Classification saved to mycoai_cnn_testshort_nt_gpu.raw
+	Command being timed: "mycoai-classify --model train_nt_cnn_gpu.pt --out mycoai_cnn_testshort_nt_gpu.raw --confidence ../../data/testshort_nt.fasta"
+	User time (seconds): 7.79
+	System time (seconds): 1.15
+	Percent of CPU this job got: 89%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:10.03
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 811988
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 272947
+	Voluntary context switches: 9163
+	Involuntary context switches: 107
+	Swaps: 0
+	File system inputs: 6640
+	File system outputs: 5904
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+Completed job 25856564

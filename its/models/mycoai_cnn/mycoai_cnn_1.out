@@ -1,0 +1,593 @@
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/mycoai/utils.py:52: UserWarning: No cuda-enabled GPUs available, using CPU
+  warnings.warn('No cuda-enabled GPUs available, using CPU')
+wandb: Currently logged in as: anony-moose-767377289203985031. Use `wandb login --relogin` to force relogin
+  0%|          | 0/10776 [00:00<?, ?it/s]100%|██████████| 10776/10776 [00:00<00:00, 112588.95it/s]
+8475 samples loaded into dataframe.
+Encoding the data into network-readable format...
+0it [00:00, ?it/s]1it [00:01,  1.69s/it]21it [00:01, 16.11it/s]41it [00:01, 34.47it/s]61it [00:01, 55.05it/s]81it [00:02, 76.49it/s]101it [00:02, 97.71it/s]121it [00:02, 117.48it/s]141it [00:02, 135.23it/s]161it [00:02, 150.38it/s]181it [00:02, 163.01it/s]201it [00:02, 172.74it/s]222it [00:02, 180.63it/s]243it [00:02, 186.65it/s]263it [00:03, 190.00it/s]283it [00:03, 192.65it/s]304it [00:03, 195.23it/s]325it [00:03, 196.76it/s]346it [00:03, 198.64it/s]367it [00:03, 199.54it/s]388it [00:03, 200.26it/s]409it [00:03, 200.92it/s]430it [00:03, 199.97it/s]451it [00:03, 199.53it/s]471it [00:04, 199.41it/s]491it [00:04, 199.30it/s]511it [00:04, 199.22it/s]531it [00:04, 199.23it/s]552it [00:04, 199.43it/s]572it [00:04, 198.86it/s]592it [00:04, 199.18it/s]612it [00:04, 198.97it/s]632it [00:04, 198.96it/s]652it [00:04, 199.13it/s]672it [00:05, 199.35it/s]692it [00:05, 193.45it/s]713it [00:05, 195.73it/s]734it [00:05, 197.64it/s]755it [00:05, 198.89it/s]775it [00:05, 198.11it/s]795it [00:05, 197.37it/s]815it [00:05, 196.74it/s]835it [00:05, 196.03it/s]855it [00:05, 195.99it/s]875it [00:06, 196.16it/s]895it [00:06, 196.26it/s]915it [00:06, 196.76it/s]935it [00:06, 197.10it/s]956it [00:06, 198.23it/s]977it [00:06, 199.03it/s]997it [00:06, 199.31it/s]1018it [00:06, 200.13it/s]1039it [00:06, 200.60it/s]1060it [00:07, 201.12it/s]1081it [00:07, 201.19it/s]1102it [00:07, 201.79it/s]1123it [00:07, 200.75it/s]1144it [00:07, 199.51it/s]1164it [00:07, 198.48it/s]1184it [00:07, 198.42it/s]1205it [00:07, 198.97it/s]1225it [00:07, 199.12it/s]1245it [00:07, 198.78it/s]1266it [00:08, 199.47it/s]1287it [00:08, 200.20it/s]1308it [00:08, 200.35it/s]1329it [00:08, 201.06it/s]1350it [00:08, 201.16it/s]1371it [00:08, 200.39it/s]1392it [00:08, 200.35it/s]1413it [00:08, 200.10it/s]1434it [00:08, 200.20it/s]1455it [00:09, 199.36it/s]1475it [00:09, 197.74it/s]1495it [00:09, 196.34it/s]1515it [00:09, 195.26it/s]1535it [00:09, 195.32it/s]1555it [00:09, 194.85it/s]1575it [00:09, 193.81it/s]1595it [00:09, 193.50it/s]1615it [00:09, 192.83it/s]1635it [00:09, 192.38it/s]1655it [00:10, 193.11it/s]1675it [00:10, 193.36it/s]1695it [00:10, 193.73it/s]1715it [00:10, 193.61it/s]1735it [00:10, 193.75it/s]1755it [00:10, 193.90it/s]1775it [00:10, 193.98it/s]1795it [00:10, 193.39it/s]1815it [00:10, 193.63it/s]1835it [00:11, 137.50it/s]1855it [00:11, 150.38it/s]1875it [00:11, 160.85it/s]1895it [00:11, 168.90it/s]1915it [00:11, 174.79it/s]1935it [00:11, 179.81it/s]1955it [00:11, 183.02it/s]1975it [00:11, 185.78it/s]1995it [00:11, 187.65it/s]2015it [00:12, 189.67it/s]2035it [00:12, 190.86it/s]2055it [00:12, 191.72it/s]2075it [00:12, 192.02it/s]2095it [00:12, 192.64it/s]2115it [00:12, 193.16it/s]2135it [00:12, 193.42it/s]2155it [00:12, 193.38it/s]2175it [00:12, 193.14it/s]2195it [00:12, 192.28it/s]2215it [00:13, 192.05it/s]2235it [00:13, 191.84it/s]2255it [00:13, 191.81it/s]2275it [00:13, 191.18it/s]2295it [00:13, 191.11it/s]2315it [00:13, 190.77it/s]2335it [00:13, 190.94it/s]2355it [00:13, 191.42it/s]2375it [00:13, 191.30it/s]2395it [00:14, 191.09it/s]2415it [00:14, 191.26it/s]2435it [00:14, 191.46it/s]2455it [00:14, 191.50it/s]2475it [00:14, 191.81it/s]2495it [00:14, 191.88it/s]2515it [00:14, 191.32it/s]2535it [00:14, 191.63it/s]2555it [00:14, 192.08it/s]2575it [00:14, 191.19it/s]2595it [00:15, 190.58it/s]2615it [00:15, 190.51it/s]2635it [00:15, 190.18it/s]2655it [00:15, 190.05it/s]2675it [00:15, 190.31it/s]2695it [00:15, 190.79it/s]2715it [00:15, 191.07it/s]2735it [00:15, 191.04it/s]2755it [00:15, 191.16it/s]2775it [00:16, 191.54it/s]2795it [00:16, 191.48it/s]2815it [00:16, 191.43it/s]2835it [00:16, 191.42it/s]2855it [00:16, 191.92it/s]2875it [00:16, 191.34it/s]2895it [00:16, 190.98it/s]2915it [00:16, 190.51it/s]2935it [00:16, 190.90it/s]2955it [00:16, 190.45it/s]2975it [00:17, 189.74it/s]2994it [00:17, 184.01it/s]3014it [00:17, 186.03it/s]3034it [00:17, 187.34it/s]3054it [00:17, 188.21it/s]3074it [00:17, 189.48it/s]3094it [00:17, 190.82it/s]3114it [00:17, 190.81it/s]3134it [00:17, 191.09it/s]3154it [00:18, 192.55it/s]3174it [00:18, 193.11it/s]3194it [00:18, 192.98it/s]3214it [00:18, 192.49it/s]3234it [00:18, 192.37it/s]3254it [00:18, 192.65it/s]3274it [00:18, 192.19it/s]3294it [00:18, 192.05it/s]3314it [00:18, 192.63it/s]3334it [00:18, 192.95it/s]3354it [00:19, 192.87it/s]3374it [00:19, 194.00it/s]3394it [00:19, 193.47it/s]3414it [00:19, 193.34it/s]3434it [00:19, 193.35it/s]3454it [00:19, 193.58it/s]3474it [00:19, 193.72it/s]3494it [00:19, 194.44it/s]3514it [00:19, 195.33it/s]3534it [00:19, 195.11it/s]3554it [00:20, 195.59it/s]3574it [00:20, 193.62it/s]3594it [00:20, 192.50it/s]3614it [00:20, 192.05it/s]3634it [00:20, 191.82it/s]3654it [00:20, 192.05it/s]3674it [00:20, 192.18it/s]3694it [00:20, 192.54it/s]3714it [00:20, 191.68it/s]3734it [00:21, 191.88it/s]3754it [00:21, 192.22it/s]3774it [00:21, 192.41it/s]3794it [00:21, 191.49it/s]3814it [00:21, 190.46it/s]3834it [00:21, 190.20it/s]3854it [00:21, 189.43it/s]3873it [00:21, 189.16it/s]3893it [00:21, 189.56it/s]3913it [00:21, 190.33it/s]3933it [00:22, 190.18it/s]3953it [00:22, 190.13it/s]3973it [00:22, 190.71it/s]3993it [00:22, 190.50it/s]4013it [00:22, 190.99it/s]4033it [00:22, 190.93it/s]4053it [00:22, 191.05it/s]4073it [00:22, 191.17it/s]4093it [00:22, 192.24it/s]4113it [00:22, 192.41it/s]4133it [00:23, 193.03it/s]4153it [00:23, 193.46it/s]4173it [00:23, 192.78it/s]4193it [00:23, 192.09it/s]4213it [00:23, 192.31it/s]4233it [00:23, 192.66it/s]4253it [00:23, 192.38it/s]4273it [00:23, 191.48it/s]4293it [00:23, 191.32it/s]4313it [00:24, 192.02it/s]4333it [00:24, 191.27it/s]4353it [00:24, 190.20it/s]4373it [00:24, 190.32it/s]4393it [00:24, 190.66it/s]4413it [00:24, 190.89it/s]4433it [00:24, 191.23it/s]4453it [00:24, 191.41it/s]4473it [00:24, 191.95it/s]4493it [00:24, 192.22it/s]4513it [00:25, 192.26it/s]4533it [00:25, 192.17it/s]4553it [00:25, 192.51it/s]4573it [00:25, 192.71it/s]4593it [00:25, 192.61it/s]4613it [00:25, 191.44it/s]4633it [00:25, 191.05it/s]4653it [00:25, 190.37it/s]4673it [00:25, 190.22it/s]4693it [00:26, 189.79it/s]4712it [00:26, 189.62it/s]4731it [00:26, 189.62it/s]4751it [00:26, 190.17it/s]4771it [00:26, 190.09it/s]4791it [00:26, 190.14it/s]4811it [00:26, 191.53it/s]4831it [00:26, 192.75it/s]4851it [00:26, 193.57it/s]4871it [00:26, 193.85it/s]4891it [00:27, 194.84it/s]4911it [00:27, 195.26it/s]4931it [00:27, 195.03it/s]4951it [00:27, 195.63it/s]4971it [00:27, 195.06it/s]4991it [00:27, 193.69it/s]5011it [00:27, 192.55it/s]5031it [00:27, 192.55it/s]5051it [00:27, 192.74it/s]5071it [00:27, 192.91it/s]5091it [00:28, 193.45it/s]5111it [00:28, 193.95it/s]5131it [00:28, 193.70it/s]5151it [00:28, 194.93it/s]5171it [00:28, 195.33it/s]5191it [00:28, 195.44it/s]5211it [00:28, 195.76it/s]5231it [00:28, 195.43it/s]5251it [00:28, 195.64it/s]5271it [00:29, 194.91it/s]5291it [00:29, 194.76it/s]5311it [00:29, 194.66it/s]5331it [00:29, 193.76it/s]5351it [00:29, 192.61it/s]5371it [00:29, 191.60it/s]5391it [00:29, 191.76it/s]5411it [00:29, 191.67it/s]5431it [00:29, 191.33it/s]5451it [00:29, 191.29it/s]5471it [00:30, 191.32it/s]5491it [00:30, 191.38it/s]5511it [00:30, 192.01it/s]5531it [00:30, 192.10it/s]5551it [00:30, 192.81it/s]5571it [00:30, 192.94it/s]5591it [00:30, 193.03it/s]5611it [00:30, 193.41it/s]5631it [00:30, 193.61it/s]5651it [00:30, 193.61it/s]5671it [00:31, 193.08it/s]5691it [00:31, 192.31it/s]5711it [00:31, 191.92it/s]5731it [00:31, 191.77it/s]5751it [00:31, 191.26it/s]5771it [00:31, 190.52it/s]5791it [00:31, 189.90it/s]5811it [00:31, 190.20it/s]5831it [00:31, 191.42it/s]5851it [00:32, 191.92it/s]5871it [00:32, 192.64it/s]5891it [00:32, 192.73it/s]5911it [00:32, 191.34it/s]5931it [00:32, 191.72it/s]5951it [00:32, 192.16it/s]5971it [00:32, 192.86it/s]5991it [00:32, 192.87it/s]6011it [00:32, 192.64it/s]6031it [00:32, 192.80it/s]6051it [00:33, 193.05it/s]6071it [00:33, 192.73it/s]6091it [00:33, 192.66it/s]6111it [00:33, 192.49it/s]6131it [00:33, 192.85it/s]6151it [00:33, 192.88it/s]6171it [00:33, 192.93it/s]6191it [00:33, 192.70it/s]6211it [00:33, 193.24it/s]6231it [00:33, 193.59it/s]6251it [00:34, 193.78it/s]6271it [00:34, 193.23it/s]6291it [00:34, 193.65it/s]6311it [00:34, 194.44it/s]6331it [00:34, 195.40it/s]6351it [00:34, 195.48it/s]6371it [00:34, 195.00it/s]6391it [00:34, 194.46it/s]6411it [00:34, 194.28it/s]6431it [00:35, 194.40it/s]6451it [00:35, 193.93it/s]6471it [00:35, 193.66it/s]6491it [00:35, 194.03it/s]6511it [00:35, 193.67it/s]6531it [00:35, 193.33it/s]6551it [00:35, 193.82it/s]6571it [00:35, 194.57it/s]6591it [00:35, 194.93it/s]6611it [00:35, 194.54it/s]6631it [00:36, 195.31it/s]6651it [00:36, 195.12it/s]6671it [00:36, 195.33it/s]6691it [00:36, 194.87it/s]6711it [00:36, 195.43it/s]6731it [00:36, 195.26it/s]6751it [00:36, 194.87it/s]6771it [00:36, 194.24it/s]6791it [00:36, 193.61it/s]6811it [00:36, 192.81it/s]6831it [00:37, 192.07it/s]6851it [00:37, 191.90it/s]6871it [00:37, 191.91it/s]6891it [00:37, 192.79it/s]6911it [00:37, 192.60it/s]6931it [00:37, 192.92it/s]6951it [00:37, 193.02it/s]6971it [00:37, 192.86it/s]6991it [00:37, 192.52it/s]7011it [00:38, 192.77it/s]7031it [00:38, 193.23it/s]7051it [00:38, 192.68it/s]7071it [00:38, 192.63it/s]7091it [00:38, 192.09it/s]7111it [00:38, 192.07it/s]7131it [00:38, 192.13it/s]7151it [00:38, 191.47it/s]7171it [00:38, 191.46it/s]7191it [00:38, 191.46it/s]7211it [00:39, 191.68it/s]7231it [00:39, 191.08it/s]7251it [00:39, 191.48it/s]7271it [00:39, 191.75it/s]7291it [00:39, 192.11it/s]7311it [00:39, 192.80it/s]7331it [00:39, 192.62it/s]7351it [00:39, 193.01it/s]7371it [00:39, 193.32it/s]7391it [00:39, 193.00it/s]7411it [00:40, 192.76it/s]7431it [00:40, 192.84it/s]7451it [00:40, 191.83it/s]7471it [00:40, 191.78it/s]7491it [00:40, 192.46it/s]7511it [00:40, 192.35it/s]7531it [00:40, 192.46it/s]7551it [00:40, 192.55it/s]7571it [00:40, 192.93it/s]7591it [00:41, 193.04it/s]7611it [00:41, 193.45it/s]7627it [00:41, 185.02it/s]
+No. of to-be-predicted classes:
+             phylum  class  order  family  genus  species
+                                                         
+Classes (#)       8     72    214     590   1469     3633
+No. unrecognized target labels:
+           phylum  class  order  family  genus  species
+                                                       
+Exact (#)     0.0    0.0    0.0     0.0    0.0      0.0
+Perc. (%)     0.0    0.0    0.0     0.0    0.0      0.0
+Encoding the data into network-readable format...
+0it [00:00, ?it/s]21it [00:00, 209.84it/s]42it [00:00, 209.59it/s]63it [00:00, 209.27it/s]84it [00:00, 209.13it/s]105it [00:00, 208.99it/s]126it [00:00, 208.50it/s]147it [00:00, 208.94it/s]169it [00:00, 209.61it/s]190it [00:00, 209.15it/s]211it [00:01, 209.29it/s]232it [00:01, 209.29it/s]253it [00:01, 209.17it/s]274it [00:01, 208.76it/s]295it [00:01, 208.73it/s]316it [00:01, 208.50it/s]338it [00:01, 209.18it/s]360it [00:01, 209.48it/s]382it [00:01, 209.99it/s]404it [00:01, 210.56it/s]426it [00:02, 210.75it/s]448it [00:02, 210.82it/s]470it [00:02, 210.69it/s]492it [00:02, 211.13it/s]514it [00:02, 203.66it/s]536it [00:02, 206.03it/s]557it [00:02, 206.53it/s]579it [00:02, 207.66it/s]600it [00:02, 207.89it/s]621it [00:02, 207.66it/s]642it [00:03, 207.65it/s]664it [00:03, 208.43it/s]685it [00:03, 208.74it/s]706it [00:03, 207.66it/s]728it [00:03, 208.52it/s]750it [00:03, 209.64it/s]772it [00:03, 210.87it/s]794it [00:03, 211.99it/s]816it [00:03, 212.68it/s]838it [00:04, 212.46it/s]848it [00:04, 209.36it/s]
+wandb: wandb version 0.19.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.12
+wandb: Run data is saved locally in wandb/run-20250116_153230-bn9t8wve
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run jumping-morning-43
+wandb: ⭐️ View project at https://wandb.ai/anony-moose-767377289203985031/ITS%20Classification
+wandb: 🚀 View run at https://wandb.ai/anony-moose-767377289203985031/ITS%20Classification/runs/bn9t8wve
+No. of to-be-predicted classes:
+             phylum  class  order  family  genus  species
+                                                         
+Classes (#)       8     72    214     590   1469     3633
+No. unrecognized target labels:
+           phylum  class  order  family  genus  species
+                                                       
+Exact (#)     0.0    4.0    6.0    21.0   64.0    280.0
+Perc. (%)     0.0    0.5    0.7     2.5    7.5     33.0
+Training classification task...
+  0%|          | 0/50 [00:00<?, ?it/s]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+  2%|▏         | 1/50 [00:33<27:30, 33.68s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+  4%|▍         | 2/50 [00:55<21:20, 26.68s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+  6%|▌         | 3/50 [01:16<18:48, 24.02s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+  8%|▊         | 4/50 [01:37<17:27, 22.77s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 10%|█         | 5/50 [01:58<16:40, 22.22s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 12%|█▏        | 6/50 [02:22<16:51, 22.99s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 14%|█▍        | 7/50 [02:47<16:55, 23.63s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 16%|█▌        | 8/50 [03:11<16:36, 23.73s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 18%|█▊        | 9/50 [03:35<16:10, 23.67s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 20%|██        | 10/50 [03:58<15:41, 23.55s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 22%|██▏       | 11/50 [04:21<15:16, 23.50s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 24%|██▍       | 12/50 [04:45<14:54, 23.54s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 26%|██▌       | 13/50 [05:09<14:35, 23.66s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 28%|██▊       | 14/50 [05:33<14:12, 23.69s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 30%|███       | 15/50 [05:56<13:48, 23.68s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 32%|███▏      | 16/50 [06:20<13:24, 23.67s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 34%|███▍      | 17/50 [06:44<12:58, 23.60s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 36%|███▌      | 18/50 [07:07<12:33, 23.56s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 38%|███▊      | 19/50 [07:31<12:10, 23.57s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 40%|████      | 20/50 [07:54<11:46, 23.54s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 42%|████▏     | 21/50 [08:18<11:22, 23.54s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 44%|████▍     | 22/50 [08:41<10:59, 23.54s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 46%|████▌     | 23/50 [09:05<10:34, 23.49s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 48%|████▊     | 24/50 [09:28<10:09, 23.44s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 50%|█████     | 25/50 [09:51<09:45, 23.41s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 52%|█████▏    | 26/50 [10:15<09:21, 23.40s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 54%|█████▍    | 27/50 [10:38<08:58, 23.41s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 56%|█████▌    | 28/50 [11:02<08:35, 23.45s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 58%|█████▊    | 29/50 [11:25<08:12, 23.45s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 60%|██████    | 30/50 [11:48<07:48, 23.45s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 62%|██████▏   | 31/50 [12:12<07:26, 23.49s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 64%|██████▍   | 32/50 [12:36<07:02, 23.50s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 66%|██████▌   | 33/50 [12:59<06:39, 23.49s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 68%|██████▊   | 34/50 [13:23<06:15, 23.49s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 70%|███████   | 35/50 [13:46<05:51, 23.46s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 72%|███████▏  | 36/50 [14:09<05:27, 23.42s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 74%|███████▍  | 37/50 [14:33<05:04, 23.40s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 76%|███████▌  | 38/50 [14:56<04:40, 23.36s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 78%|███████▊  | 39/50 [15:19<04:17, 23.37s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 80%|████████  | 40/50 [15:43<03:54, 23.40s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 82%|████████▏ | 41/50 [16:06<03:30, 23.41s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 84%|████████▍ | 42/50 [16:30<03:07, 23.40s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 86%|████████▌ | 43/50 [16:53<02:43, 23.41s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 88%|████████▊ | 44/50 [17:16<02:20, 23.40s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 90%|█████████ | 45/50 [17:40<01:57, 23.40s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 92%|█████████▏| 46/50 [18:03<01:33, 23.44s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 94%|█████████▍| 47/50 [18:27<01:10, 23.41s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 96%|█████████▌| 48/50 [18:50<00:46, 23.44s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+ 98%|█████████▊| 49/50 [19:14<00:23, 23.42s/it]/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/sklearn/metrics/_classification.py:2399: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+100%|██████████| 50/50 [19:37<00:00, 23.40s/it]100%|██████████| 50/50 [19:37<00:00, 23.55s/it]
+wandb: Waiting for W&B process to finish... (success).
+wandb: 🚀 View run jumping-morning-43 at: https://wandb.ai/anony-moose-767377289203985031/ITS%20Classification/runs/bn9t8wve
+wandb: Synced 5 W&B file(s), 6 media file(s), 6 artifact file(s) and 0 other file(s)
+Training finished, log saved to wandb (see above).
+Final accuracy scores:
+---------------------
+Valid:
+     phylum     class     order   family    genus   species
+0  0.996462  0.978673  0.964371  0.92503  0.90051  0.966549
+Model saved to train_nt_cnn_1.pt.
+	Command being timed: "mycoai-train --out train_nt_cnn_1.pt --base_arch_type CNN ../../data/train_nt_unite.fasta"
+	User time (seconds): 1209.17
+	System time (seconds): 3.52
+	Percent of CPU this job got: 81%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 24:52.37
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 687324
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 13377
+	Minor (reclaiming a frame) page faults: 376151
+	Voluntary context switches: 71612
+	Involuntary context switches: 21489
+	Swaps: 0
+	File system inputs: 1250832
+	File system outputs: 100040
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/mycoai/utils.py:52: UserWarning: No cuda-enabled GPUs available, using CPU
+  warnings.warn('No cuda-enabled GPUs available, using CPU')
+wandb: Currently logged in as: anony-moose-767377289203985031. Use `wandb login --relogin` to force relogin
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/mycoai/scripts/classify.py:11: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  deep_its_model = torch.load(model, map_location=utils.DEVICE)
+  0%|          | 0/17226 [00:00<?, ?it/s]100%|██████████| 17226/17226 [00:00<00:00, 436140.77it/s]
+17226 samples loaded into dataframe.
+Encoding the data into network-readable format...
+No data labels have been imported.
+If the data is labelled, specify tax_parser in init.
+0it [00:00, ?it/s]227it [00:00, 2261.53it/s]457it [00:00, 2283.58it/s]686it [00:00, 2280.74it/s]915it [00:00, 2284.00it/s]1144it [00:00, 2285.24it/s]1374it [00:00, 2288.08it/s]1604it [00:00, 2290.95it/s]1834it [00:00, 2279.53it/s]2063it [00:00, 2280.24it/s]2293it [00:01, 2285.79it/s]2522it [00:01, 2215.48it/s]2749it [00:01, 2230.25it/s]2975it [00:01, 2237.02it/s]3199it [00:01, 2229.27it/s]3423it [00:01, 2219.13it/s]3650it [00:01, 2233.85it/s]3874it [00:01, 1676.71it/s]4100it [00:01, 1816.64it/s]4326it [00:02, 1929.88it/s]4549it [00:02, 2008.19it/s]4776it [00:02, 2080.51it/s]4999it [00:02, 2121.27it/s]5221it [00:02, 2149.63it/s]5446it [00:02, 2176.65it/s]5672it [00:02, 2198.46it/s]5896it [00:02, 2209.41it/s]6121it [00:02, 2221.32it/s]6349it [00:02, 2238.30it/s]6576it [00:03, 2245.91it/s]6802it [00:03, 2247.94it/s]7030it [00:03, 2255.02it/s]7256it [00:03, 2254.53it/s]7482it [00:03, 2250.64it/s]7708it [00:03, 2252.49it/s]7934it [00:03, 2238.20it/s]8159it [00:03, 2239.96it/s]8388it [00:03, 2253.73it/s]8618it [00:03, 2266.21it/s]8845it [00:04, 2259.10it/s]9071it [00:04, 2251.62it/s]9297it [00:04, 2250.13it/s]9523it [00:04, 2249.90it/s]9749it [00:04, 2249.35it/s]9974it [00:04, 2243.10it/s]10200it [00:04, 2245.66it/s]10425it [00:04, 2245.39it/s]10651it [00:04, 2248.51it/s]10878it [00:04, 2252.65it/s]11106it [00:05, 2258.14it/s]11332it [00:05, 2254.54it/s]11559it [00:05, 2255.03it/s]11786it [00:05, 2259.12it/s]12012it [00:05, 2255.32it/s]12238it [00:05, 2255.72it/s]12466it [00:05, 2262.87it/s]12696it [00:05, 2272.46it/s]12926it [00:05, 2278.12it/s]13154it [00:05, 2275.38it/s]13382it [00:06, 2261.59it/s]13609it [00:06, 2257.22it/s]13835it [00:06, 2251.97it/s]14062it [00:06, 2254.89it/s]14289it [00:06, 2257.66it/s]14515it [00:06, 2258.32it/s]14745it [00:06, 2269.27it/s]14972it [00:06, 2266.45it/s]15199it [00:06, 2267.06it/s]15426it [00:06, 2262.31it/s]15653it [00:07, 2257.93it/s]15879it [00:07, 2253.73it/s]16105it [00:07, 2246.54it/s]16330it [00:07, 2241.02it/s]16555it [00:07, 2242.44it/s]16783it [00:07, 2252.49it/s]17009it [00:07, 2248.96it/s]17226it [00:07, 2221.11it/s]
+Classification took 11.603643417358398 seconds.
+Classification saved to mycoai_cnn_test_nt_1.raw
+	Command being timed: "mycoai-classify --model train_nt_cnn_1.pt --out mycoai_cnn_test_nt_1.raw --confidence ../../data/test_nt.fasta"
+	User time (seconds): 16.16
+	System time (seconds): 1.15
+	Percent of CPU this job got: 92%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:18.81
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 605376
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 16
+	Minor (reclaiming a frame) page faults: 235553
+	Voluntary context switches: 9076
+	Involuntary context switches: 100
+	Swaps: 0
+	File system inputs: 18504
+	File system outputs: 5984
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/mycoai/utils.py:52: UserWarning: No cuda-enabled GPUs available, using CPU
+  warnings.warn('No cuda-enabled GPUs available, using CPU')
+wandb: Currently logged in as: anony-moose-767377289203985031. Use `wandb login --relogin` to force relogin
+/projappl/project_2005718/mycoai/lib64/python3.9/site-packages/mycoai/scripts/classify.py:11: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  deep_its_model = torch.load(model, map_location=utils.DEVICE)
+  0%|          | 0/17226 [00:00<?, ?it/s]100%|██████████| 17226/17226 [00:00<00:00, 588814.57it/s]
+17226 samples loaded into dataframe.
+Encoding the data into network-readable format...
+No data labels have been imported.
+If the data is labelled, specify tax_parser in init.
+0it [00:00, ?it/s]362it [00:00, 3610.54it/s]729it [00:00, 3644.68it/s]1100it [00:00, 3673.11it/s]1468it [00:00, 3671.07it/s]1836it [00:00, 3651.64it/s]2203it [00:00, 3656.47it/s]2570it [00:00, 3658.98it/s]2936it [00:00, 3657.25it/s]3302it [00:00, 3636.46it/s]3666it [00:01, 3619.94it/s]4029it [00:01, 2704.31it/s]4399it [00:01, 2946.37it/s]4767it [00:01, 3135.13it/s]5131it [00:01, 3269.44it/s]5499it [00:01, 3381.22it/s]5869it [00:01, 3469.97it/s]6239it [00:01, 3533.84it/s]6610it [00:01, 3584.48it/s]6978it [00:02, 3610.48it/s]7346it [00:02, 3629.55it/s]7713it [00:02, 3640.25it/s]8079it [00:02, 3632.89it/s]8452it [00:02, 3660.80it/s]8823it [00:02, 3675.18it/s]9192it [00:02, 3663.59it/s]9563it [00:02, 3674.59it/s]9931it [00:02, 3660.88it/s]10298it [00:02, 3659.66it/s]10667it [00:03, 3667.13it/s]11034it [00:03, 3666.06it/s]11405it [00:03, 3676.44it/s]11780it [00:03, 3696.71it/s]12150it [00:03, 3688.28it/s]12521it [00:03, 3693.19it/s]12894it [00:03, 3701.45it/s]13265it [00:03, 3698.24it/s]13635it [00:03, 3686.55it/s]14004it [00:03, 3675.95it/s]14376it [00:04, 3686.71it/s]14748it [00:04, 3693.86it/s]15120it [00:04, 3698.86it/s]15491it [00:04, 3700.48it/s]15862it [00:04, 3695.83it/s]16232it [00:04, 3680.38it/s]16601it [00:04, 3678.76it/s]16970it [00:04, 3681.22it/s]17226it [00:04, 3586.17it/s]
+Classification took 8.648536443710327 seconds.
+Classification saved to mycoai_cnn_testshort_nt_1.raw
+	Command being timed: "mycoai-classify --model train_nt_cnn_1.pt --out mycoai_cnn_testshort_nt_1.raw --confidence ../../data/testshort_nt.fasta"
+	User time (seconds): 13.20
+	System time (seconds): 1.17
+	Percent of CPU this job got: 91%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:15.66
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 600556
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 234362
+	Voluntary context switches: 9046
+	Involuntary context switches: 65
+	Swaps: 0
+	File system inputs: 6640
+	File system outputs: 7424
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+Job 25856669 complete
