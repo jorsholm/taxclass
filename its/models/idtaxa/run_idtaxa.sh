@@ -4,8 +4,8 @@
 #SBATCH --partition=small
 #SBATCH --time=24:00:00
 #SBATCH --mem=16G
-#SBATCH --cpus-per-task=40
-#SBATCH --array=40
+#SBATCH --cpus-per-task=16
+#SBATCH --array=16
 #SBATCH --output=idtaxa_%a.out
 #SBATCH --error=idtaxa_%a.out
 #SBATCH --mail-type=ALL

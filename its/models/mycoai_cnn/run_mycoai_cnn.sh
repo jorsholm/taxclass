@@ -4,8 +4,8 @@
 #SBATCH --partition=small
 #SBATCH --time=72:00:00
 #SBATCH --mem=32G
-#SBATCH --cpus-per-task=40
-#SBATCH --array=40
+#SBATCH --cpus-per-task=4
+#SBATCH --array=4
 ##SBATCH --gres=gpu:v100:1
 #SBATCH --output=mycoai_cnn_%a.out
 #SBATCH --error=mycoai_cnn_%a.out

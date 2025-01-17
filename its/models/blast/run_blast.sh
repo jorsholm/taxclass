@@ -4,8 +4,8 @@
 #SBATCH --partition=small
 #SBATCH --time=24:00:00
 #SBATCH --mem-per-cpu=4800M
-#SBATCH --cpus-per-task=40
-#SBATCH --array=40
+#SBATCH --cpus-per-task=16
+#SBATCH --array=16
 #SBATCH --output=blast_%a.out
 #SBATCH --error=blast_%a.out
 #SBATCH --mail-type=ALL
