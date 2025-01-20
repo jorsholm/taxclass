@@ -57,6 +57,13 @@ sed -r '/^>/ {
  >train_nt_label.fasta
 ```
 
+### "RDP" labels
+
+```
+tr '\t|' ' ;' <train_nt_label.fasta |
+sed 's/ / root;/' >train_nt_rdp.fasta
+```
+
 ## ID-taxonomy maps (without sequences)
 
 Many of these formats use two different delimiters; one to delimit the ID from
