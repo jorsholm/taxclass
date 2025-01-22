@@ -58,3 +58,15 @@ coi/result_list*.rds
 
 # Raw model outputs
 *.raw
+*.ndb
+*.nhr
+*.nin
+*.njs
+*.not
+*.nsq
+*.ntf
+*.nto
+*.rds
+.Rprofile
+renv
+renv.lock
