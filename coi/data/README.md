@@ -91,6 +91,16 @@ do
 done
 ```
 
+### "RDP" labels
+
+```
+for f in train_*_label.fasta
+do
+  tr '\t|' ' ;' <$f |
+  sed 's/ / root;/' >${f%_label.fasta}_rdp.fasta
+done
+```
+
 ## ID-taxonomy maps (without sequences)
 
 Many of these formats use two different delimiters; one to delimit the ID from

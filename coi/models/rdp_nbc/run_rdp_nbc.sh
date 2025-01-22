@@ -6,8 +6,8 @@
 #SBATCH --mem-per-cpu=4800M
 #SBATCH --cpus-per-task=1
 #SBATCH --array=1
-#SBATCH --output=rdp_%a.out
-#SBATCH --error=rdp_%a.out
+#SBATCH --output=rdp_nbc_%a.out
+#SBATCH --error=rdp_nbc_%a.out
 #SBATCH --mail-type=ALL
 
 # set environmental variables to tell various parallel computation libraries
@@ -17,6 +17,9 @@ export OPENBLAS_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export MKL_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export VECLIB_MAXIMUM_THREADS=$SLURM_CPUS_PER_TASK
 export NUMEXPR_NUM_THREADS=$SLURM_CPUS_PER_TASK
+
+# java is not on the path by default on compute nodes
+module load biojava/21
 
 # GNU time is not on the path by default on compute nodes
 export PATH="/appl/opt/time/1.9/bin:$PATH"
@@ -59,14 +62,18 @@ gawk -F'[|]' '
     ntaxa = NR
   }
   END {
-    id["root"] = 0
+    id[0]["root"] = 0
     print 0, "root", 0, 0, "root"
     n = 1
     for (r = 1; r <= nranks; r++) {
+      #initialize empty subarray by assigning an element and deleting
+      id[r][0] = 0
+      delete id[r][0]
+
       for (i = 1; i <= ntaxa; i++) {
-        if (! (label[i][r] in id)) {
-          id[label[i][r]] = n
-          print n, label[i][r], id[parent[i][r]], r, ranknames[r]
+        if (! (label[i][r] in id[r])) {
+          id[r][label[i][r]] = n
+          print n, label[i][r], id[r-1][parent[i][r]], r, ranknames[r]
           n++
         }
       }
