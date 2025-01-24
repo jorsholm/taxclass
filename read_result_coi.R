@@ -79,7 +79,7 @@ names(result_BayesANT) <-
                   setNames(substitutions, names(substitutions)))
 result_BayesANT <- 
   result_BayesANT |> 
-  dplyr::mutate(dplyr::across(ranks, 
+  dplyr::mutate(dplyr::across(all_of(ranks), 
                               ~stringr::str_replace_all(., substitutions))) 
 result_BayesANT <- arrange_columns(result_BayesANT, correct_cols)
 
