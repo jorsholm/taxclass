@@ -123,7 +123,31 @@ for f in *_${SLURM_ARRAY_TASK_ID}.raw;
 do
   RESULT_FILE=$RESULTS/${f%.raw}.tsv
   echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species" >$RESULT_FILE
-  grep -v "seconds" $f |
-  sed 's/[^ ]*,//g' |
-  tr ' ' '\t' >>$RESULT_FILE
+  awk -F' ' '
+    /seconds$/ {next}
+    {
+      for (rank = 1; rank <= 7; rank++) {
+        best_prob[rank] = 0
+        best_taxon[rank] = "NA"
+      }
+      for (i = 2; i <= NF; i += 2) {
+        rank = split($i, a, ",")
+        if (rank > 1 && $i !~ best_taxon[rank - 1]) continue
+        if ($(i+1) > best_prob[rank]) {
+          best_prob[rank] = $(i+1)
+          best_taxon[rank] = $i
+          for (rank2 = rank + 1; rank2 <= 7; rank2++) {
+            best_prob[rank2] = 0
+            best_taxon[rank2] = "NA"
+          }
+        }
+      }
+      printf "%s", $1
+      for (rank = 1; rank <= 7; rank++) {
+        sub(/.+,/, "", best_taxon[rank])
+        printf "\t%s\t%.6f", best_taxon[rank], best_prob[rank]
+      }
+      printf "\n"
+    }' $f\
+   >>$RESULT_FILE
 done
