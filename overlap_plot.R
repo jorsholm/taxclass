@@ -47,13 +47,8 @@ for(case in cases){
     bind_cols(test_seq, tibble(id = names(test_raw))) |> 
     left_join(read_delim(paste0(case, "/data/test_tax.tsv"),
                          delim = "\t"))
-  
-  colnames(test_taxa) <- sapply(colnames(test_taxa), 
-                                function(x) str_to_sentence(x), 
-                                USE.NAMES = F)
-  test_taxa <- 
-    test_taxa |> 
-    select(all_of(correctcols))
+  test_taxa <- test_taxa[,c(2:ncol(test_taxa), 1)]
+  colnames(test_taxa) <- correctcols
   
   # FIND COMMON TAXA AND SEQUENCES -------------------
   
@@ -144,9 +139,6 @@ for(case in cases){
     geom_sankey(flow.alpha = 0.5, width = 0.35) + 
     geom_sankey_label() + 
     theme_minimal() + 
-    scale_y_continuous(breaks = c(-20000, 0, 20000),
-                       labels = c("0", "20000", "40000"), 
-                       position = "right") + 
     scale_fill_discrete(limits = c(train_lab, common_lab, test_lab), 
                         labels = c("Unique to train", "Shared", "Unique to test")) + 
     ylab("Number of sequences") + 
@@ -159,22 +151,37 @@ for(case in cases){
           axis.title.y = element_text(size = 11),
           legend.position = "top") 
   
+  if(case == "its"){
+    p[[case]] <- p[[case]] + 
+      scale_y_continuous(breaks = c(-20000, 0, 20000),
+                         labels = c("0", "20000", "40000"), 
+                         position = "right")
+  }else{
+    p[[case]] <- p[[case]] + 
+      scale_y_continuous(breaks = c(-40000, -20000, 0, 20000, 40000),
+                         labels = c("0", "20000", "40000", "60000", "80000"), 
+                         position = "right")
+  }
+  
   ggsave(plot = p[[case]], 
          filename = paste0("plots/overlap_", case, ".pdf"), 
          width = 1900, 
          height = 1600, 
          units = "px", 
          dpi = 300)
+  
 }
 
+overlap_plot <- 
+  ggpubr::ggarrange(plotlist = p,
+                    ncol = 1,
+                    common.legend = T,
+                    legend = "bottom", 
+                    labels = c("COI", "ITS"))
 
-
-
-
-
-
-
-
-
-  
-
+ggsave(plot = overlap_plot, 
+       filename = "plots/overlap.pdf", 
+       width = 1900, 
+       height = 2000, 
+       units = "px", 
+       dpi = 300)

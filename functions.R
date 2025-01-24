@@ -82,8 +82,8 @@ change_plot_colors <- function(x){
 
 #' Loads FinBOL data (train) and GBOL data (test) as listed dataframes. 
 #' @param level lowest taxonomic level (genus/species)
-load_train_test <- function(train_file = "data/train_tax.tsv",
-                             test_file = "data/test_tax.tsv", 
+load_train_test <- function(train_file,
+                             test_file, 
                              ranks = c("Class", 
                                        "Order",
                                        "Family",
