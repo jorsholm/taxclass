@@ -1,12 +1,13 @@
 
-setwd("its")
 rm(list = ls())
 
 # LOAD FUNCTIONS AND PACKAGES --------------------------------------------------
 
 library(tidyverse)
-source("load_FinBOL_GBOL.R")
 source("functions.R")
+
+# case <- "its" 
+case <- "coi"
 
 # SET PARAMETERS ---------------------------------------------------------------
 
@@ -23,37 +24,45 @@ if(keep_na) natxt <- "_keepNA"
 
 # LOAD DATA --------------------------------------------------------------------
 
+if(case == "its"){
+  ranks <- c("Kingdom",
+             "Phylum",
+             "Class", 
+             "Order", 
+             "Family", 
+             "Genus", 
+             "Species")
+}else{
+  ranks <- c("Class", 
+             "Order",
+             "Family",
+             "Subfamily",
+             "Tribe",
+             "Genus",
+             "Species")
+}
+
+
 # Load test and train data
-data <- load_FinBOL_GBOL(ranks = c("Kingdom", 
-                                   "Phylum", 
-                                   "Class", 
-                                   "Order", 
-                                   "Family", 
-                                   "Genus", 
-                                   "Species"))
+data <- load_train_test(train_file = paste0(case, "/data/train_tax.tsv"), 
+                        test_file = paste0(case, "/data/test_tax.tsv"),
+                        ranks = ranks)
 
 # Replace labels of taxa unique to test
 # Sort test data in alphabetical order
 data_true <- get_data_true(data$test, data$train, 
-                           ranks = c("Kingdom", 
-                                     "Phylum", 
-                                     "Class", 
-                                     "Order", 
-                                     "Family", 
-                                     "Genus", 
-                                     "Species")) |>
+                           ranks = ranks) |>
   dplyr::arrange(ID)
 
 # CORRECT COLUMN NAMES AND ORDER -----------------------------------------------
 
-ranks <- colnames(data_true)[-1]
 correct_cols <- c("ID",
                   ranks,
                   sapply(ranks, function(x) paste0("Prob_", x), USE.NAMES = F))
 
 # READ RESULTS -----------------------------------------------------------------
 
-results <- readRDS(paste0("result_list", natxt, ".rds"))
+results <- readRDS(paste0(case, "/result_list", natxt, ".rds"))
 
 # IDENTIFY TAXA SETS -----------------------------------------------------------
 
@@ -74,6 +83,10 @@ for(rank in colnames(data_true)[-1]){
 
 id_all <- lapply(data_true, function(x) 1:length(x))
 
+# TODO: Some of our results have more sequences than data_true
+# Here, I remove them as a temporary solution 
+results <- lapply(results, function(x) x[which(x[,1] %in% data_true[,1]),])
+
 # Some quick checks of results structure 
 if(!length(unique(lapply(results, function(x) colnames(x)))) == 1) print("One of the results data frames have wrong column names.")
 if(!all(sapply(results, function(x) all(x[,1] == data_true[,1])))) print("One of the results data frames is not sorted by ID.")
@@ -92,7 +105,7 @@ calibrations <-
 p_cal <- plot_calibration(calibrations) 
 
 ggsave(plot = p_cal, 
-       filename = paste0("../plots/calibration_ITS_all", natxt, undshort, ".pdf"), 
+       filename = paste0("plots/calibration_all_", case, natxt, undshort, ".pdf"), 
        width = 500, 
        height = 300, 
        units = "mm")
@@ -132,7 +145,7 @@ p_cal_subset_divided <-
                     labels = c("a", "b"))
 
 ggsave(plot = p_cal_subset_divided, 
-       filename = paste0("../plots/calibration_COI_subset", natxt, undshort, ".pdf"), 
+       filename = paste0("plots/calibration_subset_", case, natxt, undshort, ".pdf"), 
        width = 200, 
        height = 180, 
        units = "mm")
@@ -196,7 +209,7 @@ p_cal_binned_genus <-
                     labels = c("a", "b"))
 
 ggsave(plot = p_cal_binned_genus, 
-       filename = paste0("../plots/binned_calibration_genus_COI", natxt, undshort, ".pdf"), 
+       filename = paste0("plots/binned_calibration_genus_", case, natxt, undshort, ".pdf"), 
        width = 250, 
        height = 200, 
        units = "mm")
@@ -227,7 +240,7 @@ for(m in names(results)){
     ggtitle(m)
 }
 
-pdf(paste0("../plots/binned_calibration_COI", natxt, undshort, ".pdf"), 
+pdf(paste0("plots/binned_calibration_all_", case, natxt, undshort, ".pdf"), 
     width = 10)
 lapply(plotlist, print)
 dev.off()
@@ -245,7 +258,7 @@ p_acc <-
   change_plot_colors()
 
 ggsave(plot = p_acc, 
-       filename = paste0("../plots/accuracy_COI", natxt, undshort, ".pdf"), 
+       filename = paste0("plots/accuracy_", case, natxt, undshort, ".pdf"), 
        width = 210, 
        height = 150, 
        units = "mm")
@@ -309,7 +322,7 @@ fourpanel_accuracy <-
   labs(color = "Model", y = "Accuracy (%)") 
 fourpanel_accuracy <- change_plot_colors(fourpanel_accuracy)
   
-ggsave(filename = paste0("../plots/fourpanel_accuracy_COI", 
+ggsave(filename = paste0("plots/fourpanel_accuracy_", case,
                          natxt, undshort, ".pdf"), 
        plot = fourpanel_accuracy, 
        height = 150, 
@@ -323,6 +336,7 @@ no_novel <- accuracy_df |>
   distinct(model) |> 
   pull(model)
 
+# TODO: Fix this plot 
 #cond_accuracy_novel_taxa <- 
   accuracy_df |> 
   filter(measure == "conditional" & set == "Novel") |> 
@@ -370,7 +384,7 @@ no_novel <- accuracy_df |>
   facet_wrap(~model_category)
 
 ggsave(plot = cond_accuracy_novel_taxa,
-       filename = paste0("../plots/cond_recall", natxt, undshort, "_COI.pdf"),
+       filename = paste0("../plots/cond_recall", natxt, undshort, "_", case, ".pdf"),
        width = 200,
        height = 130,
        units = "mm")
@@ -406,9 +420,9 @@ p_tot_novel <-
 p_tot_novel <- change_plot_colors(p_tot_novel)
 
 ggsave(plot = p_tot_novel, 
-       filename = paste0("../plots/sum_novel_COI", natxt, undshort, ".pdf"), 
-       height = 150, 
-       width = 200, 
+       filename = paste0("plots/sum_novel_", case, natxt, undshort, ".pdf"), 
+       height = 100, 
+       width = 150, 
        units = "mm")
 
 # NOVELTY: PARTITIONED ---------------------------------------------------------
@@ -462,12 +476,14 @@ p_part_novelty <-
              linetype = "dashed")
 
 ggsave(plot = p_part_novelty, 
-       filename = paste0("../plots/part_novelty_COI", natxt, undshort, ".pdf"), 
+       filename = paste0("plots/part_novelty_", case, natxt, undshort, ".pdf"), 
        width = 220, 
        height = 130, 
        units = "mm")
 
 # % CLASSIFIED ~ % CORRECT -----------------------------------------------------
+
+# TODO: Fix this 
 
 # Add similarity as "probability" for BLAST top hit 
 result_blast_top_similarity <-
@@ -562,6 +578,7 @@ ggsave(plot = p_class_correct,
 
 # NA COUNTS --------------------------------------------------------------------
 
+# TODO: fix this 
 if(keep_na){
   p_na_count <- 
     bind_rows(results, .id = "model") |> 
@@ -611,7 +628,7 @@ p_pred_prob <-
   theme_bw() +
   scale_y_log10()
 
-ggsave(filename = paste0("../plots/pred_prob_COI", undshort, natxt, ".pdf"), 
+ggsave(filename = paste0("plots/pred_prob_", case, undshort, natxt, ".pdf"), 
        plot = p_pred_prob, 
        width = 350, 
        height = 150, 
@@ -650,7 +667,7 @@ errorrates <-
         aspect.ratio = 1)
 errorrates <- change_plot_colors(errorrates)
 
-ggsave(filename = paste0("../plots/errorrates_COI", undshort, natxt, ".pdf"), 
+ggsave(filename = paste0("plots/errorrates_", case, undshort, natxt, ".pdf"), 
        plot = errorrates, 
        width = 10,
        height = 4, 
@@ -658,12 +675,9 @@ ggsave(filename = paste0("../plots/errorrates_COI", undshort, natxt, ".pdf"),
 
 # REPRESENTATIVE SEQ -----------------------------------------------------------
 
-finbol <- 
-  data$train |> 
-  as_tibble()
-
 p_repseq <- 
-  finbol |> 
+  data$train |> 
+  as_tibble() |> 
   pivot_longer(2:8, 
                names_to = "rank", 
                values_to = "taxon") |> 
@@ -682,7 +696,7 @@ p_repseq <-
   ylab("# of taxa") + 
   xlab("# representative sequences")
 
-ggsave(filename = paste0("../plots/repseq", undshort, natxt, ".pdf"), 
+ggsave(filename = paste0("plots/repseq_", case, undshort, natxt, ".pdf"), 
        plot = p_repseq, 
        width = 6,
        height = 4, 
@@ -690,7 +704,7 @@ ggsave(filename = paste0("../plots/repseq", undshort, natxt, ".pdf"),
 
 
 # FOR THE TEXT -----------------------------------------------------------------
-
+# TODO: fix this 
 accuracies |> 
   filter(set == "Observed") |> 
   ggplot() + 
