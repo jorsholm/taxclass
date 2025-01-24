@@ -80,6 +80,26 @@ change_plot_colors <- function(x){
 
 # OTHER FUNCTIONS --------------------------------------------------------------
 
+#' Loads FinBOL data (train) and GBOL data (test) as listed dataframes. 
+#' @param level lowest taxonomic level (genus/species)
+load_train_test <- function(train_file = "data/train_tax.tsv",
+                             test_file = "data/test_tax.tsv", 
+                             ranks = c("Class", 
+                                       "Order",
+                                       "Family",
+                                       "Subfamily",
+                                       "Tribe",
+                                       "Genus",
+                                       "Species")){
+  
+  data_train <- read.delim(train_file)
+  data_test <- read.delim(test_file)
+  
+  colnames(data_train) <- colnames(data_test) <- c(colnames(data_train)[1], ranks)
+  
+  return(list("train" = data_train, "test"= data_test))
+}
+
 #' Replaces labels of classes that are unique to test dataset. 
 #' Example of new labels: Araneae_Family_new
 #' Or, if first level is new: Class_new
@@ -577,25 +597,49 @@ threshold_curve <- function(results, data_true, thresholds = seq(0, 1, 0.01)){
   ranks <- colnames(data_true)[-1]
   n <- nrow(data_true)
   
+  # Find which have single value 1 for all classification probabilities 
+  point_models <- 
+    names(which(sapply(results, 
+                       function(x) all(x$Prob_Species == 1 | is.na(x$Prob_Species)))))
+  
   for(i in 1:length(results)){
     
     for(r in ranks){
       
       probcol <- paste0("Prob_", r)
       
-      correct <- sapply(thresholds, function(x)
-        sum(results[[i]][which(results[[i]][, probcol] >= x), r] == data_true[which(results[[i]][, probcol] >= x), r]) /
-          length(which(results[[i]][, probcol] >= x)) * 100)
-      classified <- sapply(thresholds, 
-                           function(x) length(which(results[[i]][,probcol] >= x))/n * 100)
+      not_na_pos <- which(!is.na(results[[i]][,r]))
       
-      out <- rbind(out, 
-                   data.frame(model = names(results)[i], 
-                              rank = r, 
-                              threshold = thresholds, 
-                              correct = correct, 
-                              classified = classified))
-      
+      if(names(results)[i] %in% point_models){
+        
+        correct <- sum(results[[i]][not_na_pos, r] == data_true[not_na_pos, r])/nrow(results[[i]][not_na_pos,]) * 100
+        classified <- nrow(results[[i]][not_na_pos,])/n * 100
+        
+        out <- rbind(out,
+                     data.frame(model = names(results)[i],
+                                rank = r,
+                                threshold = unique(results[[i]][not_na_pos, probcol]),
+                                correct = correct,
+                                classified = classified))
+        
+      }else{
+
+        results_without_na <- results[[i]][not_na_pos,]
+        data_true_without_na <- data_true[not_na_pos,]
+
+        correct <- sapply(thresholds, function(x)
+          sum(results_without_na[which(results_without_na[, probcol] >= x), r] == data_true_without_na[which(results_without_na[, probcol] >= x), r]) /
+            length(which(results_without_na[, probcol] >= x)) * 100)
+        classified <- sapply(thresholds,
+                             function(x) length(which(results_without_na[,probcol] >= x))/n * 100)
+        
+        out <- rbind(out,
+                     data.frame(model = names(results)[i],
+                                rank = r,
+                                threshold = thresholds,
+                                correct = correct,
+                                classified = classified))
+      }
     }
   }
   return(out)
