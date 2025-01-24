@@ -45,17 +45,6 @@ data_true <- get_data_true(data$test, data$train,
                                      "Species")) |>
   dplyr::arrange(ID)
 
-# kingdom_phylum_match <- data$train |> 
-#   dplyr::select(Kingdom, Phylum) |> 
-#   dplyr::distinct()
-
-# train_tax <- 
-#   read.table("its/data/train_tax.tsv", 
-#              header = T, 
-#              fill = T) |> 
-#   dplyr::distinct(kingdom, phylum, class, order, family, genus, species) 
-
-
 # CORRECT COLUMN NAMES AND ORDER -----------------------------------------------
 
 ranks <- colnames(data_true)[-1]

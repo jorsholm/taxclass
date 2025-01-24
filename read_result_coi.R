@@ -1,12 +1,10 @@
 # Read and modify model results, because it is becoming too much for the same script 
 
-setwd("coi")
 rm(list = ls())
 
 # LOAD FUNCTIONS ---------------------------------------------------------------
 
 library(tidyverse)
-source("load_FinBOL_GBOL.R")
 source("functions.R")
 
 # SET PARAMETERS ---------------------------------------------------------------
@@ -25,7 +23,8 @@ if(keep_na) natxt <- "_keepNA"
 # LOAD DATA --------------------------------------------------------------------
 
 # Load test and train data 
-data <- load_FinBOL_GBOL()
+data <- load_train_test(train_file = "coi/data/train_tax.tsv", 
+                        test_file = "coi/data/test_tax.tsv")
 
 # Replace labels of taxa unique to test
 # Sort test data in alphabetical order
@@ -36,18 +35,18 @@ class_order_match <- data$train |>
   dplyr::select(Class, Order) |> 
   dplyr::distinct()
 
-train_tax <- 
-  read.table("data/train_tax.tsv", 
-             header = T, 
-             fill = T) |> 
-  dplyr::distinct(kingdom, phylum, class, order, family, genus, species) |> 
-  dplyr::rename(Class = kingdom, 
-                Order = phylum, 
-                Family = class, 
-                Subfamily = order, 
-                Tribe = family, 
-                Genus = genus, 
-                Species = species)
+# train_tax <- 
+#   read.table("data/train_tax.tsv", 
+#              header = T, 
+#              fill = T) |> 
+#   dplyr::distinct(kingdom, phylum, class, order, family, genus, species) |> 
+#   dplyr::rename(Class = kingdom, 
+#                 Order = phylum, 
+#                 Family = class, 
+#                 Subfamily = order, 
+#                 Tribe = family, 
+#                 Genus = genus, 
+#                 Species = species)
 
 
 # CORRECT COLUMN NAMES AND ORDER -----------------------------------------------
@@ -61,7 +60,7 @@ correct_cols <- c("ID",
 
 # BayesANT
 result_BayesANT <-
-  read.table(paste0("results/bayesant/bayesant_test", shorttxt, "_nt_16.tsv"),
+  read.table(paste0("coi/results/bayesant/bayesant_test", shorttxt, "_nt_16.tsv"),
              header = T) |>
   tibble::rownames_to_column("ID") |>
   dplyr::arrange(ID)
@@ -85,7 +84,7 @@ result_BayesANT <- arrange_columns(result_BayesANT, correct_cols)
 
 # RDP
 result_RDP <-
-  read.table(paste0("results/rdp/rdp_test", shorttxt, "_nt_aln_label.txt"),
+  read.table(paste0("coi/results/rdp/rdp_test", shorttxt, "_nt_aln_label.txt"),
              header = T) |>
   tibble::rownames_to_column("ID") |>
   dplyr::arrange(ID)
@@ -105,7 +104,7 @@ result_RDP <- arrange_columns(result_RDP, correct_cols)
 
 # EPA-ng Taxonomy tree
 result_epatax <-
-  read.table(paste0("results/epang_taxtree/epang_taxtree_test", shorttxt,
+  read.table(paste0("coi/results/epang_taxtree/epang_taxtree_test", shorttxt,
                     "_nt_all.tsv"),
              header = T) |>
   dplyr::arrange(ID)
@@ -114,14 +113,14 @@ result_epatax <- arrange_columns(result_epatax, correct_cols)
 
 # Sintax
 result_SINTAX <-
-  read.table(paste0("results/sintax/sintax_test", shorttxt, "_nt_16.tsv"),
+  read.table(paste0("coi/results/sintax/sintax_test", shorttxt, "_nt_16.tsv"),
              header = TRUE) |> 
   dplyr::arrange(ID)
 result_SINTAX <- arrange_columns(result_SINTAX, correct_cols)
 
 # EPA-ng phylogenetic tree 
 result_epaphyl <- 
-  read.table(paste0("results/epang_phyltree/epang_phyltree_test",
+  read.table(paste0("coi/results/epang_phyltree/epang_phyltree_test",
                     shorttxt, "_finbol-gbol.txt"),
              header = T, sep = "\t")  |>
   dplyr::arrange(ID)
@@ -134,7 +133,7 @@ result_epaphyl <- arrange_columns(result_epaphyl, correct_cols)
 
 # MycoAI-CNN 
 result_aicnn <-
-  read.table(paste0("results/mycoai_cnn/mycoai_cnn_test", shorttxt,
+  read.table(paste0("coi/results/mycoai_cnn/mycoai_cnn_test", shorttxt,
                     "_nt_gpu.tsv"),
              header = T) |>
   dplyr::arrange(ID)
@@ -147,7 +146,7 @@ result_aicnn <- arrange_columns(result_aicnn, correct_cols)
 
 # MycoAI-BERT 
 result_aibert <- 
-  read.table(paste0("results/mycoai_bert/mycoai_bert_test", shorttxt, 
+  read.table(paste0("coi/results/mycoai_bert/mycoai_bert_test", shorttxt, 
                     "_nt_gpu.tsv"), 
              header = T) |> 
   dplyr::arrange(ID)
@@ -160,7 +159,7 @@ result_aibert <- arrange_columns(result_aibert, correct_cols)
 
 # BLAST top hit 
 result_blast_top <-
-  read.table(paste0("results/blast/blast_top_hit_test", shorttxt, "_nt_16.tsv"),
+  read.table(paste0("coi/results/blast/blast_top_hit_test", shorttxt, "_nt_16.tsv"),
              header = T) |> 
   dplyr::arrange(ID) |> 
   dplyr::mutate(species = purrr::map_chr(species, 
@@ -171,7 +170,7 @@ result_blast_top <- arrange_columns(result_blast_top, correct_cols)
 
 # BLAST threshold
 result_blast_thresh <-
-  read.table(paste0("results/blast/blast_thresh_test", shorttxt, "_nt_16.tsv"),
+  read.table(paste0("coi/results/blast/blast_thresh_test", shorttxt, "_nt_16.tsv"),
              header = T) |> 
   dplyr::arrange(ID)
 result_blast_thresh <- arrange_columns(result_blast_thresh, correct_cols)
@@ -183,7 +182,7 @@ if(!keep_na){
 
 # DNA-barcoder
 result_dnabarcoder <-
-  read.table(paste0("results/dnabarcoder/test", shorttxt, "_nt_1.tsv"),
+  read.table(paste0("coi/results/dnabarcoder/test", shorttxt, "_nt_1.tsv"),
              header = T) |> 
   dplyr::arrange(ID)
 if(keep_na){
@@ -207,7 +206,7 @@ result_dnabarcoder <- arrange_columns(result_dnabarcoder, correct_cols)
 
 # IDTAXA 
 result_idtaxa <-
- read.table(paste0("results/idtaxa/idtaxa_test", shorttxt, "_nt_4.tsv"), 
+ read.table(paste0("coi/results/idtaxa/idtaxa_test", shorttxt, "_nt_4.tsv"), 
             fill = T, header = T) |> 
   dplyr::arrange(ID)
 result_idtaxa <- arrange_columns(result_idtaxa, correct_cols)
@@ -251,7 +250,7 @@ if(keep_na){
 
 # Crest4
 result_crest4 <- 
-  read.table(paste0("results/crest4/crest4_test", shorttxt, "_nt_4.tsv"), 
+  read.table(paste0("coi/results/crest4/crest4_test", shorttxt, "_nt_4.tsv"), 
              header = T) |> 
   dplyr::arrange(ID)
 if(keep_na){
@@ -261,7 +260,6 @@ if(keep_na){
 }
 result_crest4[paste0("Prob_", ranks)] <- 1
 result_crest4 <- arrange_columns(result_crest4, correct_cols)
-
 
 # Mystery result ------
 # # Brendan's mystery model
@@ -359,35 +357,27 @@ results <- list(
 
 results <- lapply(results, function(x) as.data.frame(x))
 
-saveRDS(results, paste0("result_list", natxt, ".rds"))
+saveRDS(results, paste0("coi/result_list", natxt, ".rds"))
 
 # CHECK TAXONOMY ---------------------------------------------------------------
 
-mismatch_taxonomy <- check_taxonomy(taxdf = train_tax, results = results, ranks = ranks)
-
-library(tidyverse)
-
-mismatch_taxonomy |> 
-  as_tibble() |> 
-  filter(str_starts(model, "MycoAI") | model == "SINTAX") |> 
-  mutate(intid = row_number()) |> 
-  left_join(train_tax, by = "Species", suffix = c("_pred", "_train")) |> 
-  relocate(intid, .before = Class_pred) |> 
-  relocate(model, .after = intid) |> 
-  relocate(Species, .after = model) |>  
-  pivot_longer(4:15, 
-               names_to = c("rank", "set"), 
-               values_to = "taxa", 
-               names_sep = "_") |> 
-  pivot_wider(names_from = set, values_from = taxa) |> 
-  filter(pred != train)
-
- mismatch_taxonomy |> 
-   as_tibble() |> 
-   filter(str_starts(model, "MycoAI") | model == "SINTAX")
-
-
-
-
-
-
+# mismatch_taxonomy <- check_taxonomy(taxdf = train_tax, results = results, ranks = ranks)
+#
+# mismatch_taxonomy |> 
+#   as_tibble() |> 
+#   filter(str_starts(model, "MycoAI") | model == "SINTAX") |> 
+#   mutate(intid = row_number()) |> 
+#   left_join(train_tax, by = "Species", suffix = c("_pred", "_train")) |> 
+#   relocate(intid, .before = Class_pred) |> 
+#   relocate(model, .after = intid) |> 
+#   relocate(Species, .after = model) |>  
+#   pivot_longer(4:15, 
+#                names_to = c("rank", "set"), 
+#                values_to = "taxa", 
+#                names_sep = "_") |> 
+#   pivot_wider(names_from = set, values_from = taxa) |> 
+#   filter(pred != train)
+# 
+#  mismatch_taxonomy |> 
+#    as_tibble() |> 
+#    filter(str_starts(model, "MycoAI") | model == "SINTAX")
