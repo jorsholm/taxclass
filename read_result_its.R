@@ -84,6 +84,11 @@ result_RDP <-
              header = T) |>
   dplyr::arrange(ID)
 result_RDP <- arrange_columns(result_RDP, correct_cols)
+if(keep_na){
+  result_RDP <- arrange_columns(
+    apply_threshold(result_RDP, ranks, 0.8),
+    correct_cols)
+}
 
 # PROTAX
 # result_PROTAX <-
@@ -103,6 +108,11 @@ result_SINTAX <-
              header = TRUE) |> 
   dplyr::arrange(ID)
 result_SINTAX <- arrange_columns(result_SINTAX, correct_cols)
+if(keep_na){
+  result_SINTAX <- arrange_columns(
+    apply_threshold(result_SINTAX, ranks, 0.8),
+    correct_cols)
+}
 
 # MycoAI-CNN 
 result_aicnn <-
@@ -183,25 +193,9 @@ result_idtaxa <-
 result_idtaxa <- arrange_columns(result_idtaxa, correct_cols)
 if(keep_na){
   # Unclassified = NA 
-  result_idtaxa <- 
-    result_idtaxa |> 
-    dplyr::mutate(across(all_of(ranks), 
-                         ~stringr::str_replace(., "^unclassified_.*", ""))) |> 
-    tidyr::pivot_longer(cols = all_of(ranks), 
-                        names_to = "rank", 
-                        values_to = "taxon") |> 
-    tidyr::pivot_longer(cols = paste0("Prob_", ranks), 
-                        names_to = "Prob_rank", 
-                        names_pattern = "Prob_(.*)", 
-                        values_to = "Prob") |> 
-    dplyr::filter(rank == Prob_rank) |> 
-    dplyr::mutate(Prob = dplyr::if_else(taxon == "", NA, Prob)) |> 
-    dplyr::select(-Prob_rank) |> 
-    tidyr::pivot_wider(names_from = rank, 
-                       values_from = c(taxon, Prob)) |> 
-    dplyr::rename_with(~gsub("taxon_", "", .), dplyr::starts_with("taxon_")) |> 
-    dplyr::mutate(across(all_of(ranks), 
-                         ~dplyr::na_if(., "")))
+  result_idtaxa <- arrange_columns(
+    apply_threshold(result_idtaxa, ranks, 0.6), 
+    correct_cols)
 }else{
   result_idtaxa <-
     result_idtaxa |>
@@ -226,10 +220,21 @@ result_crest4 <-
   dplyr::arrange(ID)
 if(keep_na){
   result_crest4[result_crest4 == "unclassified"] <- NA
+  result_crest4 <- 
+    result_crest4 |> 
+    pivot_longer(all_of(str_to_lower(ranks)), 
+                 names_to = "rank", 
+                 values_to = "taxon") |> 
+    mutate(Prob = if_else(is.na(taxon), NA, 1)) |> 
+    pivot_wider(names_from = rank, 
+                values_from = c(taxon, Prob), 
+                names_glue = "{.value}_{rank}") |> 
+    rename_with(cols = starts_with("taxon_"), 
+                ~str_remove(.x, "taxon_"))
 }else{
   result_crest4 <- rename_unk_output(result_crest4, unktxt = "unclassified")
+  result_crest4[paste0("Prob_", ranks)] <- 1
 }
-result_crest4[paste0("Prob_", ranks)] <- 1
 result_crest4 <- arrange_columns(result_crest4, correct_cols)
 
 # UGLY FIX FOR BLAST MISSING DATA ----------------------------------------------
@@ -241,10 +246,14 @@ if(keep_na){
   add_blast_thresh[,correct_cols[-1]] <- NA
   add_blast_top[,correct_cols[-1]] <- NA
 }else{
+  add_blast_thresh[,ranks] <- "unk"
+  add_blast_top[,ranks] <- "unk" 
+  
   add_blast_thresh[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
   add_blast_top[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
-  add_blast_thresh[,ranks] <- "dummy"
-  add_blast_top[,ranks] <- "dummy"  
+  
+  add_blast_thresh[,ranks] <- rename_unk(add_blast_thresh[,ranks], toprank = "Kingdom")
+  add_blast_top[,ranks] <- rename_unk(add_blast_top[,ranks], toprank = "Kingdom")
 }
 
 result_blast_thresh <- rbind(result_blast_thresh, add_blast_thresh) |> dplyr::arrange(ID)
@@ -254,8 +263,8 @@ results <- list(
   "BayesANT" = result_BayesANT,
   #  "PROTAX" = result_PROTAX,
   "RDP" = result_RDP,
-  #"BLAST top hit" = result_blast_top, 
-  #"BLAST threshold" = result_blast_thresh, 
+  "BLAST top hit" = result_blast_top, 
+  "BLAST threshold" = result_blast_thresh, 
   "SINTAX" = result_SINTAX,
   "DNABarcoder" = result_dnabarcoder,
   "IDTAXA" = result_idtaxa, 

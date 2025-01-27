@@ -6,8 +6,8 @@ rm(list = ls())
 library(tidyverse)
 source("functions.R")
 
-# case <- "its" 
-case <- "coi"
+case <- "its" 
+# case <- "coi"
 
 # SET PARAMETERS ---------------------------------------------------------------
 
@@ -139,7 +139,7 @@ for(i in 1:2){
 
 p_cal_subset_divided <- 
   ggpubr::ggarrange(plotlist = plotlist_cal, 
-                    nrow = round(length(results)/6), 
+                    nrow = 2, 
                     common.legend = T, 
                     legend = "bottom", 
                     labels = c("a", "b"))
