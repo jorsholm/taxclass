@@ -9,14 +9,14 @@ source("functions.R")
 
 # SET PARAMETERS ---------------------------------------------------------------
 
-short <- F
+short <- T
 shorttxt <- ""
 undshort <- ""
 if(short){
   shorttxt <- "short"
   undshort <- "_short"
 }
-keep_na <- F
+keep_na <- T
 natxt <- ""
 if(keep_na) natxt <- "_keepNA"
 
@@ -105,13 +105,18 @@ if(keep_na){
 # Sintax
 result_SINTAX <-
   read.table(paste0("its/results/sintax/sintax_test", shorttxt, "_nt_16.tsv"),
-             header = TRUE) |> 
+             header = TRUE, 
+             fill = T) |> 
   dplyr::arrange(ID)
 result_SINTAX <- arrange_columns(result_SINTAX, correct_cols)
 if(keep_na){
   result_SINTAX <- arrange_columns(
     apply_threshold(result_SINTAX, ranks, 0.8),
     correct_cols)
+}else{
+  result_SINTAX[is.na(result_SINTAX)] <- 1
+  result_SINTAX[result_SINTAX == ""] <- "unk"
+  result_SINTAX <- rename_unk_output(result_SINTAX, toprank = "Kingdom")
 }
 
 # MycoAI-CNN 
@@ -191,10 +196,13 @@ result_idtaxa <-
             fill = T, header = T) |> 
   dplyr::arrange(ID)
 result_idtaxa <- arrange_columns(result_idtaxa, correct_cols)
+result_idtaxa$Prob_Kingdom[which(result_idtaxa$Prob_Kingdom == "[0%]")] <- 0
 if(keep_na){
   # Unclassified = NA 
   result_idtaxa <- arrange_columns(
-    apply_threshold(result_idtaxa, ranks, 0.6), 
+    apply_threshold(result_idtaxa |> 
+                      mutate(Prob_Kingdom = as.numeric(Prob_Kingdom)), 
+                    ranks, 0.6), 
     correct_cols)
 }else{
   result_idtaxa <-
@@ -203,6 +211,7 @@ if(keep_na){
                          ~dplyr::na_if(., ""))) |>
     dplyr::mutate(across(all_of(ranks),
                          ~dplyr::coalesce(stringr::str_replace(., "^unclassified_.*", "unk"), "unk"))) |> 
+    mutate(Prob_Kingdom = as.numeric(Prob_Kingdom)) |> 
     tidyr::pivot_longer(cols = all_of(correct_cols[which(stringr::str_starts(correct_cols, "Prob_"))]), 
                         names_to = "rank", values_to = "prob") |> 
     dplyr::group_by(ID) |> 
@@ -252,8 +261,8 @@ if(keep_na){
   add_blast_thresh[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
   add_blast_top[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
   
-  add_blast_thresh[,ranks] <- rename_unk(add_blast_thresh[,ranks], toprank = "Kingdom")
-  add_blast_top[,ranks] <- rename_unk(add_blast_top[,ranks], toprank = "Kingdom")
+  add_blast_thresh <- rename_unk_output(add_blast_thresh, toprank = "Kingdom")
+  add_blast_top <- rename_unk_output(add_blast_top, toprank = "Kingdom")
 }
 
 result_blast_thresh <- rbind(result_blast_thresh, add_blast_thresh) |> dplyr::arrange(ID)
@@ -275,4 +284,8 @@ results <- list(
 
 results <- lapply(results, function(x) as.data.frame(x))
 
-saveRDS(results, paste0("its/result_list", natxt, ".rds"))
+if(short){
+  saveRDS(results, paste0("its/result_list_short", natxt, ".rds"))
+}else{
+  saveRDS(results, paste0("its/result_list", natxt, ".rds"))
+}
