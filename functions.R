@@ -149,7 +149,7 @@ get_data_true <- function(test, train,
 #' Renames PROTAX new taxa ("unk") to BayesANT standard. 
 #' Only deals with taxonomy-columns (not prob-columns). 
 #' @param x one row data frame with taxonomy columns of protax output 
-rename_unk <- function(x, unktxt = "unk"){
+rename_unk <- function(x, unktxt = "unk", toprank = "Class"){
   # Remove NAs 
   cols <- names(x)
   na_cols <- names(x[which(is.na(x))])
@@ -159,7 +159,7 @@ rename_unk <- function(x, unktxt = "unk"){
   
   if (sum(is_unk) > 0) {
     if (all(x == unktxt)) {
-      x[1:length(x)] <- "Class_new"
+      x[1:length(x)] <- paste0(toprank, "_new")
     } else{
       d <- min(which(is_unk))
       x[d:length(x)] <- paste0(x[d - 1], "_", stringr::str_to_title(names(x)[d]), "_new")
@@ -173,11 +173,11 @@ rename_unk <- function(x, unktxt = "unk"){
 
 #' Renames 'unk' to BayesANT standard + sort columns 
 #' @param out data frame with PROTAX results. Cannot contain NA values  
-rename_unk_output <- function(out, unktxt = "unk"){
+rename_unk_output <- function(out, unktxt = "unk", toprank = "Class"){
   # Rename unk 
   renamed <- cbind("ID" = out[,which(colnames(out) == "ID")],
                    t(apply(out[, which(!stringr::str_detect(colnames(out), "Prob|ID"))],
-                           1, function(x) rename_unk(x, unktxt = unktxt))), 
+                           1, function(x) rename_unk(x, unktxt = unktxt, toprank = toprank))), 
                    out[,which(stringr::str_detect(colnames(out), "Prob_"))])
   
   return(renamed)
@@ -699,3 +699,30 @@ misclass_rate <- function(results, data_true, id_observed){
   }
   return(misclass_df)
 }
+
+apply_threshold <- function(df, ranks, threshold){
+  
+  df_edit <- df
+  
+  colnames(df_edit)[which(colnames(df_edit) %in% ranks)] <- paste0("Taxon_", ranks)
+  targetcols <- c(paste0("Taxon_", ranks), paste0("Prob_", ranks))
+  
+  df_edit <- 
+    df_edit |>
+    pivot_longer(cols = all_of(targetcols), 
+                 names_to = c(".value", "Rank"), 
+                 names_sep = "_") |> 
+    mutate(Taxon = if_else(Prob < threshold, NA, Taxon)) |> 
+    mutate(Prob = if_else(Prob < threshold, NA, Prob)) |> 
+    pivot_wider(names_from = Rank, 
+                values_from = c(Taxon, Prob), 
+                names_glue = "{.value}_{Rank}") |> 
+    rename_with(cols = starts_with("Taxon_"), 
+                .fn = ~str_remove(.x, "Taxon_"))
+  
+  if(!all(colnames(df_edit) %in% colnames(df))) print("Error: colnames changed.")
+  
+  return(df_edit[,colnames(df)])
+}
+
+

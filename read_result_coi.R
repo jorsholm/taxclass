@@ -9,14 +9,18 @@ source("functions.R")
 
 # SET PARAMETERS ---------------------------------------------------------------
 
-short <- F
+args <- commandArgs(trailingOnly = T)
+
+short <- as.logical(args[1])
+keep_na <- as.logical(args[2])
+datatype <- args[3]
+
 shorttxt <- ""
 undshort <- ""
 if(short){
   shorttxt <- "short"
   undshort <- "_short"
 }
-keep_na <- F
 natxt <- ""
 if(keep_na) natxt <- "_keepNA"
 
@@ -58,9 +62,9 @@ correct_cols <- c("ID",
 
 # READ RESULTS -----------------------------------------------------------------
 
-# BayesANT
+##### BayesANT #####
 result_BayesANT <-
-  read.table(paste0("coi/results/bayesant/bayesant_test", shorttxt, "_nt_16.tsv"),
+  read.table(paste0("coi/results/bayesant/bayesant_test", shorttxt, "_", datatype, "_16.tsv"),
              header = T) |>
   tibble::rownames_to_column("ID") |>
   dplyr::arrange(ID)
@@ -82,13 +86,19 @@ result_BayesANT <-
                               ~stringr::str_replace_all(., substitutions))) 
 result_BayesANT <- arrange_columns(result_BayesANT, correct_cols)
 
-# RDP
-result_RDP <-
-  read.table(paste0("coi/results/rdp/rdp_test", shorttxt, "_nt_aln_label.txt"),
-             header = T) |>
-  tibble::rownames_to_column("ID") |>
-  dplyr::arrange(ID)
-result_RDP <- arrange_columns(result_RDP, correct_cols)
+##### RDP #####
+if(datatype == "nt"){
+  result_RDP <-
+    read.table(paste0("coi/results/rdp_nbc/rdp_nbc_test", shorttxt, "_1.tsv"),
+               header = T) |>
+    dplyr::arrange(ID)
+  result_RDP <- arrange_columns(result_RDP, correct_cols)
+  if(keep_na){
+    result_RDP <- arrange_columns(
+      apply_threshold(result_RDP, ranks, 0.8),
+      correct_cols)
+  }
+}
 
 # PROTAX
 # result_PROTAX <-
@@ -104,8 +114,8 @@ result_RDP <- arrange_columns(result_RDP, correct_cols)
 
 # EPA-ng Taxonomy tree
 result_epatax <-
-  read.table(paste0("coi/results/epang_taxtree/epang_taxtree_test", shorttxt,
-                    "_nt_all.tsv"),
+  read.table(paste0("coi/results/epang_taxtree/epang_taxtree_test", shorttxt, "_", datatype, 
+                    "_all.tsv"),
              header = T) |>
   dplyr::arrange(ID)
 result_epatax <- rename_unk_output(result_epatax)
@@ -113,10 +123,15 @@ result_epatax <- arrange_columns(result_epatax, correct_cols)
 
 # Sintax
 result_SINTAX <-
-  read.table(paste0("coi/results/sintax/sintax_test", shorttxt, "_nt_16.tsv"),
+  read.table(paste0("coi/results/sintax/sintax_test", shorttxt, "_", datatype, "_16.tsv"),
              header = TRUE) |> 
   dplyr::arrange(ID)
 result_SINTAX <- arrange_columns(result_SINTAX, correct_cols)
+if(keep_na){
+  result_SINTAX <- arrange_columns(
+    apply_threshold(result_SINTAX, ranks, 0.8),
+    correct_cols)
+}
 
 # EPA-ng phylogenetic tree 
 result_epaphyl <- 
@@ -134,7 +149,7 @@ result_epaphyl <- arrange_columns(result_epaphyl, correct_cols)
 # MycoAI-CNN 
 result_aicnn <-
   read.table(paste0("coi/results/mycoai_cnn/mycoai_cnn_test", shorttxt,
-                    "_nt_gpu.tsv"),
+                    "_", datatype, "_gpu.tsv"),
              header = T) |>
   dplyr::arrange(ID)
 result_aicnn <- 
@@ -147,7 +162,7 @@ result_aicnn <- arrange_columns(result_aicnn, correct_cols)
 # MycoAI-BERT 
 result_aibert <- 
   read.table(paste0("coi/results/mycoai_bert/mycoai_bert_test", shorttxt, 
-                    "_nt_gpu.tsv"), 
+                    "_", datatype, "_gpu.tsv"), 
              header = T) |> 
   dplyr::arrange(ID)
 result_aibert <- 
@@ -159,7 +174,7 @@ result_aibert <- arrange_columns(result_aibert, correct_cols)
 
 # BLAST top hit 
 result_blast_top <-
-  read.table(paste0("coi/results/blast/blast_top_hit_test", shorttxt, "_nt_16.tsv"),
+  read.table(paste0("coi/results/blast/blast_top_hit_test", shorttxt, "_", datatype, "_16.tsv"),
              header = T) |> 
   dplyr::arrange(ID) |> 
   dplyr::mutate(species = purrr::map_chr(species, 
@@ -170,7 +185,7 @@ result_blast_top <- arrange_columns(result_blast_top, correct_cols)
 
 # BLAST threshold
 result_blast_thresh <-
-  read.table(paste0("coi/results/blast/blast_thresh_test", shorttxt, "_nt_16.tsv"),
+  read.table(paste0("coi/results/blast/blast_thresh_test", shorttxt, "_", datatype, "_16.tsv"),
              header = T) |> 
   dplyr::arrange(ID)
 result_blast_thresh <- arrange_columns(result_blast_thresh, correct_cols)
@@ -182,7 +197,7 @@ if(!keep_na){
 
 # DNA-barcoder
 result_dnabarcoder <-
-  read.table(paste0("coi/results/dnabarcoder/test", shorttxt, "_nt_1.tsv"),
+  read.table(paste0("coi/results/dnabarcoder/test", shorttxt, "_", datatype, "_1.tsv"),
              header = T) |> 
   dplyr::arrange(ID)
 if(keep_na){
@@ -206,31 +221,16 @@ result_dnabarcoder <- arrange_columns(result_dnabarcoder, correct_cols)
 
 # IDTAXA 
 result_idtaxa <-
- read.table(paste0("coi/results/idtaxa/idtaxa_test", shorttxt, "_nt_4.tsv"), 
+ read.table(paste0("coi/results/idtaxa/idtaxa_test", shorttxt, "_", datatype, "_4.tsv"), 
             fill = T, header = T) |> 
   dplyr::arrange(ID)
 result_idtaxa <- arrange_columns(result_idtaxa, correct_cols)
 if(keep_na){
   # Unclassified = NA 
-  result_idtaxa <- 
-    result_idtaxa |> 
-    dplyr::mutate(across(all_of(ranks), 
-                         ~stringr::str_replace(., "^unclassified_.*", ""))) |> 
-    tidyr::pivot_longer(cols = all_of(ranks), 
-                        names_to = "rank", 
-                        values_to = "taxon") |> 
-    tidyr::pivot_longer(cols = paste0("Prob_", ranks), 
-                        names_to = "Prob_rank", 
-                        names_pattern = "Prob_(.*)", 
-                        values_to = "Prob") |> 
-    dplyr::filter(rank == Prob_rank) |> 
-    dplyr::mutate(Prob = dplyr::if_else(taxon == "", NA, Prob)) |> 
-    dplyr::select(-Prob_rank) |> 
-    tidyr::pivot_wider(names_from = rank, 
-                       values_from = c(taxon, Prob)) |> 
-    dplyr::rename_with(~gsub("taxon_", "", .), dplyr::starts_with("taxon_")) |> 
-    dplyr::mutate(across(all_of(ranks), 
-                         ~dplyr::na_if(., "")))
+  result_idtaxa <- arrange_columns(
+    apply_threshold(result_idtaxa, 
+                    ranks, 0.6), 
+    correct_cols)
 }else{
   result_idtaxa <-
     result_idtaxa |>
@@ -250,15 +250,26 @@ if(keep_na){
 
 # Crest4
 result_crest4 <- 
-  read.table(paste0("coi/results/crest4/crest4_test", shorttxt, "_nt_4.tsv"), 
+  read.table(paste0("coi/results/crest4/crest4_test", shorttxt, "_", datatype, "_4.tsv"), 
              header = T) |> 
   dplyr::arrange(ID)
 if(keep_na){
   result_crest4[result_crest4 == "unclassified"] <- NA
+  result_crest4 <- 
+    result_crest4 |> 
+    pivot_longer(all_of(str_to_lower(ranks)), 
+                 names_to = "rank", 
+                 values_to = "taxon") |> 
+    mutate(Prob = if_else(is.na(taxon), NA, 1)) |> 
+    pivot_wider(names_from = rank, 
+                values_from = c(taxon, Prob), 
+                names_glue = "{.value}_{rank}") |> 
+    rename_with(cols = starts_with("taxon_"), 
+                ~str_remove(.x, "taxon_"))
 }else{
   result_crest4 <- rename_unk_output(result_crest4, unktxt = "unclassified")
+  result_crest4[paste0("Prob_", ranks)] <- 1
 }
-result_crest4[paste0("Prob_", ranks)] <- 1
 result_crest4 <- arrange_columns(result_crest4, correct_cols)
 
 # Mystery result ------
@@ -329,10 +340,12 @@ if(keep_na){
   add_blast_thresh[,correct_cols[-1]] <- NA
   add_blast_top[,correct_cols[-1]] <- NA
 }else{
+  add_blast_thresh[,ranks] <- "unk"
+  add_blast_top[,ranks] <- "unk"
   add_blast_thresh[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
   add_blast_top[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
-  add_blast_thresh[,ranks] <- "dummy"
-  add_blast_top[,ranks] <- "dummy"  
+  add_blast_thresh <- rename_unk_output(add_blast_thresh)
+  add_blast_top <- rename_unk_output(add_blast_top)
 }
 
 result_blast_thresh <- rbind(result_blast_thresh, add_blast_thresh) |> dplyr::arrange(ID)
@@ -357,7 +370,11 @@ results <- list(
 
 results <- lapply(results, function(x) as.data.frame(x))
 
-saveRDS(results, paste0("coi/result_list", natxt, ".rds"))
+if(short){
+  saveRDS(results, paste0("coi/result_list_short", natxt, "_", datatype, ".rds"))
+}else{
+  saveRDS(results, paste0("coi/result_list", natxt, "_", datatype, ".rds"))
+}
 
 # CHECK TAXONOMY ---------------------------------------------------------------
 

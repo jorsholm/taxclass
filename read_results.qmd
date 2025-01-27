@@ -1,0 +1,39 @@
+---
+title: "Read results for ITS and COI"
+format: html
+editor: visual
+---
+
+## ITS
+
+```{bash}
+# short = FALSE, keep_NA = FALSE
+Rscript read_result_its.R FALSE FALSE
+
+# short = FALSE, keep_NA = TRUE
+Rscript read_result_its.R FALSE TRUE
+
+# short = TRUE, keep_NA = FALSE
+Rscript read_result_its.R TRUE FALSE
+
+# short = TRUE, keep_NA = TRUE
+Rscript read_result_its.R TRUE TRUE
+
+```
+
+## COI 
+
+```{bash}
+
+# short = FALSE, keep_NA = FALSE, datatype = nt
+Rscript read_result_coi.R FALSE FALSE nt
+
+# short = FALSE, keep_NA = TRUE, datatype = nt
+Rscript read_result_coi.R FALSE TRUE nt
+
+# short = TRUE, keep_NA = FALSE, datatype = nt
+Rscript read_result_coi.R TRUE FALSE nt
+
+# short = TRUE, keep_NA = TRUE, datatype = nt
+Rscript read_result_coi.R TRUE TRUE nt
+```

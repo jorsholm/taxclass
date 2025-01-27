@@ -1,7 +1,5 @@
 # Read and modify model results, because it is becoming too much for the same script 
 
-rm(list = ls())
-
 # LOAD FUNCTIONS ---------------------------------------------------------------
 
 library(tidyverse)
@@ -9,22 +7,24 @@ source("functions.R")
 
 # SET PARAMETERS ---------------------------------------------------------------
 
-short <- T
+args <- commandArgs(trailingOnly = T)
+short <- as.logical(args[1])
+keep_na <- as.logical(args[2])
+
 shorttxt <- ""
 undshort <- ""
 if(short){
   shorttxt <- "short"
   undshort <- "_short"
 }
-keep_na <- T
 natxt <- ""
 if(keep_na) natxt <- "_keepNA"
 
 # LOAD DATA --------------------------------------------------------------------
 
-# Load test and train data 
-data <- load_train_test(train_file = "its/data/train_tax.tsv", 
-                        test_file = "its/data/test_tax.tsv", 
+# Load test and train data
+data <- load_train_test(train_file = "its/data/train_tax.tsv",
+                        test_file = "its/data/test_tax.tsv",
                         ranks = c("Kingdom",
                                   "Phylum",
                                   "Class",
@@ -35,21 +35,21 @@ data <- load_train_test(train_file = "its/data/train_tax.tsv",
 
 # Replace labels of taxa unique to test
 # Sort test data in alphabetical order
-data_true <- get_data_true(data$test, data$train, 
-                           ranks = c("Kingdom", 
-                                     "Phylum", 
-                                     "Class", 
-                                     "Order", 
-                                     "Family", 
-                                     "Genus", 
+data_true <- get_data_true(data$test, data$train,
+                           ranks = c("Kingdom",
+                                     "Phylum",
+                                     "Class",
+                                     "Order",
+                                     "Family",
+                                     "Genus",
                                      "Species")) |>
   dplyr::arrange(ID)
 
 # CORRECT COLUMN NAMES AND ORDER -----------------------------------------------
 
 ranks <- colnames(data_true)[-1]
-correct_cols <- c("ID", 
-                  ranks, 
+correct_cols <- c("ID",
+                  ranks,
                   sapply(ranks, function(x) paste0("Prob_", x), USE.NAMES = F))
 
 # READ RESULTS -----------------------------------------------------------------
@@ -105,8 +105,8 @@ if(keep_na){
 # Sintax
 result_SINTAX <-
   read.table(paste0("its/results/sintax/sintax_test", shorttxt, "_nt_16.tsv"),
-             header = TRUE, 
-             fill = T) |> 
+             header = TRUE,
+             fill = T) |>
   dplyr::arrange(ID)
 result_SINTAX <- arrange_columns(result_SINTAX, correct_cols)
 if(keep_na){
@@ -119,19 +119,19 @@ if(keep_na){
   result_SINTAX <- rename_unk_output(result_SINTAX, toprank = "Kingdom")
 }
 
-# MycoAI-CNN 
+# MycoAI-CNN
 result_aicnn <-
   read.table(paste0("its/results/mycoai_cnn/mycoai_cnn_test", shorttxt,
                     "_nt_40.tsv"),
              header = T) |>
   dplyr::arrange(ID)
-result_aicnn <- 
+result_aicnn <-
   result_aicnn |>
-  mutate(Kingdom = "Fungi", 
-         Prob_Kingdom = Prob_phylum) 
+  mutate(Kingdom = "Fungi",
+         Prob_Kingdom = Prob_phylum)
 result_aicnn <- arrange_columns(result_aicnn, correct_cols)
 
-# MycoAI-BERT 
+# MycoAI-BERT
 result_aibert <-
   read.table(paste0("its/results/mycoai_bert/mycoai_bert_test", shorttxt,
                     "_nt_gpu.tsv"),
@@ -139,25 +139,25 @@ result_aibert <-
   dplyr::arrange(ID)
 result_aibert <-
   result_aibert |>
-  mutate(Kingdom = "Fungi", 
-         Prob_Kingdom = Prob_phylum) 
+  mutate(Kingdom = "Fungi",
+         Prob_Kingdom = Prob_phylum)
 result_aibert <- arrange_columns(result_aibert, correct_cols)
 
-# BLAST top hit 
+# BLAST top hit
 result_blast_top <-
   read.table(paste0("its/results/blast/blast_top_hit_test", shorttxt, "_nt_16.tsv"),
-             header = T) |> 
-  dplyr::arrange(ID) |> 
-  dplyr::mutate(species = purrr::map_chr(species, 
+             header = T) |>
+  dplyr::arrange(ID) |>
+  dplyr::mutate(species = purrr::map_chr(species,
                                          ~stringr::str_extract(.x, "^[^;]+")))
 result_blast_top <- arrange_columns(result_blast_top, correct_cols)
 
-## HERE COMES THE ALGORITHMS WHICH HAVE TWO OPTIONS: (1) KEEP NA AS NA or (2) USE NA AS NOVEL 
+## HERE COMES THE ALGORITHMS WHICH HAVE TWO OPTIONS: (1) KEEP NA AS NA or (2) USE NA AS NOVEL
 
 # BLAST threshold
 result_blast_thresh <-
   read.table(paste0("its/results/blast/blast_thresh_test", shorttxt, "_nt_16.tsv"),
-             header = T) |> 
+             header = T) |>
   dplyr::arrange(ID)
 result_blast_thresh <- arrange_columns(result_blast_thresh, correct_cols)
 if(!keep_na){
@@ -190,19 +190,19 @@ if(keep_na){
 }
 result_dnabarcoder <- arrange_columns(result_dnabarcoder, correct_cols)
 
-# IDTAXA 
+# IDTAXA
 result_idtaxa <-
- read.table(paste0("its/results/idtaxa/idtaxa_test", shorttxt, "_nt_4.tsv"), 
-            fill = T, header = T) |> 
+ read.table(paste0("its/results/idtaxa/idtaxa_test", shorttxt, "_nt_4.tsv"),
+            fill = T, header = T) |>
   dplyr::arrange(ID)
 result_idtaxa <- arrange_columns(result_idtaxa, correct_cols)
 result_idtaxa$Prob_Kingdom[which(result_idtaxa$Prob_Kingdom == "[0%]")] <- 0
 if(keep_na){
-  # Unclassified = NA 
+  # Unclassified = NA
   result_idtaxa <- arrange_columns(
-    apply_threshold(result_idtaxa |> 
-                      mutate(Prob_Kingdom = as.numeric(Prob_Kingdom)), 
-                    ranks, 0.6), 
+    apply_threshold(result_idtaxa |>
+                      mutate(Prob_Kingdom = as.numeric(Prob_Kingdom)),
+                    ranks, 0.6),
     correct_cols)
 }else{
   result_idtaxa <-
@@ -210,35 +210,35 @@ if(keep_na){
     dplyr::mutate(across(all_of(ranks),
                          ~dplyr::na_if(., ""))) |>
     dplyr::mutate(across(all_of(ranks),
-                         ~dplyr::coalesce(stringr::str_replace(., "^unclassified_.*", "unk"), "unk"))) |> 
-    mutate(Prob_Kingdom = as.numeric(Prob_Kingdom)) |> 
-    tidyr::pivot_longer(cols = all_of(correct_cols[which(stringr::str_starts(correct_cols, "Prob_"))]), 
-                        names_to = "rank", values_to = "prob") |> 
-    dplyr::group_by(ID) |> 
+                         ~dplyr::coalesce(stringr::str_replace(., "^unclassified_.*", "unk"), "unk"))) |>
+    mutate(Prob_Kingdom = as.numeric(Prob_Kingdom)) |>
+    tidyr::pivot_longer(cols = all_of(correct_cols[which(stringr::str_starts(correct_cols, "Prob_"))]),
+                        names_to = "rank", values_to = "prob") |>
+    dplyr::group_by(ID) |>
     dplyr::mutate(prob = dplyr::if_else(is.na(prob), dplyr::lag(prob, default = FALSE), prob)) |>
-    tidyr::fill(prob, .direction = "down") |> 
-    dplyr::ungroup() |> 
+    tidyr::fill(prob, .direction = "down") |>
+    dplyr::ungroup() |>
     tidyr::pivot_wider(names_from = rank, values_from = prob)
   result_idtaxa <- rename_unk_output(result_idtaxa)
 }
 
 # Crest4
-result_crest4 <- 
-  read.table(paste0("its/results/crest4/crest4_test", shorttxt, "_nt_4.tsv"), 
-             header = T) |> 
+result_crest4 <-
+  read.table(paste0("its/results/crest4/crest4_test", shorttxt, "_nt_4.tsv"),
+             header = T) |>
   dplyr::arrange(ID)
 if(keep_na){
   result_crest4[result_crest4 == "unclassified"] <- NA
-  result_crest4 <- 
-    result_crest4 |> 
-    pivot_longer(all_of(str_to_lower(ranks)), 
-                 names_to = "rank", 
-                 values_to = "taxon") |> 
-    mutate(Prob = if_else(is.na(taxon), NA, 1)) |> 
-    pivot_wider(names_from = rank, 
-                values_from = c(taxon, Prob), 
-                names_glue = "{.value}_{rank}") |> 
-    rename_with(cols = starts_with("taxon_"), 
+  result_crest4 <-
+    result_crest4 |>
+    pivot_longer(all_of(str_to_lower(ranks)),
+                 names_to = "rank",
+                 values_to = "taxon") |>
+    mutate(Prob = if_else(is.na(taxon), NA, 1)) |>
+    pivot_wider(names_from = rank,
+                values_from = c(taxon, Prob),
+                names_glue = "{.value}_{rank}") |>
+    rename_with(cols = starts_with("taxon_"),
                 ~str_remove(.x, "taxon_"))
 }else{
   result_crest4 <- rename_unk_output(result_crest4, unktxt = "unclassified")
@@ -256,11 +256,11 @@ if(keep_na){
   add_blast_top[,correct_cols[-1]] <- NA
 }else{
   add_blast_thresh[,ranks] <- "unk"
-  add_blast_top[,ranks] <- "unk" 
-  
+  add_blast_top[,ranks] <- "unk"
+
   add_blast_thresh[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
   add_blast_top[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
-  
+
   add_blast_thresh <- rename_unk_output(add_blast_thresh, toprank = "Kingdom")
   add_blast_top <- rename_unk_output(add_blast_top, toprank = "Kingdom")
 }
@@ -272,13 +272,13 @@ results <- list(
   "BayesANT" = result_BayesANT,
   #  "PROTAX" = result_PROTAX,
   "RDP" = result_RDP,
-  "BLAST top hit" = result_blast_top, 
-  "BLAST threshold" = result_blast_thresh, 
+  "BLAST top hit" = result_blast_top,
+  "BLAST threshold" = result_blast_thresh,
   "SINTAX" = result_SINTAX,
   "DNABarcoder" = result_dnabarcoder,
-  "IDTAXA" = result_idtaxa, 
-  "MycoAI-CNN" = result_aicnn, 
-  "MycoAI-BERT" = result_aibert, 
+  "IDTAXA" = result_idtaxa,
+  "MycoAI-CNN" = result_aicnn,
+  "MycoAI-BERT" = result_aibert,
   "Crest4" = result_crest4
 )
 
@@ -289,3 +289,4 @@ if(short){
 }else{
   saveRDS(results, paste0("its/result_list", natxt, ".rds"))
 }
+
