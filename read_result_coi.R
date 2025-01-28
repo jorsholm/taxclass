@@ -4,7 +4,7 @@ rm(list = ls())
 
 # LOAD FUNCTIONS ---------------------------------------------------------------
 
-library(tidyverse)
+suppressMessages(library(tidyverse))
 source("functions.R")
 
 # SET PARAMETERS ---------------------------------------------------------------
@@ -112,67 +112,77 @@ if(datatype == "nt"){
 # # Rename Protax columns
 # colnames(result_PROTAX) <- colnames(result_BayesANT)
 
-# EPA-ng Taxonomy tree
-result_epatax <-
-  read.table(paste0("coi/results/epang_taxtree/epang_taxtree_test", shorttxt, "_", datatype, 
-                    "_all.tsv"),
-             header = T) |>
-  dplyr::arrange(ID)
-result_epatax <- rename_unk_output(result_epatax)
-result_epatax <- arrange_columns(result_epatax, correct_cols)
-
-# Sintax
-result_SINTAX <-
-  read.table(paste0("coi/results/sintax/sintax_test", shorttxt, "_", datatype, "_16.tsv"),
-             header = TRUE) |> 
-  dplyr::arrange(ID)
-result_SINTAX <- arrange_columns(result_SINTAX, correct_cols)
-if(keep_na){
-  result_SINTAX <- arrange_columns(
-    apply_threshold(result_SINTAX, ranks, 0.8),
-    correct_cols)
+##### EPA-ng Taxonomy tree #####
+if(datatype == "nt"){
+  result_epatax <-
+    read.table(paste0("coi/results/epang_taxtree/epang_taxtree_test", shorttxt, "_", datatype, 
+                      "_all.tsv"),
+               header = T) |>
+    dplyr::arrange(ID)
+  result_epatax <- rename_unk_output(result_epatax)
+  result_epatax <- arrange_columns(result_epatax, correct_cols)
 }
 
-# EPA-ng phylogenetic tree 
-result_epaphyl <- 
-  read.table(paste0("coi/results/epang_phyltree/epang_phyltree_test",
-                    shorttxt, "_finbol-gbol.txt"),
-             header = T, sep = "\t")  |>
-  dplyr::arrange(ID)
-result_epaphyl$class[which(result_epaphyl$class == "DISTANT")] <- "unk"
-result_epaphyl$species <- sapply(result_epaphyl$species, 
-                                 function(x) stringr::str_replace(x, " ", "_"),
-                                 USE.NAMES = F)
-result_epaphyl <- rename_unk_output(result_epaphyl)
-result_epaphyl <- arrange_columns(result_epaphyl, correct_cols)
+##### Sintax #####
+if(datatype == "nt"){
+  result_SINTAX <-
+    read.table(paste0("coi/results/sintax/sintax_test", shorttxt, "_", datatype, "_16.tsv"),
+               header = TRUE) |> 
+    dplyr::arrange(ID)
+  result_SINTAX <- arrange_columns(result_SINTAX, correct_cols)
+  if(keep_na){
+    result_SINTAX <- arrange_columns(
+      apply_threshold(result_SINTAX, ranks, 0.8),
+      correct_cols)
+  }
+}
 
-# MycoAI-CNN 
-result_aicnn <-
-  read.table(paste0("coi/results/mycoai_cnn/mycoai_cnn_test", shorttxt,
-                    "_", datatype, "_gpu.tsv"),
-             header = T) |>
-  dplyr::arrange(ID)
-result_aicnn <- 
-  result_aicnn |> 
-  dplyr::left_join(class_order_match, 
-                   by = c("order" = "Order")) |> 
-  dplyr::mutate(Prob_Class = Prob_order)
-result_aicnn <- arrange_columns(result_aicnn, correct_cols)
+##### EPA-ng phylogenetic tree #####
+if(datatype == "nt"){
+  result_epaphyl <- 
+    read.table(paste0("coi/results/epang_phyltree/epang_phyltree_test",
+                      shorttxt, "_finbol-gbol.txt"),
+               header = T, sep = "\t")  |>
+    dplyr::arrange(ID)
+  result_epaphyl$class[which(result_epaphyl$class == "DISTANT")] <- "unk"
+  result_epaphyl$species <- sapply(result_epaphyl$species, 
+                                   function(x) stringr::str_replace(x, " ", "_"),
+                                   USE.NAMES = F)
+  result_epaphyl <- rename_unk_output(result_epaphyl)
+  result_epaphyl <- arrange_columns(result_epaphyl, correct_cols)
+}
 
-# MycoAI-BERT 
-result_aibert <- 
-  read.table(paste0("coi/results/mycoai_bert/mycoai_bert_test", shorttxt, 
-                    "_", datatype, "_gpu.tsv"), 
-             header = T) |> 
-  dplyr::arrange(ID)
-result_aibert <- 
-  result_aibert |> 
-  dplyr::left_join(class_order_match, 
-                   by = c("order" = "Order")) |> 
-  dplyr::mutate(Prob_Class = Prob_order)
-result_aibert <- arrange_columns(result_aibert, correct_cols)
+##### MycoAI-CNN ##### 
+if(datatype == "nt"){
+  result_aicnn <-
+    read.table(paste0("coi/results/mycoai_cnn/mycoai_cnn_test", shorttxt,
+                      "_", datatype, "_gpu.tsv"),
+               header = T) |>
+    dplyr::arrange(ID)
+  result_aicnn <- 
+    result_aicnn |> 
+    dplyr::left_join(class_order_match, 
+                     by = c("order" = "Order")) |> 
+    dplyr::mutate(Prob_Class = Prob_order)
+  result_aicnn <- arrange_columns(result_aicnn, correct_cols)
+}
 
-# BLAST top hit 
+##### MycoAI-BERT ##### 
+if(datatype == "nt"){
+  result_aibert <- 
+    read.table(paste0("coi/results/mycoai_bert/mycoai_bert_test", shorttxt, 
+                      "_", datatype, "_gpu.tsv"), 
+               header = T) |> 
+    dplyr::arrange(ID)
+  result_aibert <- 
+    result_aibert |> 
+    dplyr::left_join(class_order_match, 
+                     by = c("order" = "Order")) |> 
+    dplyr::mutate(Prob_Class = Prob_order)
+  result_aibert <- arrange_columns(result_aibert, correct_cols)
+}
+
+##### BLAST top hit ##### 
 result_blast_top <-
   read.table(paste0("coi/results/blast/blast_top_hit_test", shorttxt, "_", datatype, "_16.tsv"),
              header = T) |> 
@@ -181,45 +191,77 @@ result_blast_top <-
                                          ~stringr::str_extract(.x, "^[^;]+")))
 result_blast_top <- arrange_columns(result_blast_top, correct_cols)
 
+
+if(length(which(!(data_true$ID %in% result_blast_top$ID))) != 0){
+  add_blast_top <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_top$ID))])
+  
+  if(keep_na){
+    add_blast_top[,correct_cols[-1]] <- NA
+  }else{
+    add_blast_top[,ranks] <- "unk"
+    add_blast_top[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
+    add_blast_top <- rename_unk_output(add_blast_top)
+  }
+  
+  result_blast_top <- rbind(result_blast_top, add_blast_top) |> dplyr::arrange(ID)
+}
+
 ## HERE COMES THE ALGORITHMS WHICH HAVE TWO OPTIONS: (1) KEEP NA AS NA or (2) USE NA AS NOVEL 
 
-# BLAST threshold
-result_blast_thresh <-
-  read.table(paste0("coi/results/blast/blast_thresh_test", shorttxt, "_", datatype, "_16.tsv"),
-             header = T) |> 
-  dplyr::arrange(ID)
-result_blast_thresh <- arrange_columns(result_blast_thresh, correct_cols)
-if(!keep_na){
-  result_blast_thresh[is.na(result_blast_thresh)] <- "unk"
-  result_blast_thresh[,correct_cols[which(stringr::str_starts(correct_cols, "Prob_"))]] <- 1
-  result_blast_thresh <- rename_unk_output(result_blast_thresh)
+##### BLAST threshold #####
+if(datatype == "nt"){
+  result_blast_thresh <-
+    read.table(paste0("coi/results/blast/blast_thresh_test", shorttxt, "_", datatype, "_16.tsv"),
+               header = T) |> 
+    dplyr::arrange(ID)
+  result_blast_thresh <- arrange_columns(result_blast_thresh, correct_cols)
+  if(!keep_na){
+    result_blast_thresh[is.na(result_blast_thresh)] <- "unk"
+    result_blast_thresh[,correct_cols[which(stringr::str_starts(correct_cols, "Prob_"))]] <- 1
+    result_blast_thresh <- rename_unk_output(result_blast_thresh)
+  }
+  
+  if(length(which(!(data_true$ID %in% result_blast_thresh$ID))) != 0){
+    add_blast_thresh <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_thresh$ID))])
+    if(keep_na){
+      add_blast_thresh[,correct_cols[-1]] <- NA
+    }else{
+      add_blast_thresh[,ranks] <- "unk"
+      add_blast_thresh[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
+      add_blast_thresh <- rename_unk_output(add_blast_thresh)
+    }
+    
+    result_blast_thresh <- rbind(result_blast_thresh, add_blast_thresh) |> dplyr::arrange(ID)
+  }
 }
 
-# DNA-barcoder
-result_dnabarcoder <-
-  read.table(paste0("coi/results/dnabarcoder/test", shorttxt, "_", datatype, "_1.tsv"),
-             header = T) |> 
-  dplyr::arrange(ID)
-if(keep_na){
-  # Unidentified = NA 
-  result_dnabarcoder[result_dnabarcoder == "unidentified"] <- NA
-  result_dnabarcoder <- 
-    result_dnabarcoder |>
-    tidyr::pivot_longer(cols = all_of(stringr::str_to_lower(ranks)), 
-                        names_to = "rank", values_to = "taxon") |> 
-    dplyr::mutate(prob = dplyr::if_else(is.na(taxon), NA, 1)) |> 
-    tidyr::pivot_wider(names_from = rank, 
-                       values_from = c(taxon, prob)) |> 
-    dplyr::rename_with(~gsub("taxon_", "", .), dplyr::starts_with("taxon_"))
-}else{
+##### DNA-barcoder #####
+if(datatype == "nt"){
   result_dnabarcoder <-
-    result_dnabarcoder |>
-    rename_unk_output(unktxt = "unidentified") |>
-    cbind(purrr::map_dfc(ranks, ~ dplyr::tibble(!!paste0("Prob_", .x) := 1)))
+    read.table(paste0("coi/results/dnabarcoder/test", shorttxt, "_", datatype, "_1.tsv"),
+               header = T) |> 
+    dplyr::arrange(ID)
+  if(keep_na){
+    # Unidentified = NA 
+    result_dnabarcoder[result_dnabarcoder == "unidentified"] <- NA
+    result_dnabarcoder <- 
+      result_dnabarcoder |>
+      tidyr::pivot_longer(cols = all_of(stringr::str_to_lower(ranks)), 
+                          names_to = "rank", values_to = "taxon") |> 
+      dplyr::mutate(prob = dplyr::if_else(is.na(taxon), NA, 1)) |> 
+      tidyr::pivot_wider(names_from = rank, 
+                         values_from = c(taxon, prob)) |> 
+      dplyr::rename_with(~gsub("taxon_", "", .), dplyr::starts_with("taxon_"))
+  }else{
+    result_dnabarcoder <-
+      result_dnabarcoder |>
+      rename_unk_output(unktxt = "unidentified") |>
+      cbind(purrr::map_dfc(ranks, ~ dplyr::tibble(!!paste0("Prob_", .x) := 1)))
+  }
+  result_dnabarcoder <- arrange_columns(result_dnabarcoder, correct_cols)
 }
-result_dnabarcoder <- arrange_columns(result_dnabarcoder, correct_cols)
 
-# IDTAXA 
+##### IDTAXA #####
 result_idtaxa <-
  read.table(paste0("coi/results/idtaxa/idtaxa_test", shorttxt, "_", datatype, "_4.tsv"), 
             fill = T, header = T) |> 
@@ -331,42 +373,40 @@ result_crest4 <- arrange_columns(result_crest4, correct_cols)
 # }
 # result_mystery <- rename_unk_output(result_mystery)
 
-# UGLY FIX FOR BLAST MISSING DATA ----------------------------------------------
+# COMPILE RESULT ---------------------------------------------------------------
 
-add_blast_thresh <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_thresh$ID))])
-add_blast_top <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_top$ID))])
-
-if(keep_na){
-  add_blast_thresh[,correct_cols[-1]] <- NA
-  add_blast_top[,correct_cols[-1]] <- NA
-}else{
-  add_blast_thresh[,ranks] <- "unk"
-  add_blast_top[,ranks] <- "unk"
-  add_blast_thresh[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
-  add_blast_top[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
-  add_blast_thresh <- rename_unk_output(add_blast_thresh)
-  add_blast_top <- rename_unk_output(add_blast_top)
+if(datatype == "nt"){
+  results <- list(
+    "BayesANT" = result_BayesANT,
+    #  "PROTAX" = result_PROTAX,
+    "EPA-ng taxtree" = result_epatax,
+    "RDP" = result_RDP,
+    "BLAST top hit" = result_blast_top, 
+    "BLAST threshold" = result_blast_thresh, 
+    "SINTAX" = result_SINTAX,
+    # "Mystery" = result_mystery,
+    "EPA-ng phyltree" = result_epaphyl,
+    "DNABarcoder" = result_dnabarcoder,
+    "IDTAXA" = result_idtaxa, 
+    "MycoAI-CNN" = result_aicnn, 
+    "MycoAI-BERT" = result_aibert, 
+    "Crest4" = result_crest4
+  )
+}else if(datatype == "aa"){
+  results <- list(
+    "BayesANT" = result_BayesANT,
+    #"EPA-ng taxtree" = result_epatax,
+    #"RDP" = result_RDP,
+    "BLAST top hit" = result_blast_top, 
+    #"BLAST threshold" = result_blast_thresh, 
+    #"SINTAX" = result_SINTAX,
+    #"EPA-ng phyltree" = result_epaphyl,
+    #"DNABarcoder" = result_dnabarcoder,
+    "IDTAXA" = result_idtaxa, 
+    #"MycoAI-BERT" = result_aibert, 
+    "Crest4" = result_crest4
+  )
 }
-
-result_blast_thresh <- rbind(result_blast_thresh, add_blast_thresh) |> dplyr::arrange(ID)
-result_blast_top <- rbind(result_blast_top, add_blast_top) |> dplyr::arrange(ID)
-
-results <- list(
-  "BayesANT" = result_BayesANT,
-  #  "PROTAX" = result_PROTAX,
-  "EPA-ng taxtree" = result_epatax,
-  "RDP" = result_RDP,
-  "BLAST top hit" = result_blast_top, 
-  "BLAST threshold" = result_blast_thresh, 
-  "SINTAX" = result_SINTAX,
-  # "Mystery" = result_mystery,
-  "EPA-ng phyltree" = result_epaphyl,
-  "DNABarcoder" = result_dnabarcoder,
-  "IDTAXA" = result_idtaxa, 
-  "MycoAI-CNN" = result_aicnn, 
-  "MycoAI-BERT" = result_aibert, 
-  "Crest4" = result_crest4
-)
 
 results <- lapply(results, function(x) as.data.frame(x))
 

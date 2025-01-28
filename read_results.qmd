@@ -21,7 +21,7 @@ Rscript read_result_its.R TRUE TRUE
 
 ```
 
-## COI 
+## COI
 
 ```{bash}
 
@@ -36,4 +36,10 @@ Rscript read_result_coi.R TRUE FALSE nt
 
 # short = TRUE, keep_NA = TRUE, datatype = nt
 Rscript read_result_coi.R TRUE TRUE nt
+
+# short = FALSE, keep_NA = FALSE, datatype = aa
+Rscript read_result_coi.R FALSE FALSE aa
+
+# short = FALSE, keep_NA = TRUE, datatype = aa
+Rscript read_result_coi.R FALSE TRUE aa
 ```
