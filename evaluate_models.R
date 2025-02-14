@@ -6,8 +6,8 @@ rm(list = ls())
 library(tidyverse)
 source("functions.R")
 
-case <- "its" 
-# case <- "coi"
+#case <- "its" 
+case <- "coi"
 
 # SET PARAMETERS ---------------------------------------------------------------
 
@@ -21,6 +21,7 @@ if(short){
 keep_na <- F
 natxt <- ""
 if(keep_na) natxt <- "_keepNA"
+datatype <- "nt"
 
 # LOAD DATA --------------------------------------------------------------------
 
@@ -62,7 +63,7 @@ correct_cols <- c("ID",
 
 # READ RESULTS -----------------------------------------------------------------
 
-results <- readRDS(paste0(case, "/result_list", natxt, ".rds"))
+results <- readRDS(paste0(case, "/result_list", natxt, "_", datatype, ".rds"))
 
 # IDENTIFY TAXA SETS -----------------------------------------------------------
 

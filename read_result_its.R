@@ -78,7 +78,7 @@ result_BayesANT <-
                               ~stringr::str_replace_all(., substitutions)))
 result_BayesANT <- arrange_columns(result_BayesANT, correct_cols)
 
-# RDP
+##### RDP #####
 result_RDP <-
   read.table(paste0("its/results/rdp_nbc/rdp_nbc_test", shorttxt, "_1.tsv"),
              header = T) |>
@@ -90,7 +90,7 @@ if(keep_na){
     correct_cols)
 }
 
-# PROTAX
+##### PROTAX #####
 # result_PROTAX <-
 #   read.table(paste0("results/protax-a/protax-a_test", shorttxt, "_nt_1.tsv"),
 #              header = T)
@@ -102,7 +102,7 @@ if(keep_na){
 # # Rename Protax columns
 # colnames(result_PROTAX) <- colnames(result_BayesANT)
 
-# Sintax
+##### Sintax #####
 result_SINTAX <-
   read.table(paste0("its/results/sintax/sintax_test", shorttxt, "_nt_16.tsv"),
              header = TRUE,
@@ -119,7 +119,7 @@ if(keep_na){
   result_SINTAX <- rename_unk_output(result_SINTAX, toprank = "Kingdom")
 }
 
-# MycoAI-CNN
+##### MycoAI-CNN #####
 result_aicnn <-
   read.table(paste0("its/results/mycoai_cnn/mycoai_cnn_test", shorttxt,
                     "_nt_40.tsv"),
@@ -131,7 +131,7 @@ result_aicnn <-
          Prob_Kingdom = Prob_phylum)
 result_aicnn <- arrange_columns(result_aicnn, correct_cols)
 
-# MycoAI-BERT
+##### MycoAI-BERT #####
 result_aibert <-
   read.table(paste0("its/results/mycoai_bert/mycoai_bert_test", shorttxt,
                     "_nt_gpu.tsv"),
@@ -143,7 +143,7 @@ result_aibert <-
          Prob_Kingdom = Prob_phylum)
 result_aibert <- arrange_columns(result_aibert, correct_cols)
 
-# BLAST top hit
+##### BLAST top hit #####
 result_blast_top <-
   read.table(paste0("its/results/blast/blast_top_hit_test", shorttxt, "_nt_16.tsv"),
              header = T) |>
@@ -152,9 +152,21 @@ result_blast_top <-
                                          ~stringr::str_extract(.x, "^[^;]+")))
 result_blast_top <- arrange_columns(result_blast_top, correct_cols)
 
-## HERE COMES THE ALGORITHMS WHICH HAVE TWO OPTIONS: (1) KEEP NA AS NA or (2) USE NA AS NOVEL
+if(length(which(!(data_true$ID %in% result_blast_top$ID))) != 0){
+  add_blast_top <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_top$ID))])
+  
+  if(keep_na){
+    add_blast_top[,correct_cols[-1]] <- NA
+  }else{
+    add_blast_top[,ranks] <- "unk"
+    add_blast_top[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
+    add_blast_top <- rename_unk_output(add_blast_top, toprank = "Kingdom")
+  }
+  
+  result_blast_top <- rbind(result_blast_top, add_blast_top) |> dplyr::arrange(ID)
+}
 
-# BLAST threshold
+##### BLAST threshold #####
 result_blast_thresh <-
   read.table(paste0("its/results/blast/blast_thresh_test", shorttxt, "_nt_16.tsv"),
              header = T) |>
@@ -166,7 +178,20 @@ if(!keep_na){
   result_blast_thresh <- rename_unk_output(result_blast_thresh)
 }
 
-# DNA-barcoder
+if(length(which(!(data_true$ID %in% result_blast_thresh$ID))) != 0){
+  add_blast_thresh <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_thresh$ID))])
+  if(keep_na){
+    add_blast_thresh[,correct_cols[-1]] <- NA
+  }else{
+    add_blast_thresh[,ranks] <- "unk"
+    add_blast_thresh[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
+    add_blast_thresh <- rename_unk_output(add_blast_thresh, toprank = "Kingdom")
+  }
+  
+  result_blast_thresh <- rbind(result_blast_thresh, add_blast_thresh) |> dplyr::arrange(ID)
+}
+
+##### DNA-barcoder #####
 result_dnabarcoder <-
   read.table(paste0("its/results/dnabarcoder/test", shorttxt, "_nt_40.tsv"),
              header = T) |>
@@ -190,7 +215,7 @@ if(keep_na){
 }
 result_dnabarcoder <- arrange_columns(result_dnabarcoder, correct_cols)
 
-# IDTAXA
+##### IDTAXA #####
 result_idtaxa <-
  read.table(paste0("its/results/idtaxa/idtaxa_test", shorttxt, "_nt_4.tsv"),
             fill = T, header = T) |>
@@ -222,7 +247,7 @@ if(keep_na){
   result_idtaxa <- rename_unk_output(result_idtaxa)
 }
 
-# Crest4
+##### Crest4 #####
 result_crest4 <-
   read.table(paste0("its/results/crest4/crest4_test", shorttxt, "_nt_4.tsv"),
              header = T) |>
@@ -246,27 +271,7 @@ if(keep_na){
 }
 result_crest4 <- arrange_columns(result_crest4, correct_cols)
 
-# UGLY FIX FOR BLAST MISSING DATA ----------------------------------------------
-
-add_blast_thresh <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_thresh$ID))])
-add_blast_top <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_top$ID))])
-
-if(keep_na){
-  add_blast_thresh[,correct_cols[-1]] <- NA
-  add_blast_top[,correct_cols[-1]] <- NA
-}else{
-  add_blast_thresh[,ranks] <- "unk"
-  add_blast_top[,ranks] <- "unk"
-
-  add_blast_thresh[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
-  add_blast_top[,correct_cols[which(!(correct_cols %in% ranks))][-1]] <- 1
-
-  add_blast_thresh <- rename_unk_output(add_blast_thresh, toprank = "Kingdom")
-  add_blast_top <- rename_unk_output(add_blast_top, toprank = "Kingdom")
-}
-
-result_blast_thresh <- rbind(result_blast_thresh, add_blast_thresh) |> dplyr::arrange(ID)
-result_blast_top <- rbind(result_blast_top, add_blast_top) |> dplyr::arrange(ID)
+# BIND RESULT LIST -------------------------------------------------------------
 
 results <- list(
   "BayesANT" = result_BayesANT,
