@@ -64,6 +64,8 @@ correct_cols <- c("ID",
 # READ RESULTS -----------------------------------------------------------------
 
 results <- readRDS(paste0(case, "/result_list", natxt, "_", datatype, ".rds"))
+# Read version with missing predictions 
+results_mp <- readRDS(paste0(case, "/result_list", undshort, "_keepNA_", datatype, ".rds"))
 
 # IDENTIFY TAXA SETS -----------------------------------------------------------
 
@@ -87,17 +89,23 @@ id_all <- lapply(data_true, function(x) 1:length(x))
 # TODO: Some of our results have more sequences than data_true
 # Here, I remove them as a temporary solution 
 results <- lapply(results, function(x) x[which(x[,1] %in% data_true[,1]),])
+results_mp <- lapply(results_mp, function(x) x[which(x[,1] %in% data_true[,1]),])
 
 # Some quick checks of results structure 
 if(!length(unique(lapply(results, function(x) colnames(x)))) == 1) print("One of the results data frames have wrong column names.")
 if(!all(sapply(results, function(x) all(x[,1] == data_true[,1])))) print("One of the results data frames is not sorted by ID.")
 if(!all(colnames(data_true) == colnames(results[[1]])[1:ncol(data_true)])) print("Column names containing taxonomic information not identical to data_true")
 
-
 # PLOT CALIBRATION CURVES ------------------------------------------------------
 
 calibrations <- 
   get_calibration(results, data_true, observed_everywhere) |> 
+  mutate(rank = factor(rank, levels = ranks), 
+         set = factor(set, levels = c("All", "Observed", "Novel")), 
+         model = factor(model, levels = algs_sorted))
+
+calibrations_mp <- 
+  get_calibration(results_mp, data_true, observed_everywhere) |> 
   mutate(rank = factor(rank, levels = ranks), 
          set = factor(set, levels = c("All", "Observed", "Novel")), 
          model = factor(model, levels = algs_sorted))
@@ -253,6 +261,10 @@ accuracies <- get_accuracy_from_cal(calibrations) |>
   mutate(rank = factor(rank, levels = ranks), 
          set = factor(set, levels = c("All", "Observed", "Novel")))
 
+accuracies_mp <- get_accuracy_from_cal(calibrations_mp) |> 
+  mutate(rank = factor(rank, levels = ranks), 
+         set = factor(set, levels = c("All", "Observed", "Novel")))
+
 #### Plot across all models and species sets ####
 p_acc <- 
   plot_accuracies(accuracies) |> 
@@ -275,10 +287,34 @@ cond_accuracies <- conditional_accuracy(results, data_true,
                                         id_list = list(All = id_all,
                                                        Observed = id_observed,
                                                        Novel = id_novel))
+# With missing predictions
+marg_accuracies_mp <- marginal_accuracy(results_mp, data_true, 
+                                     id_list = list(All = id_all, 
+                                                    Observed = id_observed, 
+                                                    Novel = id_novel))
+
+cond_accuracies_mp <- conditional_accuracy(results_mp, data_true,
+                                        id_list = list(All = id_all,
+                                                       Observed = id_observed,
+                                                       Novel = id_novel))
 
 accuracy_df <- 
   marg_accuracies |> 
   left_join(cond_accuracies) |>
+  rename(marginal = marg_accuracy,
+         conditional = cond_accuracy) |> 
+  pivot_longer(c("marginal", "conditional"),
+               names_to = "measure",
+               values_to = "accuracy") |> 
+  mutate(denom_cond = if_else(measure == "marginal", 0, denom_cond)) |> 
+  mutate(denom_cond = na_if(denom_cond, 0)) |> 
+  mutate(rank = factor(rank, levels = ranks), 
+         set = factor(set, levels = c("All", "Observed", "Novel")), 
+         measure = factor(measure, levels = c("marginal", "conditional")))
+
+accuracy_df_mp <- 
+  marg_accuracies_mp |> 
+  left_join(cond_accuracies_mp) |>
   rename(marginal = marg_accuracy,
          conditional = cond_accuracy) |> 
   pivot_longer(c("marginal", "conditional"),
@@ -327,6 +363,45 @@ ggsave(filename = paste0("plots/fourpanel_accuracy_", case,
                          natxt, undshort, ".pdf"), 
        plot = fourpanel_accuracy, 
        height = 150, 
+       width = 200, 
+       units = "mm")
+
+# With missing predictions for Suppl.
+p_accuracy_mp <-
+  accuracy_df_mp |> 
+  filter(measure == "marginal", set != "All") |> 
+  select(-denom_cond) |> 
+  mutate(set = map_chr(set, ~str_to_sentence(paste(.x, "taxa"))),
+         accuracy = accuracy * 100) |> 
+  bind_rows(accuracies_mp |>
+              filter(set != "All") |>
+              mutate(set = paste(set, "species"),
+                     measure = "accuracy")) |> 
+  mutate(set = factor(set, levels = c("Observed species",
+                                      "Novel species",
+                                      "Observed taxa",
+                                      "Novel taxa")), 
+         model = factor(model, levels = algs_sorted)) |> 
+  filter(str_detect(set, "Observed")) |> 
+  ggplot() + 
+  theme_bw() + 
+  theme(aspect.ratio = 1, 
+        panel.grid.minor = element_blank(), 
+        axis.title.x = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  aes(x = rank, 
+      y = accuracy, 
+      color = model, 
+      shape = model) + 
+  geom_line(mapping = aes(group = model)) + 
+  geom_point() + 
+  facet_wrap(~set) + 
+  labs(color = "Model", y = "Accuracy (%)") 
+p_accuracy_mp <- change_plot_colors(p_accuracy_mp)
+
+ggsave(filename = paste0("plots/accuracy_mp_", case, ".pdf"), 
+       plot = p_accuracy_mp, 
+       height = 80, 
        width = 200, 
        units = "mm")
 
@@ -484,48 +559,27 @@ ggsave(plot = p_part_novelty,
 
 # % CLASSIFIED ~ % CORRECT -----------------------------------------------------
 
-# TODO: Fix this 
+# Use results which allow missing predictions
 
 # Add similarity as "probability" for BLAST top hit 
 result_blast_top_similarity <-
-  read.table(paste0("results/blast/blast_top_hit_test", shorttxt, "_nt_16.tsv"),
+  read.table(paste0("coi/results/blast/blast_top_hit_test", shorttxt, "_nt_16.tsv"),
              header = T) |> 
-  arrange(ID) 
-result_blast_top_similarity <- arrange_columns(result_blast_top_similarity, correct_cols)
-result_blast_top_similarity <- 
-  result_blast_top_similarity |> 
-  select(ID, all_of(ranks)) |> 
+  arrange_columns(correct_cols = correct_cols) |> 
   separate(Species, into = c("Species", "Similarity"), 
-           sep = ";") 
-result_blast_top_similarity[,correct_cols[which(str_starts(correct_cols, "Prob_"))]] <- as.numeric(result_blast_top_similarity$Similarity)/100
-result_blast_top_similarity <- result_blast_top_similarity |> select(-Similarity)
+           sep = ";") %>%
+  mutate(Similarity = as.numeric(Similarity)/100) |> 
+  mutate(across(starts_with("Prob_"), ~Similarity)) |> 
+  select(-Similarity) %>%
+  bind_rows(data.frame(ID = data_true$ID[which(!(data_true$ID %in% .$ID))])) |> 
+  arrange(ID) 
 
-add_blast_top_similarity <- data.frame(ID = data_true$ID[which(!(data_true$ID %in% result_blast_top_similarity$ID))])
-add_blast_top_similarity[,correct_cols[-1]] <- NA
-
-result_blast_top_similarity <- 
-  rbind(result_blast_top_similarity, 
-        add_blast_top_similarity) |> 
-  arrange(ID)
-
-result_blast_top_similarity <- 
-  result_blast_top_similarity |> 
-  filter(ID %in% data_true$ID)
-
-# When NA = skip 
-
-results_skipNA <- readRDS(paste0("result_list", "_keepNA", ".rds"))
-has_nas <- names(which(sapply(results_skipNA, function(x) any(is.na(x$Species)))))
-has_nas <- has_nas[which(has_nas != "BLAST top hit")]
-
-results_similarity <- results
-results_similarity[paste0(has_nas, "_NA")] <- results_skipNA[has_nas]
-results_similarity$`BLAST top hit` <- result_blast_top_similarity
-
-results_similarity <- lapply(results_similarity, function(x) x[which(x[,1] %in% data_true[,1]),])
+# Replace BLAST result with similarity data frame 
+results_mp_similarity <- results_mp
+results_mp_similarity$`BLAST top hit` <- result_blast_top_similarity
 
 classified_correct <- 
-  threshold_curve(results_similarity, data_true) |>   
+  threshold_curve(results_mp_similarity, data_true) |>   
   mutate(rank = factor(rank, levels = ranks))
 
 point_models <- 
@@ -536,27 +590,19 @@ point_models <-
     filter(count == length(ranks)) |> 
     pull(model)
 
-classified_correct <- 
-  classified_correct |>
-  mutate(rank = factor(rank, levels = ranks)) |> 
-  separate(model, into = c("model", "has_na"), sep = "_") |> 
-  mutate(has_na = !is.na(has_na))
-
-#p_class_correct <- 
+p_class_correct <- 
   ggplot() +  
   geom_line(data = classified_correct |> 
               filter(!model %in% point_models), 
               aes(x = classified, 
                 y = correct, 
-                color = model,
-                linetype = has_na),
+                color = model),
             alpha = 0.7) +
   geom_point(data = classified_correct |> 
                filter(model %in% point_models), 
              aes(x = classified, 
                  y = correct, 
-                 color = model,
-                 shape = has_na)) +  
+                 color = model)) +  
   facet_wrap(~rank, 
              nrow = 2) + 
   theme_bw() + 
@@ -572,7 +618,7 @@ classified_correct <-
                      breaks = algs_sorted) 
 
 ggsave(plot = p_class_correct, 
-       filename = paste0("../plots/classified_correct_COI", natxt, undshort, ".pdf"), 
+       filename = paste0("plots/classified_correct_COI", natxt, undshort, ".pdf"), 
        width = 250, 
        height = 130, 
        units = "mm")
@@ -637,9 +683,11 @@ ggsave(filename = paste0("plots/pred_prob_", case, undshort, natxt, ".pdf"),
 
 # MIS-, OVER-, AND UNDERCLASSIFICATION -----------------------------------------
 
-oclass_df <- overclass_rate(results, id_novel)
-uclass_df <- underclass_rate(results, id_observed)
-misclass_df <- misclass_rate(results, data_true, id_observed)
+# Here we use thresholds for IDTAXA, RDP, SINTAX
+# (novel and NA will have the same interpretation here)
+oclass_df <- overclass_rate(results_mp, id_novel)
+uclass_df <- underclass_rate(results_mp, id_observed)
+misclass_df <- misclass_rate(results_mp, data_true, id_observed)
 
 errorrates <- 
   oclass_df |> 

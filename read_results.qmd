@@ -6,40 +6,39 @@ editor: visual
 
 ## ITS
 
-```{bash}
+```{r}
 # short = FALSE, keep_NA = FALSE
-Rscript read_result_its.R FALSE FALSE
+system("Rscript read_result_its.R FALSE FALSE")
 
 # short = FALSE, keep_NA = TRUE
-Rscript read_result_its.R FALSE TRUE
+system("Rscript read_result_its.R FALSE TRUE")
 
 # short = TRUE, keep_NA = FALSE
-Rscript read_result_its.R TRUE FALSE
+system("Rscript read_result_its.R TRUE FALSE")
 
 # short = TRUE, keep_NA = TRUE
-Rscript read_result_its.R TRUE TRUE
-
+system("Rscript read_result_its.R TRUE TRUE")
 ```
 
 ## COI
 
-```{bash}
+```{R}
 
 # short = FALSE, keep_NA = FALSE, datatype = nt
-Rscript read_result_coi.R FALSE FALSE nt
+system("Rscript read_result_coi.R FALSE FALSE nt")
 
 # short = FALSE, keep_NA = TRUE, datatype = nt
-Rscript read_result_coi.R FALSE TRUE nt
+system("Rscript read_result_coi.R FALSE TRUE nt")
 
 # short = TRUE, keep_NA = FALSE, datatype = nt
-Rscript read_result_coi.R TRUE FALSE nt
+system("Rscript read_result_coi.R TRUE FALSE nt")
 
 # short = TRUE, keep_NA = TRUE, datatype = nt
-Rscript read_result_coi.R TRUE TRUE nt
+system("Rscript read_result_coi.R TRUE TRUE nt")
 
 # short = FALSE, keep_NA = FALSE, datatype = aa
-Rscript read_result_coi.R FALSE FALSE aa
+system("Rscript read_result_coi.R FALSE FALSE aa")
 
 # short = FALSE, keep_NA = TRUE, datatype = aa
-Rscript read_result_coi.R FALSE TRUE aa
+system("Rscript read_result_coi.R FALSE TRUE aa")
 ```
