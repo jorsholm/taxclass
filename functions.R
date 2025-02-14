@@ -289,7 +289,7 @@ calc_calibration_binned <- function(prob, correct, bins){
 # TODO: When plotting a single model + set, include accuracies in legend 
 # TODO: When plotting a single rank + set, include accuracies in legend + info about sample size 
 # TODO: sample size in All Observed and Novel headings? 
-plot_calibration <- function(calibrations){
+plot_calibration <- function(calibrations, data_true){
   
   # Make plot base 
   p <- ggplot2::ggplot() +
@@ -645,7 +645,7 @@ threshold_curve <- function(results, data_true, thresholds = seq(0, 1, 0.01)){
   return(out)
 }
 
-underclass_rate <- function(results, id_observed){
+underclass_rate <- function(results, id_observed, ranks){
   uclass_df <- data.frame() 
   
   for(i in 1:length(results)){
@@ -663,7 +663,7 @@ underclass_rate <- function(results, id_observed){
   return(uclass_df)
 }
 
-overclass_rate <- function(results, id_novel){
+overclass_rate <- function(results, id_novel, ranks){
   oclass_df <- data.frame() 
   
   for(i in 1:length(results)){
@@ -681,7 +681,7 @@ overclass_rate <- function(results, id_novel){
   return(oclass_df)
 }
 
-misclass_rate <- function(results, data_true, id_observed){
+misclass_rate <- function(results, data_true, id_observed, ranks){
   misclass_df <- data.frame() 
   
   for(i in 1:length(results)){

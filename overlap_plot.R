@@ -137,7 +137,7 @@ for(case in cases){
         fill = node, 
         label = count) + 
     geom_sankey(flow.alpha = 0.5, width = 0.35) + 
-    geom_sankey_label() + 
+    geom_sankey_label(show.legend = F) + 
     theme_minimal() + 
     scale_fill_discrete(limits = c(train_lab, common_lab, test_lab), 
                         labels = c("Unique to train", "Shared", "Unique to test")) + 

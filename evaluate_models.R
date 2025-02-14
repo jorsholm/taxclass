@@ -14,6 +14,7 @@ case <- "coi"
 short <- F
 shorttxt <- ""
 undshort <- ""
+datatype <- "nt"
 if(short){
   shorttxt <- "short"
   undshort <- "_short"
@@ -21,7 +22,6 @@ if(short){
 keep_na <- F
 natxt <- ""
 if(keep_na) natxt <- "_keepNA"
-datatype <- "nt"
 
 # LOAD DATA --------------------------------------------------------------------
 
