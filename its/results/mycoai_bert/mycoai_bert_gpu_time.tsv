@@ -1,0 +1,4 @@
+command	CPU	time	mem
+"mycoai-train --out train_nt_bert_gpu.pt ../../data/train_nt_unite.fasta"	70%	16:55.38	1406356
+"mycoai-classify --model train_nt_bert_gpu.pt --out mycoai_bert_test_nt_gpu.raw --confidence ../../data/test_nt.fasta"	93%	0:29.92	927632
+"mycoai-classify --model train_nt_bert_gpu.pt --out mycoai_bert_testshort_nt_gpu.raw --confidence ../../data/testshort_nt.fasta"	95%	0:26.92	918776

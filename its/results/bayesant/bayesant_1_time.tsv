@@ -1,0 +1,4 @@
+command	CPU	time	mem
+"Rscript fit_BayesANT.R"	68%	0:36.27	884044
+"Rscript predict_BayesANT.R"	99%	2:00:18	1181204
+"Rscript predict_BayesANT.R"	99%	2:03:09	1092664

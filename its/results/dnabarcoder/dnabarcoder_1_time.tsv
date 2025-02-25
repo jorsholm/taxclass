@@ -1,0 +1,19 @@
+command	CPU	time	mem
+"python3 -u dnabarcoder/dnabarcoder.py sim -i ../../data/train_nt.fasta -o train_nt_1"	14%	0:00.12	6836
+"python3 -u dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_1/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_1 -o train_nt_1 -rank species"	88%	0:00.01	6912
+"python3 -u dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_1/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_1 -o train_nt_1 -rank species -higherrank genus,family,order,class,phylum,kingdom"	88%	0:00.01	6776
+"python3 -u dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_1/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_1 -o train_nt_1 -rank genus"	94%	0:00.01	6852
+"python3 -u dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_1/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_1 -o train_nt_1 -rank genus -higherrank family,order,class,phylum,kingdom"	94%	0:00.01	6988
+"python3 -u dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_1/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_1 -o train_nt_1 -rank family"	88%	0:00.01	6968
+"python3 -u dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_1/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_1 -o train_nt_1 -rank family -higherrank order,class,phylum,kingdom"	88%	0:00.01	6908
+"python3 -u dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_1/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_1 -o train_nt_1 -rank order"	88%	0:00.01	6908
+"python3 -u dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_1/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_1 -o train_nt_1 -rank order -higherrank class,phylum,kingdom"	88%	0:00.01	6988
+"python3 -u dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_1/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_1 -o train_nt_1 -rank class"	88%	0:00.01	6772
+"python3 -u dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_1/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_1 -o train_nt_1 -rank class -higherrank phylum,kingdom"	94%	0:00.01	6936
+"python3 -u dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_1/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_1 -o train_nt_1 -rank phylum"	88%	0:00.01	6856
+"python3 -u dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_1/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_1 -o train_nt_1 -rank phylum -higherrank kingdom"	88%	0:00.01	6876
+"python3 -u dnabarcoder/dnabarcoder.py best -i train_nt_1/train_nt_1.cutoffs.json -c ../../data/train_tax.tsv -o train_nt_1"	88%	0:00.01	6944
+"python3 -u dnabarcoder/dnabarcoder.py search -i ../../data/test_nt.fasta -r ../../data/train_nt.fasta --prefix test_nt_1 -o ."	88%	0:00.01	6964
+"python3 -u dnabarcoder/dnabarcoder.py classify -i test_nt_1.train_nt_BLAST.bestmatch -r ../../data/train_nt.fasta -c ../../data/train_tax.tsv --cutoffs train_nt_1/train_nt_1.cutoffs.best.json -o . --prefix test_nt_1"	94%	0:00.01	6972
+"python3 -u dnabarcoder/dnabarcoder.py search -i ../../data/testshort_nt.fasta -r ../../data/train_nt.fasta --prefix testshort_nt_1 -o ."	88%	0:00.01	6784
+"python3 -u dnabarcoder/dnabarcoder.py classify -i testshort_nt_1.train_nt_BLAST.bestmatch -r ../../data/train_nt.fasta -c ../../data/train_tax.tsv --cutoffs train_nt_1/train_nt_1.cutoffs.best.json -o . --prefix testshort_nt_1"	94%	0:00.01	6848

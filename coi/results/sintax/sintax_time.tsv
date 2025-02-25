@@ -1,0 +1,4 @@
+command	CPU	time	mem
+"vsearch --makeudb_usearch ../../data/finbol-gbol/train_finbol-gbol_nt_sintax.fasta --output train_finbol-gbol_nt.udb"	96%	0:04.25	80032
+"vsearch --sintax ../../data/finbol-gbol/test_finbol-gbol_nt_sintax.fasta --db train_finbol-gbol_nt.udb --tabbedout sintax_finbol_gbol_nt.raw --threads 8"	701%	1:30.14	124516
+"vsearch --sintax ../../data/finbol-gbol/testshort_finbol-gbol_nt_sintax.fasta --db train_finbol-gbol_nt.udb --tabbedout sintax_finbol_gbol_nt_short.raw --threads 8"	661%	2:41.26	125472
