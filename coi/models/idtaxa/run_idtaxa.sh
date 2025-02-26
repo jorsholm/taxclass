@@ -4,8 +4,8 @@
 #SBATCH --partition=small
 #SBATCH --time=24:00:00
 #SBATCH --mem=16G
-#SBATCH --cpus-per-task=40
-#SBATCH --array=40
+#SBATCH --cpus-per-task=16
+#SBATCH --array=16
 #SBATCH --output=idtaxa_%a.out
 #SBATCH --error=idtaxa_%a.out
 #SBATCH --mail-type=ALL
@@ -43,7 +43,7 @@ do
   # train the model
   export TRAIN_FILE=$DATA/train_$alphabet.fasta
   export TAX_FILE=$DATA/train_tax.tsv
-  export MODEL_FILE=train_$alphabet_$SLURM_ARRAY_TASK_ID.rds
+  export MODEL_FILE=train_${alphabet}_$SLURM_ARRAY_TASK_ID.rds
 
   $TIME Rscript learn_taxa.R
 

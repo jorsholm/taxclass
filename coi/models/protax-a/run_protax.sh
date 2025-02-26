@@ -2,7 +2,7 @@
 #SBATCH --job-name=protax-a
 #SBATCH --account=project_2005718
 #SBATCH --partition=small
-#SBATCH --time=24:00:00
+#SBATCH --time=3-00:00:00
 #SBATCH --mem-per-cpu=4800M
 #SBATCH --cpus-per-task=1
 #SBATCH --array=1
@@ -38,7 +38,7 @@ for TAXONOMY in train_tax full_tax;
 do
   # create input files
   TAX_FILE=$DATA/$TAXONOMY.txt
-  export MODEL_DIR=${MODEL}_${TAXONOMY}_${SLURM_ARRAY_TASK_ID}
+  export MODEL_DIR=train_nt_${TAXONOMY}_${SLURM_ARRAY_TASK_ID}
   mkdir -p $MODEL_DIR
 
   export PROTAX="$(pwd)/scripts"
