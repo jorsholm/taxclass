@@ -1,0 +1,7 @@
+command	CPU	time	mem
+"python3 ../crest4_utils/dev_scripts/make_new_crest_db.py train_nt_1.tsv"	3%	0:13.87	39932
+"makeblastdb -in train_nt_1.fasta -out train_nt_1 -dbtype nucl"	24%	0:01.06	12128
+"blastn -query ../../data/test_nt.fasta -db train_nt_1/train_nt_1 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_test_nt_1/search.hits -strand plus -num_threads 1"	99%	33:21.92	84140
+"crest4 --fasta ../../data/test_nt.fasta --search_db train_nt_1/ --search_hits crest4_test_nt_1/search.hits --num_threads 1 --output_dir crest4_test_nt_1"	96%	3:59.19	2609812
+"blastn -query ../../data/testshort_nt.fasta -db train_nt_1/train_nt_1 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_testshort_nt_1/search.hits -strand plus -num_threads 1"	98%	0:51.98	2154852
+"crest4 --fasta ../../data/testshort_nt.fasta --search_db train_nt_1/ --search_hits crest4_testshort_nt_1/search.hits --num_threads 1 --output_dir crest4_testshort_nt_1"	99%	1:20.70	721780

@@ -1,0 +1,6 @@
+command	CPU	time	mem
+"python3 dnabarcoder/dnabarcoder.py sim -i ../../data/train_nt.fasta -o train_nt_16"	511%	47:54.72	4498132
+"python3 dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_16/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_16 -o train_nt_16 -rank genus"	99%	4:50:58	50541272
+"python3 dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_16/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_16 -o train_nt_16 -rank family"	99%	5:14:08	50539324
+"python3 dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_16/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_16 -o train_nt_16 -rank order"	99%	4:26:12	50544732
+"python3 dnabarcoder/dnabarcoder.py predict -i ../../data/train_nt.fasta -c ../../data/train_tax.tsv -sim train_nt_16/train_nt.sim -st 0.85 -et 1.0 -s 0.001 -prefix train_nt_16 -o train_nt_16 -rank class"	99%	4:09:17	50528528

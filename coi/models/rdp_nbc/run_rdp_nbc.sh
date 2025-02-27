@@ -34,7 +34,7 @@ TRAIN_FILE=$DATA/train_nt_rdp.fasta
 
 # create input files
 TAX_FILE=$DATA/train_tax.txt
-export MODEL_DIR=${MODEL}_${SLURM_ARRAY_TASK_ID}
+export MODEL_DIR=train_nt_${SLURM_ARRAY_TASK_ID}
 mkdir -p $MODEL_DIR
 
 # taxonomy

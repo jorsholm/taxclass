@@ -1,0 +1,4 @@
+command	CPU	time	mem
+"../train_protax.sh"	99%	2:27:06	145772
+"c2/classify_v2 protax-a_train_tax_1/taxonomy.priors protax-a_train_tax_1/refs.aln protax-a_train_tax_1/model.rseqs.numeric protax-a_train_tax_1/model.pars protax-a_train_tax_1/model.scs 0.01 ../../data/test_nt_aln.fasta"	99%	0:54.49	40040
+"c2/classify_v2 protax-a_train_tax_1/taxonomy.priors protax-a_train_tax_1/refs.aln protax-a_train_tax_1/model.rseqs.numeric protax-a_train_tax_1/model.pars protax-a_train_tax_1/model.scs 0.01 ../../data/testshort_nt_aln.fasta"	99%	0:55.48	40088

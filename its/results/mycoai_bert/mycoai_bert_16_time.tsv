@@ -1,0 +1,4 @@
+command	CPU	time	mem
+"mycoai-train --out train_nt_bert_16.pt ../../data/train_nt_unite.fasta"	1489%	5:56:57	10493340
+"mycoai-classify --model train_nt_bert_16.pt --out mycoai_bert_test_nt_16.raw --confidence ../../data/test_nt.fasta"	1126%	7:59.74	2275948
+"mycoai-classify --model train_nt_bert_16.pt --out mycoai_bert_testshort_nt_16.raw --confidence ../../data/testshort_nt.fasta"	1478%	6:04.95	2246384
