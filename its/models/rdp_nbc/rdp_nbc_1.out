@@ -1,42 +1,42 @@
 java  21  environment loaded 
-	Command being timed: "java -Xmx4g -jar dist/classifier.jar train -t train.tax -s ../../data/train_nt_rdp.fasta -o rdp_nbc_1"
-	User time (seconds): 10.50
-	System time (seconds): 0.88
-	Percent of CPU this job got: 77%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:14.78
+	Command being timed: "java -Xmx4g -jar dist/classifier.jar train -t train.tax -s ../../data/train_nt_rdp.fasta -o train_nt_1"
+	User time (seconds): 10.53
+	System time (seconds): 0.79
+	Percent of CPU this job got: 68%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:16.49
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 1616292
+	Maximum resident set size (kbytes): 1614400
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 626
-	Minor (reclaiming a frame) page faults: 405641
-	Voluntary context switches: 1044
-	Involuntary context switches: 499
+	Major (requiring I/O) page faults: 204
+	Minor (reclaiming a frame) page faults: 406409
+	Voluntary context switches: 1198
+	Involuntary context switches: 469
 	Swaps: 0
-	File system inputs: 101976
+	File system inputs: 100800
 	File system outputs: 71728
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-	Command being timed: "java -Xmx4g -jar dist/classifier.jar classify --conf 0 -t rdp_nbc_1/rdp_nbc.properties -o rdp_nbc_test_1.raw ../../data/test_nt.fasta"
-	User time (seconds): 145.96
+	Command being timed: "java -Xmx4g -jar dist/classifier.jar classify --conf 0 -t train_nt_1/rdp_nbc.properties -o rdp_nbc_test_1.raw ../../data/test_nt.fasta"
+	User time (seconds): 190.60
 	System time (seconds): 0.49
-	Percent of CPU this job got: 98%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:28.06
+	Percent of CPU this job got: 97%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:15.72
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 721476
+	Maximum resident set size (kbytes): 720780
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 7
-	Minor (reclaiming a frame) page faults: 187773
-	Voluntary context switches: 4763
-	Involuntary context switches: 4647
+	Minor (reclaiming a frame) page faults: 183671
+	Voluntary context switches: 6178
+	Involuntary context switches: 5989
 	Swaps: 0
 	File system inputs: 95752
 	File system outputs: 6760
@@ -45,21 +45,21 @@ java  21  environment loaded
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-	Command being timed: "java -Xmx4g -jar dist/classifier.jar classify --conf 0 -t rdp_nbc_1/rdp_nbc.properties -o rdp_nbc_testshort_1.raw ../../data/testshort_nt.fasta"
-	User time (seconds): 42.36
-	System time (seconds): 0.46
+	Command being timed: "java -Xmx4g -jar dist/classifier.jar classify --conf 0 -t train_nt_1/rdp_nbc.properties -o rdp_nbc_testshort_1.raw ../../data/testshort_nt.fasta"
+	User time (seconds): 50.32
+	System time (seconds): 0.43
 	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:43.08
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:51.07
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 729876
+	Maximum resident set size (kbytes): 730780
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 191067
-	Voluntary context switches: 1929
-	Involuntary context switches: 1697
+	Minor (reclaiming a frame) page faults: 193320
+	Voluntary context switches: 2186
+	Involuntary context switches: 2067
 	Swaps: 0
 	File system inputs: 6640
 	File system outputs: 6792
