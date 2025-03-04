@@ -1,25 +1,25 @@
 ================================================================================
 
-Time difference of 438.01 secs
+Time difference of 436.39 secs
 
 	Command being timed: "Rscript learn_taxa.R"
-	User time (seconds): 434.57
-	System time (seconds): 8.84
-	Percent of CPU this job got: 97%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 7:37.09
+	User time (seconds): 435.58
+	System time (seconds): 6.85
+	Percent of CPU this job got: 96%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 7:38.23
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 1543388
+	Maximum resident set size (kbytes): 1594708
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 291
-	Minor (reclaiming a frame) page faults: 4956746
-	Voluntary context switches: 2660
-	Involuntary context switches: 1436
+	Major (requiring I/O) page faults: 490
+	Minor (reclaiming a frame) page faults: 3590757
+	Voluntary context switches: 2870
+	Involuntary context switches: 1524
 	Swaps: 0
-	File system inputs: 120976
-	File system outputs: 24736
+	File system inputs: 121872
+	File system outputs: 24936
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -27,26 +27,26 @@ Time difference of 438.01 secs
 	Exit status: 0
 ================================================================================
 
-Time difference of 1798.57 secs
+Time difference of 1849.96 secs
 
 	Command being timed: "Rscript id_taxa.R"
-	User time (seconds): 1795.64
-	System time (seconds): 1.37
+	User time (seconds): 1846.40
+	System time (seconds): 1.63
 	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 30:04.09
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 30:56.59
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 777416
+	Maximum resident set size (kbytes): 780868
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 8
-	Minor (reclaiming a frame) page faults: 669484
-	Voluntary context switches: 1677
-	Involuntary context switches: 5390
+	Major (requiring I/O) page faults: 56
+	Minor (reclaiming a frame) page faults: 777008
+	Voluntary context switches: 1744
+	Involuntary context switches: 5650
 	Swaps: 0
-	File system inputs: 18576
-	File system outputs: 5528
+	File system inputs: 19520
+	File system outputs: 5416
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -54,29 +54,29 @@ Time difference of 1798.57 secs
 	Exit status: 0
 ================================================================================
 
-Time difference of 741.55 secs
+Time difference of 777.1 secs
 
 	Command being timed: "Rscript id_taxa.R"
-	User time (seconds): 741.46
-	System time (seconds): 2.04
+	User time (seconds): 776.26
+	System time (seconds): 1.76
 	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 12:26.23
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 13:05.55
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 713612
+	Maximum resident set size (kbytes): 707608
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 1123354
-	Voluntary context switches: 1310
-	Involuntary context switches: 2596
+	Major (requiring I/O) page faults: 108
+	Minor (reclaiming a frame) page faults: 795257
+	Voluntary context switches: 1539
+	Involuntary context switches: 2720
 	Swaps: 0
-	File system inputs: 6640
-	File system outputs: 5304
+	File system inputs: 59320
+	File system outputs: 5536
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-Job 25856338 completed
+Job 26792523 completed

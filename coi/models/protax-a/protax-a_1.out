@@ -70322,43 +70322,43 @@ create xdata 10000/10000
 null device 
           1 
 	Command being timed: "../train_protax.sh"
-	User time (seconds): 8800.67
-	System time (seconds): 13.98
+	User time (seconds): 8761.52
+	System time (seconds): 4.08
 	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:28:18
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:27:28
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 145120
+	Maximum resident set size (kbytes): 144736
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 7884
-	Minor (reclaiming a frame) page faults: 2028612
-	Voluntary context switches: 368772
-	Involuntary context switches: 41009
+	Major (requiring I/O) page faults: 597
+	Minor (reclaiming a frame) page faults: 242039
+	Voluntary context switches: 2465
+	Involuntary context switches: 24427
 	Swaps: 0
-	File system inputs: 1910784
-	File system outputs: 187280
+	File system inputs: 69504
+	File system outputs: 177672
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-	Command being timed: "c2/classify_v2 protax-a_train_tax_1/taxonomy.priors protax-a_train_tax_1/refs.aln protax-a_train_tax_1/model.rseqs.numeric protax-a_train_tax_1/model.pars protax-a_train_tax_1/model.scs 0.01 ../../data/test_nt_aln.fasta"
-	User time (seconds): 56.50
-	System time (seconds): 0.55
+	Command being timed: "c2/classify_v2 train_nt_train_tax_1/taxonomy.priors train_nt_train_tax_1/refs.aln train_nt_train_tax_1/model.rseqs.numeric train_nt_train_tax_1/model.pars train_nt_train_tax_1/model.scs 0.01 ../../data/test_nt_aln.fasta"
+	User time (seconds): 65.01
+	System time (seconds): 0.52
 	Percent of CPU this job got: 98%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:57.65
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:06.34
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 39804
+	Maximum resident set size (kbytes): 40012
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 1
-	Minor (reclaiming a frame) page faults: 9489
-	Voluntary context switches: 30
-	Involuntary context switches: 717
+	Minor (reclaiming a frame) page faults: 9494
+	Voluntary context switches: 31
+	Involuntary context switches: 245
 	Swaps: 0
 	File system inputs: 93096
 	File system outputs: 69440
@@ -70367,11 +70367,11 @@ null device
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-	Command being timed: "c2/classify_v2 protax-a_train_tax_1/taxonomy.priors protax-a_train_tax_1/refs.aln protax-a_train_tax_1/model.rseqs.numeric protax-a_train_tax_1/model.pars protax-a_train_tax_1/model.scs 0.01 ../../data/testshort_nt_aln.fasta"
-	User time (seconds): 56.09
-	System time (seconds): 0.51
+	Command being timed: "c2/classify_v2 train_nt_train_tax_1/taxonomy.priors train_nt_train_tax_1/refs.aln train_nt_train_tax_1/model.rseqs.numeric train_nt_train_tax_1/model.pars train_nt_train_tax_1/model.scs 0.01 ../../data/testshort_nt_aln.fasta"
+	User time (seconds): 65.00
+	System time (seconds): 0.48
 	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:57.07
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:05.98
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
@@ -70379,9 +70379,9 @@ null device
 	Maximum resident set size (kbytes): 39944
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 9493
-	Voluntary context switches: 19
-	Involuntary context switches: 232
+	Minor (reclaiming a frame) page faults: 9494
+	Voluntary context switches: 20
+	Involuntary context switches: 231
 	Swaps: 0
 	File system inputs: 35360
 	File system outputs: 64688
@@ -70390,4 +70390,4 @@ null device
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-slurmstepd: error: *** JOB 24712736 ON r18c47 CANCELLED AT 2024-12-07T00:32:56 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 26792553 ON r18c45 CANCELLED AT 2025-03-01T15:10:46 DUE TO TIME LIMIT ***

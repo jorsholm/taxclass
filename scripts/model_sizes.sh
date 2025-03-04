@@ -24,7 +24,7 @@ du -s */models/crest4/train_??_* | tr "\t" " " >>$OUTFILE
 ls -s1 */models/dnabarcoder/train_??_*/train_??_*.cutoffs.best.json | sed 's/^ *//' >>$OUTFILE
 
 # IDTAXA: model is a single rds file
-ls -s1 */models/idtaxa/train_??_.*.rds | sed 's/^ *//' >>$OUTFILE
+ls -s1 */models/idtaxa/train_??_*.rds | sed 's/^ *//' >>$OUTFILE
 
 # MycoAI: model is a single pt file
 ls -s1 */models/mycoai_*/train_??_*.pt | sed 's/^ *//' >>$OUTFILE

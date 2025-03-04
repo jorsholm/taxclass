@@ -67,15 +67,49 @@ summary_stats <- dplyr::summarise(
     round() |>
     paste0("%"),
   # sum the time; just doing a sum on the period object does not seem to work.
-  time = round(lubridate::seconds_to_period(sum(lubridate::period_to_seconds(time))), 2),
+  time = round(lubridate::seconds_to_period(sum(lubridate::period_to_seconds(time)))),
   # max memory is the only thing that is relevant
   mem = max(as.integer(mem)),
   .by = c(marker, model, seq_type, stage, ncpu)
 ) |>
   dplyr::arrange(marker, model, seq_type, stage, ncpu)
 
-knitr::kable(
+# load the model size data
+# these have already been collected into a single file by `scripts/model_size.sh`
+
+size_stats <- readr::read_delim(
+  here::here("results/model_sizes.tsv"),
+  delim = " ",
+  col_names = c("model_size", "file"),
+  col_types = "ic"
+) |>
+  tidyr::extract(
+    file,
+    into = c("marker", "model", "seq_type", "ncpu"),
+    regex = paste0("(its|coi)/models/([^/]+)/.+_(nt|aa)_[^\\d]*(\\d+|gpu).*"),
+    remove = FALSE
+  ) |>
+  dplyr::filter(!is.na(model)) |>
+  dplyr::mutate(
+    ncpu = ordered(ncpu, levels = c("1", "4", "16", "40", "gpu"))
+  ) |>
+  dplyr::summarize(
+    model_size = sum(model_size),
+    .by = c(marker, model, seq_type, ncpu)
+  ) |>
+  dplyr::arrange(marker, model, seq_type, ncpu)
+
+# join the two tables
+all_stats <- dplyr::full_join(
   summary_stats,
+  size_stats,
+  by = c("marker", "model", "seq_type", "ncpu")
+)
+
+# format the results as LaTeX
+
+knitr::kable(
+  all_stats,
   format = "latex",
   booktabs = TRUE,
   linesep = with(
@@ -87,5 +121,7 @@ knitr::kable(
       "",
       "\\addlinespace"
     )
-  )
-)
+  ),
+  format.args = list(big.mark = "§")
+) |>
+  gsub("§", "\\,", x = _, fixed = TRUE)
