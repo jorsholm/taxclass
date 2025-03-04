@@ -44,7 +44,7 @@ do
   export PROTAX="$(pwd)/scripts"
 
   # taxonomy
-  cut -f2 -d" " $TAX_FILE |
+  sed 's/^[^ ]* //' $TAX_FILE |
   sort |
   uniq |
   gawk -F'[|]' '
@@ -71,6 +71,7 @@ do
       count[0]=1
       for (r = 1; r <= 7; r++) {
         for (i = 1; i <= ntaxa; i++) {
+          if (r > length(label[i])) continue
           if (! (label[i][r] in id)) {
             count[r]++
             if (parent[i][r] != lastparent) {
