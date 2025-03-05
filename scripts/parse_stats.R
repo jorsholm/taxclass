@@ -16,7 +16,8 @@ stats <- readr::read_tsv(stats_files, id = "file", col_types = "cccc") |>
     remove = FALSE
   ) |>
   dplyr::mutate(
-    ncpu = ordered(ncpu, levels = c("1", "4", "16", "40", "gpu"))
+    ncpu = ordered(ncpu, levels = c("1", "4", "16", "40", "gpu")),
+    marker = toupper(marker)
   ) |>
   dplyr::mutate(
     # the time is given as MM:SS.sss for times less than 1 hour, or
@@ -54,7 +55,7 @@ stats <- readr::read_tsv(stats_files, id = "file", col_types = "cccc") |>
       model %in% c("bayesant", "idtaxa") ~ rep(c("nt", "aa"), each = 3, length.out = dplyr::n()),
       TRUE ~ NA_character_
     ) |>
-      ordered(levels = c("nt", "aa")),
+      ordered(levels = c("nt", "aa"), labels = c("NT", "AA")),
     .by = c(marker, model, ncpu)
   )
 
@@ -91,6 +92,8 @@ size_stats <- readr::read_delim(
   ) |>
   dplyr::filter(!is.na(model)) |>
   dplyr::mutate(
+    marker = toupper(marker),
+    seq_type = toupper(seq_type),
     ncpu = ordered(ncpu, levels = c("1", "4", "16", "40", "gpu"))
   ) |>
   dplyr::summarize(
@@ -114,6 +117,45 @@ knitr::kable(
   booktabs = TRUE,
   linesep = with(
     summary_stats,
+    ifelse(
+      marker == dplyr::lead(marker, default = NA) &
+        model == dplyr::lead(model, default = NA) &
+        seq_type == dplyr::lead(seq_type, default = NA),
+      "",
+      "\\addlinespace"
+    )
+  ),
+  format.args = list(big.mark = "§")
+) |>
+  gsub("§", "\\,", x = _, fixed = TRUE)
+
+# condensed for main text
+
+maintext_stats <- 
+  all_stats |>
+  dplyr::filter(
+    # don't include testshort
+    stage != "testshort",
+    # only include the minimum and maximum amount of computational resources
+    ncpu == min(ncpu) | ncpu == max(ncpu),
+    # only look at NT
+    seq_type == "NT",
+    .by = c(marker, model)
+    ) |>
+  tidyr::pivot_wider(
+    names_from = stage,
+    values_from = c(CPU, time, mem),
+    names_vary = "slowest"
+  ) |>
+  dplyr::select(marker, model, seq_type, time_train, CPU_train, mem_train,
+                time_test, CPU_test, mem_test, model_size)
+
+knitr::kable(
+  maintext_stats,
+  format = "latex",
+  booktabs = TRUE,
+  linesep = with(
+    maintext_stats,
     ifelse(
       marker == dplyr::lead(marker, default = NA) &
         model == dplyr::lead(model, default = NA) &
