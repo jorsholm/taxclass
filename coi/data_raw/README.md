@@ -241,14 +241,20 @@ done
 ```sh
 tar -xOf BOLD_Public.29-Mar-2024.tar.gz BOLD_Public.29-Mar-2024.tsv |
 awk -F"\t" '
-  !($23 ~ /sp[.]|aff[.]|cf[.]|nr[.]|agg[.]|t[.]|cluster/) &&
   $16=="Arthropoda" {
+    # remove all placeholder taxa
+    for (i=17; i<=23; i++) {
+      if ($i ~ /[Uu]nknown|[Uu]nclassified|[Uu]nassigned|[Ii]ncertae|sp[.]|aff[.]|cf[.]|nr[.]|agg[.]|t[.]|cluster|[0-9]|^[a-z]|^[A-Z].*[A-Z]/) $i="None"
+      if (i < 23 && $i ~ /[_ ]/) $i = "None"
+    }
+    # convert "None" to standardized placeholders at ranks above genus
     for (i=17;i<=21;i++) {
       if ($i == "None") {
         $i = "dummy_" $(i-1);
         sub(/dummy_dummy/, "dummy", $i)
       }
     }
+    # remove trailing placeholders/None
     for (i=23; i>17; i--) {
       if ($i == "None" && $(i-1) ~ /^dummy_/) $(i-1) = "None"
     }
