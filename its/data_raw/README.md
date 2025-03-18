@@ -455,3 +455,53 @@ gawk '
   ../data/train_nt_unite.fasta\
   ../data/test_nt_unite.fasta
 ```
+
+## Full Unite taxonomy -- for Protax only
+
+```sh
+tar -xzOf sh_general_release_s_04.04.2024.tgz sh_general_release_dynamic_s_04.04.2024.fasta |
+gawk -F"[|;]" '
+  BEGIN {
+    rank[5] = "kgd"
+    rank[6] = "phy"
+    rank[7] = "cl"
+    rank[8] = "ord"
+    rank[9] = "fam"
+    rank[10] = "gen"
+    rank[11] = "sp"
+  }
+  /^>/ {
+    # remove rank prefixes and placeholder taxa
+    for (i=5; i <= NF; i++) {
+      sub(/^[kpcofgs]__/, "", $i)
+      if ($i ~ /_sp$/) $i="None"
+    }
+    if ($5 == "None") next
+    
+    # convert "None" to standardized placeholders at ranks above genus
+    next_known = "None"
+    for (i=10; i >= 5; i--) {
+      if ($i ~ /Incertae_sedis/) {
+        if (next_known != "None") {
+          $i = $i "_" next_known
+        } else {
+          $i = "None"
+        }
+      } else {
+        next_known = $i
+      }
+    }
+    
+    # generate taxon name
+    taxon=$5
+    for (i=6; i <= 11; i++) {
+      if ($i != "None") {
+        taxon = taxon "|" $i
+      }
+    }
+    if (taxon in c) next
+    c[taxon]=1
+    print $2, taxon
+  }'\
+  >../data/full_tax.txt
+```
