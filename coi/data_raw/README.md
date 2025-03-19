@@ -227,7 +227,10 @@ for data in test train; do
     }
     $1 in select {
       seq=""
-      for (i=2;i<=NF;i++) seq = seq $i
+      for (i=2;i<=NF;i++) {
+        gsub(/!/, "X", $i)
+        seq = seq $i
+      }
       print ">" $1 > "'../data/${data}_aa_aln_label.fasta'"
       print seq > "'../data/${data}_aa_aln_label.fasta'"
     }
