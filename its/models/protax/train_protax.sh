@@ -1,55 +1,67 @@
 #!/usr/bin/env bash
 
-# Based on readme.txt in protaxA
+# Based on step1.txt and step2.txt in protax (as well as equivalent code in protaxA)
 
-# 1) set variable NUM_TAXLEVELS based on your taxonomy:
+#############################################
+# PART I: Reference sequence database
+#############################################
+
+# create USEARCH index:
+usearch -makeudb_usearch refs.fa -output refs.udb
+
+#############################################
+# PART II: Taxonomy
+#############################################
+
+
+#######################################
+# A) Special treatment for Fungi taxonomy: skip nonFungi node in level 1
+#######################################
+
+perl $PROTAX/cptaxonomy.pl taxonomy > taxonomy.fungi
+perl $PROTAX/thintaxonomy.pl 1 taxonomy.fungi > tax1
+# remove nonFungi from taxonomy after kingdom level (1) since it is not divided
+# further (this is quick and dirty hack so that no changes need to be done in
+# script  generate_training_data.pl)
+
+# note : "dirty hack" and above comment are verbatim from published PROTAX -- BF
+
+#set variable NUM_TAXLEVELS based on your taxonomy:
 export NUM_TAXLEVELS=7
 
-# 2) add priors for unknown taxa in taxonomy, one value for each level
-#    this relates to how much you think there are taxa not included in your taxonomy,
-#    larger values add more uncertainty to all predictions
-#    unk prior is level-specific where units correspond to leaf nodes of the taxonomy (value * prior(known_species))
-#    NOTE: the number of priors in the ,,, list must equal to $NUM_TAXLEVELS
-
-perl $PROTAX/taxonomy_priors.pl "$(cat unk_priors)" taxonomy >taxonomy.priors
-
-for ((LEVEL=1; LEVEL<=$NUM_TAXLEVELS; LEVEL++))
+for ((LEVEL=2; LEVEL<=$NUM_TAXLEVELS; LEVEL++))
 do
- perl $PROTAX/thintaxonomy.pl $LEVEL taxonomy.priors > tax$LEVEL
+ perl $PROTAX/thintaxonomy.pl $LEVEL taxonomy.fungi | grep -v -w nonFungi > tax$LEVEL
 done
 
-# 3) generate training data for each level, here 10000 training samples per level
+#############################################
+# PART III: Generating training data lists
+#############################################
 
-for ((LEVEL=1; LEVEL<=$NUM_TAXLEVELS; LEVEL++))
+# here 5000 training samples out of which 5% represent unknown taxa
+# NOTE: include also LEVEL 1 if normal taxonomy (this is for Fungi example)
+
+for ((LEVEL=2; LEVEL<=$NUM_TAXLEVELS; LEVEL++))
 do
- echo "LEVEL $LEVEL"
  perl $PROTAX/seqid2taxlevel.pl $LEVEL seqid2tax > ref.tax$LEVEL
  perl $PROTAX/get_all_reference_sequences.pl $LEVEL tax$LEVEL ref.tax$LEVEL rseqs$LEVEL
- perl $PROTAX/taxrseq2numeric.pl $LEVEL tax$LEVEL refs.aln > rseqs${LEVEL}.numeric
- perl $PROTAX/generate_training_data.pl $LEVEL tax$LEVEL ref.tax$LEVEL rseqs$LEVEL 10000 1 no train$LEVEL 
- perl $PROTAX/traindat2numeric.pl refs.aln train$LEVEL > train${LEVEL}.numeric
+ perl $PROTAX/generate_training_data.pl tax$LEVEL ref.tax$LEVEL rseqs$LEVEL 4750 2 no train.level$LEVEL 
+ perl $PROTAX/generate_unk_training_data.pl $LEVEL tax$LEVEL ref.tax$LEVEL rseqs$LEVEL 250 2 no train.unk$LEVEL 
+ cat train.level$LEVEL train.unk$LEVEL > train$LEVEL
+ cut -f6 -d" " train$LEVEL | sort | uniq > train${LEVEL}.id
 done
 
-# to check what kind of training data there is for each level:
+cat train[2,3,4,5,6,7].id | sort | uniq > train.ids
 
-for ((LEVEL=1; LEVEL<=$NUM_TAXLEVELS; LEVEL++))
+# map training sequences against reference sequences
+
+perl $PROTAX/fastagrep.pl train.ids refs.fa > train.fa
+usearch -usearch_global train.fa -db refs.udb -id 0.75 -maxaccepts 1000 -strand both -userfields query+target+id -userout train.m8
+
+for ((LEVEL=2; LEVEL<=$NUM_TAXLEVELS; LEVEL++))
 do
- echo "LEVEL $LEVEL:"
- cut -f4 -d" " train$LEVEL | cut -f1 -d"," | sort | uniq -c
-done
-
-# 4) calculate xdat file (sequence similarity predictors), scale the values and save the scaling parameters for later use
-#    ...this can take a while if large training data...
-
-for ((LEVEL=1; LEVEL<=$NUM_TAXLEVELS; LEVEL++))
-do
- echo "LEVEL $LEVEL"
- $PROTAX/create_xdata_best2 tax$LEVEL refs.aln rseqs${LEVEL}.numeric train${LEVEL}.numeric > train${LEVEL}.xdat
-done
-
-for ((LEVEL=1; LEVEL<=$NUM_TAXLEVELS; LEVEL++))
-do
- perl $PROTAX/scale_xdat.pl sc$LEVEL train${LEVEL}.xdat > train${LEVEL}.scxdat
+ echo $LEVEL
+ perl $PROTAX/create_xdata4Q.pl 0.05 train$LEVEL tax$LEVEL ref.tax$LEVEL rseqs$LEVEL train.m8 train${LEVEL}.xdat 1
 done
 
 # 5) parameter estimation in R
@@ -57,3 +69,18 @@ done
 #    you need to check the convergence and continue iterations or re-initialize adaptive proposal if needed
 
 Rscript ../train_protax.R
+
+# put level-specific parameters in single file in correct order
+
+echo -n "" > model.pars
+echo -n "" > model.scs
+echo -n "" > model.rseqs.numeric
+
+for ((LEVEL=1; LEVEL<=$NUM_TAXLEVELS; LEVEL++))
+do
+ cut -f3-6 -d" " mcmc$LEVEL >> model.pars
+ cat sc$LEVEL >> model.scs
+ cat rseqs${LEVEL}.numeric >> model.rseqs.numeric
+done
+
+
