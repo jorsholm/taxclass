@@ -1,5 +1,15 @@
 #### convert *_time.tsv files to formatted table ####
 
+# function to print a Period object in a condensed format
+print_period <- function(x) {
+  dplyr::case_when(
+    x@day > 0 ~ sprintf("%dd %02d:%02d:%02d", x@day, x@hour, x@minute, second(x)),
+    x@hour > 0 ~ sprintf("%d:%02d:%02d", x@hour, x@minute, second(x)),
+    TRUE ~ sprintf("%d:%02d", x@minute, second(x))
+  )
+}
+
+
 # find all the time files
 stats_files <- list.files(
   path = here::here(),
@@ -142,12 +152,13 @@ maintext_stats <-
     seq_type == "NT",
     .by = c(marker, model)
     ) |>
+  dplyr::mutate(time = print_period(time)) |>
   tidyr::pivot_wider(
     names_from = stage,
     values_from = c(CPU, time, mem),
     names_vary = "slowest"
   ) |>
-  dplyr::select(marker, model, seq_type, time_train, CPU_train, mem_train,
+  dplyr::select(marker, model, ncpu, time_train, CPU_train, mem_train,
                 time_test, CPU_test, mem_test, model_size)
 
 knitr::kable(
@@ -158,8 +169,7 @@ knitr::kable(
     maintext_stats,
     ifelse(
       marker == dplyr::lead(marker, default = NA) &
-        model == dplyr::lead(model, default = NA) &
-        seq_type == dplyr::lead(seq_type, default = NA),
+        model == dplyr::lead(model, default = NA),
       "",
       "\\addlinespace"
     )
