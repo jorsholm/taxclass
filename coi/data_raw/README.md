@@ -308,3 +308,64 @@ awk -F"\t" '
     print $1, taxon
   }' >../data/full_tax.txt
 ```
+
+## Single-sequence outgroup (for unconstrained phylogenetic tree inference)
+
+For constrained phylogenetic trees, it is possible to root the tree between
+Insecta and	Arachnida. However, unconstrained algorithms may not reconstruct
+these groups as monophyletic, so it is necessary to have an outgroup which is a
+single sequence. We use the *Caenorhabditis elegans* reference genome for this
+purpose; download from
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_001328.1?report=fasta&from=7845&to=9422>
+as `Caenorhabditis_elegans_cox1_refseq.fasta`.
+
+The sequence must be aligned and translated to match the other references.
+
+```sh
+java -jar macse_v2.07.jar\
+    -prog enrichAlignment\
+    -align finbol_repseq_aln_nt.fasta\
+    -seq Caenorhabditis_elegans_cox1_refseq.fasta\
+    -out_AA outgroup_raw_aa.fasta\
+    -out_NT outgroup_raw_nt.fasta\
+    -out_tested_seq_info outgroup_macse_stats.csv\
+    -gc_def 5\
+    -gap_ext_term 0.2\
+    -gap_op_term 2.0\
+```
+
+Then it must be trimmed and given a label.
+
+```sh
+sed -i '/^>/!y/!/-/' outgroup_raw_nt.fasta
+esl-alimask --outformat afa -g outgroup_raw_nt.fasta |
+awk '
+  BEGIN{
+    RS=">"
+    FS="\n"
+  }
+  FNR==2{
+    seq=""
+    for (i=2;i<=NF;i++) seq = seq $i
+    seq=gensub(/(-{1,2})([ACGT]{1,2})(-*)$/, "\\2\\1\\3", 1, seq)
+    seqlen = length(gensub(/[^ACGT]/, "", "g", seq))
+    print ">outgroup"
+    print seq
+  }' >../data/outgroup_nt_aln.fasta
+
+esl-alimask --outformat afa -g outgroup_raw_aa.fasta |
+awk '
+  BEGIN{
+    RS=">"
+    FS="\n"
+  }
+  FNR==2{
+    seq=""
+    for (i=2;i<=NF;i++) {
+      gsub(/!/, "X", $i)
+      seq = seq $i
+    }
+    print ">outgroup"
+    print seq
+  }' >../data/outgroup_aa_aln.fasta
+```
