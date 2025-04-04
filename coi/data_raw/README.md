@@ -112,6 +112,16 @@ Now, similarly extract the FinBOL sequences from the BOLD public database.  This
 ```sh
 tar -xOf BOLD_Public.29-Mar-2024.tar.gz BOLD_Public.29-Mar-2024.tsv |
 awk -F"\t" '
+  BEGIN{
+    ranks[16]="phylum"
+    ranks[17]="class"
+    ranks[18]="order"
+    ranks[19]="family"
+    ranks[20]="subfamily"
+    ranks[21]="tribe"
+    ranks[22]="genus"
+    ranks[23]="species"
+  }
   $23 != "None" &&\
   $74 ~ /DS-FINPRO/ &&\
   !($23 ~ /sp[.]|aff[.]|cf[.]|nr[.]|agg[.]|t[.]|cluster/) &&\
@@ -279,6 +289,16 @@ done
 ```sh
 tar -xOf BOLD_Public.29-Mar-2024.tar.gz BOLD_Public.29-Mar-2024.tsv |
 awk -F"\t" '
+  BEGIN{
+    ranks[16]="phylum"
+    ranks[17]="class"
+    ranks[18]="order"
+    ranks[19]="family"
+    ranks[20]="subfamily"
+    ranks[21]="tribe"
+    ranks[22]="genus"
+    ranks[23]="species"
+  }
   $16=="Arthropoda" {
     # remove all placeholder taxa
     for (i=17; i<=23; i++) {
@@ -288,8 +308,8 @@ awk -F"\t" '
     # convert "None" to standardized placeholders at ranks above genus
     for (i=17;i<=21;i++) {
       if ($i == "None") {
-        $i = "dummy_" $(i-1);
-        sub(/dummy_dummy/, "dummy", $i)
+        $i = $(i-1) "_" ranks[i] "_incertae_sedis"
+        sub("_" ranks[i-1] "_incertae_sedis", "", $i)
       }
     }
     # remove trailing placeholders/None
