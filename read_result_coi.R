@@ -11,6 +11,8 @@ source("functions.R")
 
 args <- commandArgs(trailingOnly = T)
 
+#args <- c("FALSE", "FALSE", "nt")
+
 short <- as.logical(args[1])
 keep_na <- as.logical(args[2])
 datatype <- args[3]
@@ -59,6 +61,7 @@ ranks <- colnames(data_true)[-1]
 correct_cols <- c("ID", 
                   ranks, 
                   sapply(ranks, function(x) paste0("Prob_", x), USE.NAMES = F))
+probcols <- correct_cols[which(str_starts(correct_cols, "Prob_"))]
 
 # READ RESULTS -----------------------------------------------------------------
 
@@ -100,17 +103,23 @@ if(datatype == "nt"){
   }
 }
 
-# PROTAX
-# result_PROTAX <-
-#   read.table(paste0("results/protax-a/protax-a_test", shorttxt, "_nt_1.tsv"),
-#              header = T)
-# result_PROTAX[is.na(result_PROTAX)] <- 0
-# result_PROTAX <- rename_PROTAX_output(result_PROTAX)
-# # Quick check that order of columns is identical to BayesANT
-# # all(stringr::str_to_lower(colnames(result_PROTAX)) ==
-# #       stringr::str_to_lower(colnames(result_BayesANT)))
-# # Rename Protax columns
-# colnames(result_PROTAX) <- colnames(result_BayesANT)
+##### PROTAX #####
+if(datatype == "nt"){
+  result_PROTAX <-
+    read.table(paste0("coi/results/protax-a/protax-a_train_tax_test", shorttxt, "_1.tsv"),
+               header = T) |> 
+    dplyr::arrange(ID)
+  result_PROTAX[is.na(result_PROTAX)] <- "unk"
+  result_PROTAX <- arrange_columns(result_PROTAX, correct_cols)
+  # Propagate last probability of unk to lower ranks
+  for (r in seq_len(nrow(result_PROTAX))){
+    i <- match(TRUE, result_PROTAX[r, ranks] == "unk", nomatch = 0)  # first unk (or 0 if none)
+    if (i > 0) {
+      result_PROTAX[r, probcols[i:length(probcols)]] <- result_PROTAX[r, probcols[i]]
+    }
+  }
+  result_PROTAX <- rename_unk_output(result_PROTAX)
+}
 
 ##### EPA-ng Taxonomy tree #####
 if(datatype == "nt"){
@@ -290,7 +299,7 @@ if(keep_na){
   result_idtaxa <- rename_unk_output(result_idtaxa)
 }
 
-# Crest4
+##### Crest4 #####
 result_crest4 <- 
   read.table(paste0("coi/results/crest4/crest4_test", shorttxt, "_", datatype, "_4.tsv"), 
              header = T) |> 
@@ -378,7 +387,7 @@ result_crest4 <- arrange_columns(result_crest4, correct_cols)
 if(datatype == "nt"){
   results <- list(
     "BayesANT" = result_BayesANT,
-    #  "PROTAX" = result_PROTAX,
+    "PROTAX" = result_PROTAX,
     "EPA-ng taxtree" = result_epatax,
     "RDP" = result_RDP,
     "BLAST top hit" = result_blast_top, 
@@ -396,14 +405,9 @@ if(datatype == "nt"){
   results <- list(
     "BayesANT" = result_BayesANT,
     #"EPA-ng taxtree" = result_epatax,
-    #"RDP" = result_RDP,
     "BLAST top hit" = result_blast_top, 
-    #"BLAST threshold" = result_blast_thresh, 
-    #"SINTAX" = result_SINTAX,
     #"EPA-ng phyltree" = result_epaphyl,
-    #"DNABarcoder" = result_dnabarcoder,
     "IDTAXA" = result_idtaxa, 
-    #"MycoAI-BERT" = result_aibert, 
     "Crest4" = result_crest4
   )
 }

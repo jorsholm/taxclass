@@ -16,7 +16,7 @@ algs_sorted <- c(
   "SINTAX",
   # Probabilistic
   "BayesANT", 
-  #"PROTAX", 
+  "PROTAX", 
   #Neural networks
   "MycoAI-BERT", 
   "MycoAI-CNN", 
@@ -36,7 +36,7 @@ plot_colors <- c(
   "#238b45",
   # Probabilistic
   "#bcbddc",
-  #"#756bb1",
+  "#756bb1",
   #Neural networks
   "#fdbe85",
   "#fd8d3c",
@@ -56,7 +56,7 @@ point_shapes <- c(
   5,
   # probabilistic 
   2,
-  # 5,
+  20,
   # neural
   20,
   4,

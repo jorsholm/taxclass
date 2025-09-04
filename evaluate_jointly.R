@@ -137,6 +137,18 @@ calibrations_its <-
          set = factor(set, levels = c("All", "Observed", "Novel")), 
          model = factor(model, levels = algs_sorted))
 
+# With missing predictions
+calibrations_coi_mp <- 
+  get_calibration(results_coi_mp, data_true_coi, observed_everywhere_coi) |> 
+  mutate(rank = factor(rank, levels = ranks_coi), 
+         set = factor(set, levels = c("All", "Observed", "Novel")), 
+         model = factor(model, levels = algs_sorted))
+calibrations_its_mp <- 
+  get_calibration(results_its_mp, data_true_its, observed_everywhere_its) |> 
+  mutate(rank = factor(rank, levels = ranks_its), 
+         set = factor(set, levels = c("All", "Observed", "Novel")), 
+         model = factor(model, levels = algs_sorted))
+
 #### Novel species #### 
 
 caldf <- 
@@ -218,6 +230,7 @@ ggsave(plot = p_cal_obs_joint,
 
 # PLOT ACCURACIES --------------------------------------------------------------
 
+##### Forced predictions #####
 accuracies_coi <-
   get_accuracy_from_cal(calibrations_coi) |> 
   mutate(rank = factor(rank, levels = ranks_coi), 
@@ -240,8 +253,6 @@ marg_accuracies_its <-
                     id_list = list(All = id_all_its,
                                    Observed = id_observed_its,
                                    Novel = id_novel_its))
-
-
 p_acc <- 
   marg_accuracies_coi |> 
   filter(set != "All") |> 
@@ -278,7 +289,8 @@ p_acc <-
           axis.title.x = element_blank(), 
           axis.text.x = element_text(angle = 45, hjust = 1), 
           legend.position = "bottom",
-          panel.spacing = unit(0, "lines")) + 
+          panel.spacing = unit(0, "lines"),
+          strip.text.y = element_blank()) + 
     ggh4x::facet_nested(set ~ gene + obs, scales = "free_x") + 
     labs(color = "Model", y = "Marginal recall (%)                  Accuracy (%)") # Stupid double axis label fix 
 p_acc <- change_plot_colors(p_acc) 
@@ -289,6 +301,160 @@ ggsave(plot = p_acc,
        height = 6, 
        units = "in")
 
+##### Missing predictions #####
+accuracies_coi_mp <-
+  get_accuracy_from_cal(calibrations_coi_mp) |> 
+  mutate(rank = factor(rank, levels = ranks_coi), 
+         set = factor(set, levels = c("All", "Observed", "Novel")))
+
+accuracies_its_mp <-
+  get_accuracy_from_cal(calibrations_its_mp) |> 
+  mutate(rank = factor(rank, levels = ranks_its), 
+         set = factor(set, levels = c("All", "Observed", "Novel")))
+
+marg_accuracies_coi_mp <- 
+  marginal_accuracy(results_coi_mp, 
+                    data_true_coi,
+                    id_list = list(All = id_all_coi,
+                                   Observed = id_observed_coi,
+                                   Novel = id_novel_coi))
+marg_accuracies_its_mp <- 
+  marginal_accuracy(results_its_mp, 
+                    data_true_its,
+                    id_list = list(All = id_all_its,
+                                   Observed = id_observed_its,
+                                   Novel = id_novel_its))
+
+p_acc_mp <- 
+  marg_accuracies_coi_mp |> 
+  filter(set != "All") |> 
+  rename(accuracy = marg_accuracy) |> 
+  mutate(set = paste(set, "Taxa"), 
+         accuracy = accuracy * 100) |> 
+  bind_rows(accuracies_coi_mp |> 
+              filter(set != "All") |> 
+              mutate(set = paste(set, "Species"))) |> 
+  mutate(gene = "COI") |> 
+  bind_rows(marg_accuracies_its_mp |> 
+              filter(set != "All") |> 
+              rename(accuracy = marg_accuracy) |> 
+              mutate(set = paste(set, "Taxa"), 
+                     accuracy = accuracy * 100) |> 
+              bind_rows(accuracies_its_mp |> 
+                          filter(set != "All") |> 
+                          mutate(set = paste(set, "Species"))) |> 
+              mutate(gene = "ITS")) |> 
+  separate(set, into = c("obs", "set"), sep = " ") |> 
+  mutate(rank = factor(rank, levels = allranks), 
+         obs = factor(obs, levels = c("Observed", "Novel")), 
+         model = factor(model, levels = algs_sorted)) |> 
+  ggplot() + 
+  aes(x = rank, 
+      y = accuracy, 
+      color = model, 
+      shape = model) +
+  geom_line(mapping = aes(group = model)) + 
+  geom_point() +
+  theme_bw() + 
+  theme(aspect.ratio = 1, 
+        panel.grid.minor = element_blank(), 
+        axis.title.x = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.position = "bottom",
+        panel.spacing = unit(0, "lines")) + 
+  ggh4x::facet_nested(set ~ gene + obs, scales = "free_x") + 
+  labs(color = "Model", y = "Marginal recall (%)                  Accuracy (%)") # Stupid double axis label fix 
+p_acc_mp <- change_plot_colors(p_acc_mp) 
+
+ggsave(plot = p_acc_mp, 
+       filename = "plots/fourpanel_joint_mp.pdf", 
+       width = 9, 
+       height = 6, 
+       units = "in")
+
+# CONDITIONAL ACCURACY ---------------------------------------------------------
+
+cond_accuracies_coi <- 
+  conditional_accuracy(results_coi,
+                       data_true_coi, 
+                       id_list = list(All = id_all_coi,
+                                      Observed = id_observed_coi,
+                                      Novel = id_novel_coi))
+
+cond_accuracies_its <- 
+  conditional_accuracy(results_its,
+                       data_true_its, 
+                       id_list = list(All = id_all_its,
+                                      Observed = id_observed_its,
+                                      Novel = id_novel_its))
+
+cond_df <- 
+  bind_rows(cond_accuracies_coi |> 
+              mutate(gene = "COI"), 
+            cond_accuracies_its |> 
+              mutate(gene = "ITS"))
+
+no_novel <- 
+  cond_df |>
+  filter(set == "Novel") |>
+  filter(all(cond_accuracy == 0), .by = c(model, gene)) |> 
+  distinct(model) |>
+  pull(model)
+
+p_cond <- 
+  cond_df |> 
+  filter(set == "Novel" & !(model %in% no_novel)) |>
+  mutate(model_category = 
+           case_when(
+             model == "Crest4" ~ "Similarity", 
+             model == "BLAST threshold" ~ "Similarity",
+             model == "BLAST top hit" ~ "Similarity",
+             model == "DNABarcoder" ~ "Similarity",
+             model == "BayesANT" ~ "Probabilistic",
+             model == "PROTAX" ~ "Probabilistic",
+             str_starts(model, "EPA-") ~ "Phylogenetic placement",
+             str_starts(model, "MycoAI-") ~ "Neural network",
+             TRUE ~ "Composition"
+           )) |> 
+  mutate(rank = factor(rank, levels = allranks),
+         model_category = factor(model_category,
+                                 levels = c("Similarity",
+                                            "Composition", 
+                                            "Probabilistic", 
+                                            "Phylogenetic placement", 
+                                            "Neural network"))) |> 
+  mutate(cond_accuracy = if_else(is.na(cond_accuracy), 0, cond_accuracy), 
+         denom_cond = if_else(is.na(denom_cond), 0, denom_cond)) |>  
+  ggplot() + 
+  aes(x = rank,
+      y = cond_accuracy * 100, 
+      group = model, 
+      color = model, 
+      shape = model, 
+      label = denom_cond) + 
+  geom_line() + 
+  geom_point() + 
+  geom_text(nudge_y = 5, 
+            size = 3, 
+            show.legend = F) +
+  facet_grid(gene~model_category) + 
+  theme_bw() + 
+  ylab("Conditional recall (%)") + 
+  theme(axis.title.x = element_blank(), 
+        axis.text.x = element_text(angle = 45, hjust = 1), 
+        panel.grid.minor.y = element_blank(),
+        panel.spacing = unit(0, "lines"), 
+        legend.position = "bottom") + 
+  labs(color = "Model", 
+       shape = "Model") 
+
+p_cond <- change_plot_colors(p_cond)
+  
+ggsave(plot = p_cond,
+       filename = "plots/cond_recall.pdf",
+       width = 250,
+       height = 130,
+       units = "mm")
 
 # % CLASSIFIED ~ % CORRECT -----------------------------------------------------
 
@@ -428,3 +594,123 @@ ggsave(plot = p_error,
        height = 6.5, 
        width = 6.5, 
        units = "in")
+
+# TOTAL NUMBER OF NOVELTY PREDICTIONS ------------------------------------------
+
+pred_novel_coi <- count_novel(results_coi, data_true_coi, id_novel_coi)
+pred_novel_its <- count_novel(results_its, data_true_its, id_novel_its)
+
+pred_novel_df <- 
+  bind_rows(pred_novel_coi |> 
+              mutate(gene = "COI"), 
+            pred_novel_its |> 
+              mutate(gene = "ITS")) |> 
+  mutate(rank = factor(rank, levels = allranks))
+
+p_tot_novel <-
+  pred_novel_df |> 
+  filter(!all(pred_novel == 0), .by = model) |> 
+  ggplot() + 
+  geom_line(data = pred_novel_df |> filter(model == model[1]),
+            aes(x = rank, 
+                y = sum_novel, 
+                group = model),
+            color = "black",
+            linetype = "dashed") + 
+  aes(x = rank, 
+      y = pred_novel,
+      color = model, 
+      group = model, 
+      shape = model) +
+  geom_line() + 
+  geom_point() + 
+  theme_bw() + 
+  scale_y_log10(labels = c("10", "1000", "100000"), 
+                breaks = c(10, 1000, 100000)) +
+  labs(y = "# predicted novel") + 
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  facet_wrap(~gene,
+             scales = "free_x")
+p_tot_novel <- change_plot_colors(p_tot_novel)
+
+ggsave(plot = p_tot_novel, 
+       filename = "plots/sum_novel.pdf", 
+       height = 100, 
+       width = 200, 
+       units = "mm")
+
+# TESTSHORT DATA ---------------------------------------------------------------
+
+# Read short data 
+results_coi_short <- readRDS("coi/result_list_short_nt.rds")
+results_its_short <- readRDS("its/result_list_short.rds")
+
+# TODO: temporary fixes for wrong number of sequences
+results_coi_short <- lapply(results_coi_short, 
+                            function(x) x[which(x[,1] %in% data_true_coi[,1]),])
+
+results_its_short <- results_its_short[-2]
+
+# Get calibrations data 
+calibrations_coi_short <-  
+  get_calibration(results_coi_short, 
+                  data_true_coi, 
+                  observed_everywhere_coi) 
+calibrations_its_short <- 
+  get_calibration(results_its_short,
+                  data_true_its, 
+                  observed_everywhere_its) 
+
+acc_long_short <- 
+  get_accuracy_from_cal(calibrations_coi) |> 
+  left_join(get_accuracy_from_cal(calibrations_coi_short), 
+            by = c("model", 
+                   "rank", 
+                   "set")) |> 
+  rename(accuracy_long = accuracy.x, 
+         accuracy_short = accuracy.y) |> 
+  mutate(gene = "COI") |> 
+  bind_rows(get_accuracy_from_cal(calibrations_its) |> 
+              left_join(get_accuracy_from_cal(calibrations_its_short), 
+                        by = c("model", 
+                               "rank", 
+                               "set")) |> 
+              rename(accuracy_long = accuracy.x, 
+                     accuracy_short = accuracy.y) |> 
+              mutate(gene = "ITS")) 
+
+p_acc_short <- 
+  acc_long_short |> 
+  mutate(diff = accuracy_short- accuracy_long,
+         rank = factor(rank, levels = allranks), 
+         set = factor(set, levels = c("All", "Observed", "Novel"))
+         ) |> 
+  filter(set != "All") |> 
+  ggplot() + 
+  geom_line(aes(x = rank, 
+                y = diff, 
+                color = model, 
+                group = model)) + 
+  geom_point(aes(x = rank,
+                 y = diff,
+                 color = model,
+                 group = model, 
+                 shape = model)) + 
+  facet_grid(set~gene, 
+             scales = "free") + 
+  geom_hline(yintercept = 0, 
+             linetype = "dashed") + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+        panel.spacing = unit(0, "lines"), 
+        axis.title.x = element_blank(), 
+        legend.position = "bottom") + 
+  labs(y = "Accuracy difference (%pt.)")
+p_acc_short <- change_plot_colors(p_acc_short)
+
+ggsave(plot = p_acc_short, 
+       filename = "plots/accuracy_diff_short.pdf", 
+       height = 150, 
+       width = 150, 
+       units = "mm")
