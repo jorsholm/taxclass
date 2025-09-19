@@ -314,7 +314,7 @@ awk -F"\t" '
     }
     # remove trailing placeholders/None
     for (i=23; i>17; i--) {
-      if ($i == "None" && $(i-1) ~ /^dummy_/) $(i-1) = "None"
+      if ($i == "None" && $(i-1) ~ /_incertae_sedis$/) $(i-1) = "None"
     }
     if ($17=="None") next
     gsub(/ /, "_", $23);
