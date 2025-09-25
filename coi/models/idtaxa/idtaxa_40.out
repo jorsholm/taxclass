@@ -1,36 +1,26 @@
 - The project is out-of-sync -- use `renv::status()` for details.
-Warning message:
-renv took longer than expected (11 seconds) to activate the sandbox.
-
-The sandbox can be disabled by setting:
-
-    RENV_CONFIG_SANDBOX_ENABLED = FALSE
-
-within an appropriate start-up .Renviron file.
-
-See `?renv::config` for more details. 
 ================================================================================
 
-Time difference of 660.72 secs
+Time difference of 663.25 secs
 
 	Command being timed: "Rscript learn_taxa.R"
-	User time (seconds): 671.53
-	System time (seconds): 12.56
-	Percent of CPU this job got: 97%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 11:40.91
+	User time (seconds): 666.18
+	System time (seconds): 10.29
+	Percent of CPU this job got: 95%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 11:45.55
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 2597768
+	Maximum resident set size (kbytes): 2687336
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 475
-	Minor (reclaiming a frame) page faults: 8718166
-	Voluntary context switches: 5270
-	Involuntary context switches: 603
+	Minor (reclaiming a frame) page faults: 7144822
+	Voluntary context switches: 5176
+	Involuntary context switches: 502
 	Swaps: 0
-	File system inputs: 160632
-	File system outputs: 101816
+	File system inputs: 161280
+	File system outputs: 101704
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -39,26 +29,26 @@ Time difference of 660.72 secs
 - The project is out-of-sync -- use `renv::status()` for details.
 ================================================================================
 
-Time difference of 718.74 secs
+Time difference of 724.75 secs
 
 	Command being timed: "Rscript id_taxa.R"
-	User time (seconds): 12249.30
-	System time (seconds): 26.86
-	Percent of CPU this job got: 1693%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 12:04.76
+	User time (seconds): 12215.92
+	System time (seconds): 35.64
+	Percent of CPU this job got: 1671%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 12:13.06
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 1038176
+	Maximum resident set size (kbytes): 1023304
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 164
-	Minor (reclaiming a frame) page faults: 7883938
-	Voluntary context switches: 765197
-	Involuntary context switches: 19959
+	Major (requiring I/O) page faults: 132
+	Minor (reclaiming a frame) page faults: 13578596
+	Voluntary context switches: 764552
+	Involuntary context switches: 17180
 	Swaps: 0
-	File system inputs: 35320
-	File system outputs: 7928
+	File system inputs: 35288
+	File system outputs: 8392
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -67,26 +57,26 @@ Time difference of 718.74 secs
 - The project is out-of-sync -- use `renv::status()` for details.
 ================================================================================
 
-Time difference of 631.22 secs
+Time difference of 673.73 secs
 
 	Command being timed: "Rscript id_taxa.R"
-	User time (seconds): 10090.12
-	System time (seconds): 13.53
-	Percent of CPU this job got: 1585%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 10:37.35
+	User time (seconds): 10149.83
+	System time (seconds): 60.89
+	Percent of CPU this job got: 1502%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 11:19.65
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 1013468
+	Maximum resident set size (kbytes): 998288
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 10
-	Minor (reclaiming a frame) page faults: 2119868
-	Voluntary context switches: 673452
-	Involuntary context switches: 16613
+	Major (requiring I/O) page faults: 18
+	Minor (reclaiming a frame) page faults: 34527757
+	Voluntary context switches: 672774
+	Involuntary context switches: 15394
 	Swaps: 0
-	File system inputs: 124056
-	File system outputs: 7960
+	File system inputs: 22560
+	File system outputs: 8416
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -95,26 +85,26 @@ Time difference of 631.22 secs
 - The project is out-of-sync -- use `renv::status()` for details.
 ================================================================================
 
-Time difference of 2493.18 secs
+Time difference of 2500.15 secs
 
 	Command being timed: "Rscript learn_taxa.R"
-	User time (seconds): 2428.23
-	System time (seconds): 65.00
+	User time (seconds): 2429.42
+	System time (seconds): 70.90
 	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 41:39.27
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 41:47.58
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 13548844
+	Maximum resident set size (kbytes): 13181440
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 4
-	Minor (reclaiming a frame) page faults: 48501821
-	Voluntary context switches: 2990
-	Involuntary context switches: 1266
+	Major (requiring I/O) page faults: 10
+	Minor (reclaiming a frame) page faults: 51907363
+	Voluntary context switches: 3000
+	Involuntary context switches: 1454
 	Swaps: 0
-	File system inputs: 16144
-	File system outputs: 9632
+	File system inputs: 16280
+	File system outputs: 9640
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -123,26 +113,26 @@ Time difference of 2493.18 secs
 - The project is out-of-sync -- use `renv::status()` for details.
 ================================================================================
 
-Time difference of 371.32 secs
+Time difference of 377.93 secs
 
 	Command being timed: "Rscript id_taxa.R"
-	User time (seconds): 5204.14
-	System time (seconds): 13.57
-	Percent of CPU this job got: 1382%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 6:17.47
+	User time (seconds): 5205.64
+	System time (seconds): 13.95
+	Percent of CPU this job got: 1330%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 6:32.24
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 802160
+	Maximum resident set size (kbytes): 801316
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 32
-	Minor (reclaiming a frame) page faults: 1644549
-	Voluntary context switches: 485682
-	Involuntary context switches: 3787
+	Major (requiring I/O) page faults: 31
+	Minor (reclaiming a frame) page faults: 1695622
+	Voluntary context switches: 485242
+	Involuntary context switches: 3954
 	Swaps: 0
-	File system inputs: 18104
-	File system outputs: 7776
+	File system inputs: 25976
+	File system outputs: 8232
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -151,29 +141,29 @@ Time difference of 371.32 secs
 - The project is out-of-sync -- use `renv::status()` for details.
 ================================================================================
 
-Time difference of 251.5 secs
+Time difference of 253.94 secs
 
 	Command being timed: "Rscript id_taxa.R"
-	User time (seconds): 3374.51
-	System time (seconds): 10.21
-	Percent of CPU this job got: 1314%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 4:17.43
+	User time (seconds): 3372.98
+	System time (seconds): 16.06
+	Percent of CPU this job got: 1307%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 4:19.21
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 808344
+	Maximum resident set size (kbytes): 823828
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 21
-	Minor (reclaiming a frame) page faults: 914926
-	Voluntary context switches: 386306
-	Involuntary context switches: 1167
+	Major (requiring I/O) page faults: 23
+	Minor (reclaiming a frame) page faults: 4440882
+	Voluntary context switches: 386301
+	Involuntary context switches: 1327
 	Swaps: 0
-	File system inputs: 18504
-	File system outputs: 7688
+	File system inputs: 17584
+	File system outputs: 8184
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-Job 26792242 completed
+Job 29789604 completed

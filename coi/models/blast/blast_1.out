@@ -1,35 +1,34 @@
 EMBOSS  6.5.7  environment loaded 
-BLAST  2.15.0  environment loaded 
+BLAST  2.16.0  environment loaded 
 
 
-Building a new DB, current time: 11/28/2024 18:19:16
+Building a new DB, current time: 09/19/2025 14:36:57
 New DB name:   /scratch/project_2003104/brendan/taxclass/coi/models/blast/train_nt_1
 New DB title:  ../../data/train_nt_sintax.fasta
 Sequence type: Nucleotide
-Deleted existing Nucleotide BLAST database named /scratch/project_2003104/brendan/taxclass/coi/models/blast/train_nt_1
 Keep MBits: T
 Maximum file size: 3000000000B
-Adding sequences from FASTA; added 35603 sequences in 1.2193 seconds.
+Adding sequences from FASTA; added 35556 sequences in 0.848547 seconds.
 
 
 	Command being timed: "makeblastdb -in ../../data/train_nt_sintax.fasta -dbtype nucl -out train_nt_1"
-	User time (seconds): 0.93
-	System time (seconds): 0.07
-	Percent of CPU this job got: 27%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:03.64
+	User time (seconds): 0.80
+	System time (seconds): 0.06
+	Percent of CPU this job got: 49%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.77
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 12316
+	Maximum resident set size (kbytes): 12300
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 33
-	Minor (reclaiming a frame) page faults: 2811
-	Voluntary context switches: 378
-	Involuntary context switches: 22
+	Major (requiring I/O) page faults: 4
+	Minor (reclaiming a frame) page faults: 2857
+	Voluntary context switches: 300
+	Involuntary context switches: 11
 	Swaps: 0
-	File system inputs: 98872
-	File system outputs: 26200
+	File system inputs: 99320
+	File system outputs: 26880
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -37,23 +36,23 @@ Adding sequences from FASTA; added 35603 sequences in 1.2193 seconds.
 	Exit status: 0
 Warning: [blastn] Examining 5 or more matches is recommended
 	Command being timed: "blastn -query ../../data/test_nt.fasta -db train_nt_1 -out blast_test_nt_1.raw -strand plus -num_threads 1 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"
-	User time (seconds): 8699.48
-	System time (seconds): 3.18
-	Percent of CPU this job got: 94%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:34:11
+	User time (seconds): 8815.22
+	System time (seconds): 4.10
+	Percent of CPU this job got: 96%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:32:59
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 43820
+	Maximum resident set size (kbytes): 45768
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 4286
-	Minor (reclaiming a frame) page faults: 2068342
-	Voluntary context switches: 4211
-	Involuntary context switches: 25862
+	Major (requiring I/O) page faults: 17083
+	Minor (reclaiming a frame) page faults: 2137198
+	Voluntary context switches: 14910
+	Involuntary context switches: 82455
 	Swaps: 0
-	File system inputs: 173328
-	File system outputs: 9600
+	File system inputs: 499208
+	File system outputs: 9992
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -61,23 +60,23 @@ Warning: [blastn] Examining 5 or more matches is recommended
 	Exit status: 0
 Warning: [blastn] Examining 5 or more matches is recommended
 	Command being timed: "blastn -query ../../data/testshort_nt.fasta -db train_nt_1 -out blast_testshort_nt_1.raw -strand plus -num_threads 1 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"
-	User time (seconds): 3007.22
-	System time (seconds): 1.63
-	Percent of CPU this job got: 98%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 50:41.26
+	User time (seconds): 2944.49
+	System time (seconds): 3.97
+	Percent of CPU this job got: 85%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 57:10.02
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 49976
+	Maximum resident set size (kbytes): 45952
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 35
-	Minor (reclaiming a frame) page faults: 689971
-	Voluntary context switches: 156
-	Involuntary context switches: 11115
+	Major (requiring I/O) page faults: 22262
+	Minor (reclaiming a frame) page faults: 1071877
+	Voluntary context switches: 18330
+	Involuntary context switches: 27424
 	Swaps: 0
-	File system inputs: 50600
-	File system outputs: 8296
+	File system inputs: 654256
+	File system outputs: 8648
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -85,102 +84,81 @@ Warning: [blastn] Examining 5 or more matches is recommended
 	Exit status: 0
 
 
-Building a new DB, current time: 11/28/2024 21:44:12
+Building a new DB, current time: 09/19/2025 18:07:09
 New DB name:   /scratch/project_2003104/brendan/taxclass/coi/models/blast/train_aa_1
 New DB title:  ../../data/train_aa_sintax.fasta
 Sequence type: Protein
-Deleted existing Protein BLAST database named /scratch/project_2003104/brendan/taxclass/coi/models/blast/train_aa_1
 Keep MBits: T
 Maximum file size: 3000000000B
-Adding sequences from FASTA; added 35603 sequences in 0.817617 seconds.
+Adding sequences from FASTA; added 35556 sequences in 0.731775 seconds.
 
 
 	Command being timed: "makeblastdb -in ../../data/train_aa_sintax.fasta -dbtype prot -out train_aa_1"
-	User time (seconds): 0.74
-	System time (seconds): 0.06
-	Percent of CPU this job got: 47%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.71
+	User time (seconds): 0.69
+	System time (seconds): 0.05
+	Percent of CPU this job got: 46%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.61
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 12224
+	Maximum resident set size (kbytes): 12220
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 3
-	Minor (reclaiming a frame) page faults: 2740
-	Voluntary context switches: 334
-	Involuntary context switches: 8
+	Major (requiring I/O) page faults: 9
+	Minor (reclaiming a frame) page faults: 2760
+	Voluntary context switches: 287
+	Involuntary context switches: 12
 	Swaps: 0
-	File system inputs: 68312
-	File system outputs: 29656
+	File system inputs: 69112
+	File system outputs: 30360
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
 Warning: [blastp] Examining 5 or more matches is recommended
-FASTA-Reader: Ignoring invalid residues at position(s): On line 3622: 201
-FASTA-Reader: Ignoring invalid residues at position(s): On line 7996: 201
-FASTA-Reader: Ignoring invalid residues at position(s): On line 10150: 205
-FASTA-Reader: Ignoring invalid residues at position(s): On line 12446: 27
-FASTA-Reader: Ignoring invalid residues at position(s): On line 39994: 205
-FASTA-Reader: Ignoring invalid residues at position(s): On line 40972: 205
-FASTA-Reader: Ignoring invalid residues at position(s): On line 44580: 168
-FASTA-Reader: Ignoring invalid residues at position(s): On line 48902: 205
-FASTA-Reader: Ignoring invalid residues at position(s): On line 51600: 15
-FASTA-Reader: Ignoring invalid residues at position(s): On line 52216: 203
-FASTA-Reader: Ignoring invalid residues at position(s): On line 52866: 205
 	Command being timed: "blastp -query ../../data/test_aa.fasta -db train_aa_1 -out blast_test_aa_1.raw -num_threads 1 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"
-	User time (seconds): 35690.61
-	System time (seconds): 14.49
-	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 9:58:17
+	User time (seconds): 34546.79
+	System time (seconds): 28.58
+	Percent of CPU this job got: 96%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 9:58:31
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 81644
+	Maximum resident set size (kbytes): 79184
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 10538
-	Minor (reclaiming a frame) page faults: 7528377
-	Voluntary context switches: 9305
-	Involuntary context switches: 98690
+	Major (requiring I/O) page faults: 94823
+	Minor (reclaiming a frame) page faults: 7632143
+	Voluntary context switches: 79216
+	Involuntary context switches: 181849
 	Swaps: 0
-	File system inputs: 441056
-	File system outputs: 11584
+	File system inputs: 3339328
+	File system outputs: 11968
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
 Warning: [blastp] Examining 5 or more matches is recommended
-FASTA-Reader: Ignoring invalid residues at position(s): On line 3622: 122
-FASTA-Reader: Ignoring invalid residues at position(s): On line 7996: 122
-FASTA-Reader: Ignoring invalid residues at position(s): On line 10150: 125
-FASTA-Reader: Ignoring invalid residues at position(s): On line 39994: 125
-FASTA-Reader: Ignoring invalid residues at position(s): On line 40972: 125
-FASTA-Reader: Ignoring invalid residues at position(s): On line 44580: 89
-FASTA-Reader: Ignoring invalid residues at position(s): On line 48902: 125
-FASTA-Reader: Ignoring invalid residues at position(s): On line 52216: 127
-FASTA-Reader: Ignoring invalid residues at position(s): On line 52866: 125
 	Command being timed: "blastp -query ../../data/testshort_aa.fasta -db train_aa_1 -out blast_testshort_aa_1.raw -num_threads 1 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"
-	User time (seconds): 31405.22
-	System time (seconds): 20.90
+	User time (seconds): 21324.47
+	System time (seconds): 12.29
 	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 8:49:02
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 5:57:15
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 112896
+	Maximum resident set size (kbytes): 113924
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 22994
-	Minor (reclaiming a frame) page faults: 7587185
-	Voluntary context switches: 21486
-	Involuntary context switches: 99914
+	Major (requiring I/O) page faults: 5944
+	Minor (reclaiming a frame) page faults: 7564641
+	Voluntary context switches: 5813
+	Involuntary context switches: 59564
 	Swaps: 0
-	File system inputs: 596776
-	File system outputs: 9888
+	File system inputs: 237184
+	File system outputs: 10264
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
