@@ -33,7 +33,7 @@ done
 # .logprob files contain list of node ids and logprobs, convert node ids to taxonomic names and logprobs to probs
 # NOTE: for final output, we can add information from best matching reference sequences etc., this is just an example
 
-for LEVEL in 2 3 4 5 6 7
+for LEVEL in 1 2 3 4 5 6 7
 do
  perl $PROTAX/nameprob.pl $MDIR/taxonomy $ODIR/query${LEVEL}.logprob > $ODIR/query${LEVEL}.nameprob
 done

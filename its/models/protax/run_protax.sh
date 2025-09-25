@@ -28,13 +28,14 @@ export PATH="/projappl/project_2005718/bin:$PATH"
 # define file names
 MODEL=protax
 DATA=../../data
-RESULTS=../../results/$MODEL
+RESULTS=$(pwd)/../../results/$MODEL
+mkdir -p $RESULTS
 
 RSEQ2TAX_FILE=$DATA/train_protax.tax
 TRAIN_FILE=$DATA/train_nt.fasta
 ROOT_DIR=$(pwd)
 
-# loop for full and trainonly taxonomy
+# loop for full and train-only taxonomy
 for TAXONOMY in full_tax train_tax;
 do
   # create input files
@@ -106,41 +107,47 @@ do
     cd $ODIR
 
     $TIME $ROOT_DIR/classify_protax.sh
-    cd $ROOT_DIR
-  done
-done
-
-# format the test data and write to results directory
-mkdir -p $RESULTS
-for f in *_${SLURM_ARRAY_TASK_ID}.raw;
-do
-  RESULT_FILE=$RESULTS/${f%.raw}.tsv
-  echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species" >$RESULT_FILE
-  awk -F' ' '
-    /seconds$/ {next}
-    {
-      for (rank = 1; rank <= 7; rank++) {
-        best_prob[rank] = 0
-        best_taxon[rank] = "NA"
+    
+    # format the test data and write to results directory
+    RESULT_FILE=$RESULTS/${MODEL}_${TAXONOMY}_${TESTSET}_nt_$SLURM_ARRAY_TASK_ID.tsv
+    echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species" >$RESULT_FILE
+    paste -d'\n' query{1..7}.nameprob |
+    awk -F' ' '
+     function output() {
+        printf "%s", prev_id
+        for (rank = 1; rank <= 7; rank++) {
+          sub(/.+,/, "", best_taxon[rank])
+          printf "\t%s\t%.6f", best_taxon[rank], best_prob[rank]
+        }
+        printf "\n"
       }
-      for (i = 2; i <= NF; i += 2) {
-        rank = split($i, a, ",")
-        if (rank > 1 && $i !~ best_taxon[rank - 1]) continue
-        if ($(i+1) > best_prob[rank]) {
-          best_prob[rank] = $(i+1)
-          best_taxon[rank] = $i
-          for (rank2 = rank + 1; rank2 <= 7; rank2++) {
-            best_prob[rank2] = 0
-            best_taxon[rank2] = "NA"
+      /seconds$/ {next}
+      BEGIN{ prev_id = "NA" }
+      $1 != prev_id {
+        if (prev_id != "NA") output()
+        prev_id = $1
+        for (rank = 1; rank <= 7; rank++) {
+          best_prob[rank] = 0
+          best_taxon[rank] = "NA"
+        }
+      }
+      {
+        for (i = 2; i <= NF; i += 2) {
+          rank = split($i, a, ",")
+          if (rank > 1 && $i !~ best_taxon[rank - 1]) continue
+          if ($(i+1) > best_prob[rank]) {
+            best_prob[rank] = $(i+1)
+            best_taxon[rank] = $i
+            for (rank2 = rank + 1; rank2 <= 7; rank2++) {
+              best_prob[rank2] = 0
+              best_taxon[rank2] = "NA"
+            }
           }
         }
       }
-      printf "%s", $1
-      for (rank = 1; rank <= 7; rank++) {
-        sub(/.+,/, "", best_taxon[rank])
-        printf "\t%s\t%.6f", best_taxon[rank], best_prob[rank]
-      }
-      printf "\n"
-    }' $f\
-   >>$RESULT_FILE
+      END{output()}'\
+      >>$RESULT_FILE
+    
+    cd $ROOT_DIR
+  done
 done
