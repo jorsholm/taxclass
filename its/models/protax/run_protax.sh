@@ -6,8 +6,8 @@
 #SBATCH --mem-per-cpu=4800M
 #SBATCH --cpus-per-task=1
 #SBATCH --array=1
-#SBATCH --output=protax-a_%a.out
-#SBATCH --error=protax-a_%a.out
+#SBATCH --output=protax_%a.out
+#SBATCH --error=protax_%a.out
 #SBATCH --mail-type=ALL
 
 # set environmental variables to tell various parallel computation libraries
@@ -67,15 +67,14 @@ do
     END {
       id["root"] = 0
       print 0, 0, 0, "root", 1.0
-      print 1, 0, 1, "nonFungi", 0.01
-      n = 2
+      n = 1
       lastparent = "root"
       for (r = 1; r <= 7; r++) {
         for (i = 1; i <= ntaxa; i++) {
           if (r > length(label[i])) continue
           if (! (label[i][r] in id)) {
             id[label[i][r]] = n
-            print n, id[parent[i][r]], r, label[i][r], 0.99 * leafcount[label[i][r]] / ntaxa
+            print n, id[parent[i][r]], r, label[i][r], leafcount[label[i][r]] / ntaxa
             n++
           }
         }
@@ -93,22 +92,21 @@ do
   $TIME ../train_protax.sh
 
   cd ..
+  
+  export MDIR="$(pwd)/$MODEL_DIR"
 
   # classify the test data
   for TESTSET in test testshort;
   do
     TESTFILE=$DATA/${TESTSET}_nt_aln.fasta
-    RAWFILE=${MODEL}_${TAXONOMY}_${TESTSET}_${SLURM_ARRAY_TASK_ID}.raw
-    $TIME c2/classify_v2 $MODEL_DIR/taxonomy.priors\
-                         $MODEL_DIR/refs.aln\
-                         $MODEL_DIR/model.rseqs.numeric\
-                         $MODEL_DIR/model.pars\
-                         $MODEL_DIR/model.scs\
-                         0.01\
-                         $TESTFILE\
-                         >$RAWFILE
+    export ODIR="$MODEL_DIR/${TESTSET}"
+    mkdir -p $ODIR
+    cp $TESTFILE $ODIR/test.fa
+    cd $ODIR
+    
+    $TIME ../../classify_protax.sh
+    cd ../..
   done
-
 done
 
 # format the test data and write to results directory

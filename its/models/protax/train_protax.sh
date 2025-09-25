@@ -70,17 +70,4 @@ done
 
 Rscript ../train_protax.R
 
-# put level-specific parameters in single file in correct order
-
-echo -n "" > model.pars
-echo -n "" > model.scs
-echo -n "" > model.rseqs.numeric
-
-for ((LEVEL=1; LEVEL<=$NUM_TAXLEVELS; LEVEL++))
-do
- cut -f3-6 -d" " mcmc$LEVEL >> model.pars
- cat sc$LEVEL >> model.scs
- cat rseqs${LEVEL}.numeric >> model.rseqs.numeric
-done
-
 

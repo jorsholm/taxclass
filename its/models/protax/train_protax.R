@@ -30,5 +30,3 @@ for (level in seq.int(num_taxlevels)[-1]) {
 }
 
 dev.off()
-
-dev.off()
