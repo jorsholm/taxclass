@@ -26,7 +26,7 @@ do
  PREVLEVEL=$((LEVEL-1))
  IFILE=$ODIR/query${PREVLEVEL}.logprob
  OFILE=$ODIR/query${LEVEL}.logprob
- perl $PROTAX/classify4Q.pl 0.05 $IFILE $MDIR/tax$LEVEL $MDIR/ref.tax$LEVEL $MDIR/rseqs$LEVEL $MDIR/mcmc${LEVEL} map $SIMFILE1 0 .1 $OFILE 1
+ perl $PROTAX/classify4Q.pl 0.05 $IFILE $MDIR/tax$LEVEL $MDIR/ref.tax$LEVEL $MDIR/rseqs$LEVEL $MDIR/mcmc${LEVEL} map $SIMFILE1 0 .1 $OFILE 0
 done
 
 ###################

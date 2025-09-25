@@ -107,7 +107,7 @@ do
     cd $ODIR
 
     $TIME $ROOT_DIR/classify_protax.sh
-    
+
     # format the test data and write to results directory
     RESULT_FILE=$RESULTS/${MODEL}_${TAXONOMY}_${TESTSET}_nt_$SLURM_ARRAY_TASK_ID.tsv
     echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species" >$RESULT_FILE
@@ -147,7 +147,6 @@ do
       }
       END{output()}'\
       >>$RESULT_FILE
-    
     cd $ROOT_DIR
   done
 done
