@@ -32,9 +32,10 @@ RESULTS=../../results/$MODEL
 
 RSEQ2TAX_FILE=$DATA/train_protax.tax
 TRAIN_FILE=$DATA/train_nt.fasta
+ROOT_DIR=$(pwd)
 
 # loop for full and trainonly taxonomy
-for TAXONOMY in train_tax full_tax;
+for TAXONOMY in full_tax train_tax;
 do
   # create input files
   TAX_FILE=$DATA/$TAXONOMY.txt
@@ -89,23 +90,23 @@ do
 
   # train the model
   cd $MODEL_DIR
-  $TIME ../train_protax.sh
+  $TIME $ROOT_DIR/train_protax.sh
 
-  cd ..
-  
-  export MDIR="$(pwd)/$MODEL_DIR"
+  cd $ROOT_DIR
+
+  export MDIR="$ROOT_DIR/$MODEL_DIR"
 
   # classify the test data
   for TESTSET in test testshort;
   do
-    TESTFILE=$DATA/${TESTSET}_nt_aln.fasta
-    export ODIR="$MODEL_DIR/${TESTSET}"
+    TESTFILE=$DATA/${TESTSET}_nt.fasta
+    export ODIR="$ROOT_DIR/${MODEL_DIR}_${TESTSET}"
     mkdir -p $ODIR
     cp $TESTFILE $ODIR/test.fa
     cd $ODIR
-    
-    $TIME ../../classify_protax.sh
-    cd ../..
+
+    $TIME $ROOT_DIR/classify_protax.sh
+    cd $ROOT_DIR
   done
 done
 

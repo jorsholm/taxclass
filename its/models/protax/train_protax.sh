@@ -45,8 +45,8 @@ for ((LEVEL=2; LEVEL<=$NUM_TAXLEVELS; LEVEL++))
 do
  perl $PROTAX/seqid2taxlevel.pl $LEVEL seqid2tax > ref.tax$LEVEL
  perl $PROTAX/get_all_reference_sequences.pl $LEVEL tax$LEVEL ref.tax$LEVEL rseqs$LEVEL
- perl $PROTAX/generate_training_data.pl tax$LEVEL ref.tax$LEVEL rseqs$LEVEL 4750 2 no train.level$LEVEL 
- perl $PROTAX/generate_unk_training_data.pl $LEVEL tax$LEVEL ref.tax$LEVEL rseqs$LEVEL 250 2 no train.unk$LEVEL 
+ perl $PROTAX/generate_training_data.pl tax$LEVEL ref.tax$LEVEL rseqs$LEVEL 4750 2 no train.level$LEVEL
+ perl $PROTAX/generate_unk_training_data.pl $LEVEL tax$LEVEL ref.tax$LEVEL rseqs$LEVEL 250 2 no train.unk$LEVEL
  cat train.level$LEVEL train.unk$LEVEL > train$LEVEL
  cut -f6 -d" " train$LEVEL | sort | uniq > train${LEVEL}.id
 done
@@ -61,7 +61,7 @@ usearch -usearch_global train.fa -db refs.udb -id 0.75 -maxaccepts 1000 -strand 
 for ((LEVEL=2; LEVEL<=$NUM_TAXLEVELS; LEVEL++))
 do
  echo $LEVEL
- perl $PROTAX/create_xdata4Q.pl 0.05 train$LEVEL tax$LEVEL ref.tax$LEVEL rseqs$LEVEL train.m8 train${LEVEL}.xdat 1
+ perl $PROTAX/create_xdata4Q.pl 0.05 train$LEVEL tax$LEVEL ref.tax$LEVEL rseqs$LEVEL train.m8 train${LEVEL}.xdat 0
 done
 
 # 5) parameter estimation in R
