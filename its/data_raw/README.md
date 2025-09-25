@@ -459,28 +459,33 @@ gawk '
 ## Full Unite taxonomy -- for Protax only
 
 ```sh
-tar -xzOf sh_general_release_s_04.04.2024.tgz sh_general_release_dynamic_s_04.04.2024.fasta |
-gawk -F"[|;]" '
+unzip -p sh_matching_data_0_5.zip data/shs_out.txt |
+gawk -F'[;\t]' '
   BEGIN {
-    rank[5] = "kgd"
-    rank[6] = "phy"
-    rank[7] = "cl"
-    rank[8] = "ord"
-    rank[9] = "fam"
-    rank[10] = "gen"
-    rank[11] = "sp"
+    rank[2] = "kgd"
+    rank[3] = "phy"
+    rank[4] = "cl"
+    rank[5] = "ord"
+    rank[6] = "fam"
+    rank[7] = "gen"
+    rank[8] = "sp"
   }
-  /^>/ {
+  {
     # remove rank prefixes and placeholder taxa
-    for (i=5; i <= NF; i++) {
+    for (i=2; i <= 8; i++) {
       sub(/^[kpcofgs]__/, "", $i)
       if ($i ~ /_sp$/) $i="None"
+      if ($i ~ /unspecified$/) $i = "None"
     }
-    if ($5 == "None") next
+    # remove non-fungi
+    if ($2 != "Fungi") next
+    # remove incomplete taxonomy; Protax does not deal with "dangling" taxa
+    # (i.e., those who have no children at species level)
+    if ($8 == "None") next
     
     # convert "None" to standardized placeholders at ranks above genus
-    next_known = "None"
-    for (i=10; i >= 5; i--) {
+    next_known = $7
+    for (i=6; i >= 2; i--) {
       if ($i ~ /Incertae_sedis/) {
         if (next_known != "None") {
           $i = $i "_" next_known
@@ -493,15 +498,15 @@ gawk -F"[|;]" '
     }
     
     # generate taxon name
-    taxon=$5
-    for (i=6; i <= 11; i++) {
+    taxon=$2
+    for (i=3; i <= 8; i++) {
       if ($i != "None") {
         taxon = taxon "|" $i
       }
     }
     if (taxon in c) next
     c[taxon]=1
-    print $2, taxon
+    print $1, taxon
   }'\
   >../data/full_tax.txt
 ```
