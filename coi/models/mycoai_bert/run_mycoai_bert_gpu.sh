@@ -10,8 +10,11 @@
 #SBATCH --error=mycoai_bert_gpu.out
 #SBATCH --mail-type=ALL
 
+# load pytorch module
+module load pytorch/1.12
+
 # activate python virtual environment
-source /projappl/project_2005718/mycoai/bin/activate
+source /projappl/project_2010309/mycoai/bin/activate
 
 # gnu time
 export PATH="/appl/opt/time/1.9/bin:$PATH"

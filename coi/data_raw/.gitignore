@@ -1,0 +1,8 @@
+BOLD_Public.*.tar.gz
+*finbol_*.fasta
+*gbol_*.fasta
+*.jar
+*.sif
+*_seq_NT.fasta
+*.csv
+*raw*.fasta

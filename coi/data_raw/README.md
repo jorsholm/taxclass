@@ -20,12 +20,22 @@ Extract BOLD process-ID (column 24, removing web api address if present) and bar
 
 ```sh
 awk -F"\t" '
-  BEGIN{file="GBOL"};
+  BEGIN{
+    file="GBOL"
+    ranks[16]="phylum"
+    ranks[17]="class"
+    ranks[18]="order"
+    ranks[19]="family"
+    ranks[20]="subfamily"
+    ranks[21]="tribe"
+    ranks[22]="genus"
+    ranks[23]="species"
+  };
   file=="GBOL" &&
   length($24)>0 &&
   length($27)>=600 &&
   $26 ~ /COI(-5P)?$/{
-    sub(/http.*processid=/, "", $24);
+    sub(/http.*processid=/, "", $24)
     seq[$24] = $27
   };
   ENDFILE{file="BOLD"};
@@ -35,27 +45,39 @@ awk -F"\t" '
   $16=="Arthropoda" &&
   ($1 in seq) &&
   !($23 ~ /sp[.]|aff[.]|cf[.]|nr[.]|agg[.]|t[.]|cluster/) {
-    for (i=17;i<=21;i++) {
-      if ($i == "None") {
-        $i = "dummy_" $(i-1);
-        sub(/dummy_dummy/, "dummy", $i)
+    for (i=17;i<=23;i++) {
+      if ($i ~ /[Uu]nknown|[Uu]nclassified|[Uu]nassigned|[0-9]|^[a-z]|^[A-Z].*[A-Z]/) {
+        print "rejected:", $i > "/dev/stderr"
+        next
+      }
+      if ($i == "None" || $i ~/[Ii]ncertae/) {
+        if (i <= 21) {
+          $i = $(i-1) "_" ranks[i] "_incertae_sedis"
+          sub("_" ranks[i-1] "_incertae_sedis", "", $i)
+        } else {
+          print "rejected:", $i " at rank column " i > "/dev/stderr"
+          next
+        }
       }
     }
     sub(/ var\..*/, "", $23) 
     gsub(/ /, "_", $23)
     taxon=$17
-    for (i=18; i<=23; i++) taxon = taxon "|" $i
-    if (taxon ~ /[0-9]/) next
+    for (i=18; i<=23; i++) {
+      taxon = taxon "|" $i
+    }
     print ">" $1, taxon
     print seq[$1]
     delete seq[$1]
+    n++
   }
+  END{ print n " sequences" >"/dev/stderr" }
 ' <(zcat data_bolgermany_de_gbol1-search_results-guest-2023-11-22184603.csv.gz)\
  <(tar -xOf BOLD_Public.29-Mar-2024.tar.gz BOLD_Public.29-Mar-2024.tsv)\
  >test_gbol_raw.fasta
 ```
 
-This yielded 27200 sequences with species ID.
+This yielded 27177 sequences with species ID.
 
 ```sh
 awk -F"[ |]" '/^>/{
@@ -76,12 +98,12 @@ END{
 The taxonomic breakdown is:
 
 - 11 unique classes
-- 51 unique orders
-- 564 unique families
-- 1030 unique subfamilies
-- 1504 unique tribes
-- 3795 unique genera
-- 9031 unique species
+- 50 unique orders
+- 563 unique families
+- 1029 unique subfamilies
+- 1503 unique tribes
+- 3794 unique genera
+- 9022 unique species
 
 ## FinBOL (train)
 
@@ -90,28 +112,51 @@ Now, similarly extract the FinBOL sequences from the BOLD public database.  This
 ```sh
 tar -xOf BOLD_Public.29-Mar-2024.tar.gz BOLD_Public.29-Mar-2024.tsv |
 awk -F"\t" '
+  BEGIN{
+    ranks[16]="phylum"
+    ranks[17]="class"
+    ranks[18]="order"
+    ranks[19]="family"
+    ranks[20]="subfamily"
+    ranks[21]="tribe"
+    ranks[22]="genus"
+    ranks[23]="species"
+  }
   $23 != "None" &&\
   $74 ~ /DS-FINPRO/ &&\
   !($23 ~ /sp[.]|aff[.]|cf[.]|nr[.]|agg[.]|t[.]|cluster/) &&\
   $69 ~ /COI(-5P)?$/ &&\
   length($65)>=600 {
-    for (i=17;i<=21;i++) {
-      if ($i == "None") {
-        $i = "dummy_" $(i-1);
-        sub(/dummy_dummy/, "dummy", $i)
+    for (i=17;i<=23;i++) {
+      if ($i ~ /[Uu]nknown|[Uu]nclassified|[Uu]nassigned|[0-9]|^[a-z]|^[A-Z].*[A-Z]/) {
+        print "rejected:", $i > "/dev/stderr"
+        next
+      }
+      if ($i == "None" || $i ~/[Ii]ncertae/) {
+        if (i <= 21) {
+          $i = $(i-1) "_" ranks[i] "_incertae_sedis"
+          sub("_" ranks[i-1] "_incertae_sedis", "", $i)
+        } else {
+          print "rejected:", $i " at rank column " i > "/dev/stderr"
+          next
+        }
       }
     }
+    sub(/ var\..*/, "", $23) 
     gsub(/ /, "_", $23)
     taxon=$17
-    for (i=18; i<=23; i++) taxon = taxon "|" $i
-    if (taxon ~ /[0-9]/) next
+    for (i=18; i<=23; i++) {
+      taxon = taxon "|" $i
+    }
     print ">" $1, taxon
     gsub(/-/, "", $65)
     print $65
-}' >train_finbol_raw.fasta
+    n++
+  }
+  END{ print n " sequences" >"/dev/stderr" }' >train_finbol_raw.fasta
 ```
 
-36833 sequences
+36784 sequences
 
 ```sh
 awk -F"[ |]" '/^>/{
@@ -130,12 +175,12 @@ END{
 ```
 
 - 2 unique classes
-- 20 unique orders
-- 477 unique families
-- 916 unique subfamilies
-- 1372 unique tribes
-- 3895 unique genera
-- 11229 unique species
+- 19 unique orders
+- 476 unique families
+- 915 unique subfamilies
+- 1371 unique tribes
+- 3893 unique genera
+- 11205 unique species
 
 # Alignment via MACSE pipeline
 
@@ -244,6 +289,16 @@ done
 ```sh
 tar -xOf BOLD_Public.29-Mar-2024.tar.gz BOLD_Public.29-Mar-2024.tsv |
 awk -F"\t" '
+  BEGIN{
+    ranks[16]="phylum"
+    ranks[17]="class"
+    ranks[18]="order"
+    ranks[19]="family"
+    ranks[20]="subfamily"
+    ranks[21]="tribe"
+    ranks[22]="genus"
+    ranks[23]="species"
+  }
   $16=="Arthropoda" {
     # remove all placeholder taxa
     for (i=17; i<=23; i++) {
@@ -253,13 +308,13 @@ awk -F"\t" '
     # convert "None" to standardized placeholders at ranks above genus
     for (i=17;i<=21;i++) {
       if ($i == "None") {
-        $i = "dummy_" $(i-1);
-        sub(/dummy_dummy/, "dummy", $i)
+        $i = $(i-1) "_" ranks[i] "_incertae_sedis"
+        sub("_" ranks[i-1] "_incertae_sedis", "", $i)
       }
     }
     # remove trailing placeholders/None
     for (i=23; i>17; i--) {
-      if ($i == "None" && $(i-1) ~ /^dummy_/) $(i-1) = "None"
+      if ($i == "None" && $(i-1) ~ /_incertae_sedis$/) $(i-1) = "None"
     }
     if ($17=="None") next
     gsub(/ /, "_", $23);
@@ -272,4 +327,65 @@ awk -F"\t" '
     c[taxon]=1
     print $1, taxon
   }' >../data/full_tax.txt
+```
+
+## Single-sequence outgroup (for unconstrained phylogenetic tree inference)
+
+For constrained phylogenetic trees, it is possible to root the tree between
+Insecta and	Arachnida. However, unconstrained algorithms may not reconstruct
+these groups as monophyletic, so it is necessary to have an outgroup which is a
+single sequence. We use the *Caenorhabditis elegans* reference genome for this
+purpose; download from
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_001328.1?report=fasta&from=7845&to=9422>
+as `Caenorhabditis_elegans_cox1_refseq.fasta`.
+
+The sequence must be aligned and translated to match the other references.
+
+```sh
+java -jar macse_v2.07.jar\
+    -prog enrichAlignment\
+    -align finbol_repseq_aln_nt.fasta\
+    -seq Caenorhabditis_elegans_cox1_refseq.fasta\
+    -out_AA outgroup_raw_aa.fasta\
+    -out_NT outgroup_raw_nt.fasta\
+    -out_tested_seq_info outgroup_macse_stats.csv\
+    -gc_def 5\
+    -gap_ext_term 0.2\
+    -gap_op_term 2.0\
+```
+
+Then it must be trimmed and given a label.
+
+```sh
+sed -i '/^>/!y/!/-/' outgroup_raw_nt.fasta
+esl-alimask --outformat afa -g outgroup_raw_nt.fasta |
+awk '
+  BEGIN{
+    RS=">"
+    FS="\n"
+  }
+  FNR==2{
+    seq=""
+    for (i=2;i<=NF;i++) seq = seq $i
+    seq=gensub(/(-{1,2})([ACGT]{1,2})(-*)$/, "\\2\\1\\3", 1, seq)
+    seqlen = length(gensub(/[^ACGT]/, "", "g", seq))
+    print ">outgroup"
+    print seq
+  }' >../data/outgroup_nt_aln.fasta
+
+esl-alimask --outformat afa -g outgroup_raw_aa.fasta |
+awk '
+  BEGIN{
+    RS=">"
+    FS="\n"
+  }
+  FNR==2{
+    seq=""
+    for (i=2;i<=NF;i++) {
+      gsub(/!/, "X", $i)
+      seq = seq $i
+    }
+    print ">outgroup"
+    print seq
+  }' >../data/outgroup_aa_aln.fasta
 ```

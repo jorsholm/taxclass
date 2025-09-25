@@ -6,8 +6,8 @@
 #SBATCH --mem-per-cpu=4800M
 #SBATCH --cpus-per-task=1
 #SBATCH --array=1
-#SBATCH --output=protax-a_%a.out
-#SBATCH --error=protax-a_%a.out
+#SBATCH --output=protax_%a.out
+#SBATCH --error=protax_%a.out
 #SBATCH --mail-type=ALL
 
 # set environmental variables to tell various parallel computation libraries
@@ -32,9 +32,10 @@ RESULTS=../../results/$MODEL
 
 RSEQ2TAX_FILE=$DATA/train_protax.tax
 TRAIN_FILE=$DATA/train_nt.fasta
+ROOT_DIR=$(pwd)
 
 # loop for full and trainonly taxonomy
-for TAXONOMY in train_tax full_tax;
+for TAXONOMY in full_tax train_tax;
 do
   # create input files
   TAX_FILE=$DATA/$TAXONOMY.txt
@@ -67,15 +68,14 @@ do
     END {
       id["root"] = 0
       print 0, 0, 0, "root", 1.0
-      print 1, 0, 1, "nonFungi", 0.01
-      n = 2
+      n = 1
       lastparent = "root"
       for (r = 1; r <= 7; r++) {
         for (i = 1; i <= ntaxa; i++) {
           if (r > length(label[i])) continue
           if (! (label[i][r] in id)) {
             id[label[i][r]] = n
-            print n, id[parent[i][r]], r, label[i][r], 0.99 * leafcount[label[i][r]] / ntaxa
+            print n, id[parent[i][r]], r, label[i][r], leafcount[label[i][r]] / ntaxa
             n++
           }
         }
@@ -90,25 +90,24 @@ do
 
   # train the model
   cd $MODEL_DIR
-  $TIME ../train_protax.sh
+  $TIME $ROOT_DIR/train_protax.sh
 
-  cd ..
+  cd $ROOT_DIR
+
+  export MDIR="$ROOT_DIR/$MODEL_DIR"
 
   # classify the test data
   for TESTSET in test testshort;
   do
-    TESTFILE=$DATA/${TESTSET}_nt_aln.fasta
-    RAWFILE=${MODEL}_${TAXONOMY}_${TESTSET}_${SLURM_ARRAY_TASK_ID}.raw
-    $TIME c2/classify_v2 $MODEL_DIR/taxonomy.priors\
-                         $MODEL_DIR/refs.aln\
-                         $MODEL_DIR/model.rseqs.numeric\
-                         $MODEL_DIR/model.pars\
-                         $MODEL_DIR/model.scs\
-                         0.01\
-                         $TESTFILE\
-                         >$RAWFILE
-  done
+    TESTFILE=$DATA/${TESTSET}_nt.fasta
+    export ODIR="$ROOT_DIR/${MODEL_DIR}_${TESTSET}"
+    mkdir -p $ODIR
+    cp $TESTFILE $ODIR/test.fa
+    cd $ODIR
 
+    $TIME $ROOT_DIR/classify_protax.sh
+    cd $ROOT_DIR
+  done
 done
 
 # format the test data and write to results directory

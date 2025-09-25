@@ -25,6 +25,8 @@ TIME="$(which time) --verbose"
 # Add project-specific bin directory, which includes an R installation.
 export PATH="/projappl/project_2005718/bin:$PATH"
 
+set -ex
+
 # define file names
 MODEL=protax-a
 DATA=../../data
@@ -34,7 +36,7 @@ RSEQ2TAX_FILE=$DATA/train_protax.tax
 TRAIN_FILE=$DATA/train_nt_aln_label.fasta
 
 # loop for full and trainonly taxonomy
-for TAXONOMY in train_tax full_tax;
+for TAXONOMY in full_tax train_tax;
 do
   # create input files
   TAX_FILE=$DATA/$TAXONOMY.txt
@@ -48,19 +50,20 @@ do
   sort |
   uniq |
   gawk -F'[|]' '
-    {
-      for (i = 1; i <= NF; ++i) {
-        if (i == 1) {
+    BEGIN{ntaxa=0}
+    NF>=6{
+      ntaxa++
+      for (r = 1; r <= NF; ++r) {
+        if (r == 1) {
           my_parent = "root"
           my_label = $1
         } else {
           my_parent = my_label
-          my_label = my_label "," $i
+          my_label = my_label "," $r
         }
-        parent[NR][i] = my_parent
-        label[NR][i] = my_label
+        parent[ntaxa][r] = my_parent
+        label[ntaxa][r] = my_label
       }
-      ntaxa = NR
     }
     END {
       id["root"] = 0
@@ -71,7 +74,16 @@ do
       count[0]=1
       for (r = 1; r <= 7; r++) {
         for (i = 1; i <= ntaxa; i++) {
-          if (r > length(label[i])) continue
+          if (r > length(label[i])) {
+            if (r > 1 && length(label[i]) == r - 1) {
+              if (label[i][r-1] != lastparent) {
+                print n, id[label[i][r-1]], r, label[i][r-1] ",unk"
+                ++n
+                lastparent=label[i][r-1]
+              }
+            }
+            continue
+          }
           if (! (label[i][r] in id)) {
             count[r]++
             if (parent[i][r] != lastparent) {

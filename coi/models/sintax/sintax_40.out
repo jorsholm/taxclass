@@ -2,29 +2,29 @@ vsearch v2.28.1_linux_x86_64, 376.1GB RAM, 40 cores
 https://github.com/torognes/vsearch
 
 Reading file ../../data/train_nt_sintax.fasta 100%
-23241758 nt in 35603 seqs, min 600, max 658, avg 653
+23211262 nt in 35556 seqs, min 600, max 658, avg 653
 Masking 100%
 Counting k-mers 100%
 Creating k-mer index 100%
 Writing UDB file 100%
 	Command being timed: "vsearch --makeudb_usearch ../../data/train_nt_sintax.fasta --output train_nt_40.udb"
 	User time (seconds): 5.31
-	System time (seconds): 0.23
+	System time (seconds): 0.25
 	Percent of CPU this job got: 79%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:06.95
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:06.98
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 78348
+	Maximum resident set size (kbytes): 78572
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 158
-	Minor (reclaiming a frame) page faults: 19030
-	Voluntary context switches: 204
-	Involuntary context switches: 7
+	Minor (reclaiming a frame) page faults: 19098
+	Voluntary context switches: 201
+	Involuntary context switches: 8
 	Swaps: 0
-	File system inputs: 56960
-	File system outputs: 224728
+	File system inputs: 57600
+	File system outputs: 225136
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -37,27 +37,27 @@ Reading UDB file train_nt_40.udb 100%
 Reorganizing data in memory 100%
 Creating bitmaps 100%
 Parsing abundances 100%
-23241758 nt in 35603 seqs, min 600, max 658, avg 653
+23211262 nt in 35556 seqs, min 600, max 658, avg 653
 Classifying sequences 100%
-Classified 26925 of 26925 sequences (100.00%)
+Classified 26901 of 26901 sequences (100.00%)
 	Command being timed: "vsearch --sintax ../../data/test_nt.fasta --sintax_random --db train_nt_40.udb --tabbedout sintax_test_nt_40.raw --threads 40"
-	User time (seconds): 479.30
-	System time (seconds): 2365.17
-	Percent of CPU this job got: 3836%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:14.15
+	User time (seconds): 476.01
+	System time (seconds): 2357.43
+	Percent of CPU this job got: 3856%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:13.48
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 127564
+	Maximum resident set size (kbytes): 127784
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 31565
-	Voluntary context switches: 27158456
-	Involuntary context switches: 597
+	Minor (reclaiming a frame) page faults: 31625
+	Voluntary context switches: 26226209
+	Involuntary context switches: 667
 	Swaps: 0
-	File system inputs: 35080
-	File system outputs: 8328
+	File system inputs: 35048
+	File system outputs: 8808
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -70,27 +70,27 @@ Reading UDB file train_nt_40.udb 100%
 Reorganizing data in memory 100%
 Creating bitmaps 100%
 Parsing abundances 100%
-23241758 nt in 35603 seqs, min 600, max 658, avg 653
+23211262 nt in 35556 seqs, min 600, max 658, avg 653
 Classifying sequences 100%
-Classified 26925 of 26925 sequences (100.00%)
+Classified 26901 of 26901 sequences (100.00%)
 	Command being timed: "vsearch --sintax ../../data/testshort_nt.fasta --sintax_random --db train_nt_40.udb --tabbedout sintax_testshort_nt_40.raw --threads 40"
-	User time (seconds): 466.99
-	System time (seconds): 2341.53
-	Percent of CPU this job got: 3790%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:14.08
+	User time (seconds): 471.52
+	System time (seconds): 2423.75
+	Percent of CPU this job got: 3856%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:15.08
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 127500
+	Maximum resident set size (kbytes): 128048
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 31561
-	Voluntary context switches: 26265575
-	Involuntary context switches: 659
+	Minor (reclaiming a frame) page faults: 31616
+	Voluntary context switches: 28342543
+	Involuntary context switches: 606
 	Swaps: 0
-	File system inputs: 22576
-	File system outputs: 8336
+	File system inputs: 22560
+	File system outputs: 8808
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0

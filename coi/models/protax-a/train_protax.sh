@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -ex
 
 # Based on readme.txt in protaxA
 
