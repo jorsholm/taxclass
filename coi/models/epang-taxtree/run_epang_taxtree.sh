@@ -31,6 +31,7 @@ export PATH="/projappl/project_2005718/bin:$PATH"
 MODEL=epang-taxtree
 DATA=../../data
 RESULTS=../../results/$MODEL
+mkdir -p $RESULTS
 TRAIN_TAXONOMY_FILE=$DATA/train_gappa.tax
 
 # generate taxonomic constraint tree
@@ -85,10 +86,11 @@ do
     SUBSTITUTION_PARAMS="mtART+G4{$alpha}"
   fi
 
-  for TEST in test testshort
+  for TESTSET in test testshort
   do
-    TEST_FILE=$DATA/${TEST}_${ALPHABET}_aln.fasta
-    RAW_DIR=$MODEL_DIR/$TEST
+    TEST_FILE=$DATA/${TESTSET}_${ALPHABET}_aln.fasta
+    RAW_DIR=$MODEL_DIR/$TESTSET
+    SUFFIX=${TESTSET}_${ALPHABET}_${SLURM_ARRAY_TASK_ID}
     mkdir -p $RAW_DIR
 
     # place test sequences in reference tree
@@ -108,10 +110,65 @@ do
       --root-outgroup outgroup.txt\
       --ranks-string "class|order|family|subfamily|tribe|genus|species"\
       --out-dir $RAW_DIR\
-      --file-suffix "_${TEST}_${ALPHABET}_${SLURM_ARRAY_TASK_ID}"\
+      --file-suffix "_$SUFFIX"\
       --per-query-results\
       --threads $SLURM_CPUS_PER_TASK\
       --allow-file-overwriting
+
+    RESULT_FILE=$RESULTS/${MODEL}_${SUFFIX}.tsv
+
+    echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species" >$RESULT_FILE
+
+    awk -F' ' '
+      function write_record(best_prob, best_taxon, new_prob, is_new, new_rank, rank) {
+        printf "%s", prev_id
+          is_new=0
+          new_rank=8
+          for (rank = 1; rank <= 7; rank++) {
+            if (is_new) {
+              printf "\tunk\t%.6f", new_prob[new_rank]
+            } else if (new_prob[rank] > best_prob[rank]) {
+              is_new = 1
+              new_rank = rank
+              printf "\tunk\t%.6f", new_prob[rank]
+            } else {
+              printf "\t%s\t%.6f", best_taxon[rank], best_prob[rank]
+            }
+          }
+          printf "\n"
+      }
+      BEGIN { prev_id="NA" }
+      $1 == "name" { next }
+      $1 != prev_id {
+        if (prev_id != "NA") {
+          write_record(best_prob, best_taxon, new_prob)
+        }
+        for (rank = 1; rank <= 7; rank++) {
+          best_prob[rank] = 0
+          new_prob[rank] = 1
+          best_taxon[rank] = "NA"
+        }
+        prev_id = $1
+      }
+      {
+        rank = split($6, a, ";")
+        if (rank > 1 && a[rank-1] !~ best_taxon[rank - 1]) next
+        new_prob[rank] -= $5
+        if ($5 > best_prob[rank]) {
+          best_prob[rank] = $5
+          best_taxon[rank] = a[rank]
+          if (rank < 7) new_prob[rank + 1] = $5
+          for (rank2 = rank + 1; rank2 <= 7; rank2++) {
+            best_prob[rank2] = 0
+            best_taxon[rank2] = "NA"
+            new_prob[rank2] = $5
+          }
+        }
+      }
+      END{
+        write_record(best_prob, best_taxon, new_prob)
+      }' "${RAW_DIR}/per_query_${SUFFIX}.tsv" \
+      >>$RESULT_FILE
+
   done
 done
-
