@@ -351,7 +351,7 @@ java -jar macse_v2.07.jar\
     -out_tested_seq_info outgroup_macse_stats.csv\
     -gc_def 5\
     -gap_ext_term 0.2\
-    -gap_op_term 2.0\
+    -gap_op_term 2.0
 ```
 
 Then it must be trimmed and given a label.
@@ -373,6 +373,7 @@ awk '
     print seq
   }' >../data/outgroup_nt_aln.fasta
 
+sed -i '/^>/!y/!/-/' outgroup_raw_aa.fasta
 esl-alimask --outformat afa -g outgroup_raw_aa.fasta |
 awk '
   BEGIN{
