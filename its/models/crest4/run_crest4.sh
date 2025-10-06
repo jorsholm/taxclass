@@ -66,7 +66,7 @@ do
 
   cd $MODEL_DIR
 
-  $TIME python3 ../crest4_utils/dev_scripts/make_new_crest_db.py $MODEL_DIR.tsv
+  $TIME python3 ../crest4_utils/make_new_crest_db.py $MODEL_DIR.tsv
   $TIME makeblastdb -in $MODEL_DIR.fasta\
                     -out $MODEL_DIR\
                     -dbtype ${blasttype[$TYPE]}
@@ -112,7 +112,7 @@ do
   awk -F'[;\t] *'\
       '{
         printf "%s",$1
-        for (i=3; i<=9; i++) {
+        for (i=4; i<=10; i++) {
          if (i <= NF) {
           printf "\t%s",$i
          } else {
