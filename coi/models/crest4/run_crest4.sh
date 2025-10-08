@@ -59,14 +59,14 @@ do
   rm -rf $MODEL_DIR/*
 
   tr '| ' '/\t' <$TAX_FILE |
-  sed -r -e 's|\t|\troot/|'\
+  sed -r -e 's|\t|\troot/Arthropoda/|'\
          -e 's|([^/]*)$|\1\t\1|'\
          >$MODEL_DIR/$MODEL_DIR.tsv
   cp $TRAIN_FILE $MODEL_DIR/$MODEL_DIR.fasta
 
   cd $MODEL_DIR
 
-  $TIME python3 ../crest4_utils/dev_scripts/make_new_crest_db.py $MODEL_DIR.tsv
+  $TIME python3 ../crest4_utils/make_new_crest_db.py $MODEL_DIR.tsv
   $TIME makeblastdb -in $MODEL_DIR.fasta\
                     -out $MODEL_DIR\
                     -dbtype ${blasttype[$TYPE]}
@@ -112,7 +112,7 @@ do
   awk -F'[;\t] *'\
       '{
         printf "%s",$1
-        for (i=3; i<=9; i++) {
+        for (i=5; i<=11; i++) {
          if (i <= NF) {
           printf "\t%s",$i
          } else {

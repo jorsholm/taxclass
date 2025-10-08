@@ -2,23 +2,23 @@ EMBOSS  6.5.7  environment loaded
 BLAST  2.15.0  environment loaded 
 ('train_nt_4.tre', 'train_nt_4.map', 'train_nt_4.names')
 Success.
-	Command being timed: "python3 ../crest4_utils/dev_scripts/make_new_crest_db.py train_nt_4.tsv"
-	User time (seconds): 0.75
+	Command being timed: "python3 ../crest4_utils/make_new_crest_db.py train_nt_4.tsv"
+	User time (seconds): 0.99
 	System time (seconds): 0.08
-	Percent of CPU this job got: 5%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:14.30
+	Percent of CPU this job got: 7%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:13.58
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 39844
+	Maximum resident set size (kbytes): 41860
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 619
-	Minor (reclaiming a frame) page faults: 8349
-	Voluntary context switches: 1730
-	Involuntary context switches: 4
+	Major (requiring I/O) page faults: 777
+	Minor (reclaiming a frame) page faults: 7685
+	Voluntary context switches: 1892
+	Involuntary context switches: 2
 	Swaps: 0
-	File system inputs: 15288
+	File system inputs: 16680
 	File system outputs: 752
 	Socket messages sent: 0
 	Socket messages received: 0
@@ -27,32 +27,32 @@ Success.
 	Exit status: 0
 
 
-Building a new DB, current time: 01/16/2025 16:28:03
+Building a new DB, current time: 10/06/2025 18:26:23
 New DB name:   /scratch/project_2003104/brendan/taxclass/its/models/crest4/train_nt_4/train_nt_4
 New DB title:  train_nt_4.fasta
 Sequence type: Nucleotide
 Keep MBits: T
 Maximum file size: 3000000000B
-Adding sequences from FASTA; added 10776 sequences in 0.15891 seconds.
+Adding sequences from FASTA; added 10776 sequences in 0.348658 seconds.
 
 
 	Command being timed: "makeblastdb -in train_nt_4.fasta -out train_nt_4 -dbtype nucl"
-	User time (seconds): 0.15
-	System time (seconds): 0.02
-	Percent of CPU this job got: 18%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.94
+	User time (seconds): 0.18
+	System time (seconds): 0.03
+	Percent of CPU this job got: 13%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.59
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 12160
+	Maximum resident set size (kbytes): 12080
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 10
-	Minor (reclaiming a frame) page faults: 2580
-	Voluntary context switches: 304
-	Involuntary context switches: 0
+	Major (requiring I/O) page faults: 33
+	Minor (reclaiming a frame) page faults: 2560
+	Voluntary context switches: 333
+	Involuntary context switches: 1
 	Swaps: 0
-	File system inputs: 44832
+	File system inputs: 45048
 	File system outputs: 4936
 	Socket messages sent: 0
 	Socket messages received: 0
@@ -60,23 +60,23 @@ Adding sequences from FASTA; added 10776 sequences in 0.15891 seconds.
 	Page size (bytes): 4096
 	Exit status: 0
 	Command being timed: "blastn -query ../../data/test_nt.fasta -db train_nt_4/train_nt_4 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_test_nt_4/search.hits -strand plus -num_threads 4"
-	User time (seconds): 1667.99
-	System time (seconds): 7.12
-	Percent of CPU this job got: 343%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 8:07.22
+	User time (seconds): 2105.51
+	System time (seconds): 8.05
+	Percent of CPU this job got: 345%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 10:11.88
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 93368
+	Maximum resident set size (kbytes): 94508
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 19
-	Minor (reclaiming a frame) page faults: 3704622
-	Voluntary context switches: 219900
-	Involuntary context switches: 3484
+	Minor (reclaiming a frame) page faults: 3013778
+	Voluntary context switches: 230100
+	Involuntary context switches: 4999
 	Swaps: 0
 	File system inputs: 82352
-	File system outputs: 107728
+	File system outputs: 107952
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -88,46 +88,46 @@ Classification ran successfully. Results are placed in 'crest4_test_nt_4/assignm
 crest4_test_nt_4/assignments.txt
 Command exited with non-zero status 1
 	Command being timed: "crest4 --fasta ../../data/test_nt.fasta --search_db train_nt_4/ --search_hits crest4_test_nt_4/search.hits --num_threads 4 --output_dir crest4_test_nt_4"
-	User time (seconds): 194.20
-	System time (seconds): 1.41
-	Percent of CPU this job got: 95%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:25.11
+	User time (seconds): 239.27
+	System time (seconds): 1.53
+	Percent of CPU this job got: 97%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 4:08.14
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 2609940
+	Maximum resident set size (kbytes): 2611780
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 28
-	Minor (reclaiming a frame) page faults: 661144
-	Voluntary context switches: 2275
-	Involuntary context switches: 230
+	Minor (reclaiming a frame) page faults: 659593
+	Voluntary context switches: 2277
+	Involuntary context switches: 975
 	Swaps: 0
 	File system inputs: 7392
-	File system outputs: 6928
+	File system outputs: 7128
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 1
 	Command being timed: "blastn -query ../../data/testshort_nt.fasta -db train_nt_4/train_nt_4 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_testshort_nt_4/search.hits -strand plus -num_threads 4"
-	User time (seconds): 42.30
-	System time (seconds): 1.17
-	Percent of CPU this job got: 181%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:24.00
+	User time (seconds): 48.22
+	System time (seconds): 1.29
+	Percent of CPU this job got: 182%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:27.17
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 2262656
+	Maximum resident set size (kbytes): 2266384
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 655662
-	Voluntary context switches: 4780
-	Involuntary context switches: 70
+	Major (requiring I/O) page faults: 1
+	Minor (reclaiming a frame) page faults: 617472
+	Voluntary context switches: 4613
+	Involuntary context switches: 98
 	Swaps: 0
 	File system inputs: 6640
-	File system outputs: 30712
+	File system outputs: 30720
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -138,23 +138,23 @@ Classification ran successfully. Results are placed in 'crest4_testshort_nt_4/as
 crest4_testshort_nt_4/assignments.txt
 Command exited with non-zero status 1
 	Command being timed: "crest4 --fasta ../../data/testshort_nt.fasta --search_db train_nt_4/ --search_hits crest4_testshort_nt_4/search.hits --num_threads 4 --output_dir crest4_testshort_nt_4"
-	User time (seconds): 72.86
-	System time (seconds): 0.45
+	User time (seconds): 91.68
+	System time (seconds): 0.43
 	Percent of CPU this job got: 100%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:13.16
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:32.11
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 721708
+	Maximum resident set size (kbytes): 723476
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 179262
-	Voluntary context switches: 867
-	Involuntary context switches: 90
+	Minor (reclaiming a frame) page faults: 177190
+	Voluntary context switches: 873
+	Involuntary context switches: 134
 	Swaps: 0
 	File system inputs: 0
-	File system outputs: 1720
+	File system outputs: 1832
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
