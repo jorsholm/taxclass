@@ -3,3 +3,4 @@
 *.krona.report
 *.bestmatch
 train_*_*/*
+dnabarcoder
