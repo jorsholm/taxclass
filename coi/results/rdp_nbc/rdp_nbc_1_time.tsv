@@ -1,4 +1,4 @@
 command	CPU	time	mem
-"java -Xmx4g -jar dist/classifier.jar train -t train.tax -s ../../data/train_nt_rdp.fasta -o train_nt_1"	87%	0:40.71	3856212
-"java -Xmx4g -jar dist/classifier.jar classify --conf 0 -t train_nt_1/rdp_nbc.properties -o rdp_nbc_test_1.raw ../../data/test_nt.fasta"	99%	17:55.92	1123824
-"java -Xmx4g -jar dist/classifier.jar classify --conf 0 -t train_nt_1/rdp_nbc.properties -o rdp_nbc_testshort_1.raw ../../data/testshort_nt.fasta"	98%	10:47.21	1125556
+"java -Xmx4g -jar dist/classifier.jar train -t train.tax -s ../../data/train_nt_rdp.fasta -o train_nt_1"	82%	0:38.06	3855612
+"java -Xmx4g -jar dist/classifier.jar classify --conf 0 -t train_nt_1/rdp_nbc.properties -o rdp_nbc_test_1.raw ../../data/test_nt.fasta"	98%	17:05.51	1112828
+"java -Xmx4g -jar dist/classifier.jar classify --conf 0 -t train_nt_1/rdp_nbc.properties -o rdp_nbc_testshort_1.raw ../../data/testshort_nt.fasta"	98%	10:32.61	1120960

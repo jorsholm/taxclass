@@ -1,0 +1,7 @@
+command	CPU	time	mem
+"/users/brfurnea/LifePlan/brendan/taxclass/its/models/protax/train_protax.sh"	100%	2:12:38	373028
+"/users/brfurnea/LifePlan/brendan/taxclass/its/models/protax/classify_protax.sh"	217%	2:36.87	198332
+"/users/brfurnea/LifePlan/brendan/taxclass/its/models/protax/classify_protax.sh"	173%	1:44.93	123684
+"/users/brfurnea/LifePlan/brendan/taxclass/its/models/protax/train_protax.sh"	101%	1:51:34	245600
+"/users/brfurnea/LifePlan/brendan/taxclass/its/models/protax/classify_protax.sh"	221%	2:31.75	167108
+"/users/brfurnea/LifePlan/brendan/taxclass/its/models/protax/classify_protax.sh"	178%	1:37.93	122144

@@ -38,8 +38,10 @@ du -s */models/rdp_nbc/train_nt_1 | tr "\t" " " >>$OUTFILE
 # SINTAX: index is a single udb file
 ls -s1 */models/sintax/train_??_*.udb | sed 's/^ *//' >>$OUTFILE
 
-# ProtaxFungi: TBD
+# Protax: model is multiple files in a directory
+du -s */models/protax/train_nt_*_tax_1 | tr "\t" " " >>$OUTFILE
 
-# EPA-ng: TBD
+# EPA-ng: model is two files: the reference tree itself and the IQtree log file
+ls -s1 */models/epang-*/train_??_1/train_??.{iqtree,treefile} | sed 's/^ *//' >>$OUTFILE
 
 

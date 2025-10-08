@@ -1,7 +1,7 @@
 command	CPU	time	mem
-"makeblastdb -in ../../data/train_nt_sintax.fasta -dbtype nucl -out train_nt_40"	27%	0:02.17	12244
-"blastn -query ../../data/test_nt.fasta -db train_nt_40 -out blast_test_nt_40.raw -strand plus -num_threads 40 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"	443%	30:15.66	144384
-"blastn -query ../../data/testshort_nt.fasta -db train_nt_40 -out blast_testshort_nt_40.raw -strand plus -num_threads 40 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"	320%	15:55.68	117588
-"makeblastdb -in ../../data/train_aa_sintax.fasta -dbtype prot -out train_aa_40"	29%	0:01.78	12268
-"blastp -query ../../data/test_aa.fasta -db train_aa_40 -out blast_test_aa_40.raw -num_threads 40 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"	3849%	19:52.93	2185708
-"blastp -query ../../data/testshort_aa.fasta -db train_aa_40 -out blast_testshort_aa_40.raw -num_threads 40 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"	3747%	15:07.00	3416728
+"makeblastdb -in ../../data/train_nt_sintax.fasta -dbtype nucl -out train_nt_40"	30%	0:01.93	12300
+"blastn -query ../../data/test_nt.fasta -db train_nt_40 -out blast_test_nt_40.raw -strand plus -num_threads 40 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"	447%	29:42.10	145068
+"blastn -query ../../data/testshort_nt.fasta -db train_nt_40 -out blast_testshort_nt_40.raw -strand plus -num_threads 40 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"	319%	16:05.68	118196
+"makeblastdb -in ../../data/train_aa_sintax.fasta -dbtype prot -out train_aa_40"	40%	0:01.22	12276
+"blastp -query ../../data/test_aa.fasta -db train_aa_40 -out blast_test_aa_40.raw -num_threads 40 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"	3854%	18:02.08	2186656
+"blastp -query ../../data/testshort_aa.fasta -db train_aa_40 -out blast_testshort_aa_40.raw -num_threads 40 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"	3759%	13:49.90	3406780

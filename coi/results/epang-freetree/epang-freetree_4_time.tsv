@@ -1,0 +1,4 @@
+command	CPU	time	mem
+"iqtree2 -s train_aa_4/train_outgroup_aa_aln.fasta -T 4 -fast -keep-ident --redo -m mtART+G4 -pre train_aa_4/train_aa"	378%	11:36:42	41793632
+"epa-ng --tree train_aa_4/train_aa.treefile --ref-msa train_aa_4/train_outgroup_aa_aln.fasta --query ../../data/test_aa_aln.fasta --out-dir train_aa_4/test --model mtART+G4{0.594} --threads 4 --redo"	397%	10:17:31	39502768
+"gappa examine assign --jplace-path train_aa_4/test/epa_result.jplace --taxon-file taxonomy.txt --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_aa_4/test --file-suffix _test_aa_4 --per-query-results --threads 4 --allow-file-overwriting"	96%	0:48.21	83892

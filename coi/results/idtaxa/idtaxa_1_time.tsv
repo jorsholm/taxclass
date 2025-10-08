@@ -1,7 +1,7 @@
 command	CPU	time	mem
-"Rscript learn_taxa.R"	97%	14:35.97	2631896
-"Rscript id_taxa.R"	99%	1:53:24	1016544
-"Rscript id_taxa.R"	99%	1:50:12	1007656
-"Rscript learn_taxa.R"	98%	58:11.29	13732144
-"Rscript id_taxa.R"	99%	40:12.62	807852
-"Rscript id_taxa.R"	99%	21:41.17	848524
+"Rscript learn_taxa.R"	95%	13:31.39	2673012
+"Rscript id_taxa.R"	99%	2:16:29	1015012
+"Rscript id_taxa.R"	97%	1:52:10	1019960
+"Rscript learn_taxa.R"	96%	57:38.45	12561824
+"Rscript id_taxa.R"	96%	45:45.97	779608
+"Rscript id_taxa.R"	96%	23:13.27	882064

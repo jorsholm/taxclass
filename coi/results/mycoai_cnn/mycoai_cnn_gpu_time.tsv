@@ -1,4 +1,4 @@
 command	CPU	time	mem
-"mycoai-train --out train_nt_cnn_gpu.pt --base_arch_type CNN ../../data/train_nt_unite.fasta"	14%	54:16.90	1598132
-"mycoai-classify --model train_nt_cnn_gpu.pt --out mycoai_cnn_test_nt_gpu.raw --confidence ../../data/test_nt.fasta"	73%	0:21.91	864472
-"mycoai-classify --model train_nt_cnn_gpu.pt --out mycoai_cnn_testshort_nt_gpu.raw --confidence ../../data/testshort_nt.fasta"	91%	0:15.17	873976
+"mycoai-train --out train_nt_cnn_gpu.pt --base_arch_type CNN ../../data/train_nt_unite.fasta"	88%	10:03.53	3761492
+"mycoai-classify --model train_nt_cnn_gpu.pt --out mycoai_cnn_test_nt_gpu.raw --confidence ../../data/test_nt.fasta"	91%	0:34.72	3166936
+"mycoai-classify --model train_nt_cnn_gpu.pt --out mycoai_cnn_testshort_nt_gpu.raw --confidence ../../data/testshort_nt.fasta"	95%	0:28.53	3176064
