@@ -7,41 +7,41 @@
 # has actually run all of the training steps
 
 OUTFILE="results/model_sizes.tsv"
-rm -f OUTFILE
+rm -f $OUTFILE
 mkdir -p $(dirname $OUTFILE)
 touch $OUTFILE
 
 # BayesANT: model is a single rds file
-ls -s1 */models/bayesant/*.rds | sed 's/^ *//' >>$OUTFILE
+ls -s1 {coi,its}/models/bayesant/*.rds | sed 's/^ *//' >>$OUTFILE
 
 # BLAST: index is in multiple files, not divided into directories
-ls -s1 */models/blast/*.[np]?? | sed 's/^ *//' >>$OUTFILE
+ls -s1 {coi,its}/models/blast/*.[np]?? | sed 's/^ *//' >>$OUTFILE
 
 # CREST4: model is in directory
-du -s */models/crest4/train_??_* | tr "\t" " " >>$OUTFILE
+du -s {coi,its}/models/crest4/train_??_* | tr "\t" " " >>$OUTFILE
 
 # Dnabarcoder: although various files are produced, only *.best.json is passed for inference
-ls -s1 */models/dnabarcoder/train_??_*/train_??_*.cutoffs.best.json | sed 's/^ *//' >>$OUTFILE
+ls -s1 {coi,its}/models/dnabarcoder/train_??_*/train_??_*.cutoffs.best.json | sed 's/^ *//' >>$OUTFILE
 
 # IDTAXA: model is a single rds file
-ls -s1 */models/idtaxa/train_??_*.rds | sed 's/^ *//' >>$OUTFILE
+ls -s1 {coi,its}/models/idtaxa/train_??_*.rds | sed 's/^ *//' >>$OUTFILE
 
 # MycoAI: model is a single pt file
-ls -s1 */models/mycoai_*/train_??_*.pt | sed 's/^ *//' >>$OUTFILE
+ls -s1 {coi,its}/models/mycoai_*/train_??_*.pt | sed 's/^ *//' >>$OUTFILE
 
 # Protax-A: model is multiple files in a directory
-du -s */models/protax-a/train_nt_*_tax_1 | tr "\t" " " >>$OUTFILE
+du -s coi/models/protax-a/train_nt_*_tax_1 | tr "\t" " " >>$OUTFILE
 
 # RDP-NBC: model is multiple files in a directory
-du -s */models/rdp_nbc/train_nt_1 | tr "\t" " " >>$OUTFILE
+du -s {coi,its}/models/rdp_nbc/train_nt_1 | tr "\t" " " >>$OUTFILE
 
 # SINTAX: index is a single udb file
-ls -s1 */models/sintax/train_??_*.udb | sed 's/^ *//' >>$OUTFILE
+ls -s1 {coi,its}/models/sintax/train_??_*.udb | sed 's/^ *//' >>$OUTFILE
 
 # Protax: model is multiple files in a directory
-du -s */models/protax/train_nt_*_tax_1 | tr "\t" " " >>$OUTFILE
+du -s its/models/protax/train_nt_*_tax_1 | tr "\t" " " >>$OUTFILE
 
 # EPA-ng: model is two files: the reference tree itself and the IQtree log file
-ls -s1 */models/epang-*/train_??_1/train_??.{iqtree,treefile} | sed 's/^ *//' >>$OUTFILE
+ls -s1 coi/models/epang-*/train_??_*/train_??.{iqtree,treefile} | sed 's/^ *//' >>$OUTFILE
 
 
