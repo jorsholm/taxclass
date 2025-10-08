@@ -171,9 +171,13 @@
 27776 its/models/sintax/train_nt_40.udb
 27776 its/models/sintax/train_nt_4.udb
 110260 its/models/protax/train_nt_full_tax_1
+110248 its/models/protax/train_nt_full_tax_16
+110272 its/models/protax/train_nt_full_tax_4
+110252 its/models/protax/train_nt_full_tax_40
 89672 its/models/protax/train_nt_train_tax_1
-17160 coi/models/epang-freetree/train_aa_4/train_aa.iqtree
-1400 coi/models/epang-freetree/train_aa_4/train_aa.treefile
+89680 its/models/protax/train_nt_train_tax_16
+89644 its/models/protax/train_nt_train_tax_4
+89644 its/models/protax/train_nt_train_tax_40
 14460 coi/models/epang-phyltree/train_aa_16/train_aa.iqtree
 1568 coi/models/epang-phyltree/train_aa_16/train_aa.treefile
 15144 coi/models/epang-phyltree/train_aa_1/train_aa.iqtree
