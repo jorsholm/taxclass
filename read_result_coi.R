@@ -67,7 +67,9 @@ probcols <- correct_cols[which(str_starts(correct_cols, "Prob_"))]
 
 ##### BayesANT #####
 result_BayesANT <-
-  read.table(paste0("coi/results/bayesant/bayesant_test", shorttxt, "_", datatype, "_16.tsv"),
+  read.table(paste0("coi/results/bayesant/bayesant_test", 
+                    shorttxt, "_", datatype, 
+                    "_40.tsv"),
              header = T) |>
   tibble::rownames_to_column("ID") |>
   dplyr::arrange(ID)
@@ -121,21 +123,41 @@ if(datatype == "nt"){
   result_PROTAX <- rename_unk_output(result_PROTAX)
 }
 
-##### EPA-ng Taxonomy tree #####
+##### PROTAX augmented #####
 if(datatype == "nt"){
-  result_epatax <-
-    read.table(paste0("coi/results/epang_taxtree/epang_taxtree_test", shorttxt, "_", datatype, 
-                      "_all.tsv"),
-               header = T) |>
+  result_PROTAX_aug <-
+    read.table(paste0("coi/results/protax-a/protax-a_full_tax_test", shorttxt, "_1.tsv"),
+               header = T) |> 
     dplyr::arrange(ID)
-  result_epatax <- rename_unk_output(result_epatax)
-  result_epatax <- arrange_columns(result_epatax, correct_cols)
+  result_PROTAX_aug[is.na(result_PROTAX_aug)] <- "unk"
+  result_PROTAX_aug <- arrange_columns(result_PROTAX_aug, correct_cols)
+  # Propagate last probability of unk to lower ranks
+  for (r in seq_len(nrow(result_PROTAX_aug))){
+    i <- match(TRUE, result_PROTAX_aug[r, ranks] == "unk", nomatch = 0)  # first unk (or 0 if none)
+    if (i > 0) {
+      result_PROTAX_aug[r, probcols[i:length(probcols)]] <- result_PROTAX_aug[r, probcols[i]]
+    }
+  }
+  result_PROTAX_aug <- rename_unk_output(result_PROTAX_aug)
 }
+
+##### EPA-ng Taxonomy tree #####
+result_epatax <-
+  read.table(paste0("coi/results/epang-taxtree/epang-taxtree_test",
+                    shorttxt,
+                    "_",
+                    datatype,
+                    "_40.tsv"),
+             header = T) |>
+  dplyr::arrange(ID)
+result_epatax <- rename_unk_output(result_epatax)
+result_epatax <- arrange_columns(result_epatax, correct_cols)
 
 ##### Sintax #####
 if(datatype == "nt"){
   result_SINTAX <-
-    read.table(paste0("coi/results/sintax/sintax_test", shorttxt, "_", datatype, "_16.tsv"),
+    read.table(paste0("coi/results/sintax/sintax_test", 
+                      shorttxt, "_", datatype, "_40.tsv"),
                header = TRUE) |> 
     dplyr::arrange(ID)
   result_SINTAX <- arrange_columns(result_SINTAX, correct_cols)
@@ -147,19 +169,16 @@ if(datatype == "nt"){
 }
 
 ##### EPA-ng phylogenetic tree #####
-if(datatype == "nt"){
-  result_epaphyl <- 
-    read.table(paste0("coi/results/epang_phyltree/epang_phyltree_test",
-                      shorttxt, "_finbol-gbol.txt"),
-               header = T, sep = "\t")  |>
-    dplyr::arrange(ID)
-  result_epaphyl$class[which(result_epaphyl$class == "DISTANT")] <- "unk"
-  result_epaphyl$species <- sapply(result_epaphyl$species, 
-                                   function(x) stringr::str_replace(x, " ", "_"),
-                                   USE.NAMES = F)
-  result_epaphyl <- rename_unk_output(result_epaphyl)
-  result_epaphyl <- arrange_columns(result_epaphyl, correct_cols)
-}
+result_epaphyl <-
+  read.table(paste0("coi/results/epang-phyltree/epang-phyltree_test",
+                    shorttxt,
+                    "_",
+                    datatype,
+                    "_40.tsv"),
+             header = T, sep = "\t")  |>
+  dplyr::arrange(ID)
+result_epaphyl <- rename_unk_output(result_epaphyl)
+result_epaphyl <- arrange_columns(result_epaphyl, correct_cols)
 
 ##### MycoAI-CNN ##### 
 if(datatype == "nt"){
@@ -193,7 +212,8 @@ if(datatype == "nt"){
 
 ##### BLAST top hit ##### 
 result_blast_top <-
-  read.table(paste0("coi/results/blast/blast_top_hit_test", shorttxt, "_", datatype, "_16.tsv"),
+  read.table(paste0("coi/results/blast/blast_top_hit_test",
+                    shorttxt, "_", datatype, "_40.tsv"),
              header = T) |> 
   dplyr::arrange(ID) |> 
   dplyr::mutate(species = purrr::map_chr(species, 
@@ -220,7 +240,8 @@ if(length(which(!(data_true$ID %in% result_blast_top$ID))) != 0){
 ##### BLAST threshold #####
 if(datatype == "nt"){
   result_blast_thresh <-
-    read.table(paste0("coi/results/blast/blast_thresh_test", shorttxt, "_", datatype, "_16.tsv"),
+    read.table(paste0("coi/results/blast/blast_thresh_test", 
+                      shorttxt, "_", datatype, "_40.tsv"),
                header = T) |> 
     dplyr::arrange(ID)
   result_blast_thresh <- arrange_columns(result_blast_thresh, correct_cols)
@@ -247,7 +268,8 @@ if(datatype == "nt"){
 ##### DNA-barcoder #####
 if(datatype == "nt"){
   result_dnabarcoder <-
-    read.table(paste0("coi/results/dnabarcoder/test", shorttxt, "_", datatype, "_1.tsv"),
+    read.table(paste0("coi/results/dnabarcoder/test",
+                      shorttxt, "_", datatype, "_40.tsv"),
                header = T) |> 
     dplyr::arrange(ID)
   if(keep_na){
@@ -272,7 +294,8 @@ if(datatype == "nt"){
 
 ##### IDTAXA #####
 result_idtaxa <-
- read.table(paste0("coi/results/idtaxa/idtaxa_test", shorttxt, "_", datatype, "_4.tsv"), 
+ read.table(paste0("coi/results/idtaxa/idtaxa_test",
+                   shorttxt, "_", datatype, "_40.tsv"), 
             fill = T, header = T) |> 
   dplyr::arrange(ID)
 result_idtaxa <- arrange_columns(result_idtaxa, correct_cols)
@@ -301,7 +324,8 @@ if(keep_na){
 
 ##### Crest4 #####
 result_crest4 <- 
-  read.table(paste0("coi/results/crest4/crest4_test", shorttxt, "_", datatype, "_4.tsv"), 
+  read.table(paste0("coi/results/crest4/crest4_test",
+                    shorttxt, "_", datatype, "_40.tsv"), 
              header = T) |> 
   dplyr::arrange(ID)
 if(keep_na){
@@ -388,6 +412,7 @@ if(datatype == "nt"){
   results <- list(
     "BayesANT" = result_BayesANT,
     "PROTAX" = result_PROTAX,
+    "PROTAX aug." = result_PROTAX_aug,
     "EPA-ng taxtree" = result_epatax,
     "RDP" = result_RDP,
     "BLAST top hit" = result_blast_top, 
@@ -395,7 +420,7 @@ if(datatype == "nt"){
     "SINTAX" = result_SINTAX,
     # "Mystery" = result_mystery,
     "EPA-ng phyltree" = result_epaphyl,
-    "DNABarcoder" = result_dnabarcoder,
+    "dnabarcoder" = result_dnabarcoder,
     "IDTAXA" = result_idtaxa, 
     "MycoAI-CNN" = result_aicnn, 
     "MycoAI-BERT" = result_aibert, 
@@ -404,9 +429,9 @@ if(datatype == "nt"){
 }else if(datatype == "aa"){
   results <- list(
     "BayesANT" = result_BayesANT,
-    #"EPA-ng taxtree" = result_epatax,
+    "EPA-ng taxtree" = result_epatax,
     "BLAST top hit" = result_blast_top, 
-    #"EPA-ng phyltree" = result_epaphyl,
+    "EPA-ng phyltree" = result_epaphyl,
     "IDTAXA" = result_idtaxa, 
     "Crest4" = result_crest4
   )

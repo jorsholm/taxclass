@@ -4,35 +4,26 @@
 library(ggsankey)
 library(tidyverse)
 
-cases <- c("coi", "its")
-
-p <- list()
-
 # LABELS --------------------
 
 common_lab <- "b_common"
 test_lab <- "a_uniq_test"
 train_lab <- "c_uniq_train"
 
-#for(case in cases){
-  
-  # READ DATA ----------------
+# READ DATA ----------------
 test_raw_coi <- ape::read.FASTA("coi/data/test_nt.fasta")
 train_raw_coi <- ape::read.FASTA("coi/data/train_nt.fasta")
 test_raw_its <- ape::read.FASTA("its/data/test_nt.fasta")
 train_raw_its <- ape::read.FASTA("its/data/train_nt.fasta")
   
-  #if(case == "coi"){
 correctcols_coi <- c("Id", "Class", "Order", "Family", "Subfamily", "Tribe", "Genus", "Species", "Sequence")
-#  }else{
 correctcols_its <- c("Id", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "Sequence")
-#  }
-  
-  # TIBBLES OF SEQUENCES AND TAXONOMY -----------------------
+
+# TIBBLES OF SEQUENCES AND TAXONOMY -----------------------
   
   # Train data 
-  train_seq_coi <- tibble(Sequence = sapply(as.character(train_raw_coi),
-                                            function(x) paste(x, collapse = "")))
+train_seq_coi <- tibble(Sequence = sapply(as.character(train_raw_coi),
+                                          function(x) paste(x, collapse = "")))
 train_seq_its <- tibble(Sequence = sapply(as.character(train_raw_its),
                                           function(x) paste(x, collapse = "")))
   
@@ -285,7 +276,8 @@ train_seq_its <- tibble(Sequence = sapply(as.character(train_raw_its),
     scale_y_continuous(breaks = c(-40000, -20000, 0, 20000, 40000),
                        labels = c("0", "20000", "40000", "60000", "80000"))
     
-  
+p
+    
 ggsave(plot = p, 
        filename = "plots/overlap.pdf", 
        width = 2500, 

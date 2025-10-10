@@ -2,7 +2,7 @@
 
 # LOAD FUNCTIONS ---------------------------------------------------------------
 
-library(tidyverse)
+suppressMessages(library(tidyverse))
 source("functions.R")
 
 # SET PARAMETERS ---------------------------------------------------------------
@@ -51,12 +51,14 @@ ranks <- colnames(data_true)[-1]
 correct_cols <- c("ID",
                   ranks,
                   sapply(ranks, function(x) paste0("Prob_", x), USE.NAMES = F))
+probcols <- correct_cols[which(str_starts(correct_cols, "Prob_"))]
 
 # READ RESULTS -----------------------------------------------------------------
 
 # BayesANT
 result_BayesANT <-
-  read.table(paste0("its/results/bayesant/bayesant_test", shorttxt, "_nt_16.tsv"),
+  read.table(paste0("its/results/bayesant/bayesant_test", 
+                    shorttxt, "_nt_40.tsv"),
              header = T) |>
   tibble::rownames_to_column("ID") |>
   dplyr::arrange(ID)
@@ -91,20 +93,79 @@ if(keep_na){
 }
 
 ##### PROTAX #####
-# result_PROTAX <-
-#   read.table(paste0("results/protax-a/protax-a_test", shorttxt, "_nt_1.tsv"),
-#              header = T)
-# result_PROTAX[is.na(result_PROTAX)] <- 0
-# result_PROTAX <- rename_PROTAX_output(result_PROTAX)
-# # Quick check that order of columns is identical to BayesANT
-# # all(stringr::str_to_lower(colnames(result_PROTAX)) ==
-# #       stringr::str_to_lower(colnames(result_BayesANT)))
-# # Rename Protax columns
-# colnames(result_PROTAX) <- colnames(result_BayesANT)
+result_PROTAX <-
+  read.table(paste0("its/results/protax/protax_train_tax_test", 
+                    shorttxt, "_nt_40.tsv"),
+             header = T) |> 
+  dplyr::arrange(ID)
+result_PROTAX[is.na(result_PROTAX)] <- "unk"
+# Hard coding this for now
+colnames(result_PROTAX) <- c("ID", 
+                             "Kingdom", 
+                             "Prob_Kingdom", 
+                             "Phylum", 
+                             "Prob_Phylum", 
+                             "Class", 
+                             "Prob_Class",
+                             "Order", 
+                             "Prob_Order", 
+                             "Family", 
+                             "Prob_Family", 
+                             "Genus", 
+                             "Prob_Genus", 
+                             "Species", 
+                             "Prob_Species"
+                             )
+result_PROTAX <- arrange_columns(result_PROTAX, correct_cols)
+# Propagate last probability of unk to lower ranks
+for (r in seq_len(nrow(result_PROTAX))){
+  i <- match(TRUE, result_PROTAX[r, ranks] == "unk", nomatch = 0)  # first unk (or 0 if none)
+  if (i > 0) {
+    result_PROTAX[r, probcols[i:length(probcols)]] <- result_PROTAX[r, probcols[i]]
+  }
+}
+result_PROTAX <- rename_unk_output(result_PROTAX)
+
+##### PROTAX augmented #####
+result_PROTAX_aug <-
+  read.table(paste0("its/results/protax/protax_full_tax_test", 
+                    shorttxt, "_nt_40.tsv"),
+             header = T) |> 
+  dplyr::arrange(ID)
+result_PROTAX_aug[is.na(result_PROTAX_aug)] <- "unk"
+# Hard coding this for now
+colnames(result_PROTAX_aug) <- c("ID", 
+                             "Kingdom", 
+                             "Prob_Kingdom", 
+                             "Phylum", 
+                             "Prob_Phylum", 
+                             "Class", 
+                             "Prob_Class",
+                             "Order", 
+                             "Prob_Order", 
+                             "Family", 
+                             "Prob_Family", 
+                             "Genus", 
+                             "Prob_Genus", 
+                             "Species", 
+                             "Prob_Species"
+)
+result_PROTAX_aug <- arrange_columns(result_PROTAX_aug, correct_cols)
+# Propagate last probability of unk to lower ranks
+for (r in seq_len(nrow(result_PROTAX_aug))){
+  i <- match(TRUE, result_PROTAX_aug[r, ranks] == "unk", nomatch = 0)  # first unk (or 0 if none)
+  if (i > 0) {
+    result_PROTAX_aug[r, probcols[i:length(probcols)]] <- result_PROTAX_aug[r, probcols[i]]
+  }
+}
+result_PROTAX_aug <- rename_unk_output(result_PROTAX_aug)
+
+
+
 
 ##### Sintax #####
 result_SINTAX <-
-  read.table(paste0("its/results/sintax/sintax_test", shorttxt, "_nt_16.tsv"),
+  read.table(paste0("its/results/sintax/sintax_test", shorttxt, "_nt_40.tsv"),
              header = TRUE,
              fill = T) |>
   dplyr::arrange(ID)
@@ -122,7 +183,7 @@ if(keep_na){
 ##### MycoAI-CNN #####
 result_aicnn <-
   read.table(paste0("its/results/mycoai_cnn/mycoai_cnn_test", shorttxt,
-                    "_nt_40.tsv"),
+                    "_nt_gpu.tsv"),
              header = T) |>
   dplyr::arrange(ID)
 result_aicnn <-
@@ -145,7 +206,7 @@ result_aibert <- arrange_columns(result_aibert, correct_cols)
 
 ##### BLAST top hit #####
 result_blast_top <-
-  read.table(paste0("its/results/blast/blast_top_hit_test", shorttxt, "_nt_16.tsv"),
+  read.table(paste0("its/results/blast/blast_top_hit_test", shorttxt, "_nt_40.tsv"),
              header = T) |>
   dplyr::arrange(ID) |>
   dplyr::mutate(species = purrr::map_chr(species,
@@ -168,7 +229,7 @@ if(length(which(!(data_true$ID %in% result_blast_top$ID))) != 0){
 
 ##### BLAST threshold #####
 result_blast_thresh <-
-  read.table(paste0("its/results/blast/blast_thresh_test", shorttxt, "_nt_16.tsv"),
+  read.table(paste0("its/results/blast/blast_thresh_test", shorttxt, "_nt_40.tsv"),
              header = T) |>
   dplyr::arrange(ID)
 result_blast_thresh <- arrange_columns(result_blast_thresh, correct_cols)
@@ -217,7 +278,7 @@ result_dnabarcoder <- arrange_columns(result_dnabarcoder, correct_cols)
 
 ##### IDTAXA #####
 result_idtaxa <-
- read.table(paste0("its/results/idtaxa/idtaxa_test", shorttxt, "_nt_4.tsv"),
+ read.table(paste0("its/results/idtaxa/idtaxa_test", shorttxt, "_nt_40.tsv"),
             fill = T, header = T) |>
   dplyr::arrange(ID)
 result_idtaxa <- arrange_columns(result_idtaxa, correct_cols)
@@ -249,7 +310,7 @@ if(keep_na){
 
 ##### Crest4 #####
 result_crest4 <-
-  read.table(paste0("its/results/crest4/crest4_test", shorttxt, "_nt_4.tsv"),
+  read.table(paste0("its/results/crest4/crest4_test", shorttxt, "_nt_40.tsv"),
              header = T) |>
   dplyr::arrange(ID)
 if(keep_na){
@@ -275,12 +336,13 @@ result_crest4 <- arrange_columns(result_crest4, correct_cols)
 
 results <- list(
   "BayesANT" = result_BayesANT,
-  #  "PROTAX" = result_PROTAX,
+  "PROTAX" = result_PROTAX,
+  "PROTAX aug." = result_PROTAX_aug,
   "RDP" = result_RDP,
   "BLAST top hit" = result_blast_top,
   "BLAST threshold" = result_blast_thresh,
   "SINTAX" = result_SINTAX,
-  "DNABarcoder" = result_dnabarcoder,
+  "dnabarcoder" = result_dnabarcoder,
   "IDTAXA" = result_idtaxa,
   "MycoAI-CNN" = result_aicnn,
   "MycoAI-BERT" = result_aibert,
