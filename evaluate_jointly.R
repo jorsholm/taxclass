@@ -9,7 +9,7 @@ source("functions.R")
 # LOAD DATA --------------------------------------------------------------------
 
 ranks_its <- 
-  c("Kingdom",
+  c(#"Kingdom",
     "Phylum",
     "Class",
     "Order",
@@ -27,7 +27,7 @@ ranks_coi <-
     "Species")
 
 allranks <- 
-  c("Kingdom",
+  c(#"Kingdom",
     "Phylum",
     "Class", 
     "Order",
@@ -41,7 +41,7 @@ allranks <-
 data_its <- 
   load_train_test(train_file = "its/data/train_tax.tsv", 
                   test_file = "its/data/test_tax.tsv",
-                  ranks = ranks_its)
+                  ranks = c("Kingdom", ranks_its))
 
 data_coi <- 
   load_train_test(train_file = "coi/data/train_tax.tsv", 
@@ -84,6 +84,10 @@ results_coi <- readRDS("coi/result_list_nt.rds")
 results_its_mp <- readRDS("its/result_list_keepNA.rds")
 results_coi_mp <- readRDS("coi/result_list_keepNA_nt.rds")
 
+# Remove Kingdom from ITS data 
+results_its <- lapply(results_its, function(df) df[,correct_cols_its])
+results_its_mp <- lapply(results_its_mp, function(df) df[,correct_cols_its])
+
 # IDENTIFY TAXA SETS -----------------------------------------------------------
 
 # Observed on all ranks ("Observed species")
@@ -118,10 +122,10 @@ lapply(results_its_mp, function(x) nrow(x)) |> unique()
 lapply(results_coi, function(x) nrow(x)) |> unique()
 lapply(results_coi_mp, function(x) nrow(x)) |> unique()
 
-# TODO: Some of our results have more sequences than data_true
-# Here, I remove them as a temporary solution 
-results_coi <- lapply(results_coi, function(x) x[which(x[,1] %in% data_true_coi[,1]),])
-results_coi_mp <- lapply(results_coi_mp, function(x) x[which(x[,1] %in% data_true_coi[,1]),])
+# # TODO: Some of our results have more sequences than data_true
+# # Here, I remove them as a temporary solution 
+# results_coi <- lapply(results_coi, function(x) x[which(x[,1] %in% data_true_coi[,1]),])
+# results_coi_mp <- lapply(results_coi_mp, function(x) x[which(x[,1] %in% data_true_coi[,1]),])
 
 # PLOT CALIBRATION CURVES ------------------------------------------------------
 
@@ -149,7 +153,7 @@ calibrations_its_mp <-
          set = factor(set, levels = c("All", "Observed", "Novel")), 
          model = factor(model, levels = algs_sorted))
 
-#### Novel species #### 
+#### Genus-level calibrations #### 
 
 caldf <- 
   calibrations_coi |> 
@@ -193,34 +197,75 @@ ggsave(plot = p_cal,
        height = 5, 
        units = "in")
 
-#### Observed species #### 
+#### All ranks #### 
 
-p_cal_obs <- list()
+p_cal_all <- list()
 
-p_cal_obs[["coi"]] <- 
+p_cal_all[["coi_obs"]] <- 
   plot_calibration(calibrations_coi |> 
                      filter(set == "Observed"), 
                    data_true = data_true_coi) +
   facet_wrap(~model, 
-             nrow = 2) + 
+             ncol = 5) + 
   theme(panel.grid.minor = element_blank(),
         legend.position = "right") + 
   guides(color = guide_legend(ncol = 1))
 
-p_cal_obs[["its"]] <- 
+p_cal_all[["its_obs"]] <- 
   plot_calibration(calibrations_its |> 
                      filter(set == "Observed"), 
                    data_true = data_true_its) +
   facet_wrap(~model, 
-             nrow = 2) + 
+             ncol = 5) + 
   theme(panel.grid.minor = element_blank(),
         legend.position = "right") + 
   guides(color = guide_legend(ncol = 1))
 
-p_cal_obs_joint <- 
-  ggpubr::ggarrange(plotlist = p_cal_obs, 
+p_cal_all[["coi_nov"]] <- 
+  plot_calibration(calibrations_coi |> 
+                     filter(set == "Novel"), 
+                   data_true = data_true_coi) +
+  facet_wrap(~model, 
+             ncol = 5) + 
+  theme(panel.grid.minor = element_blank(),
+        legend.position = "right") + 
+  guides(color = guide_legend(ncol = 1))
+
+p_cal_all[["its_nov"]] <- 
+  plot_calibration(calibrations_its |> 
+                     filter(set == "Novel"), 
+                   data_true = data_true_its) +
+  facet_wrap(~model, 
+             ncol = 5) + 
+  theme(panel.grid.minor = element_blank(),
+        legend.position = "right") + 
+  guides(color = guide_legend(ncol = 1))
+
+p_cal_all <- 
+  lapply(p_cal_all, function(p){
+  p <- 
+    p + 
+    ggplot2::scale_color_manual(name = "Rank", 
+                                limits = allranks, 
+                                values = RColorBrewer::brewer.pal(name = "Blues",
+                                                                  n = length(allranks)))
+  p
+})
+
+p_cal_all[[1]] + 
+  ggplot2::scale_color_manual(name = "Rank", 
+                              limits = allranks, 
+                              values = RColorBrewer::brewer.pal(name = "Blues",
+                                                                n = length(allranks)), 
+                              drop = F, 
+                              labels = allranks)
+
+#p_cal_obs_joint <- 
+  ggpubr::ggarrange(plotlist = p_cal_all, 
                     ncol = 1, 
-                    labels = str_to_upper(names(p_cal)))
+                    labels = str_to_upper(names(p_cal_all)), 
+                    common.legend = T, 
+                    legend = "right")
 
 ggsave(plot = p_cal_obs_joint, 
        filename = "plots/calibration_obs_joint.pdf", 
@@ -361,14 +406,15 @@ p_acc_mp <-
         axis.title.x = element_blank(), 
         axis.text.x = element_text(angle = 45, hjust = 1), 
         legend.position = "bottom",
-        panel.spacing = unit(0, "lines")) + 
+        panel.spacing = unit(0, "lines"), 
+        strip.text.y = element_blank()) + 
   ggh4x::facet_nested(set ~ gene + obs, scales = "free_x") + 
   labs(color = "Model", y = "Marginal recall (%)                  Accuracy (%)") # Stupid double axis label fix 
 p_acc_mp <- change_plot_colors(p_acc_mp) 
 
 ggsave(plot = p_acc_mp, 
        filename = "plots/fourpanel_joint_mp.pdf", 
-       width = 9, 
+       width = 8.5, 
        height = 6, 
        units = "in")
 
@@ -485,22 +531,86 @@ result_blast_top_similarity_its <-
   arrange(ID) 
 
 # Replace BLAST result with similarity data frame 
-results_coi_mp_similarity <- results_coi_mp
-results_coi_mp_similarity$`BLAST top hit` <- result_blast_top_similarity_coi
-results_its_mp_similarity <- results_its_mp
-results_its_mp_similarity$`BLAST top hit` <- result_blast_top_similarity_its
+results_coi_coverage <- results_coi
+results_coi_coverage$`BLAST top hit` <- result_blast_top_similarity_coi
+results_coi_coverage$`BLAST threshold` <- results_coi_mp$`BLAST threshold`
+results_coi_coverage$Crest4 <- results_coi_mp$Crest4
+results_coi_coverage$DNABarcoder <- results_coi_mp$DNABarcoder
+
+results_coi_coverage$RDP_point <-
+  results_coi_mp$RDP |> 
+  pivot_longer(cols = starts_with("Prob_"), 
+               names_to = "rank", 
+               values_to = "prob") |> 
+  mutate(prob = if_else(is.na(prob), NA, 1)) |> 
+  pivot_wider(names_from = rank, 
+              values_from = prob)
+
+results_coi_coverage$SINTAX_point <-
+  results_coi_mp$SINTAX |> 
+  pivot_longer(cols = starts_with("Prob_"), 
+               names_to = "rank", 
+               values_to = "prob") |> 
+  mutate(prob = if_else(is.na(prob), NA, 1)) |> 
+  pivot_wider(names_from = rank, 
+              values_from = prob)
+
+results_coi_coverage$IDTAXA_point <-
+  results_coi_mp$IDTAXA |> 
+  pivot_longer(cols = starts_with("Prob_"), 
+               names_to = "rank", 
+               values_to = "prob") |> 
+  mutate(prob = if_else(is.na(prob), NA, 1)) |> 
+  pivot_wider(names_from = rank, 
+              values_from = prob)
+
+results_its_coverage <- results_its
+results_its_coverage$`BLAST top hit` <- result_blast_top_similarity_its
+results_its_coverage$`BLAST threshold` <- results_its_mp$`BLAST threshold`
+results_its_coverage$Crest4 <- results_its_mp$Crest4
+results_its_coverage$DNABarcoder <- results_its_mp$DNABarcoder
+
+results_its_coverage$RDP_point <-
+  results_its_mp$RDP |> 
+  pivot_longer(cols = starts_with("Prob_"), 
+               names_to = "rank", 
+               values_to = "prob") |> 
+  mutate(prob = if_else(is.na(prob), NA, 1)) |> 
+  pivot_wider(names_from = rank, 
+              values_from = prob)
+
+results_its_coverage$SINTAX_point <-
+  results_its_mp$SINTAX |> 
+  pivot_longer(cols = starts_with("Prob_"), 
+               names_to = "rank", 
+               values_to = "prob") |> 
+  mutate(prob = if_else(is.na(prob), NA, 1)) |> 
+  pivot_wider(names_from = rank, 
+              values_from = prob)
+
+results_its_coverage$IDTAXA_point <-
+  results_its_mp$IDTAXA |> 
+  pivot_longer(cols = starts_with("Prob_"), 
+               names_to = "rank", 
+               values_to = "prob") |> 
+  mutate(prob = if_else(is.na(prob), NA, 1)) |> 
+  pivot_wider(names_from = rank, 
+              values_from = prob)
 
 classified_correct_coi <- 
-  threshold_curve(results_coi_mp_similarity, data_true_coi) |>   
+  threshold_curve(results_coi_coverage, data_true_coi) |>   
   mutate(rank = factor(rank, levels = ranks_coi))
 classified_correct_its <- 
-  threshold_curve(results_its_mp_similarity, data_true_its) |>   
+  threshold_curve(results_its_coverage, data_true_its) |>   
   mutate(rank = factor(rank, levels = ranks_its))
 
 point_models <- c(
   "BLAST threshold",
   "Crest4", 
-  "DNABarcoder"
+  "dnabarcoder", 
+  "RDP_point", 
+  "SINTAX_point", 
+  "IDTAXA_point"
 )
 
 classified_correct <- 
@@ -521,7 +631,8 @@ p_class <-
                 shape = model),
             alpha = 0.7) +
   geom_point(data = classified_correct |> 
-               filter(model %in% point_models), 
+               filter(model %in% point_models) |> 
+               mutate(model = map_chr(model, ~str_remove(.x, "_point"))), 
              aes(x = classified, 
                  y = correct, 
                  color = model, 
@@ -529,13 +640,13 @@ p_class <-
   facet_grid(rank~gene) + 
   theme_bw() + 
   theme(aspect.ratio = 1, 
-        panel.grid.minor = element_blank()) + 
+        panel.grid.minor = element_blank(), 
+        panel.spacing = unit(0, "lines")) + 
   labs(x = "% classified", 
        y = "% correct", 
        color = "Model") + 
   ylim(c(0, 100)) 
 p_class <- change_plot_colors(p_class)
-
 
 ggsave(plot = p_class, 
        filename = "plots/classified_correct_joint.pdf", 
@@ -570,6 +681,7 @@ p_error <-
                names_to = "error_type",
                values_to = "error_rate") |> 
   mutate(error_type = str_to_sentence(error_type)) |> 
+  filter(!is.na(error_rate)) |> 
   ggplot() + 
   geom_line(aes(x = rank, 
                 y = error_rate, 
@@ -579,7 +691,7 @@ p_error <-
                  y = error_rate, 
                  color = model, 
                  shape = model)) + 
-  facet_grid(error_type~gene, scales = "free_x") +
+  facet_grid(gene~error_type, scales = "free_x") +
   theme_bw() + 
   ylab("Error rate (%)") + 
   theme(axis.title.x = element_blank(),
@@ -591,8 +703,8 @@ p_error <- change_plot_colors(p_error)
 
 ggsave(plot = p_error, 
        filename = "plots/errorrates_joint.pdf", 
-       height = 6.5, 
-       width = 6.5, 
+       height = 5, 
+       width = 8, 
        units = "in")
 
 # TOTAL NUMBER OF NOVELTY PREDICTIONS ------------------------------------------
@@ -647,10 +759,10 @@ results_coi_short <- readRDS("coi/result_list_short_nt.rds")
 results_its_short <- readRDS("its/result_list_short.rds")
 
 # TODO: temporary fixes for wrong number of sequences
-results_coi_short <- lapply(results_coi_short, 
-                            function(x) x[which(x[,1] %in% data_true_coi[,1]),])
-
-results_its_short <- results_its_short[-2]
+# results_coi_short <- lapply(results_coi_short, 
+#                             function(x) x[which(x[,1] %in% data_true_coi[,1]),])
+# 
+# results_its_short <- results_its_short[-2]
 
 # Get calibrations data 
 calibrations_coi_short <-  
@@ -714,3 +826,47 @@ ggsave(plot = p_acc_short,
        height = 150, 
        width = 150, 
        units = "mm")
+
+# TEXT INFO --------------------------------------------------------------------
+
+# Accuracy 
+acc_df <- 
+  accuracies_coi |> 
+  mutate(gene = "COI") |> 
+  bind_rows(accuracies_its |> 
+              mutate(gene = "ITS")) 
+# at genus and species level, observed species   
+acc_df |> 
+  filter(set == "Observed", rank %in% c("Genus", "Species")) |> 
+  pivot_wider(names_from = rank, 
+              values_from = accuracy) |> 
+  arrange(Species) 
+
+# novel, genus
+acc_df |> 
+  filter(set == "Novel", rank == "Genus") |> 
+  pivot_wider(names_from = gene, values_from = accuracy) |> 
+  arrange(ITS)
+
+# novel, species 
+acc_df |> 
+  filter(set == "Novel", rank == "Species", str_detect(model, "EPA-ng|PROTAX|BayesANT")) |> 
+  pivot_wider(names_from = gene, values_from = accuracy) |> 
+  arrange(COI)
+
+# misclassification 
+misclass_df_coi |> 
+  mutate(gene = "COI") |> 
+  bind_rows(misclass_df_its |> 
+              mutate(gene = "ITS")) |>
+  pivot_wider(names_from = gene, values_from = misclassification) |> 
+  arrange(-ITS) |> View()
+
+# overclassification, 
+oclass_df_coi |> 
+  mutate(gene = "COI") |> 
+  bind_rows(oclass_df_its |> 
+              mutate(gene = "ITS")) |> 
+  pivot_wider(names_from = gene, values_from = overclassification) |> 
+  filter(model == "RDP" | model == "SINTAX")
+

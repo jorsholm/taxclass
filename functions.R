@@ -8,7 +8,7 @@ algs_sorted <- c(
   # Similarity
   "BLAST top hit", 
   "BLAST threshold",
-  "DNABarcoder",
+  "dnabarcoder",
   "Crest4", 
   # K-mer 
   "IDTAXA",
@@ -17,6 +17,7 @@ algs_sorted <- c(
   # Probabilistic
   "BayesANT", 
   "PROTAX", 
+  "PROTAX aug.",
   #Neural networks
   "MycoAI-BERT", 
   "MycoAI-CNN", 
@@ -37,6 +38,7 @@ plot_colors <- c(
   # Probabilistic
   "#bcbddc",
   "#756bb1",
+  "#54278f",
   #Neural networks
   "#fdbe85",
   "#fd8d3c",
@@ -51,12 +53,13 @@ point_shapes <- c(
   4,
   5, 
   # k-mer
-  20,
+  6,
   4,
   5,
   # probabilistic 
   2,
   20,
+  4,
   # neural
   20,
   4,
@@ -618,7 +621,7 @@ threshold_curve <- function(results, data_true, thresholds = seq(0, 1, 0.01)){
         out <- rbind(out,
                      data.frame(model = names(results)[i],
                                 rank = r,
-                                threshold = unique(results[[i]][not_na_pos, probcol]),
+                                threshold = unique(results[[i]][not_na_pos, probcol]) |> as.numeric(),
                                 correct = correct,
                                 classified = classified))
         
