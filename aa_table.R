@@ -40,8 +40,8 @@ correct_cols <- c("ID",
 nt_long <-  readRDS("coi/result_list_nt.rds")
 aa_long <- readRDS("coi/result_list_aa.rds")
 
-nt_long_mp <-  readRDS("coi/result_list_keepNA_nt.rds")
-aa_long_mp <- readRDS("coi/result_list_keepNA_aa.rds")
+# nt_long_mp <-  readRDS("coi/result_list_keepNA_nt.rds")
+# aa_long_mp <- readRDS("coi/result_list_keepNA_aa.rds")
 
 # IDENTIFY TAXA SETS -----------------------------------------------------------
 
@@ -64,16 +64,24 @@ id_all <- lapply(data_true, function(x) 1:length(x))
 
 # TODO: Some of our results have more sequences than data_true
 # Here, I remove them as a temporary solution 
-nt_long <- lapply(nt_long, function(x) x[which(x[,1] %in% data_true[,1]),])
-aa_long <- lapply(aa_long, function(x) x[which(x[,1] %in% data_true[,1]),])
-nt_long_mp <- lapply(nt_long_mp, function(x) x[which(x[,1] %in% data_true[,1]),])
-aa_long_mp <- lapply(aa_long_mp, function(x) x[which(x[,1] %in% data_true[,1]),])
+# nt_long <- lapply(nt_long, function(x) x[which(x[,1] %in% data_true[,1]),])
+# aa_long <- lapply(aa_long, function(x) x[which(x[,1] %in% data_true[,1]),])
+# nt_long_mp <- lapply(nt_long_mp, function(x) x[which(x[,1] %in% data_true[,1]),])
+# aa_long_mp <- lapply(aa_long_mp, function(x) x[which(x[,1] %in% data_true[,1]),])
 
 
 # Some quick checks of results structure 
 if(!length(unique(lapply(aa_long, function(x) colnames(x)))) == 1) print("One of the results data frames have wrong column names.")
 if(!all(sapply(aa_long, function(x) all(x[,1] == data_true[,1])))) print("One of the results data frames is not sorted by ID.")
 if(!all(colnames(data_true) == colnames(aa_long[[1]])[1:ncol(data_true)])) print("Column names containing taxonomic information not identical to data_true")
+
+# FOR PLOTTING -----------------------------------------------------------------
+
+model_details <- create_model_details(unique(c(names(nt_long), 
+                                               names(aa_long))))
+
+models <- split(model_details$model, model_details$type, drop = TRUE)
+models <- models[unique(model_details$type)]
 
 
 # CALC ACCURACIES --------------------------------------------------------------
@@ -83,25 +91,25 @@ nt_calibrations <-
   get_calibration(nt_long, data_true, observed_everywhere) |> 
   mutate(rank = factor(rank, levels = ranks), 
          set = factor(set, levels = c("All", "Observed", "Novel")), 
-         model = factor(model, levels = algs_sorted))
+         model = factor(model, levels = model_details$model))
 
 aa_calibrations <- 
   get_calibration(aa_long, data_true, observed_everywhere) |> 
   mutate(rank = factor(rank, levels = ranks), 
          set = factor(set, levels = c("All", "Observed", "Novel")), 
-         model = factor(model, levels = algs_sorted))
+         model = factor(model, levels = model_details$model))
 
-nt_calibrations_mp <- 
-  get_calibration(nt_long_mp, data_true, observed_everywhere) |> 
-  mutate(rank = factor(rank, levels = ranks), 
-         set = factor(set, levels = c("All", "Observed", "Novel")), 
-         model = factor(model, levels = algs_sorted))
-
-aa_calibrations_mp <- 
-  get_calibration(aa_long_mp, data_true, observed_everywhere) |> 
-  mutate(rank = factor(rank, levels = ranks), 
-         set = factor(set, levels = c("All", "Observed", "Novel")), 
-         model = factor(model, levels = algs_sorted))
+# nt_calibrations_mp <- 
+#   get_calibration(nt_long_mp, data_true, observed_everywhere) |> 
+#   mutate(rank = factor(rank, levels = ranks), 
+#          set = factor(set, levels = c("All", "Observed", "Novel")), 
+#          model = factor(model, levels = algs_sorted))
+# 
+# aa_calibrations_mp <- 
+#   get_calibration(aa_long_mp, data_true, observed_everywhere) |> 
+#   mutate(rank = factor(rank, levels = ranks), 
+#          set = factor(set, levels = c("All", "Observed", "Novel")), 
+#          model = factor(model, levels = algs_sorted))
 
 ### If a sequence belongs to a new taxon (on any rank), how well is it predicted on higher ranks? 
 nt_accuracies <- get_accuracy_from_cal(nt_calibrations) |> 
@@ -110,12 +118,12 @@ nt_accuracies <- get_accuracy_from_cal(nt_calibrations) |>
 aa_accuracies <- get_accuracy_from_cal(aa_calibrations) |> 
   mutate(rank = factor(rank, levels = ranks), 
          set = factor(set, levels = c("All", "Observed", "Novel")))
-nt_accuracies_mp <- get_accuracy_from_cal(nt_calibrations_mp) |> 
-  mutate(rank = factor(rank, levels = ranks), 
-         set = factor(set, levels = c("All", "Observed", "Novel")))
-aa_accuracies_mp <- get_accuracy_from_cal(aa_calibrations_mp) |> 
-  mutate(rank = factor(rank, levels = ranks), 
-         set = factor(set, levels = c("All", "Observed", "Novel")))
+# nt_accuracies_mp <- get_accuracy_from_cal(nt_calibrations_mp) |> 
+#   mutate(rank = factor(rank, levels = ranks), 
+#          set = factor(set, levels = c("All", "Observed", "Novel")))
+# aa_accuracies_mp <- get_accuracy_from_cal(aa_calibrations_mp) |> 
+#   mutate(rank = factor(rank, levels = ranks), 
+#          set = factor(set, levels = c("All", "Observed", "Novel")))
 
 tab <- 
   bind_rows(nt_accuracies |> mutate(datatype = "nt") |> mutate(mp = "F"), 
@@ -144,25 +152,45 @@ aminomodels <- c("BLAST top hit",
                  "BLAST threshold", 
                  "Crest4", 
                  "IDTAXA", 
-                 "EPA-ng phyltree",
-                 "EPA-ng taxtree", 
+                 "EPA-ng phyl",
+                 "EPA-ng tax",
+                 "EPA-ng free",
                  "BayesANT")
 
-left_join(nt_accuracies, 
+aa_diff <- 
+  left_join(nt_accuracies, 
           aa_accuracies, 
           by = c("model", 
                  "rank", 
                  "set")) |> 
+  filter(set != "All") |> 
   rename(accuracy_nt = accuracy.x, 
          accuracy_aa = accuracy.y) |> 
   mutate(diff = accuracy_aa - accuracy_nt) |> 
-  filter(model %in% aminomodels) |> 
+  filter(model %in% aminomodels) |>
+  mutate(rank = map_chr(rank, ~if_else(.x == "Species", "Sp", 
+                                       if_else(.x == "Subfamily", "Su", 
+                                               substring(.x, 1, 1))))) |> 
+  mutate(rank = factor(rank, levels = c("C", "O", "F", "Su", "T", "G", "Sp"))) |> 
   ggplot() + 
+  theme_bw() + 
   geom_bar(stat = "identity", 
            aes(x = rank, 
                y = diff)) + 
-  facet_grid(model~set) +
+  facet_grid(set~model, 
+             scales = "free_y") +
   geom_hline(yintercept = 0, 
-             linetype = "dashed")
+             linetype = "dashed") + 
+  labs(y = "accuracy_aa - accuracy_nt (%pt.)") + 
+  theme(axis.title.x = element_blank(), 
+        panel.spacing = unit(0, "lines"), 
+        panel.grid.minor = element_blank(), 
+        panel.grid.major.x = element_blank())
+
+ggsave(filename = "plots/aa_diff.pdf", 
+       plot = aa_diff, 
+       height = 4, 
+       width = 9, 
+       units = "in")
 
 
