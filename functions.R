@@ -2,84 +2,151 @@
 # Functions for analysing performance of taxonomic classification algorithms.
 ################################################################################
 
+library(tidyverse)
+
 # FOR PLOTTING -----------------------------------------------------------------
 
-algs_sorted <- c(
-  # Similarity
-  "BLAST top hit", 
-  "BLAST threshold",
-  "dnabarcoder",
-  "Crest4", 
-  # K-mer 
-  "IDTAXA",
-  "RDP", 
-  "SINTAX",
-  # Probabilistic
-  "BayesANT", 
-  "PROTAX", 
-  "PROTAX aug.",
-  #Neural networks
-  "MycoAI-BERT", 
-  "MycoAI-CNN", 
-  # phylogenetic 
-  "EPA-ng phyltree", 
-  "EPA-ng taxtree")
+# algs_sorted <- c(
+#   # Similarity
+#   "BLAST top hit", 
+#   "BLAST threshold",
+#   "dnabarcoder",
+#   "Crest4", 
+#   # K-mer 
+#   "IDTAXA",
+#   "RDP", 
+#   "SINTAX",
+#   # Probabilistic
+#   "BayesANT", 
+#   "PROTAX", 
+#   "PROTAX aug.",
+#   #Neural networks
+#   "MycoAI-BERT", 
+#   "MycoAI-CNN", 
+#   # phylogenetic 
+#   "EPA-ng phyltree", 
+#   "EPA-ng taxtree")
+# 
+# plot_colors <- c(
+#   # Similarity
+#   "#bdd7e7",
+#   "#6baed6",
+#   "#3182bd",
+#   "#08519c", 
+#   # K-mer
+#   "#bae4b3",
+#   "#74c476",
+#   "#238b45",
+#   # Probabilistic
+#   "#bcbddc",
+#   "#756bb1",
+#   "#54278f",
+#   #Neural networks
+#   "#fdbe85",
+#   "#fd8d3c",
+#   # phylogenetic
+#   "#fbb4b9",
+#   "#f768a1")
+# 
+# point_shapes <- c( 
+#   #similarity 
+#   20,
+#   2,
+#   4,
+#   5, 
+#   # k-mer
+#   6,
+#   4,
+#   5,
+#   # probabilistic 
+#   2,
+#   20,
+#   4,
+#   # neural
+#   20,
+#   4,
+#   # phylogenetic
+#   2,
+#   5
+# )
+create_model_details <- function(models){
+  model_details <- 
+    tribble(~ord, ~type, ~model, ~colour, ~shape, 
+            1, "Similarity",     "BLAST top hit",   "#bdd7e7", 20, 
+            1, "Similarity",     "BLAST threshold", "#6baed6", 2, 
+            1, "Similarity",     "dnabarcoder",     "#3182bd", 4, 
+            1, "Similarity",     "Crest4",          "#08519c", 5, 
+            2, "Composition",    "IDTAXA",          "#bae4b3", 6, 
+            2, "Composition",    "RDP",             "#74c476", 4,
+            2, "Composition",    "SINTAX",          "#238b45", 5,
+            3, "Probabilistic",  "BayesANT",        "#bcbddc", 2, 
+            3, "Probabilistic",  "PROTAX",          "#756bb1", 20, 
+            3, "Probabilistic",  "PROTAX aug.",     "#54278f", 4,
+            4, "Phylogenetic",   "EPA-ng phyl",     "#fbb4b9", 2, 
+            4, "Phylogenetic",   "EPA-ng tax",      "#f768a1", 5, 
+            4, "Phylogenetic",   "EPA-ng free",     "#ce1256", 6, 
+            5, "Neural network", "MycoAI-BERT",     "#fdbe85", 20, 
+            5, "Neural network", "MycoAI-CNN",      "#fd8d3c", 4)
+  return(model_details |> 
+           filter(model %in% models))
+}
 
-plot_colors <- c(
-  # Similarity
-  "#bdd7e7",
-  "#6baed6",
-  "#3182bd",
-  "#08519c", 
-  # K-mer
-  "#bae4b3",
-  "#74c476",
-  "#238b45",
-  # Probabilistic
-  "#bcbddc",
-  "#756bb1",
-  "#54278f",
-  #Neural networks
-  "#fdbe85",
-  "#fd8d3c",
-  # phylogenetic
-  "#fbb4b9",
-  "#f768a1")
-
-point_shapes <- c( 
-  #similarity 
-  20,
-  2,
-  4,
-  5, 
-  # k-mer
-  6,
-  4,
-  5,
-  # probabilistic 
-  2,
-  20,
-  4,
-  # neural
-  20,
-  4,
-  # phylogenetic
-  2,
-  5
-)
-
-change_plot_colors <- function(x){
-  return(x + 
+change_plot_colors <- function(x, model_details){
+  return(x +
     scale_color_manual(name = "Model",
-                     labels = algs_sorted, 
-                     values = plot_colors, 
-                     breaks = algs_sorted) + 
+                     labels = model_details$model,
+                     values = model_details$colour,
+                     breaks = model_details$model) +
     scale_shape_manual(name = "Model",
-                       labels = algs_sorted,
-                       values = point_shapes, 
-                       breaks = algs_sorted)
+                       labels = model_details$model,
+                       values = model_details$shape,
+                       breaks = model_details$model)
   )
-} 
+}
+
+plot_line <- function(df, x, y, model_type, plot_details, ...){
+  plot_details <- 
+    plot_details |> 
+    filter(type == model_type)
+  
+  extra_aes <- rlang::enquos(...)
+  
+  list(geom_line(data = df, 
+                 aes(x = {{x}}, 
+                     y = {{y}}, 
+                     colour = model, 
+                     !!!extra_aes)), 
+       scale_colour_manual(name = model_type, 
+                           values = plot_details$colour, 
+                           breaks = plot_details$model, 
+                           labels = plot_details$model, 
+                           guide = guide_legend(
+                             order = unique(plot_details$ord), 
+                             ncol = 1)))
+}
+
+plot_point <- function(df, x, y, model_type, plot_details){
+  plot_details <- 
+    plot_details |> 
+    filter(type == model_type)
+  list(geom_point(data = df, 
+                  aes(x = {{x}}, 
+                      y = {{y}}, 
+                      colour = model, 
+                      shape = model)), 
+       scale_colour_manual(name = model_type, 
+                           values = plot_details$colour, 
+                           breaks = plot_details$model, 
+                           labels = plot_details$model, 
+                           guide = guide_legend(order = unique(plot_details$ord), 
+                                                ncol = 1)), 
+       scale_shape_manual(name = model_type, 
+                          values = plot_details$shape,
+                          breaks = plot_details$model, 
+                          labels = plot_details$model, 
+                          guide = guide_legend(order = unique(plot_details$ord), 
+                                               ncol = 1)))
+}
 
 # OTHER FUNCTIONS --------------------------------------------------------------
 

@@ -127,6 +127,15 @@ lapply(results_coi_mp, function(x) nrow(x)) |> unique()
 # results_coi <- lapply(results_coi, function(x) x[which(x[,1] %in% data_true_coi[,1]),])
 # results_coi_mp <- lapply(results_coi_mp, function(x) x[which(x[,1] %in% data_true_coi[,1]),])
 
+# FOR PLOTTING -----------------------------------------------------------------
+
+model_details <- create_model_details(unique(c(names(results_coi), 
+                                               names(results_its))))
+
+models <- split(model_details$model, model_details$type, drop = TRUE)
+models <- models[unique(model_details$type)]
+      
+
 # PLOT CALIBRATION CURVES ------------------------------------------------------
 
 # Without allowing missing predictions 
@@ -134,24 +143,24 @@ calibrations_coi <-
   get_calibration(results_coi, data_true_coi, observed_everywhere_coi) |> 
   mutate(rank = factor(rank, levels = ranks_coi), 
          set = factor(set, levels = c("All", "Observed", "Novel")), 
-         model = factor(model, levels = algs_sorted))
+         model = factor(model, levels = model_details$model))
 calibrations_its <- 
   get_calibration(results_its, data_true_its, observed_everywhere_its) |> 
   mutate(rank = factor(rank, levels = ranks_its), 
          set = factor(set, levels = c("All", "Observed", "Novel")), 
-         model = factor(model, levels = algs_sorted))
+         model = factor(model, levels = model_details$model))
 
 # With missing predictions
 calibrations_coi_mp <- 
   get_calibration(results_coi_mp, data_true_coi, observed_everywhere_coi) |> 
   mutate(rank = factor(rank, levels = ranks_coi), 
          set = factor(set, levels = c("All", "Observed", "Novel")), 
-         model = factor(model, levels = algs_sorted))
+         model = factor(model, levels = model_details$model))
 calibrations_its_mp <- 
   get_calibration(results_its_mp, data_true_its, observed_everywhere_its) |> 
   mutate(rank = factor(rank, levels = ranks_its), 
          set = factor(set, levels = c("All", "Observed", "Novel")), 
-         model = factor(model, levels = algs_sorted))
+         model = factor(model, levels = model_details$model))
 
 #### Genus-level calibrations #### 
 
@@ -174,27 +183,41 @@ p_cal <-
   geom_abline(intercept = 0, slope = 1, color = "grey") +
   xlab("Cumulative probability %") +
   ylab("Cumulative correct %") +
-  facet_grid(set~gene) + 
-  #grids(linetype = "dashed") + 
-  geom_line(data = caldf, 
-            aes(x = cumprob, 
-                y = cumcorr, 
-                color = model)) +
-  geom_point(data = caldf |>
-               group_by(across(all_of(c("model", "gene", "set")))) |>
-               summarise(cumprob = max(cumprob),
-                         cumcorr = max(cumcorr)), 
-             aes(x = cumprob, 
-                 y = cumcorr, 
-                 color = model, 
-                 shape = model)) 
+  facet_grid(set~gene) 
 
-p_cal <- change_plot_colors(p_cal)
+for(type in names(models)){
+  p_cal <- 
+    p_cal + 
+    plot_line(df = caldf |> 
+                filter(model %in% models[[type]]), 
+              x = cumprob, 
+              y = cumcorr, 
+              model_type = type, 
+              plot_details = model_details) + 
+    plot_point(df = caldf |>
+                 filter(model %in% models[[type]]) |>
+                 group_by(across(all_of(c("model", "gene", "set")))) |>
+                 summarise(cumprob = max(cumprob),
+                           cumcorr = max(cumcorr)),
+               x = cumprob,
+               y = cumcorr,
+               model_type = type,
+               plot_details = model_details) +
+    ggnewscale::new_scale_color() + ggnewscale::new_scale("shape") 
+}
+
+p_cal <- 
+  p_cal + 
+  theme(legend.spacing.x = unit(0.1, "lines"), 
+        legend.title = element_text(size = 10), 
+        legend.position = "bottom", 
+        legend.box = "horizontal", 
+        legend.title.position = "top")
 
 ggsave(plot = p_cal, 
        filename = "plots/calibration_joint.pdf", 
-       width = 6, 
-       height = 5, 
+       width = 6.5, 
+       height = 6.5, 
        units = "in")
 
 #### All ranks #### 
@@ -205,72 +228,78 @@ p_cal_all[["coi_obs"]] <-
   plot_calibration(calibrations_coi |> 
                      filter(set == "Observed"), 
                    data_true = data_true_coi) +
-  facet_wrap(~model, 
-             ncol = 5) + 
-  theme(panel.grid.minor = element_blank(),
-        legend.position = "right") + 
-  guides(color = guide_legend(ncol = 1))
+  ggplot2::scale_color_manual(name = "Rank", 
+                              limits = ranks_coi, 
+                              breaks = ranks_coi, 
+                              values = RColorBrewer::brewer.pal(name = "Blues",
+                                                                n = length(ranks_coi) + 1)[2:(length(ranks_coi) + 1)])
 
 p_cal_all[["its_obs"]] <- 
   plot_calibration(calibrations_its |> 
                      filter(set == "Observed"), 
                    data_true = data_true_its) +
-  facet_wrap(~model, 
-             ncol = 5) + 
-  theme(panel.grid.minor = element_blank(),
-        legend.position = "right") + 
-  guides(color = guide_legend(ncol = 1))
+  ggplot2::scale_color_manual(name = "Rank", 
+                              limits = ranks_its, 
+                              breaks = ranks_its, 
+                              values = RColorBrewer::brewer.pal(name = "Blues",
+                                                                n = length(ranks_its) + 1)[2:(length(ranks_its) + 1)])
 
 p_cal_all[["coi_nov"]] <- 
   plot_calibration(calibrations_coi |> 
                      filter(set == "Novel"), 
                    data_true = data_true_coi) +
-  facet_wrap(~model, 
-             ncol = 5) + 
-  theme(panel.grid.minor = element_blank(),
-        legend.position = "right") + 
-  guides(color = guide_legend(ncol = 1))
+  ggplot2::scale_color_manual(name = "Rank", 
+                              limits = ranks_coi, 
+                              breaks = ranks_coi, 
+                              values = RColorBrewer::brewer.pal(name = "Blues",
+                                                                n = length(ranks_coi) + 1)[2:(length(ranks_coi) + 1)])
 
 p_cal_all[["its_nov"]] <- 
   plot_calibration(calibrations_its |> 
                      filter(set == "Novel"), 
                    data_true = data_true_its) +
-  facet_wrap(~model, 
-             ncol = 5) + 
-  theme(panel.grid.minor = element_blank(),
-        legend.position = "right") + 
-  guides(color = guide_legend(ncol = 1))
-
+  ggplot2::scale_color_manual(name = "Rank", 
+                              limits = ranks_its, 
+                              breaks = ranks_its, 
+                              values = RColorBrewer::brewer.pal(name = "Blues",
+                                                                n = length(ranks_its) + 1)[2:(length(ranks_its) + 1)])
 p_cal_all <- 
   lapply(p_cal_all, function(p){
   p <- 
     p + 
-    ggplot2::scale_color_manual(name = "Rank", 
-                                limits = allranks, 
-                                values = RColorBrewer::brewer.pal(name = "Blues",
-                                                                  n = length(allranks)))
+    facet_wrap(~model, 
+               ncol = 5) + 
+    theme(panel.grid.minor = element_blank(),
+          legend.position = "right") 
   p
 })
 
-p_cal_all[[1]] + 
-  ggplot2::scale_color_manual(name = "Rank", 
-                              limits = allranks, 
-                              values = RColorBrewer::brewer.pal(name = "Blues",
-                                                                n = length(allranks)), 
-                              drop = F, 
-                              labels = allranks)
-
-#p_cal_obs_joint <- 
-  ggpubr::ggarrange(plotlist = p_cal_all, 
+p_cal_all_coi <- 
+  ggpubr::ggarrange(plotlist = p_cal_all[c(1,3)], 
                     ncol = 1, 
-                    labels = str_to_upper(names(p_cal_all)), 
+                    hjust = 0,
+                    labels = c("COI_obs", "COI_novel"), 
                     common.legend = T, 
                     legend = "right")
 
-ggsave(plot = p_cal_obs_joint, 
-       filename = "plots/calibration_obs_joint.pdf", 
-       width = 10, 
-       height = 8, 
+ggsave(plot = p_cal_all_coi, 
+       filename = "plots/calibration_coi_all.pdf", 
+       width = 8, 
+       height = 9, 
+       units = "in")
+
+p_cal_all_its <- 
+  ggpubr::ggarrange(plotlist = p_cal_all[c(2,4)], 
+                    ncol = 1, 
+                    hjust = 0,
+                    labels = c("ITS_obs", "ITS_novel"), 
+                    common.legend = T, 
+                    legend = "right")
+
+ggsave(plot = p_cal_all_its, 
+       filename = "plots/calibration_its_all.pdf", 
+       width = 8, 
+       height = 9, 
        units = "in")
 
 # PLOT ACCURACIES --------------------------------------------------------------
@@ -298,7 +327,8 @@ marg_accuracies_its <-
                     id_list = list(All = id_all_its,
                                    Observed = id_observed_its,
                                    Novel = id_novel_its))
-p_acc <- 
+
+p_acc_df <- 
   marg_accuracies_coi |> 
   filter(set != "All") |> 
   rename(accuracy = marg_accuracy) |> 
@@ -307,43 +337,86 @@ p_acc <-
   bind_rows(accuracies_coi |> 
               filter(set != "All") |> 
               mutate(set = paste(set, "Species"))) |> 
-    mutate(gene = "COI") |> 
-    bind_rows(marg_accuracies_its |> 
-                filter(set != "All") |> 
-                rename(accuracy = marg_accuracy) |> 
-                mutate(set = paste(set, "Taxa"), 
-                       accuracy = accuracy * 100) |> 
-                bind_rows(accuracies_its |> 
-                            filter(set != "All") |> 
-                            mutate(set = paste(set, "Species"))) |> 
-                mutate(gene = "ITS")) |> 
-    separate(set, into = c("obs", "set"), sep = " ") |> 
-    mutate(rank = factor(rank, levels = allranks), 
-           obs = factor(obs, levels = c("Observed", "Novel")), 
-           model = factor(model, levels = algs_sorted)) |> 
-    ggplot() + 
-    aes(x = rank, 
-        y = accuracy, 
-        color = model, 
-        shape = model) +
-    geom_line(mapping = aes(group = model)) + 
-    geom_point() +
+  mutate(gene = "COI") |> 
+  bind_rows(marg_accuracies_its |> 
+              filter(set != "All") |> 
+              rename(accuracy = marg_accuracy) |> 
+              mutate(set = paste(set, "Taxa"), 
+                     accuracy = accuracy * 100) |> 
+              bind_rows(accuracies_its |> 
+                          filter(set != "All") |> 
+                          mutate(set = paste(set, "Species"))) |> 
+              mutate(gene = "ITS"))  |> 
+  separate(set, into = c("obs", NA), sep = " ", remove = F) |> 
+  mutate(rank = factor(rank, levels = allranks), 
+         obs = factor(obs, levels = c("Observed", "Novel")), 
+         model = factor(model, levels = model_details$model)) 
+
+p_acc <- list(Species = NA, 
+              Taxa = NA)
+
+p_acc <- 
+  lapply(p_acc, function(x){
+  p <- ggplot() +
     theme_bw() + 
     theme(aspect.ratio = 1, 
           panel.grid.minor = element_blank(), 
           axis.title.x = element_blank(), 
-          axis.text.x = element_text(angle = 45, hjust = 1), 
-          legend.position = "bottom",
+          axis.text.x = element_text(angle = 45, hjust = 1),
           panel.spacing = unit(0, "lines"),
-          strip.text.y = element_blank()) + 
-    ggh4x::facet_nested(set ~ gene + obs, scales = "free_x") + 
-    labs(color = "Model", y = "Marginal recall (%)                  Accuracy (%)") # Stupid double axis label fix 
-p_acc <- change_plot_colors(p_acc) 
+          strip.text.y = element_blank(),legend.spacing.x = unit(0.1, "lines"), 
+          legend.title = element_text(size = 10), 
+          legend.position = "bottom", 
+          legend.box = "horizontal", 
+          legend.title.position = "top") +
+    ggh4x::facet_nested(~ gene + set, scales = "free_x") + 
+    labs(color = "Model") 
+  p
+})
 
-ggsave(plot = p_acc, 
+for(s in names(p_acc)){
+  subdf <- 
+    p_acc_df |> 
+    filter(str_ends(set, s))
+  
+  for(type in names(models)){
+    p_acc[[s]] <- 
+      p_acc[[s]] + 
+      plot_line(df = subdf |> filter(model %in% models[[type]]), 
+                x = rank, 
+                y = accuracy, 
+                model_type = type, 
+                plot_details = model_details, 
+                group = model) +
+      plot_point(df = subdf |> filter(model %in% models[[type]]), 
+                 x = rank, 
+                 y = accuracy, 
+                 model_type = type, 
+                 plot_details = model_details) + 
+      ggnewscale::new_scale_color() + ggnewscale::new_scale("shape") 
+  }
+  if(s == "Species"){
+    p_acc[[s]] <- 
+      p_acc[[s]] + 
+      labs(y = "Accuracy (%)")
+  }else{
+    p_acc[[s]] <- 
+      p_acc[[s]] + 
+      labs(y = "Marginal recall (%)")
+  }
+}
+
+p_acc_joint <- 
+  ggpubr::ggarrange(plotlist = p_acc, 
+                  ncol = 1, 
+                  labels = c("a", "b"), 
+                  common.legend = T, 
+                  legend = "bottom")
+
+ggsave(plot = p_acc_joint, 
        filename = "plots/fourpanel_joint.pdf", 
-       width = 9, 
-       height = 6, 
+       width = 7, 
+       height = 7, 
        units = "in")
 
 ##### Missing predictions #####
@@ -370,7 +443,7 @@ marg_accuracies_its_mp <-
                                    Observed = id_observed_its,
                                    Novel = id_novel_its))
 
-p_acc_mp <- 
+p_acc_mp_df <- 
   marg_accuracies_coi_mp |> 
   filter(set != "All") |> 
   rename(accuracy = marg_accuracy) |> 
@@ -389,33 +462,76 @@ p_acc_mp <-
                           filter(set != "All") |> 
                           mutate(set = paste(set, "Species"))) |> 
               mutate(gene = "ITS")) |> 
-  separate(set, into = c("obs", "set"), sep = " ") |> 
+  separate(set, into = c("obs", NA), sep = " ", remove = F) |> 
   mutate(rank = factor(rank, levels = allranks), 
          obs = factor(obs, levels = c("Observed", "Novel")), 
-         model = factor(model, levels = algs_sorted)) |> 
-  ggplot() + 
-  aes(x = rank, 
-      y = accuracy, 
-      color = model, 
-      shape = model) +
-  geom_line(mapping = aes(group = model)) + 
-  geom_point() +
-  theme_bw() + 
-  theme(aspect.ratio = 1, 
-        panel.grid.minor = element_blank(), 
-        axis.title.x = element_blank(), 
-        axis.text.x = element_text(angle = 45, hjust = 1), 
-        legend.position = "bottom",
-        panel.spacing = unit(0, "lines"), 
-        strip.text.y = element_blank()) + 
-  ggh4x::facet_nested(set ~ gene + obs, scales = "free_x") + 
-  labs(color = "Model", y = "Marginal recall (%)                  Accuracy (%)") # Stupid double axis label fix 
-p_acc_mp <- change_plot_colors(p_acc_mp) 
+         model = factor(model, levels = model_details$model))
 
-ggsave(plot = p_acc_mp, 
+p_acc_mp <- list(Species = NA, 
+              Taxa = NA)
+
+p_acc_mp <- 
+  lapply(p_acc_mp, function(x){
+    p <- ggplot() +
+      theme_bw() + 
+      theme(aspect.ratio = 1, 
+            panel.grid.minor = element_blank(), 
+            axis.title.x = element_blank(), 
+            axis.text.x = element_text(angle = 45, hjust = 1),
+            panel.spacing = unit(0, "lines"),
+            strip.text.y = element_blank(),legend.spacing.x = unit(0.1, "lines"), 
+            legend.title = element_text(size = 10), 
+            legend.position = "bottom", 
+            legend.box = "horizontal", 
+            legend.title.position = "top") +
+      ggh4x::facet_nested(~ gene + set, scales = "free_x") + 
+      labs(color = "Model") 
+    p
+  })
+
+for(s in names(p_acc_mp)){
+  subdf <- 
+    p_acc_mp_df |> 
+    filter(str_ends(set, s))
+  
+  for(type in names(models)){
+    p_acc_mp[[s]] <- 
+      p_acc_mp[[s]] + 
+      plot_line(df = subdf |> filter(model %in% models[[type]]), 
+                x = rank, 
+                y = accuracy, 
+                model_type = type, 
+                plot_details = model_details, 
+                group = model) +
+      plot_point(df = subdf |> filter(model %in% models[[type]]), 
+                 x = rank, 
+                 y = accuracy, 
+                 model_type = type, 
+                 plot_details = model_details) + 
+      ggnewscale::new_scale_color() + ggnewscale::new_scale("shape") 
+  }
+  if(s == "Species"){
+    p_acc_mp[[s]] <- 
+      p_acc[[s]] + 
+      labs(y = "Accuracy (%)")
+  }else{
+    p_acc_mp[[s]] <- 
+      p_acc[[s]] + 
+      labs(y = "Marginal recall (%)")
+  }
+}
+
+p_acc_mp_joint <- 
+  ggpubr::ggarrange(plotlist = p_acc_mp, 
+                    ncol = 1, 
+                    labels = c("a", "b"), 
+                    common.legend = T, 
+                    legend = "bottom")
+
+ggsave(plot = p_acc_mp_joint, 
        filename = "plots/fourpanel_joint_mp.pdf", 
-       width = 8.5, 
-       height = 6, 
+       width = 7, 
+       height = 7, 
        units = "in")
 
 # CONDITIONAL ACCURACY ---------------------------------------------------------
@@ -455,9 +571,10 @@ p_cond <-
              model == "Crest4" ~ "Similarity", 
              model == "BLAST threshold" ~ "Similarity",
              model == "BLAST top hit" ~ "Similarity",
-             model == "DNABarcoder" ~ "Similarity",
+             model == "dnabarcoder" ~ "Similarity",
              model == "BayesANT" ~ "Probabilistic",
              model == "PROTAX" ~ "Probabilistic",
+             model == "PROTAX aug." ~ "Probabilistic", 
              str_starts(model, "EPA-") ~ "Phylogenetic placement",
              str_starts(model, "MycoAI-") ~ "Neural network",
              TRUE ~ "Composition"
@@ -494,7 +611,8 @@ p_cond <-
   labs(color = "Model", 
        shape = "Model") 
 
-p_cond <- change_plot_colors(p_cond)
+p_cond <- change_plot_colors(p_cond, model_details = model_details |>
+                               filter(!(model %in% no_novel)))
   
 ggsave(plot = p_cond,
        filename = "plots/cond_recall.pdf",
@@ -521,6 +639,7 @@ result_blast_top_similarity_coi <-
 result_blast_top_similarity_its <-
   read.table("its/results/blast/blast_top_hit_test_nt_16.tsv",
              header = T) |> 
+  select(-contains("kingdom")) |> 
   arrange_columns(correct_cols = correct_cols_its) |> 
   separate(Species, into = c("Species", "Similarity"), 
            sep = ";") %>%
@@ -623,35 +742,59 @@ classified_correct <-
 
 p_class <- 
   ggplot() +  
-  geom_line(data = classified_correct |> 
-              filter(!model %in% point_models), 
-            aes(x = classified, 
-                y = correct, 
-                color = model, 
-                shape = model),
-            alpha = 0.7) +
-  geom_point(data = classified_correct |> 
-               filter(model %in% point_models) |> 
-               mutate(model = map_chr(model, ~str_remove(.x, "_point"))), 
-             aes(x = classified, 
-                 y = correct, 
-                 color = model, 
-                 shape = model)) + 
   facet_grid(rank~gene) + 
   theme_bw() + 
   theme(aspect.ratio = 1, 
         panel.grid.minor = element_blank(), 
-        panel.spacing = unit(0, "lines")) + 
+        panel.spacing = unit(0, "lines"), 
+        legend.position = "bottom", 
+        legend.title.position = "top") + 
   labs(x = "% classified", 
        y = "% correct", 
        color = "Model") + 
   ylim(c(0, 100)) 
-p_class <- change_plot_colors(p_class)
+
+for(type in names(models)){
+  if(any(str_detect(point_models, paste0(models[[type]], collapse = "|")))){
+    p_class <- 
+      p_class + 
+      plot_line(df = classified_correct |> 
+                  filter(model %in% models[[type]] & !model %in% point_models), 
+                x = classified, 
+                y = correct, 
+                model_type = type, 
+                plot_details = model_details, 
+                shape = model) + 
+      plot_point(df = classified_correct |> 
+                   filter(model %in% point_models) |> 
+                   mutate(model = map_chr(model, ~str_remove(.x, "_point"))) |> 
+                   filter(model %in% models[[type]]), 
+                 x = classified, 
+                 y = correct, 
+                 model_type = type, 
+                 plot_details = model_details)
+  }else{
+    p_class <- 
+      p_class + 
+      plot_line(df = classified_correct |> 
+                  filter(model %in% models[[type]] & !model %in% point_models), 
+                x = classified, 
+                y = correct, 
+                model_type = type, 
+                plot_details = model_details, 
+                shape = model)
+  }
+  p_class <- 
+    p_class + 
+    ggnewscale::new_scale_color() + ggnewscale::new_scale("shape")
+}
+
+p_class
 
 ggsave(plot = p_class, 
        filename = "plots/classified_correct_joint.pdf", 
-       width = 6, 
-       height = 5, 
+       width = 7.2, 
+       height = 7.2, 
        units = "in")
 
 # MIS-, OVER-, AND UNDERCLASSIFICATION -----------------------------------------
@@ -667,7 +810,7 @@ uclass_df_its <- underclass_rate(results_its_mp, id_observed_its, ranks = ranks_
 misclass_df_its <- misclass_rate(results_its_mp, data_true_its, id_observed_coi, ranks = ranks_its)
 
 
-p_error <- 
+p_error_df <- 
   oclass_df_coi |> 
   full_join(uclass_df_coi) |> 
   full_join(misclass_df_coi) |> 
@@ -681,16 +824,10 @@ p_error <-
                names_to = "error_type",
                values_to = "error_rate") |> 
   mutate(error_type = str_to_sentence(error_type)) |> 
-  filter(!is.na(error_rate)) |> 
+  filter(!is.na(error_rate)) 
+
+p_error <- 
   ggplot() + 
-  geom_line(aes(x = rank, 
-                y = error_rate, 
-                color = model, 
-                group = model)) +
-  geom_point(aes(x = rank, 
-                 y = error_rate, 
-                 color = model, 
-                 shape = model)) + 
   facet_grid(gene~error_type, scales = "free_x") +
   theme_bw() + 
   ylab("Error rate (%)") + 
@@ -698,13 +835,33 @@ p_error <-
         axis.text.x = element_text(angle = 45, 
                                    hjust = 1), 
         aspect.ratio = 1, 
-        panel.spacing = unit(0, "lines"))
-p_error <- change_plot_colors(p_error)
+        panel.spacing = unit(0, "lines"), 
+        legend.position = "bottom", 
+        legend.title.position = "top")
+
+for(type in names(models)){
+  p_error <- 
+    p_error + 
+    plot_line(df = p_error_df |> filter(model %in% models[[type]]), 
+              x = rank, 
+              y = error_rate, 
+              model_type = type, 
+              plot_details = model_details, 
+              group = model) + 
+    plot_point(df = p_error_df |> filter(model %in% models[[type]]), 
+               x = rank, 
+               y = error_rate, 
+               model_type = type, 
+               plot_details = model_details) + 
+    ggnewscale::new_scale_color() + ggnewscale::new_scale("shape")
+}
+
+p_error
 
 ggsave(plot = p_error, 
        filename = "plots/errorrates_joint.pdf", 
-       height = 5, 
-       width = 8, 
+       height = 7, 
+       width = 7.5, 
        units = "in")
 
 # TOTAL NUMBER OF NOVELTY PREDICTIONS ------------------------------------------
@@ -744,7 +901,7 @@ p_tot_novel <-
         axis.text.x = element_text(angle = 45, hjust = 1)) + 
   facet_wrap(~gene,
              scales = "free_x")
-p_tot_novel <- change_plot_colors(p_tot_novel)
+p_tot_novel <- change_plot_colors(p_tot_novel, model_details)
 
 ggsave(plot = p_tot_novel, 
        filename = "plots/sum_novel.pdf", 
@@ -757,6 +914,9 @@ ggsave(plot = p_tot_novel,
 # Read short data 
 results_coi_short <- readRDS("coi/result_list_short_nt.rds")
 results_its_short <- readRDS("its/result_list_short.rds")
+
+# Remove Kingdom from ITS data 
+results_its_short <- lapply(results_its_short, function(df) df[,correct_cols_its])
 
 # TODO: temporary fixes for wrong number of sequences
 # results_coi_short <- lapply(results_coi_short, 
@@ -790,25 +950,14 @@ acc_long_short <-
                                "set")) |> 
               rename(accuracy_long = accuracy.x, 
                      accuracy_short = accuracy.y) |> 
-              mutate(gene = "ITS")) 
-
-p_acc_short <- 
-  acc_long_short |> 
+              mutate(gene = "ITS")) |> 
   mutate(diff = accuracy_short- accuracy_long,
          rank = factor(rank, levels = allranks), 
-         set = factor(set, levels = c("All", "Observed", "Novel"))
-         ) |> 
-  filter(set != "All") |> 
+         set = factor(set, levels = c("All", "Observed", "Novel"))) |> 
+  filter(set != "All")
+
+p_acc_short <- 
   ggplot() + 
-  geom_line(aes(x = rank, 
-                y = diff, 
-                color = model, 
-                group = model)) + 
-  geom_point(aes(x = rank,
-                 y = diff,
-                 color = model,
-                 group = model, 
-                 shape = model)) + 
   facet_grid(set~gene, 
              scales = "free") + 
   geom_hline(yintercept = 0, 
@@ -817,15 +966,34 @@ p_acc_short <-
   theme(axis.text.x = element_text(angle = 45, hjust = 1), 
         panel.spacing = unit(0, "lines"), 
         axis.title.x = element_blank(), 
-        legend.position = "bottom") + 
+        legend.position = "bottom", 
+        legend.title.position = "top") + 
   labs(y = "Accuracy difference (%pt.)")
-p_acc_short <- change_plot_colors(p_acc_short)
+
+for(type in names(models)){
+  p_acc_short <- 
+    p_acc_short + 
+    plot_line(df = acc_long_short |> filter(model %in% models[[type]]), 
+              x = rank, 
+              y = diff, 
+              model_type = type, 
+              plot_details = model_details, 
+              group = model) + 
+    plot_point(df = acc_long_short |> filter(model %in% models[[type]]), 
+               x = rank, 
+               y = diff, 
+               model_type = type, 
+               plot_details = model_details) + 
+    ggnewscale::new_scale_color() + ggnewscale::new_scale("shape")
+}
+
+p_acc_short
 
 ggsave(plot = p_acc_short, 
        filename = "plots/accuracy_diff_short.pdf", 
-       height = 150, 
-       width = 150, 
-       units = "mm")
+       height = 7, 
+       width = 7, 
+       units = "in")
 
 # TEXT INFO --------------------------------------------------------------------
 
