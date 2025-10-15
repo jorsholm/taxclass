@@ -141,18 +141,6 @@ if(datatype == "nt"){
   result_PROTAX_aug <- rename_unk_output(result_PROTAX_aug)
 }
 
-##### EPA-ng Taxonomy tree #####
-result_epatax <-
-  read.table(paste0("coi/results/epang-taxtree/epang-taxtree_test",
-                    shorttxt,
-                    "_",
-                    datatype,
-                    "_40.tsv"),
-             header = T) |>
-  dplyr::arrange(ID)
-result_epatax <- rename_unk_output(result_epatax)
-result_epatax <- arrange_columns(result_epatax, correct_cols)
-
 ##### Sintax #####
 if(datatype == "nt"){
   result_SINTAX <-
@@ -168,6 +156,18 @@ if(datatype == "nt"){
   }
 }
 
+##### EPA-ng Taxonomy tree #####
+result_epatax <-
+  read.table(paste0("coi/results/epang-taxtree/epang-taxtree_test",
+                    shorttxt,
+                    "_",
+                    datatype,
+                    "_40.tsv"),
+             header = T) |>
+  dplyr::arrange(ID)
+result_epatax <- rename_unk_output(result_epatax)
+result_epatax <- arrange_columns(result_epatax, correct_cols)
+
 ##### EPA-ng phylogenetic tree #####
 result_epaphyl <-
   read.table(paste0("coi/results/epang-phyltree/epang-phyltree_test",
@@ -179,6 +179,18 @@ result_epaphyl <-
   dplyr::arrange(ID)
 result_epaphyl <- rename_unk_output(result_epaphyl)
 result_epaphyl <- arrange_columns(result_epaphyl, correct_cols)
+
+##### EPA-ng freetree #####
+result_epafree <- 
+  read.table(paste0("coi/results/epang-freetree/epang-freetree_test", 
+                    shorttxt, 
+                    "_", 
+                    datatype, 
+                    "_4.tsv"), 
+             header = T, sep = "\t") |> 
+  dplyr::arrange(ID)
+result_epafree <- rename_unk_output(result_epafree)
+result_epafree <- arrange_columns(result_epafree, correct_cols)
 
 ##### MycoAI-CNN ##### 
 if(datatype == "nt"){
@@ -413,18 +425,19 @@ if(datatype == "nt"){
     "BayesANT" = result_BayesANT,
     "PROTAX" = result_PROTAX,
     "PROTAX aug." = result_PROTAX_aug,
-    "EPA-ng taxtree" = result_epatax,
+    "EPA-ng tax" = result_epatax,
     "RDP" = result_RDP,
     "BLAST top hit" = result_blast_top, 
     "BLAST threshold" = result_blast_thresh, 
     "SINTAX" = result_SINTAX,
     # "Mystery" = result_mystery,
-    "EPA-ng phyltree" = result_epaphyl,
+    "EPA-ng phyl" = result_epaphyl,
     "dnabarcoder" = result_dnabarcoder,
     "IDTAXA" = result_idtaxa, 
     "MycoAI-CNN" = result_aicnn, 
     "MycoAI-BERT" = result_aibert, 
-    "Crest4" = result_crest4
+    "Crest4" = result_crest4,
+    "EPA-ng free" = result_epafree
   )
 }else if(datatype == "aa"){
   results <- list(
@@ -433,7 +446,8 @@ if(datatype == "nt"){
     "BLAST top hit" = result_blast_top, 
     "EPA-ng phyltree" = result_epaphyl,
     "IDTAXA" = result_idtaxa, 
-    "Crest4" = result_crest4
+    "Crest4" = result_crest4,
+    "EPA-ng free" = result_epafree
   )
 }
 
