@@ -52,8 +52,8 @@ awk -F"\t" '
       }
       if ($i == "None" || $i ~/[Ii]ncertae/) {
         if (i <= 21) {
-          $i = $(i-1) "_" ranks[i] "_incertae_sedis"
-          sub("_" ranks[i-1] "_incertae_sedis", "", $i)
+          $i = $(i-1) "_dummy_" ranks[i]
+          sub("_dummy_" ranks[i-1], "", $i)
         } else {
           print "rejected:", $i " at rank column " i > "/dev/stderr"
           next
@@ -134,8 +134,8 @@ awk -F"\t" '
       }
       if ($i == "None" || $i ~/[Ii]ncertae/) {
         if (i <= 21) {
-          $i = $(i-1) "_" ranks[i] "_incertae_sedis"
-          sub("_" ranks[i-1] "_incertae_sedis", "", $i)
+          $i = $(i-1) "_dummy_" ranks[i]
+          sub("_dummy_" ranks[i-1], "", $i)
         } else {
           print "rejected:", $i " at rank column " i > "/dev/stderr"
           next
@@ -308,13 +308,13 @@ awk -F"\t" '
     # convert "None" to standardized placeholders at ranks above genus
     for (i=17;i<=21;i++) {
       if ($i == "None") {
-        $i = $(i-1) "_" ranks[i] "_incertae_sedis"
-        sub("_" ranks[i-1] "_incertae_sedis", "", $i)
+        $i = $(i-1) "_dummy_" ranks[i]
+        sub("_dummy_" ranks[i-1], "", $i)
       }
     }
     # remove trailing placeholders/None
     for (i=23; i>17; i--) {
-      if ($i == "None" && $(i-1) ~ /_incertae_sedis$/) $(i-1) = "None"
+      if ($i == "None" && $(i-1) ~ /_dummy_/) $(i-1) = "None"
     }
     if ($17=="None") next
     gsub(/ /, "_", $23);
@@ -334,8 +334,8 @@ awk -F"\t" '
 For constrained phylogenetic trees, it is possible to root the tree between
 Insecta and	Arachnida. However, unconstrained algorithms may not reconstruct
 these groups as monophyletic, so it is necessary to have an outgroup which is a
-single sequence. We use the *Caenorhabditis elegans* reference genome for this
-purpose; download from
+single sequence. We use COI from the *Caenorhabditis elegans* reference genome
+for this purpose; download from
 <https://www.ncbi.nlm.nih.gov/nuccore/NC_001328.1?report=fasta&from=7845&to=9422>
 as `Caenorhabditis_elegans_cox1_refseq.fasta`.
 
