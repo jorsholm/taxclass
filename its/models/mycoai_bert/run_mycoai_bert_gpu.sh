@@ -17,9 +17,6 @@ source /projappl/project_2005718/mycoai/bin/activate
 export PATH="/appl/opt/time/1.9/bin:$PATH"
 TIME="$(which time) --verbose"
 
-# pretend we are in a SLURM arraynamed "gpu" so that we can use the same script as for CPU
-export SLURM_ARRAY_TASK_ID=gpu
-
 # define file names
 MODEL=mycoai_bert
 DATA=../../data
@@ -28,7 +25,7 @@ mkdir -p $RESULTS
 
 # train model
 TRAIN_FILE=$DATA/train_nt_unite.fasta
-MODEL_FILE=train_nt_bert_$SLURM_ARRAY_TASK_ID.pt
+MODEL_FILE=train_nt_bert_gpu.pt
 
 $TIME mycoai-train --out $MODEL_FILE\
                    $TRAIN_FILE
@@ -37,7 +34,7 @@ $TIME mycoai-train --out $MODEL_FILE\
 for test_case in test testshort
 do
   TEST_FILE=$DATA/${test_case}_nt.fasta
-  RAW_FILE=${MODEL}_$(basename $TEST_FILE .fasta)_$SLURM_ARRAY_TASK_ID.raw
+  RAW_FILE=${MODEL}_$(basename $TEST_FILE .fasta)_gpu.raw
 
   $TIME mycoai-classify --model $MODEL_FILE\
                         --out $RAW_FILE\
@@ -46,7 +43,7 @@ do
 done
 
 # format results
-for f in ${MODEL}_*_$SLURM_ARRAY_TASK_ID.raw
+for f in ${MODEL}_*_gpu.raw
 do
   RESULT_FILE=$RESULTS/${f%.raw}.tsv
   echo -n "ID	phylum	class	order	family	genus	" >$RESULT_FILE

@@ -4,10 +4,6 @@
 #SBATCH --partition=small
 #SBATCH --time=1:00:00
 #SBATCH --mem-per-cpu=4800M
-#SBATCH --cpus-per-task=40
-#SBATCH --array=40
-#SBATCH --output=sintax_%a.out
-#SBATCH --error=sintax_%a.out
 #SBATCH --mail-type=ALL
 
 # put vsearch on the path
@@ -35,7 +31,7 @@ mkdir -p $RESULTS
 
 # train the model
 TRAIN_FILE=$DATA/train_nt_sintax.fasta
-MODEL_FILE=train_nt_$SLURM_ARRAY_TASK_ID.udb
+MODEL_FILE=train_nt_$SLURM_CPUS_PER_TASK.udb
 
 $TIME vsearch --makeudb_usearch $TRAIN_FILE\
               --output $MODEL_FILE
@@ -44,7 +40,7 @@ $TIME vsearch --makeudb_usearch $TRAIN_FILE\
 for TEST in test testshort
 do
   TEST_FILE=$DATA/${TEST}_nt.fasta
-  RAW_FILE=${MODEL}_${TEST}_nt_$SLURM_ARRAY_TASK_ID.raw
+  RAW_FILE=${MODEL}_${TEST}_nt_$SLURM_CPUS_PER_TASK.raw
 
   $TIME vsearch --sintax $TEST_FILE\
                 --sintax_random\

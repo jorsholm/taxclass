@@ -4,11 +4,7 @@
 #SBATCH --partition=small
 #SBATCH --time=3-00:00:00
 #SBATCH --mem=32G
-#SBATCH --cpus-per-task=40
-#SBATCH --array=40
 ##SBATCH --gres=gpu:v100:1
-#SBATCH --output=mycoai_bert_%a.out
-#SBATCH --error=mycoai_bert_%a.out
 #SBATCH --mail-type=ALL
 
 # activate python virtual environment
@@ -25,7 +21,7 @@ RESULTS=../../results/$MODEL
 
 # train model
 TRAIN_FILE=$DATA/train_nt_unite.fasta
-MODEL_FILE=train_nt_bert_$SLURM_ARRAY_TASK_ID.pt
+MODEL_FILE=train_nt_bert_$SLURM_CPUS_PER_TASK.pt
 
 $TIME mycoai-train --out $MODEL_FILE\
                    $TRAIN_FILE
@@ -34,7 +30,7 @@ $TIME mycoai-train --out $MODEL_FILE\
 for test_case in test testshort
 do
   TEST_FILE=$DATA/${test_case}_nt.fasta
-  RAW_FILE=${MODEL}_$(basename $TEST_FILE .fasta)_$SLURM_ARRAY_TASK_ID.raw
+  RAW_FILE=${MODEL}_$(basename $TEST_FILE .fasta)_$SLURM_CPUS_PER_TASK.raw
 
   $TIME mycoai-classify --model $MODEL_FILE\
                       --out $RAW_FILE\
@@ -43,7 +39,7 @@ do
 done
 
 # format results
-for f in ${MODEL}_*_$SLURM_ARRAY_TASK_ID.raw
+for f in ${MODEL}_*_$SLURM_CPUS_PER_TASK.raw
 do
   RESULT_FILE=$RESULTS/${f%.raw}.tsv
   echo -n "ID	phylum	class	order	family	genus	" >$RESULT_FILE

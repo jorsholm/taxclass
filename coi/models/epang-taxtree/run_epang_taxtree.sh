@@ -4,10 +4,6 @@
 #SBATCH --partition=longrun
 #SBATCH --time=14-00:00:00
 #SBATCH --mem=64G
-#SBATCH --cpus-per-task=16
-#SBATCH --array=16
-#SBATCH --output=epang-taxtree_%a.out
-#SBATCH --error=epang-taxtree_%a.out
 #SBATCH --mail-type=ALL
 
 set -e -x
@@ -48,7 +44,7 @@ awk -F'\t' '/Arachnida/{print $1}' $TRAIN_TAXONOMY_FILE >outgroup.txt
 for ALPHABET in aa nt;
 do
   INSTANCE=train_${ALPHABET}
-  MODEL_DIR=${INSTANCE}_$SLURM_ARRAY_TASK_ID
+  MODEL_DIR=${INSTANCE}_$SLURM_CPUS_PER_TASK
   TRAIN_FILE=$DATA/${INSTANCE}_aln.fasta
 
   rm -fr $MODEL_DIR
@@ -90,7 +86,7 @@ do
   do
     TEST_FILE=$DATA/${TESTSET}_${ALPHABET}_aln.fasta
     RAW_DIR=$MODEL_DIR/$TESTSET
-    SUFFIX=${TESTSET}_${ALPHABET}_${SLURM_ARRAY_TASK_ID}
+    SUFFIX=${TESTSET}_${ALPHABET}_${SLURM_CPUS_PER_TASK}
     mkdir -p $RAW_DIR
 
     # place test sequences in reference tree

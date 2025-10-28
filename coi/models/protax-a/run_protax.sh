@@ -4,10 +4,6 @@
 #SBATCH --partition=small
 #SBATCH --time=3-00:00:00
 #SBATCH --mem-per-cpu=4800M
-#SBATCH --cpus-per-task=1
-#SBATCH --array=1
-#SBATCH --output=protax-a_%a.out
-#SBATCH --error=protax-a_%a.out
 #SBATCH --mail-type=ALL
 
 # set environmental variables to tell various parallel computation libraries
@@ -40,7 +36,7 @@ for TAXONOMY in full_tax train_tax;
 do
   # create input files
   TAX_FILE=$DATA/$TAXONOMY.txt
-  export MODEL_DIR=train_nt_${TAXONOMY}_${SLURM_ARRAY_TASK_ID}
+  export MODEL_DIR=train_nt_${TAXONOMY}_${SLURM_CPUS_PER_TASK}
   mkdir -p $MODEL_DIR
 
   export PROTAX="$(pwd)/scripts"
@@ -117,7 +113,7 @@ do
   for TESTSET in test testshort;
   do
     TESTFILE=$DATA/${TESTSET}_nt_aln.fasta
-    RAWFILE=${MODEL}_${TAXONOMY}_${TESTSET}_${SLURM_ARRAY_TASK_ID}.raw
+    RAWFILE=${MODEL}_${TAXONOMY}_${TESTSET}_${SLURM_CPUS_PER_TASK}.raw
     $TIME c2/classify_v2 $MODEL_DIR/taxonomy.priors\
                          $MODEL_DIR/refs.aln\
                          $MODEL_DIR/model.rseqs.numeric\
@@ -132,7 +128,7 @@ done
 
 # format the test data and write to results directory
 mkdir -p $RESULTS
-for f in *_${SLURM_ARRAY_TASK_ID}.raw;
+for f in *_${SLURM_CPUS_PER_TASK}.raw;
 do
   RESULT_FILE=$RESULTS/${f%.raw}.tsv
   echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species" >$RESULT_FILE

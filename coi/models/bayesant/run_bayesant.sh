@@ -4,10 +4,6 @@
 #SBATCH --partition=small
 #SBATCH --time=24:00:00
 #SBATCH --mem=32G
-#SBATCH --cpus-per-task=40
-#SBATCH --array=40
-#SBATCH --output=bayesant_%a.out
-#SBATCH --error=bayesant_%a.out
 #SBATCH --mail-type=ALL
 
 # installation commands (in R)
@@ -43,7 +39,7 @@ for alphabet in nt aa
 do
   # train the model
   export TRAIN_FILE=$DATA/train_${alphabet}_aln_label.fasta
-  export MODEL_FILE=train_${alphabet}_$SLURM_ARRAY_TASK_ID.rds
+  export MODEL_FILE=train_${alphabet}_$SLURM_CPUS_PER_TASK.rds
 
   $TIME Rscript fit_BayesANT.R
 
@@ -51,7 +47,7 @@ do
   for TEST in test testshort
   do
     export TEST_FILE=$DATA/${TEST}_${alphabet}_aln.fasta
-    export RESULT_FILE=${RESULTS}/${MODEL}_${TEST}_${alphabet}_$SLURM_ARRAY_TASK_ID.tsv
+    export RESULT_FILE=${RESULTS}/${MODEL}_${TEST}_${alphabet}_$SLURM_CPUS_PER_TASK.tsv
 
     $TIME Rscript predict_BayesANT.R
   done

@@ -31,7 +31,7 @@ mkdir -p $RESULTS
 
 # train model
 TRAIN_FILE=$DATA/train_nt_unite.fasta
-MODEL_FILE=train_nt_bert_$SLURM_ARRAY_TASK_ID.pt
+MODEL_FILE=train_nt_bert_gpu.pt
 
 $TIME mycoai-train --out $MODEL_FILE\
                    $TRAIN_FILE
@@ -40,7 +40,7 @@ $TIME mycoai-train --out $MODEL_FILE\
 for test_case in test testshort
 do
   TEST_FILE=$DATA/${test_case}_nt.fasta
-  RAW_FILE=${MODEL}_$(basename $TEST_FILE .fasta)_$SLURM_ARRAY_TASK_ID.raw
+  RAW_FILE=${MODEL}_$(basename $TEST_FILE .fasta)_gpu.raw
 
   $TIME mycoai-classify --model $MODEL_FILE\
                         --out $RAW_FILE\
@@ -49,7 +49,7 @@ do
 done
 
 # format results
-for f in ${MODEL}_*_$SLURM_ARRAY_TASK_ID.raw
+for f in ${MODEL}_*_gpu.raw
 do
   RESULT_FILE=$RESULTS/${f%.raw}.tsv
   echo -n "ID	order	family	subfamily	tribe	genus	" >$RESULT_FILE

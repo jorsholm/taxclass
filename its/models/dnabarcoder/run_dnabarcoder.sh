@@ -4,11 +4,7 @@
 #SBATCH --partition=small
 #SBATCH --time=3-00:00:00
 #SBATCH --mem=64G
-#SBATCH --cpus-per-task=40
-#SBATCH --array=40
 ##SBATCH --gres=gpu:v100:1
-#SBATCH --output=dnabarcoder_%a.out
-#SBATCH --error=dnabarcoder_%a.out
 #SBATCH --mail-type=ALL
 
 # install:
@@ -49,7 +45,7 @@ mkdir -p $RESULTS
 #train the nucleotide model
 TRAIN_FILE=$DATA/train_nt.fasta
 TAX_FILE=$DATA/train_tax.tsv
-SIM_DIR=train_nt_$SLURM_ARRAY_TASK_ID
+SIM_DIR=train_nt_$SLURM_CPUS_PER_TASK
 SIM_FILE=$SIM_DIR/$(basename ${TRAIN_FILE%.fasta}.sim)
 
 # calculate distances
@@ -118,7 +114,7 @@ $TIME $DNABARCODER best\
 for test_case in test testshort
 do
   TEST_FILE=$DATA/${test_case}_nt.fasta
-  TEST_PREFIX=${test_case}_nt_$SLURM_ARRAY_TASK_ID
+  TEST_PREFIX=${test_case}_nt_$SLURM_CPUS_PER_TASK
   BESTMATCH_FILE=${TEST_PREFIX}.$(basename $TRAIN_FILE .fasta)_BLAST.bestmatch
 
   $TIME $DNABARCODER search\
@@ -137,7 +133,7 @@ do
 done
 
 # format the results
-for f in *_$SLURM_ARRAY_TASK_ID.classified
+for f in *_$SLURM_CPUS_PER_TASK.classified
 do
   RESULT_FILE=$RESULTS/${f%.classified}.tsv
   echo "ID	kingdom	phylum	class	order	family	genus	species"\

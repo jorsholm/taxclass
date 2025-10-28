@@ -4,10 +4,6 @@
 #SBATCH --partition=small
 #SBATCH --time=24:00:00
 #SBATCH --mem-per-cpu=4800M
-#SBATCH --cpus-per-task=16
-#SBATCH --array=16
-#SBATCH --output=blast_%a.out
-#SBATCH --error=blast_%a.out
 #SBATCH --mail-type=ALL
 
 # make BLAST available as a module
@@ -35,7 +31,7 @@ mkdir -p $RESULTS
 
 #train the nucleotide model
 TRAIN_FILE=$DATA/train_nt_sintax.fasta
-MODEL_FILE=train_nt_$SLURM_ARRAY_TASK_ID
+MODEL_FILE=train_nt_$SLURM_CPUS_PER_TASK
 
 $TIME makeblastdb -in $TRAIN_FILE\
                   -dbtype nucl\
@@ -45,7 +41,7 @@ $TIME makeblastdb -in $TRAIN_FILE\
 for TEST in test testshort
 do
   TEST_FILE=$DATA/${TEST}_nt.fasta
-  RAW_FILE=${MODEL}_${TEST}_nt_$SLURM_ARRAY_TASK_ID.raw
+  RAW_FILE=${MODEL}_${TEST}_nt_$SLURM_CPUS_PER_TASK.raw
 
   $TIME blastn -query $TEST_FILE\
                -db $MODEL_FILE\
@@ -58,7 +54,7 @@ do
 done
 
 # reformat the output - top hit
-for f in *$SLURM_ARRAY_TASK_ID.raw
+for f in *$SLURM_CPUS_PER_TASK.raw
 do
   RESULT_FILE=${f%.raw}.tsv
   RESULT_FILE=$RESULTS/blast_top_hit${RESULT_FILE#blast}
@@ -74,7 +70,7 @@ do
 done
 
 # reformat the output - thresholds
-for f in *_nt_$SLURM_ARRAY_TASK_ID.raw
+for f in *_nt_$SLURM_CPUS_PER_TASK.raw
 do
   RESULT_FILE=${f%.raw}.tsv
   RESULT_FILE=$RESULTS/blast_thresh${RESULT_FILE#blast}

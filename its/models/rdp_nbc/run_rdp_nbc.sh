@@ -4,10 +4,6 @@
 #SBATCH --partition=small
 #SBATCH --time=24:00:00
 #SBATCH --mem-per-cpu=4800M
-#SBATCH --cpus-per-task=1
-#SBATCH --array=1
-#SBATCH --output=rdp_nbc_%a.out
-#SBATCH --error=rdp_nbc_%a.out
 #SBATCH --mail-type=ALL
 
 # set environmental variables to tell various parallel computation libraries
@@ -34,7 +30,7 @@ TRAIN_FILE=$DATA/train_nt_rdp.fasta
 
 # create input files
 TAX_FILE=$DATA/train_tax.txt
-export MODEL_DIR=train_nt_${SLURM_ARRAY_TASK_ID}
+export MODEL_DIR=train_nt_${SLURM_CPUS_PER_TASK}
 mkdir -p $MODEL_DIR
 
 # taxonomy
@@ -93,7 +89,7 @@ unzip -p rdp_classifier_2.14.zip\
 for TESTSET in test testshort;
 do
   TESTFILE=$DATA/${TESTSET}_nt.fasta
-  RAWFILE=${MODEL}_${TESTSET}_${SLURM_ARRAY_TASK_ID}.raw
+  RAWFILE=${MODEL}_${TESTSET}_${SLURM_CPUS_PER_TASK}.raw
   $TIME java -Xmx4g\
              -jar dist/classifier.jar\
              classify\
@@ -105,7 +101,7 @@ done
 
 # format the test data and write to results directory
 mkdir -p $RESULTS
-for f in *_${SLURM_ARRAY_TASK_ID}.raw;
+for f in *_${SLURM_CPUS_PER_TASK}.raw;
 do
   RESULT_FILE=$RESULTS/${f%.raw}.tsv
   echo "ID	kingdom	Prob_kingdom	phylum	Prob_phylum	class	Prob_class	order	Prob_order	family	Prob_family	genus	Prob_genus	species	Prob_species" >$RESULT_FILE

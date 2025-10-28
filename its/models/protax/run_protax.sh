@@ -4,10 +4,6 @@
 #SBATCH --partition=small
 #SBATCH --time=3-00:00:00
 #SBATCH --mem-per-cpu=4800M
-#SBATCH --cpus-per-task=1
-#SBATCH --array=1
-#SBATCH --output=protax_%a.out
-#SBATCH --error=protax_%a.out
 #SBATCH --mail-type=ALL
 
 # set environmental variables to tell various parallel computation libraries
@@ -40,7 +36,7 @@ for TAXONOMY in full_tax train_tax;
 do
   # create input files
   TAX_FILE=$DATA/$TAXONOMY.txt
-  export MODEL_DIR=train_nt_${TAXONOMY}_${SLURM_ARRAY_TASK_ID}
+  export MODEL_DIR=train_nt_${TAXONOMY}_${SLURM_CPUS_PER_TASK}
   mkdir -p $MODEL_DIR
 
   export PROTAX="$(pwd)/protax/protaxscripts"
@@ -109,7 +105,7 @@ do
     $TIME $ROOT_DIR/classify_protax.sh
 
     # format the test data and write to results directory
-    RESULT_FILE=$RESULTS/${MODEL}_${TAXONOMY}_${TESTSET}_nt_$SLURM_ARRAY_TASK_ID.tsv
+    RESULT_FILE=$RESULTS/${MODEL}_${TAXONOMY}_${TESTSET}_nt_$SLURM_CPUS_PER_TASK.tsv
     echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species" >$RESULT_FILE
     paste -d'\n' query{1..7}.nameprob |
     awk -F' ' '

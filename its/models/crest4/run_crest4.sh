@@ -4,10 +4,6 @@
 #SBATCH --partition=small
 #SBATCH --time=24:00:00
 #SBATCH --mem-per-cpu=4800M
-#SBATCH --cpus-per-task=40
-#SBATCH --array=40
-#SBATCH --output=crest4_%a.out
-#SBATCH --error=crest4_%a.out
 #SBATCH --mail-type=ALL
 
 set -e
@@ -53,7 +49,7 @@ blastcmd["aa"]="blastp"
 for TYPE in nt
 do
   TRAIN_FILE=$DATA/train_$TYPE.fasta
-  MODEL_DIR=train_${TYPE}_$SLURM_ARRAY_TASK_ID
+  MODEL_DIR=train_${TYPE}_$SLURM_CPUS_PER_TASK
 
   mkdir -p $MODEL_DIR
   rm -rf $MODEL_DIR/*
@@ -77,7 +73,7 @@ do
   for TEST in test testshort
   do
     TEST_FILE=$DATA/${TEST}_${TYPE}.fasta
-    RAW_DIR=${MODEL}_${TEST}_${TYPE}_$SLURM_ARRAY_TASK_ID
+    RAW_DIR=${MODEL}_${TEST}_${TYPE}_$SLURM_CPUS_PER_TASK
     HITS_FILE=${RAW_DIR}/search.hits
     mkdir -p $RAW_DIR
     rm -rf $RAW_DIR/*

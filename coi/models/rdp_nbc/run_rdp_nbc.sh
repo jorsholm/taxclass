@@ -34,7 +34,7 @@ TRAIN_FILE=$DATA/train_nt_rdp.fasta
 
 # create input files
 TAX_FILE=$DATA/train_tax.txt
-export MODEL_DIR=train_nt_${SLURM_ARRAY_TASK_ID}
+export MODEL_DIR=train_nt_${SLURM_CPUS_PER_TASK}
 mkdir -p $MODEL_DIR
 
 # taxonomy
@@ -97,7 +97,7 @@ unzip -p rdp_classifier_2.14.zip\
 for TESTSET in test testshort;
 do
   TESTFILE=$DATA/${TESTSET}_nt.fasta
-  RAWFILE=${MODEL}_${TESTSET}_${SLURM_ARRAY_TASK_ID}.raw
+  RAWFILE=${MODEL}_${TESTSET}_${SLURM_CPUS_PER_TASK}.raw
   $TIME java -Xmx4g\
              -jar dist/classifier.jar\
              classify\
@@ -109,7 +109,7 @@ done
 
 # format the test data and write to results directory
 mkdir -p $RESULTS
-for f in *_${SLURM_ARRAY_TASK_ID}.raw;
+for f in *_${SLURM_CPUS_PER_TASK}.raw;
 do
   RESULT_FILE=$RESULTS/${f%.raw}.tsv
   echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species" >$RESULT_FILE

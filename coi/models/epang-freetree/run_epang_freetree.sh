@@ -4,10 +4,6 @@
 #SBATCH --partition=small
 #SBATCH --time=3-00:00:00
 #SBATCH --mem=64G
-#SBATCH --cpus-per-task=4
-#SBATCH --array=4
-#SBATCH --output=epang-freetree_%a.out
-#SBATCH --error=epang-freetree_%a.out
 #SBATCH --mail-type=ALL
 
 set -e -x
@@ -41,7 +37,7 @@ echo outgroup >outgroup.txt
 for ALPHABET in aa nt;
 do
   INSTANCE=train_${ALPHABET}
-  MODEL_DIR=${INSTANCE}_$SLURM_ARRAY_TASK_ID
+  MODEL_DIR=${INSTANCE}_$SLURM_CPUS_PER_TASK
   TRAIN_FILE=$DATA/${INSTANCE}_aln.fasta
   OUTGROUP_FILE=$DATA/outgroup_${ALPHABET}_aln.fasta
   ALIGN_FILE=$MODEL_DIR/train_outgroup_${ALPHABET}_aln.fasta
@@ -86,7 +82,7 @@ do
   do
     TEST_FILE=$DATA/${TESTSET}_${ALPHABET}_aln.fasta
     RAW_DIR=$MODEL_DIR/$TESTSET
-    SUFFIX=${TESTSET}_${ALPHABET}_${SLURM_ARRAY_TASK_ID}
+    SUFFIX=${TESTSET}_${ALPHABET}_${SLURM_CPUS_PER_TASK}
     mkdir -p $RAW_DIR
 
     # place test sequences in reference tree
