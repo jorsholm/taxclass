@@ -11,23 +11,23 @@ Tuning hyperparameters: Done.
 Aggregating parameters: Now 
 Aggregating parameters: Done 
 	Command being timed: "Rscript fit_BayesANT.R"
-	User time (seconds): 213.43
-	System time (seconds): 2.01
-	Percent of CPU this job got: 79%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 4:32.00
+	User time (seconds): 170.84
+	System time (seconds): 1.59
+	Percent of CPU this job got: 92%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:06.76
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 1538680
+	Maximum resident set size (kbytes): 1537884
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 544
-	Minor (reclaiming a frame) page faults: 558477
-	Voluntary context switches: 4294
-	Involuntary context switches: 571
+	Major (requiring I/O) page faults: 555
+	Minor (reclaiming a frame) page faults: 376773
+	Voluntary context switches: 4352
+	Involuntary context switches: 219
 	Swaps: 0
-	File system inputs: 133656
-	File system outputs: 310544
+	File system inputs: 133336
+	File system outputs: 310528
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -44,23 +44,23 @@ Number of sequences predicted =  21520 / 26901
 Number of sequences predicted =  24210 / 26901  
 Number of sequences predicted =  26900 / 26901  
 	Command being timed: "Rscript predict_BayesANT.R"
-	User time (seconds): 5012.49
-	System time (seconds): 1251.02
+	User time (seconds): 4053.78
+	System time (seconds): 429.39
 	Percent of CPU this job got: 396%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 26:21.69
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 18:51.61
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 917380
+	Maximum resident set size (kbytes): 917460
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 3
-	Minor (reclaiming a frame) page faults: 604309119
-	Voluntary context switches: 3727
-	Involuntary context switches: 20594
+	Minor (reclaiming a frame) page faults: 18325668
+	Voluntary context switches: 3126
+	Involuntary context switches: 10010
 	Swaps: 0
-	File system inputs: 35776
-	File system outputs: 14000
+	File system inputs: 35760
+	File system outputs: 13688
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -77,23 +77,23 @@ Number of sequences predicted =  21520 / 26901
 Number of sequences predicted =  24210 / 26901  
 Number of sequences predicted =  26900 / 26901  
 	Command being timed: "Rscript predict_BayesANT.R"
-	User time (seconds): 3328.94
-	System time (seconds): 783.66
+	User time (seconds): 3540.31
+	System time (seconds): 346.49
 	Percent of CPU this job got: 395%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 17:20.12
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 16:23.58
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 884392
+	Maximum resident set size (kbytes): 884248
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 384395996
-	Voluntary context switches: 2952
-	Involuntary context switches: 13634
+	Minor (reclaiming a frame) page faults: 15982115
+	Voluntary context switches: 2852
+	Involuntary context switches: 14624
 	Swaps: 0
 	File system inputs: 35328
-	File system outputs: 14024
+	File system outputs: 13696
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -112,23 +112,23 @@ Tuning hyperparameters: Done.
 Aggregating parameters: Now 
 Aggregating parameters: Done 
 	Command being timed: "Rscript fit_BayesANT.R"
-	User time (seconds): 117.38
-	System time (seconds): 2.31
-	Percent of CPU this job got: 97%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:02.38
+	User time (seconds): 144.54
+	System time (seconds): 2.79
+	Percent of CPU this job got: 94%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:35.20
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 2235624
+	Maximum resident set size (kbytes): 2236132
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 981952
-	Voluntary context switches: 1968
-	Involuntary context switches: 172
+	Minor (reclaiming a frame) page faults: 884451
+	Voluntary context switches: 1874
+	Involuntary context switches: 200
 	Swaps: 0
-	File system inputs: 24160
-	File system outputs: 475832
+	File system inputs: 22680
+	File system outputs: 475840
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -145,23 +145,23 @@ Number of sequences predicted =  21520 / 26901
 Number of sequences predicted =  24210 / 26901  
 Number of sequences predicted =  26900 / 26901  
 	Command being timed: "Rscript predict_BayesANT.R"
-	User time (seconds): 2311.44
-	System time (seconds): 2.56
-	Percent of CPU this job got: 393%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 9:48.77
+	User time (seconds): 2524.27
+	System time (seconds): 2.33
+	Percent of CPU this job got: 388%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 10:50.42
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 1247964
+	Maximum resident set size (kbytes): 1248092
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 873854
-	Voluntary context switches: 2300
-	Involuntary context switches: 6427
+	Minor (reclaiming a frame) page faults: 313453
+	Voluntary context switches: 2368
+	Involuntary context switches: 10212
 	Swaps: 0
 	File system inputs: 12264
-	File system outputs: 13296
+	File system outputs: 13040
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -178,26 +178,26 @@ Number of sequences predicted =  21520 / 26901
 Number of sequences predicted =  24210 / 26901  
 Number of sequences predicted =  26900 / 26901  
 	Command being timed: "Rscript predict_BayesANT.R"
-	User time (seconds): 1595.35
-	System time (seconds): 2.51
-	Percent of CPU this job got: 390%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 6:49.03
+	User time (seconds): 1761.19
+	System time (seconds): 2.41
+	Percent of CPU this job got: 385%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 7:37.61
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 1236804
+	Maximum resident set size (kbytes): 1236952
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 851860
-	Voluntary context switches: 2070
-	Involuntary context switches: 4457
+	Minor (reclaiming a frame) page faults: 309781
+	Voluntary context switches: 2111
+	Involuntary context switches: 7809
 	Swaps: 0
-	File system inputs: 12272
-	File system outputs: 13472
+	File system inputs: 12264
+	File system outputs: 13208
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-Job 29789555 completed
+Job 30367095 completed

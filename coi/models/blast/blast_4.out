@@ -2,33 +2,34 @@ EMBOSS  6.5.7  environment loaded
 BLAST  2.16.0  environment loaded 
 
 
-Building a new DB, current time: 09/19/2025 14:37:01
+Building a new DB, current time: 10/28/2025 21:00:10
 New DB name:   /scratch/project_2003104/brendan/taxclass/coi/models/blast/train_nt_4
 New DB title:  ../../data/train_nt_sintax.fasta
 Sequence type: Nucleotide
+Deleted existing Nucleotide BLAST database named /scratch/project_2003104/brendan/taxclass/coi/models/blast/train_nt_4
 Keep MBits: T
 Maximum file size: 3000000000B
-Adding sequences from FASTA; added 35556 sequences in 1.48212 seconds.
+Adding sequences from FASTA; added 35556 sequences in 0.72991 seconds.
 
 
 	Command being timed: "makeblastdb -in ../../data/train_nt_sintax.fasta -dbtype nucl -out train_nt_4"
-	User time (seconds): 0.66
+	User time (seconds): 0.64
 	System time (seconds): 0.05
-	Percent of CPU this job got: 21%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:03.41
+	Percent of CPU this job got: 33%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.05
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 12304
+	Maximum resident set size (kbytes): 12860
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 34
-	Minor (reclaiming a frame) page faults: 2829
-	Voluntary context switches: 337
+	Major (requiring I/O) page faults: 31
+	Minor (reclaiming a frame) page faults: 2748
+	Voluntary context switches: 379
 	Involuntary context switches: 0
 	Swaps: 0
-	File system inputs: 99584
-	File system outputs: 26880
+	File system inputs: 99160
+	File system outputs: 26456
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -40,23 +41,23 @@ Warning: [Query 7664-15323] Examining 5 or more matches is recommended
 Warning: [Query 15324-22985] Examining 5 or more matches is recommended
 Warning: [Query 22986-26901] Examining 5 or more matches is recommended
 	Command being timed: "blastn -query ../../data/test_nt.fasta -db train_nt_4 -out blast_test_nt_4.raw -strand plus -num_threads 4 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"
-	User time (seconds): 10455.91
-	System time (seconds): 0.44
-	Percent of CPU this job got: 393%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 44:17.48
+	User time (seconds): 10291.65
+	System time (seconds): 0.42
+	Percent of CPU this job got: 391%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 43:47.38
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 145300
+	Maximum resident set size (kbytes): 148600
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 17
-	Minor (reclaiming a frame) page faults: 189495
-	Voluntary context switches: 717
-	Involuntary context switches: 103789
+	Major (requiring I/O) page faults: 2
+	Minor (reclaiming a frame) page faults: 134468
+	Voluntary context switches: 922
+	Involuntary context switches: 135592
 	Swaps: 0
-	File system inputs: 99072
-	File system outputs: 7696
+	File system inputs: 99008
+	File system outputs: 7416
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -67,23 +68,23 @@ Warning: [Query 1-12048] Examining 5 or more matches is recommended
 Warning: [Query 12049-24102] Examining 5 or more matches is recommended
 Warning: [Query 24103-26901] Examining 5 or more matches is recommended
 	Command being timed: "blastn -query ../../data/testshort_nt.fasta -db train_nt_4 -out blast_testshort_nt_4.raw -strand plus -num_threads 4 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"
-	User time (seconds): 4129.58
+	User time (seconds): 3916.15
 	System time (seconds): 0.80
-	Percent of CPU this job got: 319%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 21:32.04
+	Percent of CPU this job got: 320%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 20:23.40
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 118080
+	Maximum resident set size (kbytes): 122776
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 418778
-	Voluntary context switches: 416
-	Involuntary context switches: 3653
+	Minor (reclaiming a frame) page faults: 389070
+	Voluntary context switches: 370
+	Involuntary context switches: 9071
 	Swaps: 0
 	File system inputs: 22560
-	File system outputs: 7656
+	File system outputs: 7392
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -91,33 +92,34 @@ Warning: [Query 24103-26901] Examining 5 or more matches is recommended
 	Exit status: 0
 
 
-Building a new DB, current time: 09/19/2025 15:42:54
+Building a new DB, current time: 10/28/2025 22:04:22
 New DB name:   /scratch/project_2003104/brendan/taxclass/coi/models/blast/train_aa_4
 New DB title:  ../../data/train_aa_sintax.fasta
 Sequence type: Protein
+Deleted existing Protein BLAST database named /scratch/project_2003104/brendan/taxclass/coi/models/blast/train_aa_4
 Keep MBits: T
 Maximum file size: 3000000000B
-Adding sequences from FASTA; added 35556 sequences in 1.26816 seconds.
+Adding sequences from FASTA; added 35556 sequences in 0.727821 seconds.
 
 
 	Command being timed: "makeblastdb -in ../../data/train_aa_sintax.fasta -dbtype prot -out train_aa_4"
-	User time (seconds): 0.64
-	System time (seconds): 0.05
-	Percent of CPU this job got: 30%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.26
+	User time (seconds): 0.54
+	System time (seconds): 0.04
+	Percent of CPU this job got: 35%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.65
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 12340
+	Maximum resident set size (kbytes): 12204
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 3
-	Minor (reclaiming a frame) page faults: 2769
-	Voluntary context switches: 295
-	Involuntary context switches: 0
+	Major (requiring I/O) page faults: 2
+	Minor (reclaiming a frame) page faults: 2750
+	Voluntary context switches: 326
+	Involuntary context switches: 5
 	Swaps: 0
-	File system inputs: 69064
-	File system outputs: 30360
+	File system inputs: 23840
+	File system outputs: 29984
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -125,8 +127,8 @@ Adding sequences from FASTA; added 35556 sequences in 1.26816 seconds.
 	Exit status: 0
 Warning: [blastp] Examining 5 or more matches is recommended
 Warning: [Query 1-46] Examining 5 or more matches is recommended
-Warning: [Query 47-92] Examining 5 or more matches is recommended
 Warning: [Query 93-138] Examining 5 or more matches is recommended
+Warning: [Query 47-92] Examining 5 or more matches is recommended
 Warning: [Query 139-185] Examining 5 or more matches is recommended
 Warning: [Query 186-231] Examining 5 or more matches is recommended
 Warning: [Query 232-278] Examining 5 or more matches is recommended
@@ -346,8 +348,8 @@ Warning: [Query 10167-10212] Examining 5 or more matches is recommended
 Warning: [Query 10213-10258] Examining 5 or more matches is recommended
 Warning: [Query 10259-10305] Examining 5 or more matches is recommended
 Warning: [Query 10306-10351] Examining 5 or more matches is recommended
-Warning: [Query 10398-10444] Examining 5 or more matches is recommended
 Warning: [Query 10352-10397] Examining 5 or more matches is recommended
+Warning: [Query 10398-10444] Examining 5 or more matches is recommended
 Warning: [Query 10445-10491] Examining 5 or more matches is recommended
 Warning: [Query 10492-10538] Examining 5 or more matches is recommended
 Warning: [Query 10539-10584] Examining 5 or more matches is recommended
@@ -374,8 +376,8 @@ Warning: [Query 11471-11516] Examining 5 or more matches is recommended
 Warning: [Query 11517-11562] Examining 5 or more matches is recommended
 Warning: [Query 11563-11609] Examining 5 or more matches is recommended
 Warning: [Query 11610-11656] Examining 5 or more matches is recommended
-Warning: [Query 11704-11749] Examining 5 or more matches is recommended
 Warning: [Query 11657-11703] Examining 5 or more matches is recommended
+Warning: [Query 11704-11749] Examining 5 or more matches is recommended
 Warning: [Query 11750-11796] Examining 5 or more matches is recommended
 Warning: [Query 11797-11843] Examining 5 or more matches is recommended
 Warning: [Query 11844-11889] Examining 5 or more matches is recommended
@@ -388,14 +390,14 @@ Warning: [Query 12121-12167] Examining 5 or more matches is recommended
 Warning: [Query 12168-12213] Examining 5 or more matches is recommended
 Warning: [Query 12214-12260] Examining 5 or more matches is recommended
 Warning: [Query 12261-12307] Examining 5 or more matches is recommended
-Warning: [Query 12402-12447] Examining 5 or more matches is recommended
 Warning: [Query 12308-12354] Examining 5 or more matches is recommended
-Warning: [Query 12448-12494] Examining 5 or more matches is recommended
 Warning: [Query 12355-12401] Examining 5 or more matches is recommended
+Warning: [Query 12402-12447] Examining 5 or more matches is recommended
+Warning: [Query 12448-12494] Examining 5 or more matches is recommended
 Warning: [Query 12495-12541] Examining 5 or more matches is recommended
 Warning: [Query 12542-12588] Examining 5 or more matches is recommended
-Warning: [Query 12636-12682] Examining 5 or more matches is recommended
 Warning: [Query 12589-12635] Examining 5 or more matches is recommended
+Warning: [Query 12636-12682] Examining 5 or more matches is recommended
 Warning: [Query 12683-12729] Examining 5 or more matches is recommended
 Warning: [Query 12730-12775] Examining 5 or more matches is recommended
 Warning: [Query 12776-12822] Examining 5 or more matches is recommended
@@ -413,8 +415,8 @@ Warning: [Query 13292-13338] Examining 5 or more matches is recommended
 Warning: [Query 13339-13385] Examining 5 or more matches is recommended
 Warning: [Query 13386-13431] Examining 5 or more matches is recommended
 Warning: [Query 13432-13477] Examining 5 or more matches is recommended
-Warning: [Query 13525-13570] Examining 5 or more matches is recommended
 Warning: [Query 13478-13524] Examining 5 or more matches is recommended
+Warning: [Query 13525-13570] Examining 5 or more matches is recommended
 Warning: [Query 13571-13617] Examining 5 or more matches is recommended
 Warning: [Query 13618-13664] Examining 5 or more matches is recommended
 Warning: [Query 13665-13710] Examining 5 or more matches is recommended
@@ -424,13 +426,13 @@ Warning: [Query 13804-13849] Examining 5 or more matches is recommended
 Warning: [Query 13850-13896] Examining 5 or more matches is recommended
 Warning: [Query 13897-13943] Examining 5 or more matches is recommended
 Warning: [Query 13944-13990] Examining 5 or more matches is recommended
-Warning: [Query 13991-14037] Examining 5 or more matches is recommended
-Warning: [Query 14038-14084] Examining 5 or more matches is recommended
 Warning: [Query 14085-14130] Examining 5 or more matches is recommended
+Warning: [Query 14038-14084] Examining 5 or more matches is recommended
+Warning: [Query 13991-14037] Examining 5 or more matches is recommended
 Warning: [Query 14131-14176] Examining 5 or more matches is recommended
 Warning: [Query 14177-14223] Examining 5 or more matches is recommended
-Warning: [Query 14224-14270] Examining 5 or more matches is recommended
 Warning: [Query 14271-14317] Examining 5 or more matches is recommended
+Warning: [Query 14224-14270] Examining 5 or more matches is recommended
 Warning: [Query 14318-14364] Examining 5 or more matches is recommended
 Warning: [Query 14365-14411] Examining 5 or more matches is recommended
 Warning: [Query 14412-14457] Examining 5 or more matches is recommended
@@ -440,9 +442,9 @@ Warning: [Query 14552-14598] Examining 5 or more matches is recommended
 Warning: [Query 14599-14645] Examining 5 or more matches is recommended
 Warning: [Query 14646-14691] Examining 5 or more matches is recommended
 Warning: [Query 14692-14737] Examining 5 or more matches is recommended
+Warning: [Query 14831-14876] Examining 5 or more matches is recommended
 Warning: [Query 14738-14784] Examining 5 or more matches is recommended
 Warning: [Query 14785-14830] Examining 5 or more matches is recommended
-Warning: [Query 14831-14876] Examining 5 or more matches is recommended
 Warning: [Query 14877-14923] Examining 5 or more matches is recommended
 Warning: [Query 14924-14970] Examining 5 or more matches is recommended
 Warning: [Query 14971-15016] Examining 5 or more matches is recommended
@@ -456,20 +458,20 @@ Warning: [Query 15296-15341] Examining 5 or more matches is recommended
 Warning: [Query 15342-15387] Examining 5 or more matches is recommended
 Warning: [Query 15388-15434] Examining 5 or more matches is recommended
 Warning: [Query 15435-15480] Examining 5 or more matches is recommended
-Warning: [Query 15481-15526] Examining 5 or more matches is recommended
 Warning: [Query 15527-15572] Examining 5 or more matches is recommended
+Warning: [Query 15481-15526] Examining 5 or more matches is recommended
 Warning: [Query 15573-15619] Examining 5 or more matches is recommended
 Warning: [Query 15620-15666] Examining 5 or more matches is recommended
-Warning: [Query 15667-15713] Examining 5 or more matches is recommended
 Warning: [Query 15714-15759] Examining 5 or more matches is recommended
+Warning: [Query 15667-15713] Examining 5 or more matches is recommended
 Warning: [Query 15760-15806] Examining 5 or more matches is recommended
 Warning: [Query 15807-15853] Examining 5 or more matches is recommended
 Warning: [Query 15854-15899] Examining 5 or more matches is recommended
 Warning: [Query 15900-15945] Examining 5 or more matches is recommended
 Warning: [Query 15946-15992] Examining 5 or more matches is recommended
 Warning: [Query 15993-16039] Examining 5 or more matches is recommended
-Warning: [Query 16040-16085] Examining 5 or more matches is recommended
 Warning: [Query 16086-16132] Examining 5 or more matches is recommended
+Warning: [Query 16040-16085] Examining 5 or more matches is recommended
 Warning: [Query 16133-16179] Examining 5 or more matches is recommended
 Warning: [Query 16180-16226] Examining 5 or more matches is recommended
 Warning: [Query 16227-16272] Examining 5 or more matches is recommended
@@ -490,22 +492,22 @@ Warning: [Query 16881-16926] Examining 5 or more matches is recommended
 Warning: [Query 16927-16973] Examining 5 or more matches is recommended
 Warning: [Query 16974-17019] Examining 5 or more matches is recommended
 Warning: [Query 17020-17065] Examining 5 or more matches is recommended
-Warning: [Query 17066-17111] Examining 5 or more matches is recommended
 Warning: [Query 17112-17158] Examining 5 or more matches is recommended
-Warning: [Query 17206-17251] Examining 5 or more matches is recommended
+Warning: [Query 17066-17111] Examining 5 or more matches is recommended
 Warning: [Query 17159-17205] Examining 5 or more matches is recommended
+Warning: [Query 17206-17251] Examining 5 or more matches is recommended
 Warning: [Query 17252-17297] Examining 5 or more matches is recommended
 Warning: [Query 17298-17344] Examining 5 or more matches is recommended
-Warning: [Query 17345-17390] Examining 5 or more matches is recommended
 Warning: [Query 17391-17437] Examining 5 or more matches is recommended
+Warning: [Query 17345-17390] Examining 5 or more matches is recommended
 Warning: [Query 17438-17484] Examining 5 or more matches is recommended
 Warning: [Query 17485-17530] Examining 5 or more matches is recommended
 Warning: [Query 17531-17577] Examining 5 or more matches is recommended
 Warning: [Query 17578-17623] Examining 5 or more matches is recommended
 Warning: [Query 17624-17670] Examining 5 or more matches is recommended
 Warning: [Query 17671-17717] Examining 5 or more matches is recommended
-Warning: [Query 17764-17810] Examining 5 or more matches is recommended
 Warning: [Query 17718-17763] Examining 5 or more matches is recommended
+Warning: [Query 17764-17810] Examining 5 or more matches is recommended
 Warning: [Query 17811-17857] Examining 5 or more matches is recommended
 Warning: [Query 17858-17903] Examining 5 or more matches is recommended
 Warning: [Query 17904-17949] Examining 5 or more matches is recommended
@@ -528,12 +530,12 @@ Warning: [Query 18650-18695] Examining 5 or more matches is recommended
 Warning: [Query 18696-18742] Examining 5 or more matches is recommended
 Warning: [Query 18743-18789] Examining 5 or more matches is recommended
 Warning: [Query 18790-18836] Examining 5 or more matches is recommended
-Warning: [Query 18837-18882] Examining 5 or more matches is recommended
 Warning: [Query 18883-18928] Examining 5 or more matches is recommended
-Warning: [Query 18929-18975] Examining 5 or more matches is recommended
 Warning: [Query 18976-19022] Examining 5 or more matches is recommended
-Warning: [Query 19023-19068] Examining 5 or more matches is recommended
+Warning: [Query 18929-18975] Examining 5 or more matches is recommended
+Warning: [Query 18837-18882] Examining 5 or more matches is recommended
 Warning: [Query 19069-19115] Examining 5 or more matches is recommended
+Warning: [Query 19023-19068] Examining 5 or more matches is recommended
 Warning: [Query 19116-19161] Examining 5 or more matches is recommended
 Warning: [Query 19162-19208] Examining 5 or more matches is recommended
 Warning: [Query 19209-19255] Examining 5 or more matches is recommended
@@ -552,8 +554,8 @@ Warning: [Query 19768-19813] Examining 5 or more matches is recommended
 Warning: [Query 19814-19859] Examining 5 or more matches is recommended
 Warning: [Query 19860-19906] Examining 5 or more matches is recommended
 Warning: [Query 19907-19952] Examining 5 or more matches is recommended
-Warning: [Query 19953-19999] Examining 5 or more matches is recommended
 Warning: [Query 20000-20046] Examining 5 or more matches is recommended
+Warning: [Query 19953-19999] Examining 5 or more matches is recommended
 Warning: [Query 20047-20093] Examining 5 or more matches is recommended
 Warning: [Query 20094-20140] Examining 5 or more matches is recommended
 Warning: [Query 20141-20187] Examining 5 or more matches is recommended
@@ -576,8 +578,8 @@ Warning: [Query 20887-20933] Examining 5 or more matches is recommended
 Warning: [Query 20934-20979] Examining 5 or more matches is recommended
 Warning: [Query 20980-21026] Examining 5 or more matches is recommended
 Warning: [Query 21027-21072] Examining 5 or more matches is recommended
-Warning: [Query 21073-21119] Examining 5 or more matches is recommended
 Warning: [Query 21120-21166] Examining 5 or more matches is recommended
+Warning: [Query 21073-21119] Examining 5 or more matches is recommended
 Warning: [Query 21167-21213] Examining 5 or more matches is recommended
 Warning: [Query 21214-21259] Examining 5 or more matches is recommended
 Warning: [Query 21260-21306] Examining 5 or more matches is recommended
@@ -585,12 +587,12 @@ Warning: [Query 21307-21352] Examining 5 or more matches is recommended
 Warning: [Query 21353-21399] Examining 5 or more matches is recommended
 Warning: [Query 21400-21446] Examining 5 or more matches is recommended
 Warning: [Query 21447-21492] Examining 5 or more matches is recommended
-Warning: [Query 21493-21539] Examining 5 or more matches is recommended
 Warning: [Query 21540-21586] Examining 5 or more matches is recommended
+Warning: [Query 21493-21539] Examining 5 or more matches is recommended
 Warning: [Query 21587-21633] Examining 5 or more matches is recommended
 Warning: [Query 21634-21679] Examining 5 or more matches is recommended
-Warning: [Query 21680-21726] Examining 5 or more matches is recommended
 Warning: [Query 21727-21772] Examining 5 or more matches is recommended
+Warning: [Query 21680-21726] Examining 5 or more matches is recommended
 Warning: [Query 21773-21819] Examining 5 or more matches is recommended
 Warning: [Query 21820-21866] Examining 5 or more matches is recommended
 Warning: [Query 21867-21913] Examining 5 or more matches is recommended
@@ -609,24 +611,24 @@ Warning: [Query 22426-22471] Examining 5 or more matches is recommended
 Warning: [Query 22472-22518] Examining 5 or more matches is recommended
 Warning: [Query 22519-22565] Examining 5 or more matches is recommended
 Warning: [Query 22566-22611] Examining 5 or more matches is recommended
-Warning: [Query 22612-22658] Examining 5 or more matches is recommended
 Warning: [Query 22659-22705] Examining 5 or more matches is recommended
+Warning: [Query 22612-22658] Examining 5 or more matches is recommended
 Warning: [Query 22706-22752] Examining 5 or more matches is recommended
 Warning: [Query 22753-22799] Examining 5 or more matches is recommended
-Warning: [Query 22800-22846] Examining 5 or more matches is recommended
 Warning: [Query 22847-22893] Examining 5 or more matches is recommended
+Warning: [Query 22800-22846] Examining 5 or more matches is recommended
 Warning: [Query 22894-22939] Examining 5 or more matches is recommended
-Warning: [Query 22940-22986] Examining 5 or more matches is recommended
 Warning: [Query 22987-23032] Examining 5 or more matches is recommended
+Warning: [Query 22940-22986] Examining 5 or more matches is recommended
 Warning: [Query 23033-23079] Examining 5 or more matches is recommended
 Warning: [Query 23080-23125] Examining 5 or more matches is recommended
 Warning: [Query 23126-23172] Examining 5 or more matches is recommended
 Warning: [Query 23173-23218] Examining 5 or more matches is recommended
-Warning: [Query 23219-23264] Examining 5 or more matches is recommended
 Warning: [Query 23265-23310] Examining 5 or more matches is recommended
+Warning: [Query 23219-23264] Examining 5 or more matches is recommended
 Warning: [Query 23311-23356] Examining 5 or more matches is recommended
-Warning: [Query 23357-23403] Examining 5 or more matches is recommended
 Warning: [Query 23404-23450] Examining 5 or more matches is recommended
+Warning: [Query 23357-23403] Examining 5 or more matches is recommended
 Warning: [Query 23451-23496] Examining 5 or more matches is recommended
 Warning: [Query 23497-23542] Examining 5 or more matches is recommended
 Warning: [Query 23543-23588] Examining 5 or more matches is recommended
@@ -654,8 +656,8 @@ Warning: [Query 24521-24567] Examining 5 or more matches is recommended
 Warning: [Query 24568-24614] Examining 5 or more matches is recommended
 Warning: [Query 24615-24660] Examining 5 or more matches is recommended
 Warning: [Query 24661-24706] Examining 5 or more matches is recommended
-Warning: [Query 24707-24753] Examining 5 or more matches is recommended
 Warning: [Query 24754-24800] Examining 5 or more matches is recommended
+Warning: [Query 24707-24753] Examining 5 or more matches is recommended
 Warning: [Query 24801-24847] Examining 5 or more matches is recommended
 Warning: [Query 24848-24894] Examining 5 or more matches is recommended
 Warning: [Query 24895-24941] Examining 5 or more matches is recommended
@@ -703,23 +705,23 @@ Warning: [Query 26802-26847] Examining 5 or more matches is recommended
 Warning: [Query 26848-26894] Examining 5 or more matches is recommended
 Warning: [Query 26895-26901] Examining 5 or more matches is recommended
 	Command being timed: "blastp -query ../../data/test_aa.fasta -db train_aa_4 -out blast_test_aa_4.raw -num_threads 4 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"
-	User time (seconds): 41081.77
-	System time (seconds): 16.00
+	User time (seconds): 37864.76
+	System time (seconds): 16.56
 	Percent of CPU this job got: 393%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:54:07
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:40:34
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 244932
+	Maximum resident set size (kbytes): 244612
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 10435
-	Minor (reclaiming a frame) page faults: 7706372
-	Voluntary context switches: 49273
-	Involuntary context switches: 54710
+	Major (requiring I/O) page faults: 37157
+	Minor (reclaiming a frame) page faults: 7740154
+	Voluntary context switches: 79343
+	Involuntary context switches: 80353
 	Swaps: 0
-	File system inputs: 220832
-	File system outputs: 11328
+	File system inputs: 600496
+	File system outputs: 9960
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -732,12 +734,12 @@ Warning: [Query 147-219] Examining 5 or more matches is recommended
 Warning: [Query 220-292] Examining 5 or more matches is recommended
 Warning: [Query 293-365] Examining 5 or more matches is recommended
 Warning: [Query 366-438] Examining 5 or more matches is recommended
-Warning: [Query 512-584] Examining 5 or more matches is recommended
 Warning: [Query 439-511] Examining 5 or more matches is recommended
+Warning: [Query 512-584] Examining 5 or more matches is recommended
 Warning: [Query 585-657] Examining 5 or more matches is recommended
 Warning: [Query 658-730] Examining 5 or more matches is recommended
-Warning: [Query 731-803] Examining 5 or more matches is recommended
 Warning: [Query 804-876] Examining 5 or more matches is recommended
+Warning: [Query 731-803] Examining 5 or more matches is recommended
 Warning: [Query 877-949] Examining 5 or more matches is recommended
 Warning: [Query 950-1022] Examining 5 or more matches is recommended
 Warning: [Query 1023-1095] Examining 5 or more matches is recommended
@@ -748,8 +750,8 @@ Warning: [Query 1315-1387] Examining 5 or more matches is recommended
 Warning: [Query 1388-1460] Examining 5 or more matches is recommended
 Warning: [Query 1461-1533] Examining 5 or more matches is recommended
 Warning: [Query 1534-1606] Examining 5 or more matches is recommended
-Warning: [Query 1680-1752] Examining 5 or more matches is recommended
 Warning: [Query 1607-1679] Examining 5 or more matches is recommended
+Warning: [Query 1680-1752] Examining 5 or more matches is recommended
 Warning: [Query 1753-1825] Examining 5 or more matches is recommended
 Warning: [Query 1826-1898] Examining 5 or more matches is recommended
 Warning: [Query 1899-1971] Examining 5 or more matches is recommended
@@ -918,8 +920,8 @@ Warning: [Query 13727-13799] Examining 5 or more matches is recommended
 Warning: [Query 13800-13872] Examining 5 or more matches is recommended
 Warning: [Query 13873-13945] Examining 5 or more matches is recommended
 Warning: [Query 13946-14018] Examining 5 or more matches is recommended
-Warning: [Query 14019-14091] Examining 5 or more matches is recommended
 Warning: [Query 14092-14164] Examining 5 or more matches is recommended
+Warning: [Query 14019-14091] Examining 5 or more matches is recommended
 Warning: [Query 14165-14237] Examining 5 or more matches is recommended
 Warning: [Query 14238-14310] Examining 5 or more matches is recommended
 Warning: [Query 14311-14383] Examining 5 or more matches is recommended
@@ -930,8 +932,8 @@ Warning: [Query 14603-14675] Examining 5 or more matches is recommended
 Warning: [Query 14676-14748] Examining 5 or more matches is recommended
 Warning: [Query 14749-14821] Examining 5 or more matches is recommended
 Warning: [Query 14822-14894] Examining 5 or more matches is recommended
-Warning: [Query 14895-14967] Examining 5 or more matches is recommended
 Warning: [Query 14968-15040] Examining 5 or more matches is recommended
+Warning: [Query 14895-14967] Examining 5 or more matches is recommended
 Warning: [Query 15041-15113] Examining 5 or more matches is recommended
 Warning: [Query 15114-15186] Examining 5 or more matches is recommended
 Warning: [Query 15187-15259] Examining 5 or more matches is recommended
@@ -1096,23 +1098,23 @@ Warning: [Query 26721-26793] Examining 5 or more matches is recommended
 Warning: [Query 26794-26866] Examining 5 or more matches is recommended
 Warning: [Query 26867-26901] Examining 5 or more matches is recommended
 	Command being timed: "blastp -query ../../data/testshort_aa.fasta -db train_aa_4 -out blast_testshort_aa_4.raw -num_threads 4 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"
-	User time (seconds): 30867.80
-	System time (seconds): 15.36
-	Percent of CPU this job got: 396%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:09:48
+	User time (seconds): 26448.25
+	System time (seconds): 14.83
+	Percent of CPU this job got: 394%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:51:53
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 368444
+	Maximum resident set size (kbytes): 368796
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 614
-	Minor (reclaiming a frame) page faults: 7734209
-	Voluntary context switches: 25387
-	Involuntary context switches: 43457
+	Major (requiring I/O) page faults: 1150
+	Minor (reclaiming a frame) page faults: 7736269
+	Voluntary context switches: 27819
+	Involuntary context switches: 39845
 	Swaps: 0
-	File system inputs: 75896
-	File system outputs: 9800
+	File system inputs: 87368
+	File system outputs: 8792
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0

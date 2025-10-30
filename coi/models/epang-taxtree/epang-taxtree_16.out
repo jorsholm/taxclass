@@ -13,14 +13,15 @@
 ++ which time
 ++ alias
 ++ eval declare -f
-++ /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot time
 +++ declare -f
+++ /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot time
 + TIME='/appl/opt/time/1.9/bin/time --verbose'
 + export PATH=/projappl/project_2005718/bin:/appl/opt/time/1.9/bin:/appl/spack/v018/install-tree/gcc-8.5.0/git-lfs-3.1.2-u4tplj/bin:/appl/opt/csc-cli-utils/bin:/appl/spack/v018/install-tree/gcc-11.3.0/openmpi-4.1.4-w2aekq/bin:/appl/spack/v018/install-tree/gcc-11.3.0/intel-oneapi-mkl-2022.1.0-p2wpb4/mkl/2022.1.0/bin/intel64:/appl/spack/v018/install-tree/gcc-8.5.0/gcc-11.3.0-i44hho/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/appl/bin:/users/brfurnea/.local/bin:/users/brfurnea/bin
 + PATH=/projappl/project_2005718/bin:/appl/opt/time/1.9/bin:/appl/spack/v018/install-tree/gcc-8.5.0/git-lfs-3.1.2-u4tplj/bin:/appl/opt/csc-cli-utils/bin:/appl/spack/v018/install-tree/gcc-11.3.0/openmpi-4.1.4-w2aekq/bin:/appl/spack/v018/install-tree/gcc-11.3.0/intel-oneapi-mkl-2022.1.0-p2wpb4/mkl/2022.1.0/bin/intel64:/appl/spack/v018/install-tree/gcc-8.5.0/gcc-11.3.0-i44hho/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/appl/bin:/users/brfurnea/.local/bin:/users/brfurnea/bin
 + MODEL=epang-taxtree
 + DATA=../../data
 + RESULTS=../../results/epang-taxtree
++ mkdir -p ../../results/epang-taxtree
 + TRAIN_TAXONOMY_FILE=../../data/train_gappa.tax
 + /appl/opt/time/1.9/bin/time --verbose gappa prepare taxonomy-tree --taxon-list-file ../../data/train_gappa.tax --out-dir /users/brfurnea/LifePlan/brendan/taxclass/coi/models/epang-taxtree --threads 16 --allow-file-overwriting
                                               ....      ....  
@@ -66,28 +67,28 @@ Global Options:
 Run the following command to get the references that need to be cited:
 `gappa tools citation Czech2020-genesis-and-gappa`
 
-Started 2025-09-28 04:21:56
+Started 2025-10-28 21:00:09
 
 Warning: Output file already exists and will be overwritten: /users/brfurnea/LifePlan/brendan/taxclass/coi/models/epang-taxtree/taxonomy_tree.newick
 
-Finished 2025-09-28 04:21:58
+Finished 2025-10-28 21:00:11
 	Command being timed: "gappa prepare taxonomy-tree --taxon-list-file ../../data/train_gappa.tax --out-dir /users/brfurnea/LifePlan/brendan/taxclass/coi/models/epang-taxtree --threads 16 --allow-file-overwriting"
-	User time (seconds): 1.88
+	User time (seconds): 2.10
 	System time (seconds): 0.02
-	Percent of CPU this job got: 54%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:03.50
+	Percent of CPU this job got: 85%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.50
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 46900
+	Maximum resident set size (kbytes): 46844
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 213
-	Minor (reclaiming a frame) page faults: 12192
-	Voluntary context switches: 250
+	Major (requiring I/O) page faults: 101
+	Minor (reclaiming a frame) page faults: 11527
+	Voluntary context switches: 137
 	Involuntary context switches: 3
 	Swaps: 0
-	File system inputs: 20064
+	File system inputs: 18640
 	File system outputs: 912
 	Socket messages sent: 0
 	Socket messages received: 0
@@ -108,91 +109,91 @@ IQ-TREE multicore version 2.4.0 for Linux x86 64-bit built Mar  4 2025
 Developed by Bui Quang Minh, Nguyen Lam Tung, Olga Chernomor, Heiko Schmidt,
 Dominik Schrempf, Michael Woodhams, Ly Trong Nhan, Thomas Wong
 
-Host:    r02c09.bullx (AVX512, FMA3, 187 GB RAM)
+Host:    r18c05.bullx (AVX512, FMA3, 187 GB RAM)
 Command: iqtree2 -s ../../data/train_aa_aln.fasta -T 16 -fast -keep-ident --redo -m mtART+G4 -g taxonomy_tree.newick -pre train_aa_16/train_aa
-Seed:    418520 (Using SPRNG - Scalable Parallel Random Number Generator)
-Time:    Sun Sep 28 04:22:00 2025
+Seed:    740166 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Tue Oct 28 21:00:12 2025
 Kernel:  AVX+FMA - 16 threads (16 CPU cores detected)
 
 Reading alignment file ../../data/train_aa_aln.fasta ... Fasta format detected
-Reading fasta file: done in 0.159075 secs using 62.14% CPU
+Reading fasta file: done in 0.129433 secs using 80.32% CPU
 Alignment most likely contains protein sequences
 Alignment has 35556 sequences with 219 columns, 219 distinct patterns
 212 parsimony-informative, 7 singleton sites, 0 constant sites
-Analyzing sequences: done in 0.00161231 secs using 1347% CPU
+Analyzing sequences: done in 0.0130044 secs using 1328% CPU
 Reading constraint tree taxonomy_tree.newick...
 WARNING: Rooted constraint tree will be treated as unrooted tree
 Creating fast initial parsimony tree by random order stepwise addition...
-70.55 seconds, parsimony score: 43766 (based on 219 sites)
+74.75 seconds, parsimony score: 43776 (based on 219 sites)
 
 NOTE: 5273 MB RAM (5 GB) is required!
 WARNING: Number of threads seems too high for short alignments. Use -T AUTO to determine best number of threads.
 Estimate model parameters (epsilon = 0.50)
-1. Initial log-likelihood: -253474.53
-2. Current log-likelihood: -247662.60
-3. Current log-likelihood: -247343.37
-4. Current log-likelihood: -247340.60
-Optimal log-likelihood: -247340.25
+1. Initial log-likelihood: -253502.62
+2. Current log-likelihood: -247606.59
+3. Current log-likelihood: -247321.25
+4. Current log-likelihood: -247318.11
+Optimal log-likelihood: -247317.50
 Gamma shape alpha: 0.59
-Parameters optimization took 4 rounds (1167.60 sec)
+Parameters optimization took 4 rounds (1295.86 sec)
 Wrote distance file to... 
 --------------------------------------------------------------------
 |             INITIALIZING CANDIDATE TREE SET                      |
 --------------------------------------------------------------------
-Generating 1 parsimony trees... 1176.85 second
-Computing log-likelihood of 1 initial trees ... 76.30 seconds
-Current best score: -247340.25
+Generating 1 parsimony trees... 1267.90 second
+Computing log-likelihood of 1 initial trees ... 154.34 seconds
+Current best score: -247317.50
 
 Do NNI search on 2 best initial trees
 Estimate model parameters (epsilon = 0.50)
-BETTER TREE FOUND at iteration 1: -244377.97
+BETTER TREE FOUND at iteration 1: -244304.18
 Finish initializing candidate tree set (4)
-Current best tree score: -244377.97 / CPU time: 39777.28
+Current best tree score: -244304.18 / CPU time: 51591.89
 Number of iterations: 2
-TREE SEARCH COMPLETED AFTER 2 ITERATIONS / Time: 11h:43m:39s
+TREE SEARCH COMPLETED AFTER 2 ITERATIONS / Time: 15h:0m:40s
 
 --------------------------------------------------------------------
 |                    FINALIZING TREE SEARCH                        |
 --------------------------------------------------------------------
 Performs final model parameters optimization
 Estimate model parameters (epsilon = 0.05)
-1. Initial log-likelihood: -244377.97
-Optimal log-likelihood: -244377.97
+1. Initial log-likelihood: -244304.18
+Optimal log-likelihood: -244304.18
 Gamma shape alpha: 0.59
-Parameters optimization took 1 rounds (26.70 sec)
-BEST SCORE FOUND : -244377.97
-Total tree length: 404.63
+Parameters optimization took 1 rounds (44.63 sec)
+BEST SCORE FOUND : -244304.18
+Total tree length: 404.96
 
 Total number of iterations: 2
-CPU time used for tree search: 112357.97 sec (31h:12m:37s)
-Wall-clock time used for tree search: 39777.47 sec (11h:2m:57s)
-Total CPU time used: 125448.20 sec (34h:50m:48s)
-Total wall-clock time used: 42247.02 sec (11h:44m:7s)
+CPU time used for tree search: 158295.57 sec (43h:58m:15s)
+Wall-clock time used for tree search: 51592.16 sec (14h:19m:52s)
+Total CPU time used: 172351.83 sec (47h:52m:31s)
+Total wall-clock time used: 54085.94 sec (15h:1m:25s)
 
 Analysis results written to: 
   IQ-TREE report:                train_aa_16/train_aa.iqtree
   Maximum-likelihood tree:       train_aa_16/train_aa.treefile
   Screen log file:               train_aa_16/train_aa.log
 
-Date and Time: Sun Sep 28 16:06:14 2025
+Date and Time: Wed Oct 29 12:01:46 2025
 	Command being timed: "iqtree2 -s ../../data/train_aa_aln.fasta -T 16 -fast -keep-ident --redo -m mtART+G4 -g taxonomy_tree.newick -pre train_aa_16/train_aa"
-	User time (seconds): 125453.91
-	System time (seconds): 167.27
-	Percent of CPU this job got: 297%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 11:44:15
+	User time (seconds): 172359.02
+	System time (seconds): 222.55
+	Percent of CPU this job got: 319%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 15:01:35
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 10615680
+	Maximum resident set size (kbytes): 10970504
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 1596
-	Minor (reclaiming a frame) page faults: 2850306
-	Voluntary context switches: 15137626
-	Involuntary context switches: 39913
+	Major (requiring I/O) page faults: 14979
+	Minor (reclaiming a frame) page faults: 995672
+	Voluntary context switches: 18620889
+	Involuntary context switches: 439476
 	Swaps: 0
-	File system inputs: 44344
-	File system outputs: 45896
+	File system inputs: 76880
+	File system outputs: 43864
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -204,9 +205,10 @@ Date and Time: Sun Sep 28 16:06:14 2025
 + echo 'Detected alpha: 0.59'
 Detected alpha: 0.59
 + SUBSTITUTION_PARAMS='mtART+G4{0.59}'
-+ for TEST in test testshort
++ for TESTSET in test testshort
 + TEST_FILE=../../data/test_aa_aln.fasta
 + RAW_DIR=train_aa_16/test
++ SUFFIX=test_aa_16
 + mkdir -p train_aa_16/test
 + /appl/opt/time/1.9/bin/time --verbose epa-ng --tree train_aa_16/train_aa.treefile --ref-msa ../../data/train_aa_aln.fasta --query ../../data/test_aa_aln.fasta --out-dir train_aa_16/test --model 'mtART+G4{0.59}' --threads 16 --redo
 INFO Selected: Output dir: train_aa_16/test/
@@ -233,32 +235,32 @@ INFO 15000 Sequences done!
 INFO 20000 Sequences done!
 INFO 25000 Sequences done!
 INFO 26901 Sequences done!
-INFO Time spent placing: 10078s
-INFO Elapsed Time: 10131s
+INFO Time spent placing: 11717s
+INFO Elapsed Time: 11781s
 	Command being timed: "epa-ng --tree train_aa_16/train_aa.treefile --ref-msa ../../data/train_aa_aln.fasta --query ../../data/test_aa_aln.fasta --out-dir train_aa_16/test --model mtART+G4{0.59} --threads 16 --redo"
-	User time (seconds): 160322.56
-	System time (seconds): 16.43
-	Percent of CPU this job got: 1582%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:48:53
+	User time (seconds): 186088.08
+	System time (seconds): 17.50
+	Percent of CPU this job got: 1579%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:16:24
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 39591140
+	Maximum resident set size (kbytes): 39578588
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 1056
-	Minor (reclaiming a frame) page faults: 10315946
-	Voluntary context switches: 5931
-	Involuntary context switches: 85301
+	Major (requiring I/O) page faults: 2163
+	Minor (reclaiming a frame) page faults: 8830519
+	Voluntary context switches: 5657
+	Involuntary context switches: 550979
 	Swaps: 0
-	File system inputs: 41440
-	File system outputs: 24288
+	File system inputs: 42224
+	File system outputs: 24264
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-+ /appl/opt/time/1.9/bin/time --verbose gappa examine assign --jplace-path train_aa_16/test/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string 'class|order|family|subfamily|tribe|genus|species' --out-dir train_aa_16/test --file-suffix __aa_16 --per-query-results --threads 16 --allow-file-overwriting
++ /appl/opt/time/1.9/bin/time --verbose gappa examine assign --jplace-path train_aa_16/test/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string 'class|order|family|subfamily|tribe|genus|species' --out-dir train_aa_16/test --file-suffix _test_aa_16 --per-query-results --threads 16 --allow-file-overwriting
                                               ....      ....  
                                              '' '||.   .||'   
                                                   ||  ||      
@@ -271,7 +273,7 @@ INFO Elapsed Time: 10131s
                    ''''     ''''   v0.8.5 (c) 2017-2024
                                    by Lucas Czech and Pierre Barbera
 
-Invocation:                        gappa examine assign --jplace-path train_aa_16/test/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_aa_16/test --file-suffix __aa_16 --per-query-results --threads 16 --allow-file-overwriting
+Invocation:                        gappa examine assign --jplace-path train_aa_16/test/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_aa_16/test --file-suffix _test_aa_16 --per-query-results --threads 16 --allow-file-overwriting
 Command:                           gappa examine assign
 
 Input:
@@ -292,7 +294,7 @@ Settings:
 Output:
   --out-dir                        train_aa_16/test
   --file-prefix                    
-  --file-suffix                    __aa_16
+  --file-suffix                    _test_aa_16
   --cami                           false
   --sample-id                      
   --krona                          false
@@ -309,38 +311,90 @@ Global Options:
 Run the following command to get the references that need to be cited:
 `gappa tools citation Czech2020-genesis-and-gappa`
 
-Started 2025-09-28 18:55:09
+Started 2025-10-29 15:18:12
 
 Found 1 jplace file
 Running the assignment
 
-Finished 2025-09-28 18:55:45
-	Command being timed: "gappa examine assign --jplace-path train_aa_16/test/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_aa_16/test --file-suffix __aa_16 --per-query-results --threads 16 --allow-file-overwriting"
-	User time (seconds): 35.80
-	System time (seconds): 0.20
-	Percent of CPU this job got: 98%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:36.63
+Finished 2025-10-29 15:18:58
+	Command being timed: "gappa examine assign --jplace-path train_aa_16/test/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_aa_16/test --file-suffix _test_aa_16 --per-query-results --threads 16 --allow-file-overwriting"
+	User time (seconds): 45.44
+	System time (seconds): 0.25
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:46.02
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 377340
+	Maximum resident set size (kbytes): 379152
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 145
-	Minor (reclaiming a frame) page faults: 104073
-	Voluntary context switches: 261
-	Involuntary context switches: 19
+	Major (requiring I/O) page faults: 45
+	Minor (reclaiming a frame) page faults: 100871
+	Voluntary context switches: 143
+	Involuntary context switches: 28
 	Swaps: 0
-	File system inputs: 39160
-	File system outputs: 53560
+	File system inputs: 33296
+	File system outputs: 51424
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-+ for TEST in test testshort
++ RESULT_FILE=../../results/epang-taxtree/epang-taxtree_test_aa_16.tsv
++ echo 'ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species'
++ awk '-F ' '
+      function write_record(best_prob, best_taxon, new_prob, is_new, new_rank, rank) {
+        printf "%s", prev_id
+          is_new=0
+          new_rank=8
+          for (rank = 1; rank <= 7; rank++) {
+            if (is_new) {
+              printf "\tunk\t%.6f", new_prob[new_rank]
+            } else if (new_prob[rank] > best_prob[rank]) {
+              is_new = 1
+              new_rank = rank
+              printf "\tunk\t%.6f", new_prob[rank]
+            } else {
+              printf "\t%s\t%.6f", best_taxon[rank], best_prob[rank]
+            }
+          }
+          printf "\n"
+      }
+      BEGIN { prev_id="NA" }
+      $1 == "name" { next }
+      $1 != prev_id {
+        if (prev_id != "NA") {
+          write_record(best_prob, best_taxon, new_prob)
+        }
+        for (rank = 1; rank <= 7; rank++) {
+          best_prob[rank] = 0
+          new_prob[rank] = 1
+          best_taxon[rank] = "NA"
+        }
+        prev_id = $1
+      }
+      {
+        rank = split($6, a, ";")
+        if (rank > 1 && a[rank-1] !~ best_taxon[rank - 1]) next
+        new_prob[rank] -= $5
+        if ($5 > best_prob[rank]) {
+          best_prob[rank] = $5
+          best_taxon[rank] = a[rank]
+          if (rank < 7) new_prob[rank + 1] = $5
+          for (rank2 = rank + 1; rank2 <= 7; rank2++) {
+            best_prob[rank2] = 0
+            best_taxon[rank2] = "NA"
+            new_prob[rank2] = $5
+          }
+        }
+      }
+      END{
+        write_record(best_prob, best_taxon, new_prob)
+      }' train_aa_16/test/per_query_test_aa_16.tsv
++ for TESTSET in test testshort
 + TEST_FILE=../../data/testshort_aa_aln.fasta
 + RAW_DIR=train_aa_16/testshort
++ SUFFIX=testshort_aa_16
 + mkdir -p train_aa_16/testshort
 + /appl/opt/time/1.9/bin/time --verbose epa-ng --tree train_aa_16/train_aa.treefile --ref-msa ../../data/train_aa_aln.fasta --query ../../data/testshort_aa_aln.fasta --out-dir train_aa_16/testshort --model 'mtART+G4{0.59}' --threads 16 --redo
 INFO Selected: Output dir: train_aa_16/testshort/
@@ -367,32 +421,32 @@ INFO 15000 Sequences done!
 INFO 20000 Sequences done!
 INFO 25000 Sequences done!
 INFO 26901 Sequences done!
-INFO Time spent placing: 11088s
-INFO Elapsed Time: 11127s
+INFO Time spent placing: 12008s
+INFO Elapsed Time: 12062s
 	Command being timed: "epa-ng --tree train_aa_16/train_aa.treefile --ref-msa ../../data/train_aa_aln.fasta --query ../../data/testshort_aa_aln.fasta --out-dir train_aa_16/testshort --model mtART+G4{0.59} --threads 16 --redo"
-	User time (seconds): 176329.26
-	System time (seconds): 13.26
-	Percent of CPU this job got: 1584%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:05:28
+	User time (seconds): 190687.74
+	System time (seconds): 15.21
+	Percent of CPU this job got: 1580%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:21:03
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 33150020
+	Maximum resident set size (kbytes): 33147028
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 1301
-	Minor (reclaiming a frame) page faults: 8557735
-	Voluntary context switches: 4183
-	Involuntary context switches: 118237
+	Major (requiring I/O) page faults: 1642
+	Minor (reclaiming a frame) page faults: 6957783
+	Voluntary context switches: 5047
+	Involuntary context switches: 604674
 	Swaps: 0
-	File system inputs: 36456
-	File system outputs: 26040
+	File system inputs: 41512
+	File system outputs: 26080
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-+ /appl/opt/time/1.9/bin/time --verbose gappa examine assign --jplace-path train_aa_16/testshort/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string 'class|order|family|subfamily|tribe|genus|species' --out-dir train_aa_16/testshort --file-suffix __aa_16 --per-query-results --threads 16 --allow-file-overwriting
++ /appl/opt/time/1.9/bin/time --verbose gappa examine assign --jplace-path train_aa_16/testshort/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string 'class|order|family|subfamily|tribe|genus|species' --out-dir train_aa_16/testshort --file-suffix _testshort_aa_16 --per-query-results --threads 16 --allow-file-overwriting
                                               ....      ....  
                                              '' '||.   .||'   
                                                   ||  ||      
@@ -405,7 +459,7 @@ INFO Elapsed Time: 11127s
                    ''''     ''''   v0.8.5 (c) 2017-2024
                                    by Lucas Czech and Pierre Barbera
 
-Invocation:                        gappa examine assign --jplace-path train_aa_16/testshort/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_aa_16/testshort --file-suffix __aa_16 --per-query-results --threads 16 --allow-file-overwriting
+Invocation:                        gappa examine assign --jplace-path train_aa_16/testshort/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_aa_16/testshort --file-suffix _testshort_aa_16 --per-query-results --threads 16 --allow-file-overwriting
 Command:                           gappa examine assign
 
 Input:
@@ -426,7 +480,7 @@ Settings:
 Output:
   --out-dir                        train_aa_16/testshort
   --file-prefix                    
-  --file-suffix                    __aa_16
+  --file-suffix                    _testshort_aa_16
   --cami                           false
   --sample-id                      
   --krona                          false
@@ -443,35 +497,86 @@ Global Options:
 Run the following command to get the references that need to be cited:
 `gappa tools citation Czech2020-genesis-and-gappa`
 
-Started 2025-09-28 22:01:14
+Started 2025-10-29 18:40:06
 
 Found 1 jplace file
 Running the assignment
 
-Finished 2025-09-28 22:01:52
-	Command being timed: "gappa examine assign --jplace-path train_aa_16/testshort/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_aa_16/testshort --file-suffix __aa_16 --per-query-results --threads 16 --allow-file-overwriting"
-	User time (seconds): 35.91
-	System time (seconds): 0.22
-	Percent of CPU this job got: 94%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:38.32
+Finished 2025-10-29 18:40:52
+	Command being timed: "gappa examine assign --jplace-path train_aa_16/testshort/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_aa_16/testshort --file-suffix _testshort_aa_16 --per-query-results --threads 16 --allow-file-overwriting"
+	User time (seconds): 45.43
+	System time (seconds): 0.26
+	Percent of CPU this job got: 97%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:46.72
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 379068
+	Maximum resident set size (kbytes): 380916
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 162
-	Minor (reclaiming a frame) page faults: 104499
-	Voluntary context switches: 263
-	Involuntary context switches: 20
+	Major (requiring I/O) page faults: 48
+	Minor (reclaiming a frame) page faults: 101802
+	Voluntary context switches: 141
+	Involuntary context switches: 28
 	Swaps: 0
-	File system inputs: 39856
-	File system outputs: 57904
+	File system inputs: 38456
+	File system outputs: 56352
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
++ RESULT_FILE=../../results/epang-taxtree/epang-taxtree_testshort_aa_16.tsv
++ echo 'ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species'
++ awk '-F ' '
+      function write_record(best_prob, best_taxon, new_prob, is_new, new_rank, rank) {
+        printf "%s", prev_id
+          is_new=0
+          new_rank=8
+          for (rank = 1; rank <= 7; rank++) {
+            if (is_new) {
+              printf "\tunk\t%.6f", new_prob[new_rank]
+            } else if (new_prob[rank] > best_prob[rank]) {
+              is_new = 1
+              new_rank = rank
+              printf "\tunk\t%.6f", new_prob[rank]
+            } else {
+              printf "\t%s\t%.6f", best_taxon[rank], best_prob[rank]
+            }
+          }
+          printf "\n"
+      }
+      BEGIN { prev_id="NA" }
+      $1 == "name" { next }
+      $1 != prev_id {
+        if (prev_id != "NA") {
+          write_record(best_prob, best_taxon, new_prob)
+        }
+        for (rank = 1; rank <= 7; rank++) {
+          best_prob[rank] = 0
+          new_prob[rank] = 1
+          best_taxon[rank] = "NA"
+        }
+        prev_id = $1
+      }
+      {
+        rank = split($6, a, ";")
+        if (rank > 1 && a[rank-1] !~ best_taxon[rank - 1]) next
+        new_prob[rank] -= $5
+        if ($5 > best_prob[rank]) {
+          best_prob[rank] = $5
+          best_taxon[rank] = a[rank]
+          if (rank < 7) new_prob[rank + 1] = $5
+          for (rank2 = rank + 1; rank2 <= 7; rank2++) {
+            best_prob[rank2] = 0
+            best_taxon[rank2] = "NA"
+            new_prob[rank2] = $5
+          }
+        }
+      }
+      END{
+        write_record(best_prob, best_taxon, new_prob)
+      }' train_aa_16/testshort/per_query_testshort_aa_16.tsv
 + for ALPHABET in aa nt
 + INSTANCE=train_nt
 + MODEL_DIR=train_nt_16
@@ -485,102 +590,105 @@ IQ-TREE multicore version 2.4.0 for Linux x86 64-bit built Mar  4 2025
 Developed by Bui Quang Minh, Nguyen Lam Tung, Olga Chernomor, Heiko Schmidt,
 Dominik Schrempf, Michael Woodhams, Ly Trong Nhan, Thomas Wong
 
-Host:    r02c09.bullx (AVX512, FMA3, 187 GB RAM)
+Host:    r18c05.bullx (AVX512, FMA3, 187 GB RAM)
 Command: iqtree2 -s ../../data/train_nt_aln.fasta -T 16 -fast -keep-ident --redo -m GTR+G4 -g taxonomy_tree.newick -pre train_nt_16/train_nt
-Seed:    846713 (Using SPRNG - Scalable Parallel Random Number Generator)
-Time:    Sun Sep 28 22:01:54 2025
+Seed:    132899 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Wed Oct 29 18:40:57 2025
 Kernel:  AVX+FMA - 16 threads (16 CPU cores detected)
 
 Reading alignment file ../../data/train_nt_aln.fasta ... Fasta format detected
-Reading fasta file: done in 0.362092 secs using 69.51% CPU
+Reading fasta file: done in 0.493087 secs using 65.5% CPU
 Alignment most likely contains DNA/RNA sequences
 Alignment has 35556 sequences with 658 columns, 655 distinct patterns
 623 parsimony-informative, 22 singleton sites, 13 constant sites
-Analyzing sequences: done in 0.0169891 secs using 1048% CPU
+Analyzing sequences: done in 0.0056102 secs using 1663% CPU
 Reading constraint tree taxonomy_tree.newick...
 WARNING: Rooted constraint tree will be treated as unrooted tree
 Creating fast initial parsimony tree by random order stepwise addition...
-70.42 seconds, parsimony score: 521005 (based on 645 sites)
+67.23 seconds, parsimony score: 520925 (based on 645 sites)
 
 NOTE: 3043 MB RAM (2 GB) is required!
 WARNING: Number of threads seems too high for short alignments. Use -T AUTO to determine best number of threads.
 Estimate model parameters (epsilon = 0.50)
-1. Initial log-likelihood: -2281067.71
-2. Current log-likelihood: -2091810.38
-3. Current log-likelihood: -2082594.61
-4. Current log-likelihood: -2081277.33
-5. Current log-likelihood: -2081117.04
-6. Current log-likelihood: -2080848.48
-7. Current log-likelihood: -2080816.22
-8. Current log-likelihood: -2080812.82
-9. Current log-likelihood: -2080811.75
-Optimal log-likelihood: -2080811.30
-Rate parameters:  A-C: 1.39203  A-G: 7.74855  A-T: 5.44128  C-G: 1.57857  C-T: 24.27253  G-T: 1.00000
+1. Initial log-likelihood: -2281489.64
+2. Current log-likelihood: -2092484.27
+3. Current log-likelihood: -2083553.51
+4. Current log-likelihood: -2081935.61
+5. Current log-likelihood: -2081787.76
+6. Current log-likelihood: -2081575.28
+7. Current log-likelihood: -2081537.44
+8. Current log-likelihood: -2081531.08
+9. Current log-likelihood: -2081529.71
+Optimal log-likelihood: -2081529.29
+Rate parameters:  A-C: 1.38723  A-G: 7.72204  A-T: 5.41446  C-G: 1.54750  C-T: 24.25833  G-T: 1.00000
 Base frequencies:  A: 0.303  C: 0.162  G: 0.152  T: 0.383
 Gamma shape alpha: 0.414
-Parameters optimization took 9 rounds (6684.367 sec)
+Parameters optimization took 9 rounds (9854.534 sec)
 Wrote distance file to... 
 --------------------------------------------------------------------
 |             INITIALIZING CANDIDATE TREE SET                      |
 --------------------------------------------------------------------
-Generating 1 parsimony trees... 1265.227 second
-Computing log-likelihood of 1 initial trees ... 412.111 seconds
-Current best score: -2080811.296
+Generating 1 parsimony trees... 1597.060 second
+Computing log-likelihood of 1 initial trees ... 471.784 seconds
+Current best score: -2081529.289
 
 Do NNI search on 2 best initial trees
 Estimate model parameters (epsilon = 0.500)
-BETTER TREE FOUND at iteration 1: -2067703.301
+BETTER TREE FOUND at iteration 1: -2068230.159
 Estimate model parameters (epsilon = 0.500)
-BETTER TREE FOUND at iteration 2: -2067447.424
+BETTER TREE FOUND at iteration 2: -2067885.450
 Finish initializing candidate tree set (4)
-Current best tree score: -2067447.424 / CPU time: 51900.168
+Current best tree score: -2067885.450 / CPU time: 55913.446
 Number of iterations: 2
-TREE SEARCH COMPLETED AFTER 2 ITERATIONS / Time: 16h:37m:57s
+TREE SEARCH COMPLETED AFTER 2 ITERATIONS / Time: 18h:37m:19s
 
 --------------------------------------------------------------------
 |                    FINALIZING TREE SEARCH                        |
 --------------------------------------------------------------------
 Performs final model parameters optimization
 Estimate model parameters (epsilon = 0.050)
-1. Initial log-likelihood: -2067447.424
-Optimal log-likelihood: -2067445.552
-Rate parameters:  A-C: 1.39613  A-G: 8.00085  A-T: 5.61970  C-G: 1.54647  C-T: 25.46899  G-T: 1.00000
+1. Initial log-likelihood: -2067885.450
+2. Current log-likelihood: -2067885.166
+3. Current log-likelihood: -2067885.067
+4. Current log-likelihood: -2067885.015
+Optimal log-likelihood: -2067884.926
+Rate parameters:  A-C: 1.39404  A-G: 7.98574  A-T: 5.59480  C-G: 1.53367  C-T: 25.36469  G-T: 1.00000
 Base frequencies:  A: 0.303  C: 0.162  G: 0.152  T: 0.383
-Gamma shape alpha: 0.414
-Parameters optimization took 1 rounds (524.869 sec)
-BEST SCORE FOUND : -2067445.552
-Total tree length: 1757.321
+Gamma shape alpha: 0.411
+Parameters optimization took 4 rounds (928.915 sec)
+BEST SCORE FOUND : -2067884.926
+Total tree length: 1756.566
 
 Total number of iterations: 2
-CPU time used for tree search: 180986.156 sec (50h:16m:26s)
-Wall-clock time used for tree search: 51900.440 sec (14h:25m:0s)
-Total CPU time used: 247834.451 sec (68h:50m:34s)
-Total wall-clock time used: 60402.737 sec (16h:46m:42s)
+CPU time used for tree search: 182056.406 sec (50h:34m:16s)
+Wall-clock time used for tree search: 55913.879 sec (15h:31m:53s)
+Total CPU time used: 262517.090 sec (72h:55m:17s)
+Total wall-clock time used: 67969.942 sec (18h:52m:49s)
 
 Analysis results written to: 
   IQ-TREE report:                train_nt_16/train_nt.iqtree
   Maximum-likelihood tree:       train_nt_16/train_nt.treefile
   Screen log file:               train_nt_16/train_nt.log
 
-Date and Time: Mon Sep 29 14:48:49 2025
+Date and Time: Thu Oct 30 13:33:58 2025
 	Command being timed: "iqtree2 -s ../../data/train_nt_aln.fasta -T 16 -fast -keep-ident --redo -m GTR+G4 -g taxonomy_tree.newick -pre train_nt_16/train_nt"
-	User time (seconds): 247841.10
-	System time (seconds): 361.79
-	Percent of CPU this job got: 410%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 16:47:00
+	User time (seconds): 262524.79
+	System time (seconds): 446.00
+	Percent of CPU this job got: 386%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 18:53:05
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 7433744
+	Maximum resident set size (kbytes): 7434196
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 3113
-	Minor (reclaiming a frame) page faults: 2304767
-	Voluntary context switches: 34794641
-	Involuntary context switches: 118857
+	Major (requiring I/O) page faults: 5094
+	Minor (reclaiming a frame) page faults: 1062826
+	Voluntary context switches: 35639804
+	Involuntary context switches: 311295
 	Swaps: 0
-	File system inputs: 80480
-	File system outputs: 45952
+	File system inputs: 86840
+	File system outputs: 45832
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -588,30 +696,31 @@ Date and Time: Mon Sep 29 14:48:49 2025
 	Exit status: 0
 + '[' nt = nt ']'
 ++ sed -nr '/FINALIZING TREE SEARCH/,$ s|Rate parameters:  A-C: ([0-9.]+) +A-G: ([0-9.]+)  A-T: ([0-9.]+)  C-G: ([0-9.]+)  C-T: ([0-9.]+)  G-T: ([0-9.]+)|\1/\2/\3/\4/\5/\6|p' train_nt_16/train_nt.log
-+ rates=1.39613/8.00085/5.61970/1.54647/25.46899/1.00000
-+ echo 'Detected rates: 1.39613/8.00085/5.61970/1.54647/25.46899/1.00000'
-Detected rates: 1.39613/8.00085/5.61970/1.54647/25.46899/1.00000
++ rates=1.39404/7.98574/5.59480/1.53367/25.36469/1.00000
++ echo 'Detected rates: 1.39404/7.98574/5.59480/1.53367/25.36469/1.00000'
+Detected rates: 1.39404/7.98574/5.59480/1.53367/25.36469/1.00000
 ++ sed -nr '/FINALIZING TREE SEARCH/,$ s|Base frequencies:  A: ([0-9.]+) +C: ([0-9.]+) +G: ([0-9.]+) +T: ([0-9.]+)|\1/\2/\3/\4|p' train_nt_16/train_nt.log
 + frequencies=0.303/0.162/0.152/0.383
 + echo 'Detected base frequencies: 0.303/0.162/0.152/0.383'
 Detected base frequencies: 0.303/0.162/0.152/0.383
 ++ sed -nr '/FINALIZING TREE SEARCH/,$ s|Gamma shape alpha: +([0-9.]+)|\1|p' train_nt_16/train_nt.log
-+ alpha=0.414
-+ echo 'Detected alpha: 0.414'
-Detected alpha: 0.414
-+ SUBSTITUTION_PARAMS='GTR{1.39613/8.00085/5.61970/1.54647/25.46899/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.414}'
-+ for TEST in test testshort
++ alpha=0.411
++ echo 'Detected alpha: 0.411'
+Detected alpha: 0.411
++ SUBSTITUTION_PARAMS='GTR{1.39404/7.98574/5.59480/1.53367/25.36469/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.411}'
++ for TESTSET in test testshort
 + TEST_FILE=../../data/test_nt_aln.fasta
 + RAW_DIR=train_nt_16/test
++ SUFFIX=test_nt_16
 + mkdir -p train_nt_16/test
-+ /appl/opt/time/1.9/bin/time --verbose epa-ng --tree train_nt_16/train_nt.treefile --ref-msa ../../data/train_nt_aln.fasta --query ../../data/test_nt_aln.fasta --out-dir train_nt_16/test --model 'GTR{1.39613/8.00085/5.61970/1.54647/25.46899/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.414}' --threads 16 --redo
++ /appl/opt/time/1.9/bin/time --verbose epa-ng --tree train_nt_16/train_nt.treefile --ref-msa ../../data/train_nt_aln.fasta --query ../../data/test_nt_aln.fasta --out-dir train_nt_16/test --model 'GTR{1.39404/7.98574/5.59480/1.53367/25.36469/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.411}' --threads 16 --redo
 INFO Selected: Output dir: train_nt_16/test/
 INFO Selected: Query file: ../../data/test_nt_aln.fasta
 INFO Selected: Tree file: train_nt_16/train_nt.treefile
 INFO Selected: Reference MSA: ../../data/train_nt_aln.fasta
 INFO Selected: Automatic switching of use of per rate scalers
 INFO Selected: Preserving the root of the input tree
-INFO Selected: Specified model: GTR{1.39613/8.00085/5.61970/1.54647/25.46899/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.414}
+INFO Selected: Specified model: GTR{1.39404/7.98574/5.59480/1.53367/25.36469/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.411}
 INFO Selected: Using threads: 16
 INFO     ______ ____   ___           _   __ ______
         / ____// __ \ /   |         / | / // ____/
@@ -619,9 +728,9 @@ INFO     ______ ____   ___           _   __ ______
       / /___ / ____// ___ |/_____// /|  // /_/ /  
      /_____//_/    /_/  |_|      /_/ |_/ \____/ (v0.3.8)
 INFO Using model parameters:
-INFO    Rate heterogeneity: GAMMA (4 cats, mean),  alpha: 0.414 (user),  weights&rates: (0.25,0.0187849) (0.25,0.192135) (0.25,0.745996) (0.25,3.04308) 
+INFO    Rate heterogeneity: GAMMA (4 cats, mean),  alpha: 0.411 (user),  weights&rates: (0.25,0.0183328) (0.25,0.189924) (0.25,0.742915) (0.25,3.04883) 
         Base frequencies (user): 0.303 0.162 0.152 0.383 
-        Substitution rates (user): 1.39613 8.00085 5.6197 1.54647 25.469 1
+        Substitution rates (user): 1.39404 7.98574 5.5948 1.53367 25.3647 1
 INFO Output file: train_nt_16/test/epa_result.jplace
 INFO 5000 Sequences done!
 INFO 10000 Sequences done!
@@ -629,32 +738,32 @@ INFO 15000 Sequences done!
 INFO 20000 Sequences done!
 INFO 25000 Sequences done!
 INFO 26901 Sequences done!
-INFO Time spent placing: 213s
-INFO Elapsed Time: 225s
-	Command being timed: "epa-ng --tree train_nt_16/train_nt.treefile --ref-msa ../../data/train_nt_aln.fasta --query ../../data/test_nt_aln.fasta --out-dir train_nt_16/test --model GTR{1.39613/8.00085/5.61970/1.54647/25.46899/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.414} --threads 16 --redo"
-	User time (seconds): 2909.36
-	System time (seconds): 14.36
-	Percent of CPU this job got: 1288%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:46.89
+INFO Time spent placing: 220s
+INFO Elapsed Time: 232s
+	Command being timed: "epa-ng --tree train_nt_16/train_nt.treefile --ref-msa ../../data/train_nt_aln.fasta --query ../../data/test_nt_aln.fasta --out-dir train_nt_16/test --model GTR{1.39404/7.98574/5.59480/1.53367/25.36469/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.411} --threads 16 --redo"
+	User time (seconds): 2941.33
+	System time (seconds): 14.87
+	Percent of CPU this job got: 1240%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:58.22
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 36607288
+	Maximum resident set size (kbytes): 36633564
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 312
-	Minor (reclaiming a frame) page faults: 9182195
-	Voluntary context switches: 10791
-	Involuntary context switches: 6249
+	Major (requiring I/O) page faults: 293
+	Minor (reclaiming a frame) page faults: 8006289
+	Voluntary context switches: 10912
+	Involuntary context switches: 19626
 	Swaps: 0
-	File system inputs: 92576
-	File system outputs: 18016
+	File system inputs: 92400
+	File system outputs: 18064
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-+ /appl/opt/time/1.9/bin/time --verbose gappa examine assign --jplace-path train_nt_16/test/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string 'class|order|family|subfamily|tribe|genus|species' --out-dir train_nt_16/test --file-suffix __nt_16 --per-query-results --threads 16 --allow-file-overwriting
++ /appl/opt/time/1.9/bin/time --verbose gappa examine assign --jplace-path train_nt_16/test/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string 'class|order|family|subfamily|tribe|genus|species' --out-dir train_nt_16/test --file-suffix _test_nt_16 --per-query-results --threads 16 --allow-file-overwriting
                                               ....      ....  
                                              '' '||.   .||'   
                                                   ||  ||      
@@ -667,7 +776,7 @@ INFO Elapsed Time: 225s
                    ''''     ''''   v0.8.5 (c) 2017-2024
                                    by Lucas Czech and Pierre Barbera
 
-Invocation:                        gappa examine assign --jplace-path train_nt_16/test/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_nt_16/test --file-suffix __nt_16 --per-query-results --threads 16 --allow-file-overwriting
+Invocation:                        gappa examine assign --jplace-path train_nt_16/test/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_nt_16/test --file-suffix _test_nt_16 --per-query-results --threads 16 --allow-file-overwriting
 Command:                           gappa examine assign
 
 Input:
@@ -688,7 +797,7 @@ Settings:
 Output:
   --out-dir                        train_nt_16/test
   --file-prefix                    
-  --file-suffix                    __nt_16
+  --file-suffix                    _test_nt_16
   --cami                           false
   --sample-id                      
   --krona                          false
@@ -705,47 +814,99 @@ Global Options:
 Run the following command to get the references that need to be cited:
 `gappa tools citation Czech2020-genesis-and-gappa`
 
-Started 2025-09-29 14:52:40
+Started 2025-10-30 13:37:59
 
 Found 1 jplace file
 Running the assignment
 
-Finished 2025-09-29 14:53:31
-	Command being timed: "gappa examine assign --jplace-path train_nt_16/test/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_nt_16/test --file-suffix __nt_16 --per-query-results --threads 16 --allow-file-overwriting"
-	User time (seconds): 49.90
+Finished 2025-10-30 13:38:49
+	Command being timed: "gappa examine assign --jplace-path train_nt_16/test/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_nt_16/test --file-suffix _test_nt_16 --per-query-results --threads 16 --allow-file-overwriting"
+	User time (seconds): 48.95
 	System time (seconds): 0.21
-	Percent of CPU this job got: 97%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:51.15
+	Percent of CPU this job got: 98%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:49.71
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 371376
+	Maximum resident set size (kbytes): 366704
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 6
-	Minor (reclaiming a frame) page faults: 102755
-	Voluntary context switches: 88
+	Minor (reclaiming a frame) page faults: 91502
+	Voluntary context switches: 83
 	Involuntary context switches: 26
 	Swaps: 0
-	File system inputs: 18288
-	File system outputs: 47320
+	File system inputs: 17880
+	File system outputs: 45752
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-+ for TEST in test testshort
++ RESULT_FILE=../../results/epang-taxtree/epang-taxtree_test_nt_16.tsv
++ echo 'ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species'
++ awk '-F ' '
+      function write_record(best_prob, best_taxon, new_prob, is_new, new_rank, rank) {
+        printf "%s", prev_id
+          is_new=0
+          new_rank=8
+          for (rank = 1; rank <= 7; rank++) {
+            if (is_new) {
+              printf "\tunk\t%.6f", new_prob[new_rank]
+            } else if (new_prob[rank] > best_prob[rank]) {
+              is_new = 1
+              new_rank = rank
+              printf "\tunk\t%.6f", new_prob[rank]
+            } else {
+              printf "\t%s\t%.6f", best_taxon[rank], best_prob[rank]
+            }
+          }
+          printf "\n"
+      }
+      BEGIN { prev_id="NA" }
+      $1 == "name" { next }
+      $1 != prev_id {
+        if (prev_id != "NA") {
+          write_record(best_prob, best_taxon, new_prob)
+        }
+        for (rank = 1; rank <= 7; rank++) {
+          best_prob[rank] = 0
+          new_prob[rank] = 1
+          best_taxon[rank] = "NA"
+        }
+        prev_id = $1
+      }
+      {
+        rank = split($6, a, ";")
+        if (rank > 1 && a[rank-1] !~ best_taxon[rank - 1]) next
+        new_prob[rank] -= $5
+        if ($5 > best_prob[rank]) {
+          best_prob[rank] = $5
+          best_taxon[rank] = a[rank]
+          if (rank < 7) new_prob[rank + 1] = $5
+          for (rank2 = rank + 1; rank2 <= 7; rank2++) {
+            best_prob[rank2] = 0
+            best_taxon[rank2] = "NA"
+            new_prob[rank2] = $5
+          }
+        }
+      }
+      END{
+        write_record(best_prob, best_taxon, new_prob)
+      }' train_nt_16/test/per_query_test_nt_16.tsv
++ for TESTSET in test testshort
 + TEST_FILE=../../data/testshort_nt_aln.fasta
 + RAW_DIR=train_nt_16/testshort
++ SUFFIX=testshort_nt_16
 + mkdir -p train_nt_16/testshort
-+ /appl/opt/time/1.9/bin/time --verbose epa-ng --tree train_nt_16/train_nt.treefile --ref-msa ../../data/train_nt_aln.fasta --query ../../data/testshort_nt_aln.fasta --out-dir train_nt_16/testshort --model 'GTR{1.39613/8.00085/5.61970/1.54647/25.46899/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.414}' --threads 16 --redo
++ /appl/opt/time/1.9/bin/time --verbose epa-ng --tree train_nt_16/train_nt.treefile --ref-msa ../../data/train_nt_aln.fasta --query ../../data/testshort_nt_aln.fasta --out-dir train_nt_16/testshort --model 'GTR{1.39404/7.98574/5.59480/1.53367/25.36469/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.411}' --threads 16 --redo
 INFO Selected: Output dir: train_nt_16/testshort/
 INFO Selected: Query file: ../../data/testshort_nt_aln.fasta
 INFO Selected: Tree file: train_nt_16/train_nt.treefile
 INFO Selected: Reference MSA: ../../data/train_nt_aln.fasta
 INFO Selected: Automatic switching of use of per rate scalers
 INFO Selected: Preserving the root of the input tree
-INFO Selected: Specified model: GTR{1.39613/8.00085/5.61970/1.54647/25.46899/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.414}
+INFO Selected: Specified model: GTR{1.39404/7.98574/5.59480/1.53367/25.36469/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.411}
 INFO Selected: Using threads: 16
 INFO     ______ ____   ___           _   __ ______
         / ____// __ \ /   |         / | / // ____/
@@ -753,9 +914,9 @@ INFO     ______ ____   ___           _   __ ______
       / /___ / ____// ___ |/_____// /|  // /_/ /  
      /_____//_/    /_/  |_|      /_/ |_/ \____/ (v0.3.8)
 INFO Using model parameters:
-INFO    Rate heterogeneity: GAMMA (4 cats, mean),  alpha: 0.414 (user),  weights&rates: (0.25,0.0187849) (0.25,0.192135) (0.25,0.745996) (0.25,3.04308) 
+INFO    Rate heterogeneity: GAMMA (4 cats, mean),  alpha: 0.411 (user),  weights&rates: (0.25,0.0183328) (0.25,0.189924) (0.25,0.742915) (0.25,3.04883) 
         Base frequencies (user): 0.303 0.162 0.152 0.383 
-        Substitution rates (user): 1.39613 8.00085 5.6197 1.54647 25.469 1
+        Substitution rates (user): 1.39404 7.98574 5.5948 1.53367 25.3647 1
 INFO Output file: train_nt_16/testshort/epa_result.jplace
 INFO 5000 Sequences done!
 INFO 10000 Sequences done!
@@ -763,32 +924,32 @@ INFO 15000 Sequences done!
 INFO 20000 Sequences done!
 INFO 25000 Sequences done!
 INFO 26901 Sequences done!
-INFO Time spent placing: 179s
-INFO Elapsed Time: 186s
-	Command being timed: "epa-ng --tree train_nt_16/train_nt.treefile --ref-msa ../../data/train_nt_aln.fasta --query ../../data/testshort_nt_aln.fasta --out-dir train_nt_16/testshort --model GTR{1.39613/8.00085/5.61970/1.54647/25.46899/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.414} --threads 16 --redo"
-	User time (seconds): 2314.77
-	System time (seconds): 12.54
-	Percent of CPU this job got: 1240%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:07.61
+INFO Time spent placing: 185s
+INFO Elapsed Time: 192s
+	Command being timed: "epa-ng --tree train_nt_16/train_nt.treefile --ref-msa ../../data/train_nt_aln.fasta --query ../../data/testshort_nt_aln.fasta --out-dir train_nt_16/testshort --model GTR{1.39404/7.98574/5.59480/1.53367/25.36469/1.00000}+FU{0.303/0.162/0.152/0.383}+G4{0.411} --threads 16 --redo"
+	User time (seconds): 2391.94
+	System time (seconds): 12.44
+	Percent of CPU this job got: 1239%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:14.00
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 30763972
+	Maximum resident set size (kbytes): 30791788
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 1
-	Minor (reclaiming a frame) page faults: 7721596
-	Voluntary context switches: 10908
-	Involuntary context switches: 4547
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 6533848
+	Voluntary context switches: 9652
+	Involuntary context switches: 16877
 	Swaps: 0
 	File system inputs: 35328
-	File system outputs: 20960
+	File system outputs: 20968
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-+ /appl/opt/time/1.9/bin/time --verbose gappa examine assign --jplace-path train_nt_16/testshort/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string 'class|order|family|subfamily|tribe|genus|species' --out-dir train_nt_16/testshort --file-suffix __nt_16 --per-query-results --threads 16 --allow-file-overwriting
++ /appl/opt/time/1.9/bin/time --verbose gappa examine assign --jplace-path train_nt_16/testshort/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string 'class|order|family|subfamily|tribe|genus|species' --out-dir train_nt_16/testshort --file-suffix _testshort_nt_16 --per-query-results --threads 16 --allow-file-overwriting
                                               ....      ....  
                                              '' '||.   .||'   
                                                   ||  ||      
@@ -801,7 +962,7 @@ INFO Elapsed Time: 186s
                    ''''     ''''   v0.8.5 (c) 2017-2024
                                    by Lucas Czech and Pierre Barbera
 
-Invocation:                        gappa examine assign --jplace-path train_nt_16/testshort/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_nt_16/testshort --file-suffix __nt_16 --per-query-results --threads 16 --allow-file-overwriting
+Invocation:                        gappa examine assign --jplace-path train_nt_16/testshort/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_nt_16/testshort --file-suffix _testshort_nt_16 --per-query-results --threads 16 --allow-file-overwriting
 Command:                           gappa examine assign
 
 Input:
@@ -822,7 +983,7 @@ Settings:
 Output:
   --out-dir                        train_nt_16/testshort
   --file-prefix                    
-  --file-suffix                    __nt_16
+  --file-suffix                    _testshort_nt_16
   --cami                           false
   --sample-id                      
   --krona                          false
@@ -839,32 +1000,83 @@ Global Options:
 Run the following command to get the references that need to be cited:
 `gappa tools citation Czech2020-genesis-and-gappa`
 
-Started 2025-09-29 14:56:38
+Started 2025-10-30 13:42:06
 
 Found 1 jplace file
 Running the assignment
 
-Finished 2025-09-29 14:57:23
-	Command being timed: "gappa examine assign --jplace-path train_nt_16/testshort/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_nt_16/testshort --file-suffix __nt_16 --per-query-results --threads 16 --allow-file-overwriting"
-	User time (seconds): 44.77
-	System time (seconds): 0.21
+Finished 2025-10-30 13:42:53
+	Command being timed: "gappa examine assign --jplace-path train_nt_16/testshort/epa_result.jplace --taxon-file ../../data/train_gappa.tax --root-outgroup outgroup.txt --ranks-string class|order|family|subfamily|tribe|genus|species --out-dir train_nt_16/testshort --file-suffix _testshort_nt_16 --per-query-results --threads 16 --allow-file-overwriting"
+	User time (seconds): 46.60
+	System time (seconds): 0.24
 	Percent of CPU this job got: 100%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:44.99
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:46.81
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 368980
+	Maximum resident set size (kbytes): 369364
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 97463
-	Voluntary context switches: 73
-	Involuntary context switches: 20
+	Major (requiring I/O) page faults: 1
+	Minor (reclaiming a frame) page faults: 92200
+	Voluntary context switches: 76
+	Involuntary context switches: 26
 	Swaps: 0
 	File system inputs: 0
-	File system outputs: 51248
+	File system outputs: 49320
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
++ RESULT_FILE=../../results/epang-taxtree/epang-taxtree_testshort_nt_16.tsv
++ echo 'ID	class	Prob_class	order	Prob_order	family	Prob_family	subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	species	Prob_species'
++ awk '-F ' '
+      function write_record(best_prob, best_taxon, new_prob, is_new, new_rank, rank) {
+        printf "%s", prev_id
+          is_new=0
+          new_rank=8
+          for (rank = 1; rank <= 7; rank++) {
+            if (is_new) {
+              printf "\tunk\t%.6f", new_prob[new_rank]
+            } else if (new_prob[rank] > best_prob[rank]) {
+              is_new = 1
+              new_rank = rank
+              printf "\tunk\t%.6f", new_prob[rank]
+            } else {
+              printf "\t%s\t%.6f", best_taxon[rank], best_prob[rank]
+            }
+          }
+          printf "\n"
+      }
+      BEGIN { prev_id="NA" }
+      $1 == "name" { next }
+      $1 != prev_id {
+        if (prev_id != "NA") {
+          write_record(best_prob, best_taxon, new_prob)
+        }
+        for (rank = 1; rank <= 7; rank++) {
+          best_prob[rank] = 0
+          new_prob[rank] = 1
+          best_taxon[rank] = "NA"
+        }
+        prev_id = $1
+      }
+      {
+        rank = split($6, a, ";")
+        if (rank > 1 && a[rank-1] !~ best_taxon[rank - 1]) next
+        new_prob[rank] -= $5
+        if ($5 > best_prob[rank]) {
+          best_prob[rank] = $5
+          best_taxon[rank] = a[rank]
+          if (rank < 7) new_prob[rank + 1] = $5
+          for (rank2 = rank + 1; rank2 <= 7; rank2++) {
+            best_prob[rank2] = 0
+            best_taxon[rank2] = "NA"
+            new_prob[rank2] = $5
+          }
+        }
+      }
+      END{
+        write_record(best_prob, best_taxon, new_prob)
+      }' train_nt_16/testshort/per_query_testshort_nt_16.tsv

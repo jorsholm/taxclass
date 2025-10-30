@@ -2,7 +2,7 @@
 #SBATCH --job-name=crest4
 #SBATCH --account=project_2005718
 #SBATCH --partition=small
-#SBATCH --time=24:00:00
+#SBATCH --time=36:00:00
 #SBATCH --mem-per-cpu=4800M
 #SBATCH --mail-type=ALL
 

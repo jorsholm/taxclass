@@ -2,7 +2,7 @@
 #SBATCH --job-name=mycoai_bert
 #SBATCH --account=project_2005718
 #SBATCH --partition=longrun
-#SBATCH --time=7-00:00:00
+#SBATCH --time=14-00:00:00
 #SBATCH --mem=32G
 ##SBATCH --gres=gpu:v100:1
 #SBATCH --mail-type=ALL

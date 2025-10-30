@@ -1,174 +1,26 @@
-# Bootstrapping renv 1.0.4 ---------------------------------------------------
-- Downloading renv ... OK
-- Installing renv  ... FAILED
-Error in h(simpleError(msg, call)) : failed to install:
-installation of renv failed
-===========================
-ERROR: failed to lock directory ‘/scratch/project_2003104/brendan/taxclass/coi/models/idtaxa/renv/library/R-4.2/x86_64-pc-linux-gnu’ for modifying
-Try removing ‘/scratch/project_2003104/brendan/taxclass/coi/models/idtaxa/renv/library/R-4.2/x86_64-pc-linux-gnu/00LOCK-renv’
-Calls: source ... bootstrap -> withCallingHandlers -> renv_bootstrap_install
-In addition: Warning message:
-In system2(R, args, stdout = TRUE, stderr = TRUE) :
-  running command ''/projappl/project_2005718/lib64/R/bin/R' --vanilla CMD INSTALL --no-multiarch -l '/scratch/project_2003104/brendan/taxclass/coi/models/idtaxa/renv/library/R-4.2/x86_64-pc-linux-gnu' '/tmp/brfurnea/29789600/RtmpeD8Gxf/renv_1.0.4.tar.gz' 2>&1' had status 3
-Execution halted
-Command exited with non-zero status 1
-	Command being timed: "Rscript learn_taxa.R"
-	User time (seconds): 1.34
-	System time (seconds): 0.19
-	Percent of CPU this job got: 13%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:11.51
-	Average shared text size (kbytes): 0
-	Average unshared data size (kbytes): 0
-	Average stack size (kbytes): 0
-	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 110616
-	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 399
-	Minor (reclaiming a frame) page faults: 50044
-	Voluntary context switches: 1708
-	Involuntary context switches: 6
-	Swaps: 0
-	File system inputs: 26864
-	File system outputs: 16
-	Socket messages sent: 0
-	Socket messages received: 0
-	Signals delivered: 0
-	Page size (bytes): 4096
-	Exit status: 1
-# Bootstrapping renv 1.0.4 ---------------------------------------------------
-- Downloading renv ... OK
-- Installing renv  ... FAILED
-Error in h(simpleError(msg, call)) : failed to install:
-installation of renv failed
-===========================
-ERROR: failed to lock directory ‘/scratch/project_2003104/brendan/taxclass/coi/models/idtaxa/renv/library/R-4.2/x86_64-pc-linux-gnu’ for modifying
-Try removing ‘/scratch/project_2003104/brendan/taxclass/coi/models/idtaxa/renv/library/R-4.2/x86_64-pc-linux-gnu/00LOCK-renv’
-Calls: source ... bootstrap -> withCallingHandlers -> renv_bootstrap_install
-In addition: Warning message:
-In system2(R, args, stdout = TRUE, stderr = TRUE) :
-  running command ''/projappl/project_2005718/lib64/R/bin/R' --vanilla CMD INSTALL --no-multiarch -l '/scratch/project_2003104/brendan/taxclass/coi/models/idtaxa/renv/library/R-4.2/x86_64-pc-linux-gnu' '/tmp/brfurnea/29789600/RtmpuxoDbh/renv_1.0.4.tar.gz' 2>&1' had status 3
-Execution halted
-Command exited with non-zero status 1
-	Command being timed: "Rscript id_taxa.R"
-	User time (seconds): 1.21
-	System time (seconds): 0.13
-	Percent of CPU this job got: 36%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:03.74
-	Average shared text size (kbytes): 0
-	Average unshared data size (kbytes): 0
-	Average stack size (kbytes): 0
-	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 110420
-	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 50437
-	Voluntary context switches: 683
-	Involuntary context switches: 6
-	Swaps: 0
-	File system inputs: 0
-	File system outputs: 8
-	Socket messages sent: 0
-	Socket messages received: 0
-	Signals delivered: 0
-	Page size (bytes): 4096
-	Exit status: 1
-# Bootstrapping renv 1.0.4 ---------------------------------------------------
-- Downloading renv ... OK
-- Installing renv  ... FAILED
-Error in h(simpleError(msg, call)) : failed to install:
-installation of renv failed
-===========================
-ERROR: failed to lock directory ‘/scratch/project_2003104/brendan/taxclass/coi/models/idtaxa/renv/library/R-4.2/x86_64-pc-linux-gnu’ for modifying
-Try removing ‘/scratch/project_2003104/brendan/taxclass/coi/models/idtaxa/renv/library/R-4.2/x86_64-pc-linux-gnu/00LOCK-renv’
-Calls: source ... bootstrap -> withCallingHandlers -> renv_bootstrap_install
-In addition: Warning message:
-In system2(R, args, stdout = TRUE, stderr = TRUE) :
-  running command ''/projappl/project_2005718/lib64/R/bin/R' --vanilla CMD INSTALL --no-multiarch -l '/scratch/project_2003104/brendan/taxclass/coi/models/idtaxa/renv/library/R-4.2/x86_64-pc-linux-gnu' '/tmp/brfurnea/29789600/RtmpMs9eSN/renv_1.0.4.tar.gz' 2>&1' had status 3
-Execution halted
-Command exited with non-zero status 1
-	Command being timed: "Rscript id_taxa.R"
-	User time (seconds): 1.20
-	System time (seconds): 0.16
-	Percent of CPU this job got: 35%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:03.85
-	Average shared text size (kbytes): 0
-	Average unshared data size (kbytes): 0
-	Average stack size (kbytes): 0
-	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 110516
-	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 50433
-	Voluntary context switches: 652
-	Involuntary context switches: 8
-	Swaps: 0
-	File system inputs: 0
-	File system outputs: 16
-	Socket messages sent: 0
-	Socket messages received: 0
-	Signals delivered: 0
-	Page size (bytes): 4096
-	Exit status: 1
-# Bootstrapping renv 1.0.4 ---------------------------------------------------
-- Downloading renv ... OK
-- Installing renv  ... FAILED
-Error in h(simpleError(msg, call)) : failed to install:
-installation of renv failed
-===========================
-ERROR: failed to lock directory ‘/scratch/project_2003104/brendan/taxclass/coi/models/idtaxa/renv/library/R-4.2/x86_64-pc-linux-gnu’ for modifying
-Try removing ‘/scratch/project_2003104/brendan/taxclass/coi/models/idtaxa/renv/library/R-4.2/x86_64-pc-linux-gnu/00LOCK-renv’
-Calls: source ... bootstrap -> withCallingHandlers -> renv_bootstrap_install
-In addition: Warning message:
-In system2(R, args, stdout = TRUE, stderr = TRUE) :
-  running command ''/projappl/project_2005718/lib64/R/bin/R' --vanilla CMD INSTALL --no-multiarch -l '/scratch/project_2003104/brendan/taxclass/coi/models/idtaxa/renv/library/R-4.2/x86_64-pc-linux-gnu' '/tmp/brfurnea/29789600/RtmpmgaT4X/renv_1.0.4.tar.gz' 2>&1' had status 3
-Execution halted
-Command exited with non-zero status 1
-	Command being timed: "Rscript learn_taxa.R"
-	User time (seconds): 1.12
-	System time (seconds): 0.15
-	Percent of CPU this job got: 34%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:03.64
-	Average shared text size (kbytes): 0
-	Average unshared data size (kbytes): 0
-	Average stack size (kbytes): 0
-	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 110536
-	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 50443
-	Voluntary context switches: 691
-	Involuntary context switches: 8
-	Swaps: 0
-	File system inputs: 0
-	File system outputs: 0
-	Socket messages sent: 0
-	Socket messages received: 0
-	Signals delivered: 0
-	Page size (bytes): 4096
-	Exit status: 1
 - The project is out-of-sync -- use `renv::status()` for details.
 ================================================================================
 
-Time difference of 456.97 secs
+Time difference of 699.38 secs
 
-	Command being timed: "Rscript id_taxa.R"
-	User time (seconds): 3489.70
-	System time (seconds): 6.56
-	Percent of CPU this job got: 710%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 8:12.16
+	Command being timed: "Rscript learn_taxa.R"
+	User time (seconds): 705.42
+	System time (seconds): 7.62
+	Percent of CPU this job got: 98%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 12:04.98
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 803980
+	Maximum resident set size (kbytes): 2478764
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 105
-	Minor (reclaiming a frame) page faults: 2535981
-	Voluntary context switches: 191079
-	Involuntary context switches: 7619
+	Major (requiring I/O) page faults: 92
+	Minor (reclaiming a frame) page faults: 877053
+	Voluntary context switches: 3803
+	Involuntary context switches: 612
 	Swaps: 0
-	File system inputs: 109128
-	File system outputs: 8040
+	File system inputs: 92896
+	File system outputs: 101600
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
@@ -177,29 +29,141 @@ Time difference of 456.97 secs
 - The project is out-of-sync -- use `renv::status()` for details.
 ================================================================================
 
-Time difference of 291.75 secs
+Time difference of 968.27 secs
 
 	Command being timed: "Rscript id_taxa.R"
-	User time (seconds): 2085.12
-	System time (seconds): 4.66
-	Percent of CPU this job got: 702%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 4:57.48
+	User time (seconds): 9678.84
+	System time (seconds): 4.81
+	Percent of CPU this job got: 992%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 16:15.32
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 827680
+	Maximum resident set size (kbytes): 1010700
 	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 1
-	Minor (reclaiming a frame) page faults: 1626662
-	Voluntary context switches: 152343
-	Involuntary context switches: 4040
+	Major (requiring I/O) page faults: 7
+	Minor (reclaiming a frame) page faults: 401400
+	Voluntary context switches: 295862
+	Involuntary context switches: 22766
 	Swaps: 0
-	File system inputs: 8000
-	File system outputs: 7776
+	File system inputs: 136
+	File system outputs: 8128
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-Job 29789600 completed
+- The project is out-of-sync -- use `renv::status()` for details.
+================================================================================
+
+Time difference of 812.79 secs
+
+	Command being timed: "Rscript id_taxa.R"
+	User time (seconds): 7892.49
+	System time (seconds): 16.18
+	Percent of CPU this job got: 964%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 13:39.72
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1001428
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 2
+	Minor (reclaiming a frame) page faults: 1733829
+	Voluntary context switches: 260886
+	Involuntary context switches: 14823
+	Swaps: 0
+	File system inputs: 123920
+	File system outputs: 8144
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+- The project is out-of-sync -- use `renv::status()` for details.
+================================================================================
+
+Time difference of 2631.68 secs
+
+	Command being timed: "Rscript learn_taxa.R"
+	User time (seconds): 2585.11
+	System time (seconds): 44.89
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 43:58.65
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 12962520
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 46
+	Minor (reclaiming a frame) page faults: 1379906
+	Voluntary context switches: 3078
+	Involuntary context switches: 1687
+	Swaps: 0
+	File system inputs: 20784
+	File system outputs: 9592
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+- The project is out-of-sync -- use `renv::status()` for details.
+================================================================================
+
+Time difference of 479.75 secs
+
+	Command being timed: "Rscript id_taxa.R"
+	User time (seconds): 3579.80
+	System time (seconds): 3.85
+	Percent of CPU this job got: 731%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 8:09.71
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 821412
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 26
+	Minor (reclaiming a frame) page faults: 379253
+	Voluntary context switches: 188418
+	Involuntary context switches: 7132
+	Swaps: 0
+	File system inputs: 56744
+	File system outputs: 8088
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+- The project is out-of-sync -- use `renv::status()` for details.
+================================================================================
+
+Time difference of 276.18 secs
+
+	Command being timed: "Rscript id_taxa.R"
+	User time (seconds): 2105.33
+	System time (seconds): 3.01
+	Percent of CPU this job got: 748%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 4:41.81
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 795744
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 7
+	Minor (reclaiming a frame) page faults: 392569
+	Voluntary context switches: 149677
+	Involuntary context switches: 3969
+	Swaps: 0
+	File system inputs: 17608
+	File system outputs: 7904
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+Job 30367128 completed
