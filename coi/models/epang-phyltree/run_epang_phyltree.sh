@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=epang-phyltree
 #SBATCH --account=project_2005718
-#SBATCH --partition=small
-#SBATCH --time=3-00:00:00
+#SBATCH --partition=longrun
+#SBATCH --time=7-00:00:00
 #SBATCH --mem=64G
 #SBATCH --mail-type=ALL
 
