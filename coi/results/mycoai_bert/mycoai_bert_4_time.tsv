@@ -1,7 +1,4 @@
 command	CPU	time	mem
-"mycoai-train --out train_nt_bert_4.pt ../../data/train_nt_unite.fasta"	9%	0:00.05	3256
-"mycoai-classify --model train_nt_bert_4.pt --out mycoai_bert_test_nt_4.raw --confidence ../../data/test_nt.fasta"	12%	0:00.03	3316
-"mycoai-classify --model train_nt_bert_4.pt --out mycoai_bert_testshort_nt_4.raw --confidence ../../data/testshort_nt.fasta"	66%	0:00.00	3428
-"mycoai-train --out train_nt_bert_4.pt ../../data/train_nt_unite.fasta"	387%	47:35:39	11308168
-"mycoai-classify --model train_nt_bert_4.pt --out mycoai_bert_test_nt_4.raw --confidence ../../data/test_nt.fasta"	360%	13:48.74	2296836
-"mycoai-classify --model train_nt_bert_4.pt --out mycoai_bert_testshort_nt_4.raw --confidence ../../data/testshort_nt.fasta"	371%	6:34.27	3375324
+"mycoai-train --out train_nt_bert_4.pt ../../data/train_nt_unite.fasta"	396%	42:09:02	11294900
+"mycoai-classify --model train_nt_bert_4.pt --out mycoai_bert_test_nt_4.raw --confidence ../../data/test_nt.fasta"	280%	15:06.42	2872980
+"mycoai-classify --model train_nt_bert_4.pt --out mycoai_bert_testshort_nt_4.raw --confidence ../../data/testshort_nt.fasta"	389%	6:32.22	21525648

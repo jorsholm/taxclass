@@ -1,7 +1,7 @@
 command	CPU	time	mem
-"makeblastdb -in ../../data/train_nt_sintax.fasta -dbtype nucl -out train_nt_4"	21%	0:03.41	12304
-"blastn -query ../../data/test_nt.fasta -db train_nt_4 -out blast_test_nt_4.raw -strand plus -num_threads 4 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"	393%	44:17.48	145300
-"blastn -query ../../data/testshort_nt.fasta -db train_nt_4 -out blast_testshort_nt_4.raw -strand plus -num_threads 4 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"	319%	21:32.04	118080
-"makeblastdb -in ../../data/train_aa_sintax.fasta -dbtype prot -out train_aa_4"	30%	0:02.26	12340
-"blastp -query ../../data/test_aa.fasta -db train_aa_4 -out blast_test_aa_4.raw -num_threads 4 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"	393%	2:54:07	244932
-"blastp -query ../../data/testshort_aa.fasta -db train_aa_4 -out blast_testshort_aa_4.raw -num_threads 4 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"	396%	2:09:48	368444
+"makeblastdb -in ../../data/train_nt_sintax.fasta -dbtype nucl -out train_nt_4"	33%	0:02.05	12860
+"blastn -query ../../data/test_nt.fasta -db train_nt_4 -out blast_test_nt_4.raw -strand plus -num_threads 4 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"	391%	43:47.38	148600
+"blastn -query ../../data/testshort_nt.fasta -db train_nt_4 -out blast_testshort_nt_4.raw -strand plus -num_threads 4 -outfmt 6 delim=; qseqid sseqid pident -max_target_seqs 1 -qcov_hsp_perc 80"	320%	20:23.40	122776
+"makeblastdb -in ../../data/train_aa_sintax.fasta -dbtype prot -out train_aa_4"	35%	0:01.65	12204
+"blastp -query ../../data/test_aa.fasta -db train_aa_4 -out blast_test_aa_4.raw -num_threads 4 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"	393%	2:40:34	244612
+"blastp -query ../../data/testshort_aa.fasta -db train_aa_4 -out blast_testshort_aa_4.raw -num_threads 4 -outfmt 6 delim=; qseqid sseqid -max_target_seqs 1 -qcov_hsp_perc 80"	394%	1:51:53	368796

@@ -1,13 +1,13 @@
 command	CPU	time	mem
-"python3 ../crest4_utils/make_new_crest_db.py train_nt_16.tsv"	29%	0:11.17	56816
-"makeblastdb -in train_nt_16.fasta -out train_nt_16 -dbtype nucl"	26%	0:02.22	12396
-"blastn -query ../../data/test_nt.fasta -db train_nt_16/train_nt_16 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_test_nt_16/search.hits -strand plus -num_threads 16"	449%	38:19.44	338056
-"crest4 --fasta ../../data/test_nt.fasta --search_db train_nt_16/ --search_hits crest4_test_nt_16/search.hits --num_threads 16 --output_dir crest4_test_nt_16"	99%	9:18.83	4130740
-"blastn -query ../../data/testshort_nt.fasta -db train_nt_16/train_nt_16 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_testshort_nt_16/search.hits -strand plus -num_threads 16"	321%	21:13.22	372748
-"crest4 --fasta ../../data/testshort_nt.fasta --search_db train_nt_16/ --search_hits crest4_testshort_nt_16/search.hits --num_threads 16 --output_dir crest4_testshort_nt_16"	99%	9:23.06	4110784
-"python3 ../crest4_utils/make_new_crest_db.py train_aa_16.tsv"	233%	0:01.37	57256
-"makeblastdb -in train_aa_16.fasta -out train_aa_16 -dbtype prot"	44%	0:01.20	13068
-"blastp -query ../../data/test_aa.fasta -db train_aa_16/train_aa_16 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_test_aa_16/search.hits -num_threads 16"	1562%	49:29.42	908484
-"crest4 --fasta ../../data/test_aa.fasta --search_db train_aa_16/ --search_hits crest4_test_aa_16/search.hits --num_threads 16 --output_dir crest4_test_aa_16"	99%	7:10.65	3985312
-"blastp -query ../../data/testshort_aa.fasta -db train_aa_16/train_aa_16 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_testshort_aa_16/search.hits -num_threads 16"	1569%	36:32.69	1444192
-"crest4 --fasta ../../data/testshort_aa.fasta --search_db train_aa_16/ --search_hits crest4_testshort_aa_16/search.hits --num_threads 16 --output_dir crest4_testshort_aa_16"	99%	7:34.69	3970100
+"python3 ../crest4_utils/make_new_crest_db.py train_nt_16.tsv"	26%	0:11.19	56956
+"makeblastdb -in train_nt_16.fasta -out train_nt_16 -dbtype nucl"	42%	0:01.30	12292
+"blastn -query ../../data/test_nt.fasta -db train_nt_16/train_nt_16 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_test_nt_16/search.hits -strand plus -num_threads 16"	444%	34:19.41	381604
+"crest4 --fasta ../../data/test_nt.fasta --search_db train_nt_16/ --search_hits crest4_test_nt_16/search.hits --num_threads 16 --output_dir crest4_test_nt_16"	98%	8:16.47	4130872
+"blastn -query ../../data/testshort_nt.fasta -db train_nt_16/train_nt_16 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_testshort_nt_16/search.hits -strand plus -num_threads 16"	317%	22:45.25	410152
+"crest4 --fasta ../../data/testshort_nt.fasta --search_db train_nt_16/ --search_hits crest4_testshort_nt_16/search.hits --num_threads 16 --output_dir crest4_testshort_nt_16"	99%	9:18.89	4104580
+"python3 ../crest4_utils/make_new_crest_db.py train_aa_16.tsv"	220%	0:01.50	60352
+"makeblastdb -in train_aa_16.fasta -out train_aa_16 -dbtype prot"	48%	0:01.28	12320
+"blastp -query ../../data/test_aa.fasta -db train_aa_16/train_aa_16 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_test_aa_16/search.hits -num_threads 16"	1568%	49:09.61	906592
+"crest4 --fasta ../../data/test_aa.fasta --search_db train_aa_16/ --search_hits crest4_test_aa_16/search.hits --num_threads 16 --output_dir crest4_test_aa_16"	99%	6:25.68	3977328
+"blastp -query ../../data/testshort_aa.fasta -db train_aa_16/train_aa_16 -num_alignments 100 -outfmt 7 qseqid sseqid bitscore length nident -out crest4_testshort_aa_16/search.hits -num_threads 16"	1563%	35:16.52	1358716
+"crest4 --fasta ../../data/testshort_aa.fasta --search_db train_aa_16/ --search_hits crest4_testshort_aa_16/search.hits --num_threads 16 --output_dir crest4_testshort_aa_16"	99%	7:39.92	3964904

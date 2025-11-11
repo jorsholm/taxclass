@@ -1,7 +1,7 @@
 command	CPU	time	mem
-"../train_protax.sh"	98%	2:41:19	428900
-"c2/classify_v2 train_nt_full_tax_1/taxonomy.priors train_nt_full_tax_1/refs.aln train_nt_full_tax_1/model.rseqs.numeric train_nt_full_tax_1/model.pars train_nt_full_tax_1/model.scs 0.01 ../../data/test_nt_aln.fasta"	95%	1:00.44	106144
-"c2/classify_v2 train_nt_full_tax_1/taxonomy.priors train_nt_full_tax_1/refs.aln train_nt_full_tax_1/model.rseqs.numeric train_nt_full_tax_1/model.pars train_nt_full_tax_1/model.scs 0.01 ../../data/testshort_nt_aln.fasta"	96%	0:59.57	106280
-"../train_protax.sh"	97%	2:23:31	145880
-"c2/classify_v2 train_nt_train_tax_1/taxonomy.priors train_nt_train_tax_1/refs.aln train_nt_train_tax_1/model.rseqs.numeric train_nt_train_tax_1/model.pars train_nt_train_tax_1/model.scs 0.01 ../../data/test_nt_aln.fasta"	98%	0:55.97	40172
-"c2/classify_v2 train_nt_train_tax_1/taxonomy.priors train_nt_train_tax_1/refs.aln train_nt_train_tax_1/model.rseqs.numeric train_nt_train_tax_1/model.pars train_nt_train_tax_1/model.scs 0.01 ../../data/testshort_nt_aln.fasta"	98%	0:53.17	40240
+"../train_protax.sh"	98%	2:21:39	426924
+"c2/classify_v2 train_nt_full_tax_1/taxonomy.priors train_nt_full_tax_1/refs.aln train_nt_full_tax_1/model.rseqs.numeric train_nt_full_tax_1/model.pars train_nt_full_tax_1/model.scs 0.01 ../../data/test_nt_aln.fasta"	98%	0:43.85	104320
+"c2/classify_v2 train_nt_full_tax_1/taxonomy.priors train_nt_full_tax_1/refs.aln train_nt_full_tax_1/model.rseqs.numeric train_nt_full_tax_1/model.pars train_nt_full_tax_1/model.scs 0.01 ../../data/testshort_nt_aln.fasta"	99%	0:43.58	104288
+"../train_protax.sh"	98%	2:13:33	145580
+"c2/classify_v2 train_nt_train_tax_1/taxonomy.priors train_nt_train_tax_1/refs.aln train_nt_train_tax_1/model.rseqs.numeric train_nt_train_tax_1/model.pars train_nt_train_tax_1/model.scs 0.01 ../../data/test_nt_aln.fasta"	99%	0:43.87	40012
+"c2/classify_v2 train_nt_train_tax_1/taxonomy.priors train_nt_train_tax_1/refs.aln train_nt_train_tax_1/model.rseqs.numeric train_nt_train_tax_1/model.pars train_nt_train_tax_1/model.scs 0.01 ../../data/testshort_nt_aln.fasta"	99%	0:43.29	40016

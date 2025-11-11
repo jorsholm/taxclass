@@ -1,4 +1,4 @@
 command	CPU	time	mem
-"vsearch --makeudb_usearch ../../data/train_nt_sintax.fasta --output train_nt_4.udb"	97%	0:08.08	78564
-"vsearch --sintax ../../data/test_nt.fasta --sintax_random --db train_nt_4.udb --tabbedout sintax_test_nt_4.raw --threads 4"	393%	1:57.02	123736
-"vsearch --sintax ../../data/testshort_nt.fasta --sintax_random --db train_nt_4.udb --tabbedout sintax_testshort_nt_4.raw --threads 4"	396%	1:53.58	123772
+"vsearch --makeudb_usearch ../../data/train_nt_sintax.fasta --output train_nt_4.udb"	94%	0:08.04	80888
+"vsearch --sintax ../../data/test_nt.fasta --sintax_random --db train_nt_4.udb --tabbedout sintax_test_nt_4.raw --threads 4"	384%	1:53.25	123484
+"vsearch --sintax ../../data/testshort_nt.fasta --sintax_random --db train_nt_4.udb --tabbedout sintax_testshort_nt_4.raw --threads 4"	390%	1:49.84	125372
