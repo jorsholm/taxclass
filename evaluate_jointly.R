@@ -88,6 +88,29 @@ results_coi_mp <- readRDS("coi/result_list_keepNA_nt.rds")
 results_its <- lapply(results_its, function(df) df[,correct_cols_its])
 results_its_mp <- lapply(results_its_mp, function(df) df[,correct_cols_its])
 
+# # Do not evaluate incertae sedis 
+# sorted_test_coi <- data_coi$test |> arrange(id)
+# incertae_coi <- lapply(as.list(sorted_test_coi[2:ncol(sorted_test_coi)]), function(x) which(str_ends(x, "_incertae_sedis")))
+# 
+# results_coi <- 
+#   lapply(results_coi, function(df) {
+#     for (colname in names(incertae_coi)) {
+#       if (colname %in% names(df)) {
+#         df[incertae_coi[[colname]], colname] <- NA
+#       }
+#       }
+#     df
+#     })
+# results_coi_mp <- 
+#   lapply(results_coi_mp, function(df) {
+#     for (colname in names(incertae_coi)) {
+#       if (colname %in% names(df)) {
+#         df[incertae_coi[[colname]], colname] <- NA
+#       }
+#     }
+#     df
+#   })
+
 # IDENTIFY TAXA SETS -----------------------------------------------------------
 
 # Observed on all ranks ("Observed species")
@@ -336,7 +359,9 @@ p_acc_df <-
          accuracy = accuracy * 100) |> 
   bind_rows(accuracies_coi |> 
               filter(set != "All") |> 
-              mutate(set = paste(set, "Species"))) |> 
+              mutate(set = map_chr(set, ~if_else(.x == "Observed", 
+                                                 paste(.x, "everywhere"),
+                                                 paste(.x, "anywhere"))))) |> 
   mutate(gene = "COI") |> 
   bind_rows(marg_accuracies_its |> 
               filter(set != "All") |> 
@@ -345,7 +370,9 @@ p_acc_df <-
                      accuracy = accuracy * 100) |> 
               bind_rows(accuracies_its |> 
                           filter(set != "All") |> 
-                          mutate(set = paste(set, "Species"))) |> 
+                          mutate(set = map_chr(set, ~if_else(.x == "Observed", 
+                                                             paste(.x, "everywhere"),
+                                                             paste(.x, "anywhere"))))) |> 
               mutate(gene = "ITS"))  |> 
   separate(set, into = c("obs", NA), sep = " ", remove = F) |> 
   mutate(rank = factor(rank, levels = allranks), 
@@ -375,9 +402,16 @@ p_acc <-
 })
 
 for(s in names(p_acc)){
-  subdf <- 
-    p_acc_df |> 
-    filter(str_ends(set, s))
+  
+  if(s == "Taxa"){
+    subdf <- 
+      p_acc_df |> 
+      filter(str_ends(set, s))
+  }else{
+    subdf <- 
+      p_acc_df |> 
+      filter(str_ends(set, "where"))
+  }
   
   for(type in names(models)){
     p_acc[[s]] <- 
@@ -451,7 +485,9 @@ p_acc_mp_df <-
          accuracy = accuracy * 100) |> 
   bind_rows(accuracies_coi_mp |> 
               filter(set != "All") |> 
-              mutate(set = paste(set, "Species"))) |> 
+              mutate(set = map_chr(set, ~if_else(.x == "Observed", 
+                                                 paste(.x, "everywhere"),
+                                                 paste(.x, "anywhere"))))) |> 
   mutate(gene = "COI") |> 
   bind_rows(marg_accuracies_its_mp |> 
               filter(set != "All") |> 
@@ -460,7 +496,9 @@ p_acc_mp_df <-
                      accuracy = accuracy * 100) |> 
               bind_rows(accuracies_its_mp |> 
                           filter(set != "All") |> 
-                          mutate(set = paste(set, "Species"))) |> 
+                          mutate(set = map_chr(set, ~if_else(.x == "Observed", 
+                                                             paste(.x, "everywhere"),
+                                                             paste(.x, "anywhere"))))) |> 
               mutate(gene = "ITS")) |> 
   separate(set, into = c("obs", NA), sep = " ", remove = F) |> 
   mutate(rank = factor(rank, levels = allranks), 
@@ -490,9 +528,15 @@ p_acc_mp <-
   })
 
 for(s in names(p_acc_mp)){
-  subdf <- 
-    p_acc_mp_df |> 
-    filter(str_ends(set, s))
+  if(s == "Taxa"){
+    subdf <- 
+      p_acc_mp_df |> 
+      filter(str_ends(set, s))
+  }else{
+    subdf <- 
+      p_acc_mp_df |> 
+      filter(str_ends(set, "where"))
+  }
   
   for(type in names(models)){
     p_acc_mp[[s]] <- 
@@ -512,11 +556,11 @@ for(s in names(p_acc_mp)){
   }
   if(s == "Species"){
     p_acc_mp[[s]] <- 
-      p_acc[[s]] + 
+      p_acc_mp[[s]] + 
       labs(y = "Accuracy (%)")
   }else{
     p_acc_mp[[s]] <- 
-      p_acc[[s]] + 
+      p_acc_mp[[s]] + 
       labs(y = "Marginal recall (%)")
   }
 }
@@ -918,12 +962,6 @@ results_its_short <- readRDS("its/result_list_short.rds")
 # Remove Kingdom from ITS data 
 results_its_short <- lapply(results_its_short, function(df) df[,correct_cols_its])
 
-# TODO: temporary fixes for wrong number of sequences
-# results_coi_short <- lapply(results_coi_short, 
-#                             function(x) x[which(x[,1] %in% data_true_coi[,1]),])
-# 
-# results_its_short <- results_its_short[-2]
-
 # Get calibrations data 
 calibrations_coi_short <-  
   get_calibration(results_coi_short, 
@@ -1008,13 +1046,13 @@ acc_df |>
   filter(set == "Observed", rank %in% c("Genus", "Species")) |> 
   pivot_wider(names_from = rank, 
               values_from = accuracy) |> 
-  arrange(Species) 
+  arrange(Genus) 
 
 # novel, genus
 acc_df |> 
   filter(set == "Novel", rank == "Genus") |> 
   pivot_wider(names_from = gene, values_from = accuracy) |> 
-  arrange(ITS)
+  arrange(COI)
 
 # novel, species 
 acc_df |> 
@@ -1028,7 +1066,7 @@ misclass_df_coi |>
   bind_rows(misclass_df_its |> 
               mutate(gene = "ITS")) |>
   pivot_wider(names_from = gene, values_from = misclassification) |> 
-  arrange(-ITS) |> View()
+  arrange(-COI) |> View()
 
 # overclassification, 
 oclass_df_coi |> 

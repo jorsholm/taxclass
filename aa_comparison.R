@@ -62,14 +62,6 @@ for(rank in colnames(data_true)[-1]){
 
 id_all <- lapply(data_true, function(x) 1:length(x))
 
-# TODO: Some of our results have more sequences than data_true
-# Here, I remove them as a temporary solution 
-# nt_long <- lapply(nt_long, function(x) x[which(x[,1] %in% data_true[,1]),])
-# aa_long <- lapply(aa_long, function(x) x[which(x[,1] %in% data_true[,1]),])
-# nt_long_mp <- lapply(nt_long_mp, function(x) x[which(x[,1] %in% data_true[,1]),])
-# aa_long_mp <- lapply(aa_long_mp, function(x) x[which(x[,1] %in% data_true[,1]),])
-
-
 # Some quick checks of results structure 
 if(!length(unique(lapply(aa_long, function(x) colnames(x)))) == 1) print("One of the results data frames have wrong column names.")
 if(!all(sapply(aa_long, function(x) all(x[,1] == data_true[,1])))) print("One of the results data frames is not sorted by ID.")

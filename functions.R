@@ -609,7 +609,7 @@ count_novel <- function(results, data_true, id_novel){
       
       sum_novel <- sum_novel + length(id_novel[[r]])
       pred_novel <- pred_novel + 
-        sum(stringr::str_ends(results[[i]][,r], "_new"))
+        sum(!is.na(results[[i]][,r]) & stringr::str_ends(results[[i]][,r], "_new"))
       
       df <- data.frame(model = names(results)[i], 
                        rank = r,
