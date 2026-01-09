@@ -1,0 +1,73 @@
+[INFO ] Trying to read from database file...
+[INFO ] Writing database to file...
+	Command being timed: "raxtax --only-db --database-path ../../data/train_nt_raxtax.fasta --prefix raxtax_16 --threads 16 --redo"
+	User time (seconds): 0.65
+	System time (seconds): 1.72
+	Percent of CPU this job got: 496%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.47
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 67672
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1
+	Minor (reclaiming a frame) page faults: 16015
+	Voluntary context switches: 117496
+	Involuntary context switches: 1
+	Swaps: 0
+	File system inputs: 19088
+	File system outputs: 55792
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+[INFO ] Trying to read from database file...
+	Command being timed: "raxtax --database-path raxtax_16/train_nt_raxtax.bin --query-file ../../data/test_nt.fasta --prefix raxtax_16/test_nt --threads 16 --redo --pin"
+	User time (seconds): 94.50
+	System time (seconds): 4.66
+	Percent of CPU this job got: 999%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:09.91
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 135068
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 32021
+	Voluntary context switches: 2742
+	Involuntary context switches: 846
+	Swaps: 0
+	File system inputs: 18328
+	File system outputs: 131152
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+[INFO ] Trying to read from database file...
+	Command being timed: "raxtax --database-path raxtax_16/train_nt_raxtax.bin --query-file ../../data/testshort_nt.fasta --prefix raxtax_16/testshort_nt --threads 16 --redo --pin"
+	User time (seconds): 12.46
+	System time (seconds): 4.33
+	Percent of CPU this job got: 296%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:05.66
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 107944
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 26263
+	Voluntary context switches: 1124
+	Involuntary context switches: 132
+	Swaps: 0
+	File system inputs: 6640
+	File system outputs: 136576
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

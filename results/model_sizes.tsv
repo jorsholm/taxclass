@@ -150,6 +150,14 @@
 202460 coi/models/mycoai_cnn/train_nt_cnn_gpu.pt
 254888 coi/models/protax-a/train_nt_full_tax_1
 118312 coi/models/protax-a/train_nt_train_tax_1
+109756 coi/models/raxtax/raxtax_16/train_nt_raxtax.bin
+109760 coi/models/raxtax/raxtax_1/train_nt_raxtax.bin
+109760 coi/models/raxtax/raxtax_40/train_nt_raxtax.bin
+109760 coi/models/raxtax/raxtax_4/train_nt_raxtax.bin
+27884 its/models/raxtax/raxtax_16/train_nt_raxtax.bin
+27884 its/models/raxtax/raxtax_1/train_nt_raxtax.bin
+27884 its/models/raxtax/raxtax_40/train_nt_raxtax.bin
+27884 its/models/raxtax/raxtax_4/train_nt_raxtax.bin
 122828 coi/models/rdp_nbc/train_nt_1
 344348 its/models/mycoai_bert/train_nt_bert_16.pt
 308012 its/models/mycoai_bert/train_nt_bert_1.pt

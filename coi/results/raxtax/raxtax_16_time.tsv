@@ -1,0 +1,4 @@
+command	CPU	time	mem
+"raxtax --only-db --database-path ../../data/train_nt_raxtax.fasta --prefix raxtax_16 --threads 16 --redo"	244%	0:01.12	248648
+"raxtax --database-path raxtax_16/train_nt_raxtax.bin --query-file ../../data/test_nt.fasta --prefix raxtax_16/test_nt --threads 16 --redo --pin"	1338%	0:21.21	231128
+"raxtax --database-path raxtax_16/train_nt_raxtax.bin --query-file ../../data/testshort_nt.fasta --prefix raxtax_16/testshort_nt --threads 16 --redo --pin"	981%	0:14.69	230272
