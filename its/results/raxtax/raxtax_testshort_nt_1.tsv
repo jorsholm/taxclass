@@ -1,4 +1,4 @@
-ID	class	Prob_class	order	Prob_order	family	Prob_family	 subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	 species	Prob_species
+ID	kingdom	Prob_kingdom	phylum	Prob_phylum	class	Prob_class	 order	Prob_order	family	Prob_family	genus	Prob_genus	 species	Prob_species
 KJ720198	Fungi	1.000000	Basidiomycota	1.000000	Agaricomycetes	0.970000	Agaricales	0.680000	Mycenaceae	0.340000	Mycena	0.330000	Mycena_citrinomarginata	0.140000
 MH861482	Fungi	1.000000	Basidiomycota	1.000000	Agaricomycetes	1.000000	Russulales	1.000000	Lachnocladiaceae	1.000000	Scytinostroma	1.000000	Scytinostroma_alutum	1.000000
 LT222023	Fungi	1.000000	Basidiomycota	1.000000	Agaricomycetes	1.000000	Agaricales	1.000000	Tricholomataceae	1.000000	Tricholoma	1.000000	Tricholoma_olivaceotinctum	1.000000

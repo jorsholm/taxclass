@@ -60,8 +60,8 @@ do
   RESULT_FILE=$RESULTS/${MODEL}_${TEST_ROOT}_${SLURM_CPUS_PER_TASK}.tsv
 
   # write the header
-  echo "ID	class	Prob_class	order	Prob_order	family	Prob_family	"\
-       "subfamily	Prob_subfamily	tribe	Prob_tribe	genus	Prob_genus	"\
+  echo "ID	kingdom	Prob_kingdom	phylum	Prob_phylum	class	Prob_class	"\
+       "order	Prob_order	family	Prob_family	genus	Prob_genus	"\
        "species	Prob_species" >$RESULT_FILE
   # write the data
   awk -F'\t' '

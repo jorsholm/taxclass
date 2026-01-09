@@ -1,4 +1,4 @@
 command	CPU	time	mem
-"raxtax --only-db --database-path ../../data/train_nt_raxtax.fasta --prefix raxtax_4 --threads 4 --redo"	157%	0:00.50	64700
-"raxtax --database-path raxtax_4/train_nt_raxtax.bin --query-file ../../data/test_nt.fasta --prefix raxtax_4/test_nt --threads 4 --redo --pin"	380%	0:24.98	79724
-"raxtax --database-path raxtax_4/train_nt_raxtax.bin --query-file ../../data/testshort_nt.fasta --prefix raxtax_4/testshort_nt --threads 4 --redo --pin"	345%	0:03.98	73684
+"raxtax --only-db --database-path ../../data/train_nt_raxtax.fasta --prefix raxtax_4 --threads 4 --redo"	145%	0:00.59	65348
+"raxtax --database-path raxtax_4/train_nt_raxtax.bin --query-file ../../data/test_nt.fasta --prefix raxtax_4/test_nt --threads 4 --redo --pin"	379%	0:25.45	80724
+"raxtax --database-path raxtax_4/train_nt_raxtax.bin --query-file ../../data/testshort_nt.fasta --prefix raxtax_4/testshort_nt --threads 4 --redo --pin"	353%	0:03.92	73712
