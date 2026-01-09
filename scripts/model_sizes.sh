@@ -35,6 +35,9 @@ ls -s1 @(coi|its)/models/mycoai_@(bert|cnn)/train_nt_@(bert|cnn)_@(1|4|16|40|gpu
 # Protax-A: model is multiple files in a directory
 du -s coi/models/protax-a/train_nt_@(full|train)_tax_1 | tr "\t" " " >>$OUTFILE
 
+# RAXTAX: model is a single bin file
+ls -s1 @(coi|its)/models/raxtax/raxtax_@(1|4|16|40)/train_nt_raxtax.bin | sed 's/^ *//' >>$OUTFILE
+
 # RDP-NBC: model is multiple files in a directory
 du -s @(coi|its)/models/rdp_nbc/train_nt_1 | tr "\t" " " >>$OUTFILE
 
