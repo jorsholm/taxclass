@@ -64,6 +64,15 @@ tr '\t|' ' ;' <train_nt_label.fasta |
 sed 's/ / root;/' >train_nt_rdp.fasta
 ```
 
+### `raxtax` labels
+
+`raxtax` labels are also similar to Sintax labels, but do not have rank indicators and
+a semicolon at the end is required.
+
+```sh
+sed 's/[kpcofgst]://g; /^>/s/.*$/&;/' train_nt_sintax.fasta >train_nt_raxtax.fasta
+```
+
 ## ID-taxonomy maps (without sequences)
 
 Many of these formats use two different delimiters; one to delimit the ID from

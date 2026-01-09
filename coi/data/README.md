@@ -93,12 +93,22 @@ done
 
 ### "RDP" labels
 
-```
+```sh
 for f in train_*_label.fasta
 do
   tr '\t|' ' ;' <$f |
   sed 's/ / root;/' >${f%_label.fasta}_rdp.fasta
 done
+```
+
+### `raxtax` labels
+
+`raxtax` labels are also similar to Sintax labels, but do not have rank indicators and
+a semicolon at the end is required. `raxtax` only operates on unaligned nucleotide
+sequences.
+
+```sh
+sed 's/[kpcofgst]://g; /^>/s/.*$/&;/' train_nt_sintax.fasta >train_nt_raxtax.fasta
 ```
 
 ## ID-taxonomy maps (without sequences)
