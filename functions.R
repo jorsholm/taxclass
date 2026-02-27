@@ -104,7 +104,7 @@ change_plot_colors <- function(x, model_details){
   )
 }
 
-plot_line <- function(df, x, y, model_type, plot_details, ...){
+plot_line <- function(df, x, y, model_type, plot_details, linewidth = 0.5, ...){
   plot_details <- 
     plot_details |> 
     filter(type == model_type)
@@ -115,11 +115,12 @@ plot_line <- function(df, x, y, model_type, plot_details, ...){
                  aes(x = {{x}}, 
                      y = {{y}}, 
                      colour = model, 
-                     !!!extra_aes)), 
+                     !!!extra_aes), 
+                 linewidth = linewidth), 
        scale_colour_manual(name = model_type, 
                            values = plot_details$colour, 
                            breaks = plot_details$model, 
-                           labels = plot_details$model, 
+                           labels = plot_details$label, 
                            guide = guide_legend(
                              order = unique(plot_details$ord), 
                              ncol = 1)))
@@ -137,13 +138,13 @@ plot_point <- function(df, x, y, model_type, plot_details){
        scale_colour_manual(name = model_type, 
                            values = plot_details$colour, 
                            breaks = plot_details$model, 
-                           labels = plot_details$model, 
+                           labels = plot_details$label, 
                            guide = guide_legend(order = unique(plot_details$ord), 
                                                 ncol = 1)), 
        scale_shape_manual(name = model_type, 
                           values = plot_details$shape,
                           breaks = plot_details$model, 
-                          labels = plot_details$model, 
+                          labels = plot_details$label, 
                           guide = guide_legend(order = unique(plot_details$ord), 
                                                ncol = 1)))
 }

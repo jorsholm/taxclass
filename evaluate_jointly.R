@@ -153,7 +153,8 @@ lapply(results_coi_mp, function(x) nrow(x)) |> unique()
 # FOR PLOTTING -----------------------------------------------------------------
 
 model_details <- create_model_details(unique(c(names(results_coi), 
-                                               names(results_its))))
+                                               names(results_its)))) |> 
+  mutate(label = if_else(model == "BLAST threshold", "BLAST thresh.", model))
 
 models <- split(model_details$model, model_details$type, drop = TRUE)
 models <- models[unique(model_details$type)]
@@ -216,7 +217,8 @@ for(type in names(models)){
               x = cumprob, 
               y = cumcorr, 
               model_type = type, 
-              plot_details = model_details) + 
+              plot_details = model_details, 
+              linewidth = 0.2) + 
     plot_point(df = caldf |>
                  filter(model %in% models[[type]]) |>
                  group_by(across(all_of(c("model", "gene", "set")))) |>
@@ -231,17 +233,25 @@ for(type in names(models)){
 
 p_cal <- 
   p_cal + 
-  theme(legend.spacing.x = unit(0.1, "lines"), 
-        legend.title = element_text(size = 10), 
+  theme(legend.title = element_text(size = 7), 
+        legend.text = element_text(size = 7),
         legend.position = "bottom", 
         legend.box = "horizontal", 
-        legend.title.position = "top")
+        legend.title.position = "top", 
+        legend.key.size = unit(4, "mm"),
+        legend.spacing.y = unit(0, "pt"),
+        legend.spacing.x = unit(0, "pt"),
+        strip.text = element_text(size = 9), 
+        axis.text = element_text(size = 7), 
+        axis.title = element_text(size = 9)) + 
+  scale_x_continuous(breaks = c(0,50,100)) + 
+  scale_y_continuous(breaks = c(0,50,100)) 
 
 ggsave(plot = p_cal, 
        filename = "plots/calibration_joint.pdf", 
-       width = 6.5, 
-       height = 6.5, 
-       units = "in")
+       width = 120, 
+       height = 130, 
+       units = "mm")
 
 #### All ranks #### 
 
@@ -421,13 +431,26 @@ for(s in names(p_acc)){
                 y = accuracy, 
                 model_type = type, 
                 plot_details = model_details, 
-                group = model) +
+                group = model, 
+                linewidth = 0.2) +
       plot_point(df = subdf |> filter(model %in% models[[type]]), 
                  x = rank, 
                  y = accuracy, 
                  model_type = type, 
                  plot_details = model_details) + 
-      ggnewscale::new_scale_color() + ggnewscale::new_scale("shape") 
+      ggnewscale::new_scale_color() + ggnewscale::new_scale("shape") + 
+      theme(legend.title = element_text(size = 7), 
+            legend.text = element_text(size = 7),
+            legend.position = "bottom", 
+            legend.box = "horizontal", 
+            legend.title.position = "top", 
+            legend.key.size = unit(4, "mm"),
+            legend.spacing.y = unit(0, "pt"),
+            legend.spacing.x = unit(0, "pt"),
+            strip.text = element_text(size = 9), 
+            axis.text = element_text(size = 7), 
+            axis.title = element_text(size = 9)) + 
+      scale_y_continuous(breaks = c(0,50,100)) 
   }
   if(s == "Species"){
     p_acc[[s]] <- 
@@ -445,13 +468,14 @@ p_acc_joint <-
                   ncol = 1, 
                   labels = c("a", "b"), 
                   common.legend = T, 
-                  legend = "bottom")
+                  legend = "bottom", 
+                  font.label = list(size = 10, face = "bold")) 
 
 ggsave(plot = p_acc_joint, 
        filename = "plots/fourpanel_joint.pdf", 
-       width = 7, 
-       height = 7, 
-       units = "in")
+       width = 160, 
+       height = 160, 
+       units = "mm")
 
 ##### Missing predictions #####
 accuracies_coi_mp <-
@@ -546,13 +570,26 @@ for(s in names(p_acc_mp)){
                 y = accuracy, 
                 model_type = type, 
                 plot_details = model_details, 
-                group = model) +
+                group = model, 
+                linewidth = 0.3) +
       plot_point(df = subdf |> filter(model %in% models[[type]]), 
                  x = rank, 
                  y = accuracy, 
                  model_type = type, 
                  plot_details = model_details) + 
-      ggnewscale::new_scale_color() + ggnewscale::new_scale("shape") 
+      ggnewscale::new_scale_color() + ggnewscale::new_scale("shape") +
+      theme(legend.title = element_text(size = 7), 
+            legend.text = element_text(size = 7),
+            legend.position = "bottom", 
+            legend.box = "horizontal", 
+            legend.title.position = "top", 
+            legend.key.size = unit(4, "mm"),
+            legend.spacing.y = unit(0, "pt"),
+            legend.spacing.x = unit(0, "pt"),
+            strip.text = element_text(size = 9), 
+            axis.text = element_text(size = 7), 
+            axis.title = element_text(size = 9)) + 
+      scale_y_continuous(breaks = c(0,50,100)) 
   }
   if(s == "Species"){
     p_acc_mp[[s]] <- 
@@ -570,13 +607,14 @@ p_acc_mp_joint <-
                     ncol = 1, 
                     labels = c("a", "b"), 
                     common.legend = T, 
-                    legend = "bottom")
+                    legend = "bottom", 
+                    font.label = list(size = 10, face = "bold"))
 
 ggsave(plot = p_acc_mp_joint, 
        filename = "plots/fourpanel_joint_mp.pdf", 
-       width = 7, 
-       height = 7, 
-       units = "in")
+       width = 160, 
+       height = 160, 
+       units = "mm")
 
 # CONDITIONAL ACCURACY ---------------------------------------------------------
 
@@ -601,11 +639,13 @@ cond_df <-
               mutate(gene = "ITS"))
 
 no_novel <- 
-  cond_df |>
-  filter(set == "Novel") |>
-  filter(all(cond_accuracy == 0), .by = c(model, gene)) |> 
-  distinct(model) |>
-  pull(model)
+  setdiff(cond_df |>
+            filter(set == "Novel") |>
+            filter(all(cond_accuracy == 0), .by = c(model, gene)) |> 
+            distinct(model) |>
+            pull(model),
+          "BayesANT"
+          )
 
 p_cond <- 
   cond_df |> 
@@ -660,7 +700,7 @@ p_cond <- change_plot_colors(p_cond, model_details = model_details |>
   
 ggsave(plot = p_cond,
        filename = "plots/cond_recall.pdf",
-       width = 250,
+       width = 180,
        height = 130,
        units = "mm")
 
@@ -826,20 +866,34 @@ for(type in names(models)){
                 y = correct, 
                 model_type = type, 
                 plot_details = model_details, 
-                shape = model)
+                shape = model, linewidth = 0.3)
   }
   p_class <- 
     p_class + 
     ggnewscale::new_scale_color() + ggnewscale::new_scale("shape")
 }
 
-p_class
+p_class <- 
+  p_class + 
+  theme(legend.title = element_text(size = 7), 
+        legend.text = element_text(size = 7),
+        legend.position = "bottom", 
+        legend.box = "horizontal", 
+        legend.title.position = "top", 
+        legend.key.size = unit(4, "mm"),
+        legend.spacing.y = unit(0, "pt"),
+        legend.spacing.x = unit(0, "pt"),
+        strip.text = element_text(size = 9), 
+        axis.text = element_text(size = 7), 
+        axis.title = element_text(size = 9)) + 
+  scale_x_continuous(breaks = c(0,50,100)) + 
+  scale_y_continuous(breaks = c(0,50,100)) 
 
 ggsave(plot = p_class, 
        filename = "plots/classified_correct_joint.pdf", 
-       width = 7.2, 
-       height = 7.2, 
-       units = "in")
+       width = 120, 
+       height = 120, 
+       units = "mm")
 
 # MIS-, OVER-, AND UNDERCLASSIFICATION -----------------------------------------
 
@@ -872,7 +926,7 @@ p_error_df <-
 
 p_error <- 
   ggplot() + 
-  facet_grid(gene~error_type, scales = "free_x") +
+  facet_grid(error_type~gene, scales = "free_x") +
   theme_bw() + 
   ylab("Error rate (%)") + 
   theme(axis.title.x = element_blank(),
@@ -880,7 +934,7 @@ p_error <-
                                    hjust = 1), 
         aspect.ratio = 1, 
         panel.spacing = unit(0, "lines"), 
-        legend.position = "bottom", 
+        legend.position = "right", 
         legend.title.position = "top")
 
 for(type in names(models)){
@@ -891,7 +945,8 @@ for(type in names(models)){
               y = error_rate, 
               model_type = type, 
               plot_details = model_details, 
-              group = model) + 
+              group = model, 
+              linewidth = 0.3) + 
     plot_point(df = p_error_df |> filter(model %in% models[[type]]), 
                x = rank, 
                y = error_rate, 
@@ -900,13 +955,24 @@ for(type in names(models)){
     ggnewscale::new_scale_color() + ggnewscale::new_scale("shape")
 }
 
-p_error
+p_error <- 
+  p_error + 
+  theme(legend.title = element_text(size = 7), 
+        legend.text = element_text(size = 7),
+        legend.title.position = "top", 
+        legend.key.size = unit(4, "mm"),
+        legend.spacing.y = unit(0, "pt"),
+        legend.spacing.x = unit(0, "pt"),
+        strip.text = element_text(size = 9), 
+        axis.text = element_text(size = 7), 
+        axis.title = element_text(size = 9)) + 
+  scale_y_continuous(breaks = c(0,50,100)) 
 
 ggsave(plot = p_error, 
        filename = "plots/errorrates_joint.pdf", 
-       height = 7, 
-       width = 7.5, 
-       units = "in")
+       height = 120, 
+       width = 115, 
+       units = "mm")
 
 # TOTAL NUMBER OF NOVELTY PREDICTIONS ------------------------------------------
 
@@ -938,19 +1004,30 @@ p_tot_novel <-
   geom_line() + 
   geom_point() + 
   theme_bw() + 
-  scale_y_log10(labels = c("10", "1000", "100000"), 
+  scale_y_log10(labels = scales::parse_format(), 
                 breaks = c(10, 1000, 100000)) +
   labs(y = "# predicted novel") + 
   theme(axis.title.x = element_blank(),
-        axis.text.x = element_text(angle = 45, hjust = 1)) + 
+        axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.position = "bottom", 
+        legend.title = element_blank(), 
+        panel.spacing = unit(0, "lines")) + 
   facet_wrap(~gene,
              scales = "free_x")
-p_tot_novel <- change_plot_colors(p_tot_novel, model_details)
+p_tot_novel <- change_plot_colors(p_tot_novel, model_details) + 
+  theme(legend.text = element_text(size = 7),
+        legend.key.size = unit(4, "mm"),
+        legend.spacing.y = unit(0, "pt"),
+        legend.spacing.x = unit(0, "pt"),
+        strip.text = element_text(size = 9), 
+        axis.text = element_text(size = 7), 
+        axis.title = element_text(size = 9), 
+        legend.margin = margin(0,0,0,-10))
 
 ggsave(plot = p_tot_novel, 
        filename = "plots/sum_novel.pdf", 
-       height = 100, 
-       width = 200, 
+       height = 80, 
+       width = 100, 
        units = "mm")
 
 # TESTSHORT DATA ---------------------------------------------------------------
@@ -1016,7 +1093,8 @@ for(type in names(models)){
               y = diff, 
               model_type = type, 
               plot_details = model_details, 
-              group = model) + 
+              group = model, 
+              linewidth = 0.3) + 
     plot_point(df = acc_long_short |> filter(model %in% models[[type]]), 
                x = rank, 
                y = diff, 
@@ -1025,13 +1103,24 @@ for(type in names(models)){
     ggnewscale::new_scale_color() + ggnewscale::new_scale("shape")
 }
 
-p_acc_short
+p_acc_short <- 
+  p_acc_short + 
+  theme(legend.title = element_text(size = 7), 
+        legend.text = element_text(size = 7),
+        legend.title.position = "top", 
+        legend.key.size = unit(4, "mm"),
+        legend.spacing.y = unit(0, "pt"),
+        legend.spacing.x = unit(0, "pt"),
+        strip.text = element_text(size = 9), 
+        axis.text = element_text(size = 7), 
+        axis.title = element_text(size = 9), 
+        legend.margin = margin(0,5,0,5)) 
 
 ggsave(plot = p_acc_short, 
        filename = "plots/accuracy_diff_short.pdf", 
-       height = 7, 
-       width = 7, 
-       units = "in")
+       height = 120, 
+       width = 120, 
+       units = "mm")
 
 # TEXT INFO --------------------------------------------------------------------
 
