@@ -27,59 +27,59 @@ train_seq_coi <- tibble(Sequence = sapply(as.character(train_raw_coi),
 train_seq_its <- tibble(Sequence = sapply(as.character(train_raw_its),
                                           function(x) paste(x, collapse = "")))
   
-  train_taxa_coi <- 
-    bind_cols(train_seq_coi, tibble(id = names(train_raw_coi))) |> 
-    left_join(read_delim("coi/data/train_tax.tsv",
-                         delim = "\t"))
-  train_taxa_coi <- train_taxa_coi[,c(2:ncol(train_taxa_coi), 1)]
-  colnames(train_taxa_coi) <- correctcols_coi
-  
-  train_taxa_its <- 
-    bind_cols(train_seq_its, tibble(id = names(train_raw_its))) |> 
-    left_join(read_delim("its/data/train_tax.tsv",
-                         delim = "\t"))
-  train_taxa_its <- train_taxa_its[,c(2:ncol(train_taxa_its), 1)]
-  colnames(train_taxa_its) <- correctcols_its
-  
-  # Test data 
-  test_seq_coi <- tibble(Sequence = sapply(as.character(test_raw_coi),
-                                       function(x) paste(x, collapse = "")))
-  test_seq_its <- tibble(Sequence = sapply(as.character(test_raw_its),
-                                           function(x) paste(x, collapse = "")))
-  
-  test_taxa_coi <- 
-    bind_cols(test_seq_coi, tibble(id = names(test_raw_coi))) |> 
-    left_join(read_delim("coi/data/test_tax.tsv",
-                         delim = "\t"))
-  test_taxa_coi <- test_taxa_coi[,c(2:ncol(test_taxa_coi), 1)]
-  colnames(test_taxa_coi) <- correctcols_coi
-  
-  test_taxa_its <- 
-    bind_cols(test_seq_its, tibble(id = names(test_raw_its))) |> 
-    left_join(read_delim("its/data/test_tax.tsv",
-                         delim = "\t"))
-  test_taxa_its <- test_taxa_its[,c(2:ncol(test_taxa_its), 1)]
-  colnames(test_taxa_its) <- correctcols_its
-  
-  # FIND COMMON TAXA AND SEQUENCES -------------------
-  
-  common_coi <- 
-    test_taxa_coi %>%
-    pivot_longer(2:ncol(.), names_to = "rank", values_to = "taxon") |> 
-    distinct(rank, taxon) |> 
-    inner_join(train_taxa_coi %>%
-                 pivot_longer(2:ncol(.), names_to = "rank", values_to = "taxon") |> 
-                 distinct(rank, taxon))
-  common_its <- 
-    test_taxa_its %>%
-    pivot_longer(2:ncol(.), names_to = "rank", values_to = "taxon") |> 
-    distinct(rank, taxon) |> 
-    inner_join(train_taxa_its %>%
-                 pivot_longer(2:ncol(.), names_to = "rank", values_to = "taxon") |> 
-                 distinct(rank, taxon))
-  
-  # DIVIDE DATASETS INTO UNIQUE AND SHARED ---------------------
-  
+train_taxa_coi <-
+  bind_cols(train_seq_coi, tibble(id = names(train_raw_coi))) |>
+  left_join(read_delim("coi/data/train_tax.tsv", delim = "\t"))
+train_taxa_coi <- train_taxa_coi[, c(2:ncol(train_taxa_coi), 1)]
+colnames(train_taxa_coi) <- correctcols_coi
+
+train_taxa_its <-
+  bind_cols(train_seq_its, tibble(id = names(train_raw_its))) |>
+  left_join(read_delim("its/data/train_tax.tsv", delim = "\t"))
+train_taxa_its <- train_taxa_its[, c(2:ncol(train_taxa_its), 1)]
+colnames(train_taxa_its) <- correctcols_its
+
+# Test data
+test_seq_coi <- tibble(Sequence = sapply(as.character(test_raw_coi), function(x)
+  paste(x, collapse = "")))
+test_seq_its <- tibble(Sequence = sapply(as.character(test_raw_its), function(x)
+  paste(x, collapse = "")))
+
+test_taxa_coi <-
+  bind_cols(test_seq_coi, tibble(id = names(test_raw_coi))) |>
+  left_join(read_delim("coi/data/test_tax.tsv", delim = "\t"))
+test_taxa_coi <- test_taxa_coi[, c(2:ncol(test_taxa_coi), 1)]
+colnames(test_taxa_coi) <- correctcols_coi
+
+test_taxa_its <-
+  bind_cols(test_seq_its, tibble(id = names(test_raw_its))) |>
+  left_join(read_delim("its/data/test_tax.tsv", delim = "\t"))
+test_taxa_its <- test_taxa_its[, c(2:ncol(test_taxa_its), 1)]
+colnames(test_taxa_its) <- correctcols_its
+
+# FIND COMMON TAXA AND SEQUENCES -------------------
+
+common_coi <-
+  test_taxa_coi %>%
+  pivot_longer(2:ncol(.), names_to = "rank", values_to = "taxon") |>
+  distinct(rank, taxon) |>
+  inner_join(
+    train_taxa_coi %>%
+      pivot_longer(2:ncol(.), names_to = "rank", values_to = "taxon") |>
+      distinct(rank, taxon)
+  )
+common_its <-
+  test_taxa_its %>%
+  pivot_longer(2:ncol(.), names_to = "rank", values_to = "taxon") |>
+  distinct(rank, taxon) |>
+  inner_join(
+    train_taxa_its %>%
+      pivot_longer(2:ncol(.), names_to = "rank", values_to = "taxon") |>
+      distinct(rank, taxon)
+  )
+
+# DIVIDE DATASETS INTO UNIQUE AND SHARED ---------------------
+
   sets_coi <- 
     # test shared 
     test_taxa_coi %>% 
@@ -144,7 +144,54 @@ train_seq_its <- tibble(Sequence = sapply(as.character(train_raw_its),
     select(-taxon) |> 
     pivot_wider(names_from = rank, values_from = set) 
   
-  # COUNT OF CLASSES --------------------------
+  
+its_ranks <- c("Kingdom",
+               "Phylum",
+               "Class",
+               "Order",
+               "Family",
+               "Genus",
+               "Species")
+  
+p_part <- sets_its |> 
+  inner_join(test_taxa_its |> select(Id)) |> 
+  make_long(all_of(its_ranks)) |> 
+  mutate(x = factor(x, levels = its_ranks), 
+         next_x = factor(next_x, levels = its_ranks)) |> 
+  ggplot() +
+  aes(x = x, 
+      next_x = next_x, 
+      node = node, 
+      next_node = next_node, 
+      fill = node) + 
+  geom_sankey(flow.alpha = 0.5, width = 0.35) + 
+#  geom_sankey_label(show.legend = F, size = 3) + 
+  theme_minimal() + 
+  scale_fill_manual(limits = c(train_lab, common_lab, test_lab), 
+                    labels = c("Unique to train", "Shared", "Unique to test"), 
+                    values = c("#faab5c", "#40a373", "#2a94d1")) + 
+  ylab("Number of sequences") + 
+#  facet_wrap(~set) + 
+  theme(axis.title.x = element_blank(), 
+        panel.grid.major.x = element_blank(), 
+        legend.title = element_blank(), 
+        axis.text = element_text(size = 11),
+        axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.text = element_text(size = 11),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(), 
+        panel.grid = element_blank(),
+        legend.position = "None",
+        panel.spacing = unit(0, "lines")) + 
+  scale_y_continuous(breaks = c(-40000, -20000, 0, 20000, 40000),
+                     labels = c("0", "20000", "40000", "60000", "80000"))
+  
+ggsave(p_part, 
+       filename = "plots/partitions.pdf", 
+       width = 7, 
+       height = 4)  
+  
+# COUNT OF CLASSES --------------------------
   
   counts_coi <- 
     common_coi |>

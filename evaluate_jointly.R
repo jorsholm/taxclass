@@ -738,7 +738,7 @@ results_coi_coverage <- results_coi
 results_coi_coverage$`BLAST top hit` <- result_blast_top_similarity_coi
 results_coi_coverage$`BLAST threshold` <- results_coi_mp$`BLAST threshold`
 results_coi_coverage$Crest4 <- results_coi_mp$Crest4
-results_coi_coverage$DNABarcoder <- results_coi_mp$DNABarcoder
+results_coi_coverage$dnabarcoder <- results_coi_mp$dnabarcoder
 
 results_coi_coverage$RDP_point <-
   results_coi_mp$RDP |> 
@@ -771,7 +771,7 @@ results_its_coverage <- results_its
 results_its_coverage$`BLAST top hit` <- result_blast_top_similarity_its
 results_its_coverage$`BLAST threshold` <- results_its_mp$`BLAST threshold`
 results_its_coverage$Crest4 <- results_its_mp$Crest4
-results_its_coverage$DNABarcoder <- results_its_mp$DNABarcoder
+results_its_coverage$dnabarcoder <- results_its_mp$dnabarcoder
 
 results_its_coverage$RDP_point <-
   results_its_mp$RDP |> 
@@ -1071,10 +1071,18 @@ acc_long_short <-
          set = factor(set, levels = c("All", "Observed", "Novel"))) |> 
   filter(set != "All")
 
+partition_labels <- 
+  c(
+   "Observed" = "Observed everywhere", 
+   "Novel" = "Novel anywhere", 
+   "COI" = "COI", 
+   "ITS" = "ITS"
+  )
+
 p_acc_short <- 
   ggplot() + 
   facet_grid(set~gene, 
-             scales = "free") + 
+             scales = "free", labeller = as_labeller(partition_labels)) + 
   geom_hline(yintercept = 0, 
              linetype = "dashed") + 
   theme_bw() + 
